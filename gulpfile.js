@@ -14,6 +14,29 @@ require('laravel-elixir-vue-2');
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+    mix.scripts(
+        [
+            './node_modules/jquery/dist/jquery.min.js',
+            './node_modules/bootstrap/dist/js/bootstrap.min.js',
+        ],
+        'public/js'
+    ).styles(
+        [
+            'app.css',
+            './node_modules/bootstrap/dist/css/bootstrap.min.css',
+            './node_modules/font-awesome/css/font-awesome.min.css',
+        ],
+        'public/css'
+    )
+    .copy(
+        [
+            './node_modules/font-awesome/fonts/fontawesome-webfont.eot',
+            './node_modules/font-awesome/fonts/fontawesome-webfont.svg',
+            './node_modules/font-awesome/fonts/fontawesome-webfont.ttf',
+            './node_modules/font-awesome/fonts/fontawesome-webfont.woff',
+            './node_modules/font-awesome/fonts/fontawesome-webfont.woff2',
+            './node_modules/font-awesome/fonts/FontAwesome.otf',
+        ],
+        'public/fonts'
+    );
 });

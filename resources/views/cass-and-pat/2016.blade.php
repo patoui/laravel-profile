@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('favicon', '/img/cass-and-pat/heart_shadow.ico')
 @section('title', 'Cass &amp; Pat 2016')
 
 @section('css')

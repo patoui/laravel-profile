@@ -2,15 +2,10 @@
 
 namespace Tests\Browser;
 
-use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\Browser\Pages\LoginPage;
 use Tests\DuskTestCase;
 
 class ContactMeTest extends DuskTestCase
 {
-    use DatabaseMigrations;
-
     /**
      * Testing login.
      *

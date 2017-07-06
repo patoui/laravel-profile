@@ -70,7 +70,7 @@
             @include('vendor.flash.message')
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive img-circle" src="{{ asset('img/black-white-profile.png') }}" alt="Profile" width="300" height="300">
+                    <img class="img-responsive img-circle" src="{{ asset('image/black-white-profile.png') }}" alt="Profile" width="300" height="300">
                     <div class="intro-text">
                         <span class="name">Patrique Ouimet</span>
                         <hr class="star-light">
@@ -98,7 +98,10 @@
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="{{ asset('img/profile-website.png') }}" class="img-responsive" alt="">
+                        <picture>
+                            <source media="(min-width: 414px)" srcset="{{ asset('image/profile-website.png?width=354') }}">
+                            <img src="{{ asset('image/profile-website.png?width=720') }}" class="img-responsive img-centered">
+                        </picture>
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -108,7 +111,10 @@
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="{{ asset('img/tether-website.png') }}" class="img-responsive" alt="Tether">
+                        <picture>
+                            <source media="(min-width: 414px)" srcset="{{ asset('image/tether-website.png?width=354') }}">
+                            <img src="{{ asset('image/tether-website.png?width=720') }}" class="img-responsive img-centered">
+                        </picture>
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -118,7 +124,10 @@
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="{{ asset('img/thejobwindow-website.png') }}" class="img-responsive" alt="The Job Window">
+                        <picture>
+                            <source media="(min-width: 414px)" srcset="{{ asset('image/thejobwindow-website.png?width=354') }}">
+                            <img src="{{ asset('image/thejobwindow-website.png?width=720') }}" class="img-responsive img-centered">
+                        </picture>
                     </a>
                 </div>
             </div>
@@ -130,7 +139,10 @@
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="{{ asset('img/25todine-website.png') }}" class="img-responsive" alt="25 To Dine">
+                        <picture>
+                            <source media="(min-width: 414px)" srcset="{{ asset('image/25todine-website.png?width=354') }}">
+                            <img src="{{ asset('image/25todine-website.png?width=720') }}" class="img-responsive img-centered">
+                        </picture>
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -140,7 +152,10 @@
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="{{ asset('img/aegolfpass-website.png') }}" class="img-responsive" alt="AE Golf Pass">
+                        <picture>
+                            <source media="(min-width: 414px)" srcset="{{ asset('image/aegolfpass-website.png?width=354') }}">
+                            <img src="{{ asset('image/aegolfpass-website.png?width=720') }}" class="img-responsive img-centered">
+                        </picture>
                     </a>
                 </div>
             </div>
@@ -301,7 +316,10 @@
                         <div class="modal-body">
                             <h2>Profile Website</h2>
                             <hr class="star-primary">
-                            <img src="{{ asset('img/profile-website.png') }}" class="img-responsive img-centered" alt="">
+                            <picture>
+                                <source media="(min-width: 414px)" srcset="{{ asset('image/profile-website.png?width=354') }}">
+                                <img src="{{ asset('image/profile-website.png?width=720') }}" class="img-responsive img-centered">
+                            </picture>
                             <p>Profile website used to display work from current/previous employers and future aspirations</p>
                             <ul class="list-inline item-details">
                                 <li>Client:
@@ -338,7 +356,10 @@
                         <div class="modal-body">
                             <h2>Tether XMP</h2>
                             <hr class="star-primary">
-                            <img src="{{ asset('img/tether-website.png') }}" class="img-responsive img-centered" alt="">
+                            <picture>
+                                <source media="(min-width: 414px)" srcset="{{ asset('image/tether-website.png?width=354') }}">
+                                <img src="{{ asset('image/tether-website.png?width=720') }}" class="img-responsive img-centered">
+                            </picture>
                             <p>Current employer uses mobile marketing techniques to provide clients with rich data and relationship based marketing strategies.</p>
                             <ul class="list-inline item-details">
                                 <li>Client:
@@ -375,7 +396,10 @@
                         <div class="modal-body">
                             <h2>The Job Window</h2>
                             <hr class="star-primary">
-                            <img src="{{ asset('img/thejobwindow-website.png') }}" class="img-responsive img-centered" alt="">
+                            <picture>
+                                <source media="(min-width: 414px)" srcset="{{ asset('image/thejobwindow-website.png?width=354') }}">
+                                <img src="{{ asset('image/thejobwindow-website.png?width=720') }}" class="img-responsive img-centered">
+                            </picture>
                             <p>Website providing job searching functonality to users based on criterias, also aggregates jobs from other boards while pushing jobs to boards via API</p>
                             <ul class="list-inline item-details">
                                 <li>Client:
@@ -412,7 +436,10 @@
                         <div class="modal-body">
                             <h2>25 To Dine</h2>
                             <hr class="star-primary">
-                            <img src="{{ asset('img/25todine-website.png') }}" class="img-responsive img-centered" alt="">
+                            <picture>
+                                <source media="(min-width: 414px)" srcset="{{ asset('image/25todine-website.png?width=354') }}">
+                                <img src="{{ asset('image/25todine-website.png?width=720') }}" class="img-responsive img-centered">
+                            </picture>
                             <p>Website to redeem restaurant vouchers</p>
                             <ul class="list-inline item-details">
                                 <li>Client:
@@ -449,7 +476,10 @@
                         <div class="modal-body">
                             <h2>25 To Dine</h2>
                             <hr class="star-primary">
-                            <img src="{{ asset('img/aegolfpass-website.png') }}" class="img-responsive img-centered" alt="">
+                            <picture>
+                                <source media="(min-width: 414px)" srcset="{{ asset('image/aegolfpass-website.png?width=354') }}">
+                                <img src="{{ asset('image/aegolfpass-website.png?width=720') }}" class="img-responsive img-centered">
+                            </picture>
                             <p>Website to provide information on deals for golf packages for companies</p>
                             <ul class="list-inline item-details">
                                 <li>Client:

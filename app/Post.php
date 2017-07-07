@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $fillable = ['title', 'body'];
+
     public function getShortBodyAttribute()
     {
         return substr($this->body, 0, 100);

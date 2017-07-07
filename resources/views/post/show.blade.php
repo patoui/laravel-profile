@@ -1,12 +1,12 @@
 @extends('post.layout')
 
-@section('title', 'Articles')
+@section('title', $post->title)
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <h1>{{ $post->title }}</h1>
-            <p>{{ $post->body }}</p>
+            <p style="white-space: pre-wrap;">{{ $post->body }}</p>
         </div>
     </div>
 @endsection

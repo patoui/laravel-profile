@@ -34,10 +34,55 @@ Route::post(
 
 Route::get(
     '/blog',
-    'PostController@index'
+    [
+        'as' => 'post.index',
+        'uses' => 'PostController@index'
+    ]
+);
+
+Route::get(
+    '/post/create',
+    [
+        'as' => 'post.create',
+        'uses' => 'PostController@create'
+    ]
 );
 
 Route::get(
     '/post/{id}',
-    'PostController@show'
+    [
+        'as' => 'post.show',
+        'uses' => 'PostController@show'
+    ]
 );
+
+Route::post(
+    '/post',
+    [
+        'as' => 'post.store',
+        'uses' => 'PostController@store'
+    ]
+);
+
+Route::get(
+    '/post/{id}/edit',
+    [
+        'as' => 'post.edit',
+        'uses' => 'PostController@edit'
+    ]
+);
+
+Route::put(
+    '/post/{id}',
+    [
+        'as' => 'post.update',
+        'uses' => 'PostController@update'
+    ]
+);
+
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Patrique Ouimet - @yield('title')</a>
+            <a class="navbar-brand" href="{{ Auth::check() ? route('dashboard') : route('post.index') }}">Patrique Ouimet - @yield('title')</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <!-- <ul class="nav navbar-nav">
@@ -28,8 +28,19 @@
                 </li>
             </ul> -->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/"><i class="fa fa-home fa-lg" aria-hidden="true"></i> Home</a></li>
-                <li><a href="/blog"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i> Blog</a></li>
+                @if (Auth::check())
+                    <li><a href="{{ route('dashboard') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
+                    <li><a href="{{ route('post.create') }}"><i class="fa fa-plus" aria-hidden="true"></i> New</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            {{ csrf_field() }}
+                            <button type="submit" style="color: #777; background-color: rgba(0,0,0,0); background: none; border: none; padding: 15px;"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                        </form>
+                    </li>
+                @else
+                    <li><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                    <li><a href="{{ route('post.index') }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Blog</a></li>
+                @endif
                 <!-- <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
             </ul>
         </div><!--/.nav-collapse -->

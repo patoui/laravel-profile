@@ -18,8 +18,9 @@
     <!-- Additional CSS -->
     @yield('css')
 
-    <!-- fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -28,21 +29,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <style type="text/css">
-        html, body {
-            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-        }
-        body {
-            padding-top: 50px;
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    @include('navigation.main')
-
-    <!-- Main Content -->
     @yield('content')
 
     <!-- App JS -->

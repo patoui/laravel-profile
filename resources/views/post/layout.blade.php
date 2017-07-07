@@ -28,6 +28,7 @@
 </head>
 <body>
     @include('navigation.main')
+
     <div class="container">
         @yield('content')
     </div>

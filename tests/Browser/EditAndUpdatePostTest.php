@@ -30,10 +30,10 @@ class EditAndUpdatePostTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user, $post) {
                 $browser->loginAs($user)
-                    ->visit('/post/' . $post->id . '/edit')
+                    ->visit('/admin/post/' . $post->id . '/edit')
                     ->type('title', 'My Post Title Updated')
                     ->press('Update')
-                    ->assertPathIs('/dashboard')
+                    ->assertPathIs('/admin/dashboard')
                     ->assertSee('My Post Title Updated');
         });
     }

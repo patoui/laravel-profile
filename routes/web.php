@@ -11,44 +11,18 @@
 |
 */
 
-Route::get(
-    '/',
-    'HomeController@index'
-);
-
-Route::get(
-    '/image/{arg1}/{arg2?}',
-    'ImageController@show'
-);
+Route::get('/', 'HomeController@index');
+Route::get('/image/{arg1}/{arg2?}', 'ImageController@show');
 
 // DO NOT REMOVE
-Route::get(
-    '/cass-and-pat/2016',
-    'CassAndPatController@show2016'
-);
+Route::get('/cass-and-pat/2016', 'CassAndPatController@show2016');
+Route::post('/contact-me', 'ContactMeController@store');
 
-Route::post(
-    '/contact-me',
-    'ContactMeController@store'
-);
+// Blog
+Route::get('/blog', 'PostController@index')->name('post.index');
+Route::get('/post/{id}', 'PostController@show')->name('post.show');
 
-Route::get(
-    '/blog',
-    [
-        'as' => 'post.index',
-        'uses' => 'PostController@index'
-    ]
-);
-
-Route::get(
-    '/post/{id}',
-    [
-        'as' => 'post.show',
-        'uses' => 'PostController@show'
-    ]
-);
-
-// Authentication Routes...
+// Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
-Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');

@@ -23,8 +23,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
     }
 
@@ -38,8 +36,11 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapAdminRoutes();
+<<<<<<< HEAD
 
         $this->mapApiRoutes();
+=======
+>>>>>>> 3a0c01ef73d743daf9c9606e4add0a09287175c2
     }
 
     /**
@@ -62,14 +63,22 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the "admin" routes for the application.
      *
+<<<<<<< HEAD
      * These routes all receive session state, CSRF protection, Authentication.
+=======
+     * These routes all receive session state, CSRF protection, etc.
+>>>>>>> 3a0c01ef73d743daf9c9606e4add0a09287175c2
      *
      * @return void
      */
     protected function mapAdminRoutes()
     {
         Route::group([
+<<<<<<< HEAD
             'middleware' => 'admin',
+=======
+            'middleware' => 'web',
+>>>>>>> 3a0c01ef73d743daf9c9606e4add0a09287175c2
             'namespace' => $this->namespace . '\Admin',
             'prefix' => 'admin',
         ], function ($router) {

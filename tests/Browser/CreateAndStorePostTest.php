@@ -24,11 +24,11 @@ class CreateAndStorePostTest extends DuskTestCase
 
         $this->browse(function ($browser) use ($user) {
                 $browser->loginAs($user)
-                    ->visit('/post/create')
+                    ->visit('/admin/post/create')
                     ->type('title', 'My Post Title')
                     ->type('body', 'My Post Content')
                     ->press('Create')
-                    ->assertPathIs('/dashboard')
+                    ->assertPathIs('/admin/dashboard')
                     ->assertSee('My Post Title');
         });
     }

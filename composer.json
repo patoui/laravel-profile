@@ -12,7 +12,7 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.4.*",
+        "laravel/framework": "dev-master",
         "grimthorr/laravel-toast": "^1.1",
         "laracasts/flash": "^2.0",
         "laravel/tinker": "^1.0",
@@ -57,5 +57,6 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "minimum-stability": "dev"
 }

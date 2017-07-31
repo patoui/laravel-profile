@@ -32,7 +32,7 @@ class EditAndUpdatePostTest extends DuskTestCase
                 $browser->loginAs($user)
                     ->visit('/admin/post/' . $post->id . '/edit')
                     ->type('title', 'My Post Title Updated')
-                    ->press('Update')
+                    ->press('Submit')
                     ->assertPathIs('/admin/dashboard')
                     ->assertSee('My Post Title Updated');
         });

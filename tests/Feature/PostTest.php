@@ -4,13 +4,11 @@ namespace Tests\Feature;
 
 use App\Post;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PostTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     public function testDuplicatedPostUrls()
     {
@@ -21,12 +19,15 @@ class PostTest extends TestCase
         ]);
 
         $this->post(
-            'post/create',
+            'admin/post/create',
             [
                 'title' => 'My Article\'s Title',
                 'body' => 'My Article\'s Other Body',
             ]
         );
+
+        $this->assertStatus(302);
+        $this->assertRedirect('admin/dashboard');
 
         $this->assertEquals(
             'my-articles-title',

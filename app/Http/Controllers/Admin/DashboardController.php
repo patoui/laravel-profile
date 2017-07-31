@@ -15,8 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $posts = Post::get();
-
-        return view('home', compact('posts'));
+        return view('admin.home')
+            ->with('posts', Post::get())
+            ->with('postsCount', Post::count())
+            ->with('postsPublishedCount', Post::published()->count());
     }
 }

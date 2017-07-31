@@ -18,7 +18,8 @@
         "laravel/tinker": "^1.0",
         "laravel/dusk": "^1.1",
         "laravel/scout": "^3.0",
-        "intervention/image": "^2.4"
+        "intervention/image": "^2.4",
+        "doctrine/dbal": "2.5.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

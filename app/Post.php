@@ -35,4 +35,9 @@ class Post extends Model
 
         $this->save();
     }
+
+    public function scopePublished($query)
+    {
+        return $query->whereNotNull('published_at');
+    }
 }

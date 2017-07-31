@@ -26,8 +26,9 @@ class CreateAndStorePostTest extends DuskTestCase
                 $browser->loginAs($user)
                     ->visit('/admin/post/create')
                     ->type('title', 'My Post Title')
+                    ->type('url', 'my-post-title')
                     ->type('body', 'My Post Content')
-                    ->press('Create')
+                    ->press('Submit')
                     ->assertPathIs('/admin/dashboard')
                     ->assertSee('My Post Title');
         });

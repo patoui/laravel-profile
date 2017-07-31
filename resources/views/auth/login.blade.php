@@ -1,64 +1,45 @@
 @extends('layouts.app-navless')
 
 @section('content')
-<div class="container" style="padding-top: 20px;">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+<div class="container is-fluid">
+    <div class="columns">
+        <div class="column"></div>
+        <div id="login" class="column is-third is-half-tablet">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title has-text-centered">
+                        Blog
+                    </p>
+                </header>
+                <form method="post" action="{{ route('login') }}">
+                    {{ csrf_field() }}
+                    <div class="card-content">
+                        <div class="content">
+                            <p class="control has-icon">
+                                <input class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" type="email" placeholder="Email" required autofocus>
+                                <span class="icon is-small"><i class="fa fa-envelope"></i></span>
+                                @if($errors->has('email'))
+                                <span class="help is-danger">{{ $errors->first('email') }}</span>
                                 @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                            </p>
+                            <p class="control has-icon">
+                                <input class="input{{ $errors->has('password') ? ' is-danger' : '' }}" name="password" type="password" placeholder="Password" required>
+                                <span class="icon is-small"><i class="fa fa-lock"></i></span>
+                                @if($errors->has('password'))
+                                <span class="help is-danger">{{ $errors->first('password') }}</span>
                                 @endif
-                            </div>
+                            </p>
+                            <button class="button is-primary is-submit">Login</button>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    Login
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="/register" class="card-footer-item">Sign Up</a>
+                        <a href="/password/reset" class="card-footer-item">Forgot Password?</a>
+                    </footer>
+                </form>
             </div>
         </div>
+        <div class="column"></div>
     </div>
 </div>
 @endsection

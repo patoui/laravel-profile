@@ -1,0 +1,29 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bulma
+@import "node_modules/bulma/bulma";
+
+// Font Awesome
+@import "node_modules/font-awesome/scss/font-awesome";
+
+html {
+    overflow: auto;
+}
+
+#login {
+    padding: 40px;
+    margin: 0 10px;
+}
+
+#login .card-header-title {
+    display: block;
+}
+
+#login .is-submit {
+    width: 100%;
+}

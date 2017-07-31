@@ -6,47 +6,52 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Patrique Ouimet">
+    <!-- Additional meta tags -->
+    @yield('meta')
+
     <link rel="shortcut icon" type="image/x-icon" href="@yield('favicon')"/>
 
     <title>@yield('title')</title>
 
     <!-- App CSS -->
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
     <!-- Additional CSS -->
     @yield('css')
 
     <!-- fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet">
 
     <style type="text/css">
-        html, body {
-            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-        }
-        body {
-            padding-top: 50px;
-        }
+    /*html, body {
+        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    }*/
+    #navbar-brand-logo {
+        font-family: 'Days One', sans-serif;
+        font-size: 25px;
+    }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    @include('navigation.main')
+    <div id="app">
 
-    <!-- Main Content -->
-    @yield('content')
+        <!-- Navigation -->
+        @if (Auth::user())
+        <admin-navigation-vue></admin-navigation-vue>
+        @else
+        <navigation-vue></navigation-vue>
+        @endif
+
+        <!-- Main Content -->
+        @yield('content')
+
+    </div>
 
     <!-- App JS -->
-    <script src="{{ asset('js/all.js') }}"></script>
+    <script src="{{ mix('/js/app.js') }}"></script>
 
     <!-- Additional JS -->
     @yield('javascript')

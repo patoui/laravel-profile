@@ -29,7 +29,7 @@ tr td:last-child {
                 @foreach($posts as $post)
                 <tr>
                     <td>
-                        <a href="/post/{{ $post->id }}">
+                        <a href="/post/{{ $post->slug }}">
                             <h2>{{ $post->title }}</h2>
                         </a>
                         <p>{{ $post->short_body }}</p>

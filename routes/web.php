@@ -19,8 +19,14 @@ Route::get('/cass-and-pat/2016', 'CassAndPatController@show2016');
 Route::post('/contact-me', 'ContactMeController@store');
 
 // Blog
-Route::get('/blog', 'PostController@index')->name('post.index');
-Route::get('/post/{id}', 'PostController@show')->name('post.show');
+Route::get('/blog', 'BlogController@index')->name('post.index');
+
+// Post
+Route::get('/post/{slug}', 'PostController@show')->name('post.show');
+
+// Comment
+Route::post('/post/{slug}/comment', 'PostCommentController@store')
+    ->name('post.comment.store');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

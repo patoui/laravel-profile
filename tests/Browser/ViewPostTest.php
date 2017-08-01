@@ -14,13 +14,17 @@ class ViewPostTest extends DuskTestCase
     public function testShow()
     {
         $post = factory(Post::class)->create();
+        $comment = $post->createComment([
+            'body' => 'Awesome! Hope to see more of this!'
+        ]);
 
-        $this->browse(function (Browser $browser) use ($post) {
-            $instance = $browser->visit('/post/' . $post->id);
+        $this->browse(function (Browser $browser) use ($post, $comment) {
+            $instance = $browser->visit('/post/' . $post->slug);
 
             // Ensure post content is displayed on the page
             $instance->assertSee($post->title);
             $instance->assertSee($post->body);
+            $instance->assertSee($comment->body);
         });
     }
 }

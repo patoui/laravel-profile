@@ -30,6 +30,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
         'body' => $faker->text(),
+        'slug' => $faker->slug,
         'published_at' => Carbon::now()->subDay()->format('Y-m-d H:i:s'),
     ];
 });

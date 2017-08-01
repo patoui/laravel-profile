@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\DuskTestCase;
 
-class CreateAndStorePostTest extends DuskTestCase
+class CreatePostTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -26,7 +26,7 @@ class CreateAndStorePostTest extends DuskTestCase
                 $browser->loginAs($user)
                     ->visit('/admin/post/create')
                     ->type('title', 'My Post Title')
-                    ->type('url', 'my-post-title')
+                    ->type('slug', 'my-post-title')
                     ->type('body', 'My Post Content')
                     ->press('Submit')
                     ->assertPathIs('/admin/dashboard')

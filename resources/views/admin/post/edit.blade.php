@@ -11,7 +11,7 @@
                 @include('admin.post.form')
 
                 <p class="control">
-                    <button class="button is-primary">Submit</button>
+                    <button type="submit" class="button is-primary">Submit</button>
                 </p>
             </form>
         </div>

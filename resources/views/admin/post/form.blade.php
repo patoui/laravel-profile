@@ -14,13 +14,14 @@
 <div class="field">
     <label class="label">URL</label>
     <p class="control">
-        <input name="url" class="input{{ $errors->has('url') ? ' is-danger' : '' }}" type="text" value="{{ old('url', $post->url) }}">
+        <input name="slug" class="input{{ $errors->has('slug') ? ' is-danger' : '' }}" type="text" value="{{ old('slug', $post->slug) }}">
     </p>
 
-    @if ($errors->has('url'))
-    <p class="help is-danger">{{ $errors->first('url') }}</p>
+    @if ($errors->has('slug'))
+    <p class="help is-danger">{{ $errors->first('slug') }}</p>
     @endif
 </div>
+
 <div class="field">
     <label class="label">Body</label>
     <p class="control">

@@ -15,54 +15,46 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        // Remove all non-alphanumeric
-        $url = preg_replace(
-            '/[^a-zA-Z0-9 ]/',
-            '',
-            strtolower($post->title)
-        );
+        // Generate slug if one is not provided
+        if (! $post->slug) {
+            // Remove all non-alphanumeric
+            $slug = preg_replace(
+                '/[^a-zA-Z0-9 ]/',
+                '',
+                strtolower($post->title)
+            );
 
-        // Replace spaces with hyphens
-        $url = preg_replace('/[ ]/', '-', $url);
+            // Replace spaces with hyphens
+            $slug = preg_replace('/[ ]/', '-', $slug);
 
-        $counter = 1;
+            $counter = 1;
 
-        while ($this->checkUrl($url)) {
-            $url = $this->newUrl($url, $counter);
-            $counter++;
+            while ($this->checkSlug($slug)) {
+                $slug = $this->newSlug($slug, $counter);
+                $counter++;
+            }
+
+            DB::table('posts')
+                ->where('id', $post->id)
+                ->update(['slug' => $slug]);
         }
-
-        DB::table('posts')
-            ->where('id', $post->id)
-            ->update(['url' => $url]);
     }
 
-    /**
-     * Listen to the Post updated event.
-     *
-     * @param  Post  $post
-     * @return void
-     */
-    public function updated(Post $post)
-    {
-        //
-    }
-
-    private function checkUrl($url)
+    private function checkSlug($slug)
     {
         return DB::table('posts')
-            ->where('url', $url)
+            ->where('slug', $slug)
             ->first();
     }
 
-    private function newUrl($url, $count = null)
+    private function newSlug($slug, $count = null)
     {
         $pattern = '/-' . $count . '/';
-        if (! preg_match($pattern, $url)) {
-            $url = $url . '-' . $count;
+        if (! preg_match($pattern, $slug)) {
+            $slug = $slug . '-' . $count;
         } else {
             $count++;
-            $url = preg_replace($pattern, '-' . $count, $url);
+            $slug = preg_replace($pattern, '-' . $count, $slug);
         }
     }
 }

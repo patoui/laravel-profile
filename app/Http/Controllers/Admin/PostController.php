@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
@@ -20,14 +21,14 @@ class PostController extends Controller
             [
                 'title' => 'required|string',
                 'body' => 'required|string',
-                'url' => 'required|unique:posts,url',
+                'slug' => 'unique:posts,slug',
             ]
         );
 
         Post::create([
             'title' => request('title'),
             'body' => request('body'),
-            'url' => request('url')
+            'slug' => request('slug')
         ]);
 
         return redirect()->route('admin.dashboard');
@@ -56,6 +57,7 @@ class PostController extends Controller
             [
                 'title' => 'required|string',
                 'body' => 'required|string',
+                'slug' => Rule::unique('posts')->ignore($post->id),
             ]
         );
 

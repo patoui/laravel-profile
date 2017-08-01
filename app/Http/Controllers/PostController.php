@@ -7,17 +7,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function show($slug)
     {
-        $posts = Post::whereNotNull('published_at')->get();
+        $post = Post::findOrFailBySlug($slug);
 
-        return view('post.index', compact('posts'));
-    }
-
-    public function show($id)
-    {
-        $post = Post::findOrFail($id);
-
-        return view('post.show', compact('post'));
+        return view('post.show')
+            ->with('post', $post)
+            ->with('comments', $post->comments);
     }
 }

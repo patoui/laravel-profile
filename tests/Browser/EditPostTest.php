@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\DuskTestCase;
 
-class EditAndUpdatePostTest extends DuskTestCase
+class EditPostTest extends DuskTestCase
 {
     use DatabaseMigrations;
 

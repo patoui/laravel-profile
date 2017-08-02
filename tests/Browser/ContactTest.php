@@ -4,7 +4,7 @@ namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 
-class ContactMeTest extends DuskTestCase
+class ContactTest extends DuskTestCase
 {
     /**
      * Testing login.
@@ -12,7 +12,7 @@ class ContactMeTest extends DuskTestCase
      * @group acceptance
      * @return void
      */
-    public function testContactMe()
+    public function testContact()
     {
         $this->browse(function ($browser) {
             $browser->visit('/')

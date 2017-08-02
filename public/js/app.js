@@ -10323,7 +10323,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -10344,7 +10343,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -27644,11 +27642,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('a', {
     staticClass: "navbar-item",
     attrs: {
-      "href": "/"
-    }
-  }, [_vm._v("Home")]), _vm._v(" "), _c('a', {
-    staticClass: "navbar-item",
-    attrs: {
       "href": "/blog"
     }
   }, [_vm._v("Blog")]), _vm._v(" "), _c('a', {
@@ -27724,11 +27717,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "navbar-start"
   }, [_c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "href": "/"
-    }
-  }, [_vm._v("Home")]), _vm._v(" "), _c('a', {
     staticClass: "navbar-item",
     attrs: {
       "href": "/blog"

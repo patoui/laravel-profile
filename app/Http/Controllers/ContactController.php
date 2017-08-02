@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Mail;
 use Validator;
 
-class ContactMeController extends Controller
+class ContactController extends Controller
 {
     public function store(Request $request)
     {

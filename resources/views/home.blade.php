@@ -1,515 +1,200 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
+@section('title', 'Patrique Ouimet')
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Patrique Ouimet</title>
-
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet">
-
-    <!-- Theme CSS -->
-    <link href="{{ asset('css/freelancer.min.css') }}" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
-
-<body id="page-top" class="index">
+@section('content')
+<section class="hero is-primary is-bold">
 
     <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="#page-top">Patrique Ouimet</a>
-            </div>
+    <navigation-vue></navigation-vue>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-
-    <!-- Header -->
-    <header>
-        <div class="container">
-            @include('vendor.flash.message')
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-responsive img-circle" src="{{ asset('image/black-white-profile.png') }}" alt="Profile" width="300" height="300">
-                    <div class="intro-text">
-                        <span class="name">Patrique Ouimet</span>
-                        <hr class="star-light">
-                        <span class="skills">Developer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Portfolio</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <picture>
-                            <source media="(min-width: 414px)" srcset="{{ asset('image/profile-website.png?width=354') }}">
-                            <img src="{{ asset('image/profile-website.png?width=720') }}" class="img-responsive img-centered">
-                        </picture>
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <picture>
-                            <source media="(min-width: 414px)" srcset="{{ asset('image/tether-website.png?width=354') }}">
-                            <img src="{{ asset('image/tether-website.png?width=720') }}" class="img-responsive img-centered">
-                        </picture>
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <picture>
-                            <source media="(min-width: 414px)" srcset="{{ asset('image/thejobwindow-website.png?width=354') }}">
-                            <img src="{{ asset('image/thejobwindow-website.png?width=720') }}" class="img-responsive img-centered">
-                        </picture>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <picture>
-                            <source media="(min-width: 414px)" srcset="{{ asset('image/25todine-website.png?width=354') }}">
-                            <img src="{{ asset('image/25todine-website.png?width=720') }}" class="img-responsive img-centered">
-                        </picture>
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <picture>
-                            <source media="(min-width: 414px)" srcset="{{ asset('image/aegolfpass-website.png?width=354') }}">
-                            <img src="{{ asset('image/aegolfpass-website.png?width=720') }}" class="img-responsive img-centered">
-                        </picture>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="success" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>About</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-                    <p>My name is Patrique Ouimet, I'm a young developer looking to make an impact on the programming community. My current technologies (and frameworks) are: MySQL, PHP, Laravel, JavaScript, Angular JS, CSS/CSS3, and HTML5.</p>
-                </div>
-                <div class="col-lg-4">
-                    <p>I have an obsession with learning new technologies. I am currently meddling with ones which have a focus on Canvas animations which include: NodeJS (ExpressJS), CreateJS, and D3JS.</p>
-                </div>
-<!--                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="/download-resume" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Resume
-                    </a>
-                </div> -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Contact Me</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <form action="/contact-me" method="post">
-                        {{ csrf_field() }}
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Name</label>
-                                <input type="text" class="form-control" placeholder="Name" name="name">
-                                @if ($errors->has('name'))
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('name') }}
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Email Address</label>
-                                <input type="email" class="form-control" placeholder="Email Address" name="email">
-                                @if ($errors->has('email'))
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('email') }}
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" name="phone">
-                                @if ($errors->has('phone'))
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('phone') }}
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Message</label>
-                                <textarea rows="5" class="form-control" placeholder="Message" name="message"></textarea>
-                                @if ($errors->has('message'))
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('message') }}
-                                </div>
-                                @endif
-                            </div>
-                        </div>
-                        <br>
-                        <div id="success"></div>
-                        <div class="row">
-                            <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Send</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-6">
-                        <h3>Location</h3>
-                        <p>Ontario, Canada</p>
-                    </div>
-                    <div class="footer-col col-md-6">
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="https://github.com/patoui" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://mobile.twitter.com/OuimetPatrique" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/public-profile/settings?trk=prof-edit-edit-public_profile" target="_blank" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright &copy; http://patriqueouimet.com 2016
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div>
-
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Profile Website</h2>
-                            <hr class="star-primary">
-                            <picture>
-                                <source media="(min-width: 414px)" srcset="{{ asset('image/profile-website.png?width=354') }}">
-                                <img src="{{ asset('image/profile-website.png?width=720') }}" class="img-responsive img-centered">
-                            </picture>
-                            <p>Profile website used to display work from current/previous employers and future aspirations</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://patriqueouimet.com">Patrique Ouimet</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://patriqueouimet.com">August 2016</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://patriqueouimet.com">Web Development - Full Stack</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <img src="/image/black-white-profile.png" alt="Grayscale profile picture" style="border-radius: 50%;">
+            <h1 class="title" style="margin-top: 24px;">Patrique Ouimet</h1>
+            <hr style="max-width: 140px; margin: 0 auto 24px auto;" />
+            <h2 class="subtitle">Developer</h2>
         </div>
     </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
+</section>
+<section class="section">
+    <div class="container">
+        <h2 class="title has-text-centered">Work History</h2>
+        <div class="columns">
+            <div class="column">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="/image/tether-website.png?width=432" class="img-responsive img-centered">
+                        </figure>
                     </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Tether XMP</h2>
-                            <hr class="star-primary">
-                            <picture>
-                                <source media="(min-width: 414px)" srcset="{{ asset('image/tether-website.png?width=354') }}">
-                                <img src="{{ asset('image/tether-website.png?width=720') }}" class="img-responsive img-centered">
-                            </picture>
-                            <p>Current employer uses mobile marketing techniques to provide clients with rich data and relationship based marketing strategies.</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="https://tetherxmp.com">The Mobile Experience Company</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="https://tetherxmp.com">April 2015 - Current</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="https://tetherxmp.com">Web Development - Full Stack</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img src="/image/mobilexco-logo.png" alt="MobileXCo logo">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">MobileXCo</p>
+                                <p class="subtitle is-6">
+                                    <a href="https://twitter.com/@mobilexco" target="_blank">@mobilexco</a
+                                    >&nbsp;|&nbsp;<a href="https://mobilexco.com" target="_blank">mobilexco.com</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <p class="is-size-5">Web &amp; Application Developer</p>
+                            <p>MobileXCo uses mobile marketing techniques to provide clients with rich data and relationship based marketing strategies</p>
+                            <small>April 2015 - Current</small>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
+            <div class="column">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="/image/thejobwindow-website.png?width=432" class="img-responsive img-centered">
+                        </figure>
                     </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>The Job Window</h2>
-                            <hr class="star-primary">
-                            <picture>
-                                <source media="(min-width: 414px)" srcset="{{ asset('image/thejobwindow-website.png?width=354') }}">
-                                <img src="{{ asset('image/thejobwindow-website.png?width=720') }}" class="img-responsive img-centered">
-                            </picture>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img src="/image/thejobwindow-logo.png" alt="The Job Window logo">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">The Job Window</p>
+                                <p class="subtitle is-6"><a href="http://thejobwindow.com" target="_blank">thejobwindow.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <p class="is-size-5">Full Stack Developer</p>
                             <p>Website providing job searching functonality to users based on criterias, also aggregates jobs from other boards while pushing jobs to boards via API</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://thejobwindow.com">The Job Window Enterprises</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://thejobwindow.com">June 2014 - April 2015</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://thejobwindow.com">Web Development - Full Stack | Feature implementation to existing site</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <small>June 2014 - April 2015</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
+        <div class="columns">
+            <div class="column">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="/image/25todine-website.png?width=432" class="img-responsive img-centered">
+                        </figure>
                     </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>25 To Dine</h2>
-                            <hr class="star-primary">
-                            <picture>
-                                <source media="(min-width: 414px)" srcset="{{ asset('image/25todine-website.png?width=354') }}">
-                                <img src="{{ asset('image/25todine-website.png?width=720') }}" class="img-responsive img-centered">
-                            </picture>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img src="/image/25todine-logo.png" alt="25 to Dine logo">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">Smart Circle International</p>
+                                <p class="subtitle is-6"><a href="http://25todine.com" target="_blank">25todine.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <p class="is-size-5">Full Stack Developer</p>
                             <p>Website to redeem restaurant vouchers</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://25todine.com">Smart Circle International</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://25todine.com">January 2015 - April 2015</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://25todine.com">Web Development - Full Stack</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <small>January 2015 - April 2015</small>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
+            <div class="column">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="/image/aegolfpass-website.png?width=432" class="img-responsive img-centered">
+                        </figure>
                     </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>25 To Dine</h2>
-                            <hr class="star-primary">
-                            <picture>
-                                <source media="(min-width: 414px)" srcset="{{ asset('image/aegolfpass-website.png?width=354') }}">
-                                <img src="{{ asset('image/aegolfpass-website.png?width=720') }}" class="img-responsive img-centered">
-                            </picture>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <img src="/image/aegolfpass-logo.png" alt="AE Golf Pass logo">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">Appreciation Events</p>
+                                <p class="subtitle is-6">
+                                    <a href="http://aegolfpass.com" target="_blank">aegolfpass.com</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <p class="is-size-5">Full Stack Developer</p>
                             <p>Website to provide information on deals for golf packages for companies</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://aegolfpass.com">Appreciation Events</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://aegolfpass.com">February 2015 - April 2015</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://aegolfpass.com">Web Development - Full Stack</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <small>February 2015 - April 2015</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="columns" style="max-width: 767px; margin: 0 auto;">
+            <div class="column">
+                <h2 class="title has-text-centered">Contact Me</h2>
+                <form action="{{ route('contact.store') }}" method="post">
+                    {{ csrf_field() }}
+
+                    <div class="field">
+                        <p class="control">
+                            <input name="name" class="input{{ $errors->has('name') ? ' is-danger' : '' }}" type="text" value="{{ old('name') }}" placeholder="Name">
+                        </p>
+
+                        @if ($errors->has('name'))
+                        <p class="help is-danger">{{ $errors->first('name') }}</p>
+                        @endif
+                    </div>
+
+                    <div class="field">
+                        <p class="control">
+                            <input name="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" type="text" value="{{ old('email') }}" placeholder="Email">
+                        </p>
+
+                        @if ($errors->has('email'))
+                        <p class="help is-danger">{{ $errors->first('email') }}</p>
+                        @endif
+                    </div>
+
+                    <div class="field">
+                        <p class="control">
+                            <input name="phone" class="input{{ $errors->has('phone') ? ' is-danger' : '' }}" type="text" value="{{ old('phone') }}" placeholder="Phone">
+                        </p>
+
+                        @if ($errors->has('phone'))
+                        <p class="help is-danger">{{ $errors->first('phone') }}</p>
+                        @endif
+                    </div>
+
+                    <div class="field">
+                        <p class="control">
+                            <textarea name="message" class="textarea{{ $errors->has('message') ? ' is-danger' : '' }}" rows="5" placeholder="Message">{{ old('message') }}</textarea>
+                        </p>
+
+                        @if ($errors->has('message'))
+                        <p class="help is-danger">{{ $errors->first('message') }}</p>
+                        @endif
+                    </div>
+
+                    <p class="control">
+                        <button type="submit" class="button is-primary is-fullwidth">Send</button>
+                    </p>
+                </form>
+            </div>
+        </div>
     </div>
+</section>
+@endsection
 
-    <script src="{{ asset('js/all.js') }}"></script>
-    <script src="{{ asset('js/freelancer.min.js') }}"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script>$('div#flash-message').not('.alert-important').delay(3000).fadeOut(350);</script>
-
-</body>
-
-</html>
+@include('vendor.flash.message')

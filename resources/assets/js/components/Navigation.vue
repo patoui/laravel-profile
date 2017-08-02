@@ -14,7 +14,6 @@
 
             <div class="navbar-menu" :class="{ 'is-active': isActive }">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="/">Home</a>
                     <a class="navbar-item" href="/blog">Blog</a>
                 </div>
 

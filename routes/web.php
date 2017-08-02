@@ -16,7 +16,7 @@ Route::get('/image/{arg1}/{arg2?}', 'ImageController@show');
 
 // DO NOT REMOVE
 Route::get('/cass-and-pat/2016', 'CassAndPatController@show2016');
-Route::post('/contact-me', 'ContactMeController@store');
+Route::post('/contact', 'ContactController@store')->name('contact.store');
 
 // Blog
 Route::get('/blog', 'BlogController@index')->name('post.index');

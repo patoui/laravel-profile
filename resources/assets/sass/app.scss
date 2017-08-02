@@ -1,5 +1,6 @@
 
 // Fonts
+@import url(https://fonts.googleapis.com/css?family=Days+One);
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
 // Variables
@@ -13,6 +14,11 @@
 
 html {
     overflow: auto;
+}
+
+#navbar-brand-logo {
+    font-family: 'Days One', sans-serif;
+    font-size: 25px;
 }
 
 #login {

@@ -10,13 +10,9 @@
 @section('title', $post->title)
 
 @section('content')
-<section class="hero is-dark is-bold">
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <h1 class="title">{{ $post->title }}</h1>
-        </div>
-    </div>
-</section>
+
+@include('navigation.main', ['title' => $post->title])
+
 <section class="section">
     <div class="container">
         <article style="white-space: pre-wrap;">{{ $post->body }}</article>

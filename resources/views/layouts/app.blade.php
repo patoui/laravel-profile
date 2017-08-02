@@ -19,31 +19,10 @@
 
     <!-- Additional CSS -->
     @yield('css')
-
-    <!-- fonts -->
-    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css?family=Days+One" rel="stylesheet">
-
-    <style type="text/css">
-    /*html, body {
-        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    }*/
-    #navbar-brand-logo {
-        font-family: 'Days One', sans-serif;
-        font-size: 25px;
-    }
-    </style>
 </head>
 <body>
 
     <div id="app">
-
-        <!-- Navigation -->
-        @if (Auth::user())
-        <admin-navigation-vue></admin-navigation-vue>
-        @else
-        <navigation-vue></navigation-vue>
-        @endif
 
         <!-- Main Content -->
         @yield('content')

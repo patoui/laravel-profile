@@ -14,14 +14,15 @@ tr td:last-child {
 @endsection
 
 @section('content')
-<section class="hero is-dark is-bold">
-    <div class="hero-body">
-        <div class="container">
-            <h1 class="title">Articles</h1>
-            <h2 class="subtitle">Stories of my professional development</h2>
-        </div>
-    </div>
-</section>
+
+@include(
+    'navigation.main',
+    [
+        'title' => 'Articles',
+        'subtitle' => 'Stories of my professional development'
+    ]
+)
+
 <section class="section">
     <div class="container">
         <table class="table">

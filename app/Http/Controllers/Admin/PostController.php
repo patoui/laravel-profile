@@ -63,7 +63,8 @@ class PostController extends Controller
 
         $post->update([
             'title' => request('title'),
-            'body' => request('body')
+            'body' => request('body'),
+            'slug' => request('slug')
         ]);
 
         return redirect()->route('admin.dashboard');

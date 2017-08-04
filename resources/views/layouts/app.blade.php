@@ -10,7 +10,7 @@
     <!-- Additional meta tags -->
     @yield('meta')
 
-    <link rel="shortcut icon" type="image/x-icon" href="@yield('favicon')"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
 
     <title>@yield('title')</title>
 

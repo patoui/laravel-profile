@@ -10318,11 +10318,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -10343,9 +10338,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
 //
 //
 //
@@ -27611,10 +27603,8 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "hero-head"
-  }, [_c('header', {
-    staticClass: "nav"
-  }, [_c('div', {
-    staticClass: "container"
+  }, [_c('nav', {
+    staticClass: "navbar"
   }, [_c('div', {
     staticClass: "navbar-brand"
   }, [_c('a', {
@@ -27635,10 +27625,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'is-active': _vm.isActive
     }
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1)])])])])
+  }, [_vm._m(0)])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "navbar-start"
+    staticClass: "navbar-end"
   }, [_c('a', {
     staticClass: "navbar-item",
     attrs: {
@@ -27649,11 +27639,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "/admin/dashboard"
     }
-  }, [_vm._v("Dashboard")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "navbar-end"
-  }, [_c('a', {
+  }, [_vm._v("Dashboard")]), _vm._v(" "), _c('a', {
     staticClass: "navbar-item",
     attrs: {
       "href": "/admin/post/create"
@@ -27688,10 +27674,8 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "hero-head"
-  }, [_c('header', {
-    staticClass: "nav"
-  }, [_c('div', {
-    staticClass: "container"
+  }, [_c('nav', {
+    staticClass: "navbar"
   }, [_c('div', {
     staticClass: "navbar-brand"
   }, [_c('a', {
@@ -27702,6 +27686,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("PO")]), _vm._v(" "), _c('div', {
     staticClass: "navbar-burger burger",
+    class: {
+      'is-active': _vm.isActive
+    },
     on: {
       "click": function($event) {
         _vm.toggleNav()
@@ -27712,20 +27699,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'is-active': _vm.isActive
     }
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1)])])])])
+  }, [_vm._m(0)])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "navbar-start"
-  }, [_c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "href": "/blog"
-    }
-  }, [_vm._v("Blog")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "navbar-end"
   }, [_c('a', {
+    staticClass: "navbar-item ",
+    attrs: {
+      "href": "/blog"
+    }
+  }, [_vm._v("\n                Blog\n                ")]), _vm._v(" "), _c('a', {
     staticClass: "navbar-item",
     attrs: {
       "href": "https://twitter.com/OuimetPatrique",

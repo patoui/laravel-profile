@@ -16,6 +16,24 @@ html {
     overflow: auto;
 }
 
+.navbar {
+    color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0);
+    box-shadow: 0 0 1px rgba(255,255,255,0.5);
+}
+
+.navbar-burger span {
+    background-color: #4a4a4a;
+}
+
+.navbar-burger.is-active span {
+    background-color: #4a4a4a;
+}
+
+.navbar-brand {
+    width: inherit;
+}
+
 #navbar-brand-logo {
     font-family: 'Days One', sans-serif;
     font-size: 25px;

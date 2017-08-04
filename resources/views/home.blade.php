@@ -39,7 +39,7 @@
                                 <p class="title is-4">MobileXCo</p>
                                 <p class="subtitle is-6">
                                     <a href="https://twitter.com/@mobilexco" target="_blank">@mobilexco</a
-                                    >&nbsp;|&nbsp;<a href="https://mobilexco.com" target="_blank">mobilexco.com</a>
+                                    >&nbsp;|&nbsp;<a href="https://tetherxmp.com" target="_blank">tetherxmp.com</a>
                                 </p>
                             </div>
                         </div>

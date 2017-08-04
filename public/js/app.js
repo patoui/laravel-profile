@@ -10318,6 +10318,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -10338,6 +10340,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -27606,6 +27610,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('nav', {
     staticClass: "navbar"
   }, [_c('div', {
+    staticClass: "container"
+  }, [_c('div', {
     staticClass: "navbar-brand"
   }, [_c('a', {
     staticClass: "navbar-item",
@@ -27625,7 +27631,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'is-active': _vm.isActive
     }
-  }, [_vm._m(0)])])])
+  }, [_vm._m(0)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "navbar-end"
@@ -27677,6 +27683,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('nav', {
     staticClass: "navbar"
   }, [_c('div', {
+    staticClass: "container"
+  }, [_c('div', {
     staticClass: "navbar-brand"
   }, [_c('a', {
     staticClass: "navbar-item",
@@ -27699,7 +27707,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'is-active': _vm.isActive
     }
-  }, [_vm._m(0)])])])
+  }, [_vm._m(0)])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "navbar-end"
@@ -27708,7 +27716,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": "/blog"
     }
-  }, [_vm._v("\n                Blog\n                ")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n                    Blog\n                    ")]), _vm._v(" "), _c('a', {
     staticClass: "navbar-item",
     attrs: {
       "href": "https://twitter.com/OuimetPatrique",

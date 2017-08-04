@@ -36,7 +36,7 @@
                                 </figure>
                             </div>
                             <div class="media-content">
-                                <p class="title is-4">MobileXCo</p>
+                                <p class="title is-4"><a href="http://mobilexco.com" title="mobilexco.com" style="color:black;" target="_blank">MobileXCo</a></p>
                                 <p class="subtitle is-6">
                                     <a href="https://twitter.com/@mobilexco" target="_blank">@mobilexco</a
                                     >&nbsp;|&nbsp;<a href="https://tetherxmp.com" target="_blank">tetherxmp.com</a>

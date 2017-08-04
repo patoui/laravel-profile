@@ -15,7 +15,7 @@
 
 <section class="section">
     <div class="container">
-        <article style="white-space: pre-wrap;">{{ $post->body }}</article>
+        <article style="white-space: pre-wrap;">{!! $post->body !!}</article>
     </div>
 </section>
 <section class="section">

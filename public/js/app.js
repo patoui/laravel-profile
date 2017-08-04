@@ -27604,7 +27604,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "hero-head"
   }, [_c('nav', {
-    staticClass: "navbar"
+    staticClass: "navbar container"
   }, [_c('div', {
     staticClass: "navbar-brand"
   }, [_c('a', {
@@ -27675,7 +27675,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "hero-head"
   }, [_c('nav', {
-    staticClass: "navbar"
+    staticClass: "navbar container"
   }, [_c('div', {
     staticClass: "navbar-brand"
   }, [_c('a', {

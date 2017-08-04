@@ -1,6 +1,6 @@
 <template>
 <div class="hero-head">
-    <nav class="navbar">
+    <nav class="navbar container">
         <div class="navbar-brand">
             <a id="navbar-brand-logo" class="navbar-item" href="/">PO</a>
 

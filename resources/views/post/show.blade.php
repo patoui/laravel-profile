@@ -20,6 +20,7 @@
 </section>
 <section class="section">
     <div class="container">
+        <h4 class="subtitle">Comments</h4>
         @foreach($comments as $comment)
         <div class="media">
             <figure class="media-left">

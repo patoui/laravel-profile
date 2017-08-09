@@ -24,6 +24,17 @@
 
     <div id="app">
 
+        <section class="hero is-primary is-bold">
+
+            <!-- Navigation -->
+            <admin-navigation-vue></admin-navigation-vue>
+
+            <!-- Headline -->
+            @yield('hero-body')
+
+        </section>
+
+
         <!-- Main Content -->
         @yield('content')
 

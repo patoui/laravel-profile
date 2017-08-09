@@ -5,6 +5,8 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 TODO:
 
 * ~~Update home page UI~~
+* ~~Add Github markdown parser~~
+* Add CSS classes for Github markdown (override Bulma CSS)
 * Add logged in user nav
 * Add gates/policies for admin
 * Add user registration

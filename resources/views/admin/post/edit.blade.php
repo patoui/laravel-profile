@@ -1,8 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', 'Update: ' . $post->title)
 
 @section('content')
+
     <section class="section">
         <div class="container">
             <form method="POST" action="{{ route('admin.post.update', ['id' => $post->id]) }}">
@@ -16,4 +17,5 @@
             </form>
         </div>
     </section>
+
 @endsection

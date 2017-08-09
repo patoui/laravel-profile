@@ -61,13 +61,23 @@ class Post extends Model
     }
 
     /**
+     * Parse github markdown to html
+     *
+     * @return string
+     */
+    public function getParsedBodyAttribute()
+    {
+        return (new \Parsedown())->text($this->body);
+    }
+
+    /**
      * First 100 characters of the post body
      *
      * @return string
      */
     public function getShortBodyAttribute()
     {
-        return substr(strip_tags($this->body), 0, 100);
+        return substr(strip_tags($this->parsed_body), 0, 100);
     }
 
     /**

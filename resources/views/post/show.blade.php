@@ -15,7 +15,7 @@
 
 <section class="section">
     <div class="container">
-        <article>{!! $post->body !!}</article>
+        <article class="markdown-body">{!! $post->parsed_body !!}</article>
     </div>
 </section>
 <section class="section">

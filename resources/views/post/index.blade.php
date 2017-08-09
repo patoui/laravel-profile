@@ -23,7 +23,7 @@ tr td:last-child {
     ]
 )
 
-<section class="section">
+<section class="section main">
     <div class="container">
         <table class="table">
             <tbody>

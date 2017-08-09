@@ -3,6 +3,9 @@
 @import url(https://fonts.googleapis.com/css?family=Days+One);
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
+// Github
+@import "node_modules/github-markdown-css/github-markdown";
+
 // Variables
 @import "variables";
 
@@ -12,10 +15,23 @@
 // Font Awesome
 @import "node_modules/font-awesome/scss/font-awesome";
 
+/* START: GLOBAL */
 html {
     overflow: auto;
 }
 
+.main {
+    min-height: 425px;
+}
+/* END: GLOBAL */
+
+/* START: GITHUB */
+.markdown-body {
+    font-family: inherit;
+}
+/* END: GITHUB */
+
+/* START: NAV */
 .hero-head {
     box-shadow: 0 0 1px rgba(255,255,255,0.5);
 }
@@ -41,7 +57,9 @@ html {
     font-family: 'Days One', sans-serif;
     font-size: 25px;
 }
+/* END: NAV */
 
+/* START: LOGIN */
 #login {
     padding: 40px;
     margin: 0 10px;
@@ -54,3 +72,4 @@ html {
 #login .is-submit {
     width: 100%;
 }
+/* END: LOGIN */

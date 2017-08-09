@@ -1,8 +1,9 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', 'Create')
 
 @section('content')
+
     <section class="section">
         <div class="container">
             <form id="post-form" method="POST" action="{{ route('admin.post.store') }}">

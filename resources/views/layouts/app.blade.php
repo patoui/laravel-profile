@@ -22,7 +22,7 @@
 </head>
 <body>
 
-    <div id="app">
+    <div>
 
         <!-- Main Content -->
         @yield('content')

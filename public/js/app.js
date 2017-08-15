@@ -67,63 +67,7 @@
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
-/***/ (function(module, exports) {
-
-// this module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  scopeId,
-  cssModules
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  // inject cssModules
-  if (cssModules) {
-    var computed = Object.create(options.computed || null)
-    Object.keys(cssModules).forEach(function (key) {
-      var module = cssModules[key]
-      computed[key] = function () { return module }
-    })
-    options.computed = computed
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
+/* 0 */,
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10266,11 +10210,14 @@ window.Vue = __webpack_require__(1);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('admin-navigation-vue', __webpack_require__(9));
-Vue.component('navigation-vue', __webpack_require__(10));
-
-var app = new Vue({
-  el: '#app'
+var nav = new Vue({
+    el: '#nav',
+    data: { isActive: false },
+    methods: {
+        toggleNav: function toggleNav() {
+            this.isActive = !this.isActive;
+        }
+    }
 });
 
 /***/ }),
@@ -10280,113 +10227,8 @@ var app = new Vue({
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return { isActive: false };
-    },
-
-
-    methods: {
-        toggleNav: function toggleNav() {
-            this.isActive = !this.isActive;
-        }
-    }
-});
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return { isActive: false };
-    },
-
-
-    methods: {
-        toggleNav: function toggleNav() {
-            this.isActive = !this.isActive;
-        }
-    }
-});
-
-/***/ }),
+/* 5 */,
+/* 6 */,
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27529,216 +27371,10 @@ window.Vue = __webpack_require__(1);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(13)(module)))
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(5),
-  /* template */
-  __webpack_require__(11),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/pat/valet/laravel-profile/resources/assets/js/components/AdminNavigation.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] AdminNavigation.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-506bcbd4", Component.options)
-  } else {
-    hotAPI.reload("data-v-506bcbd4", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(6),
-  /* template */
-  __webpack_require__(12),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/home/pat/valet/laravel-profile/resources/assets/js/components/Navigation.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] Navigation.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-bb81a8de", Component.options)
-  } else {
-    hotAPI.reload("data-v-bb81a8de", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "hero-head"
-  }, [_c('nav', {
-    staticClass: "navbar container"
-  }, [_c('div', {
-    staticClass: "navbar-brand"
-  }, [_c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "id": "navbar-brand-logo",
-      "href": "/"
-    }
-  }, [_vm._v("PO")]), _vm._v(" "), _c('div', {
-    staticClass: "navbar-burger burger",
-    on: {
-      "click": function($event) {
-        _vm.toggleNav()
-      }
-    }
-  }, [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span')])]), _vm._v(" "), _c('div', {
-    staticClass: "navbar-menu",
-    class: {
-      'is-active': _vm.isActive
-    }
-  }, [_vm._m(0)])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "navbar-end"
-  }, [_c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "href": "/blog"
-    }
-  }, [_vm._v("Blog")]), _vm._v(" "), _c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "href": "/admin/dashboard"
-    }
-  }, [_vm._v("Dashboard")]), _vm._v(" "), _c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "href": "/admin/post/create"
-    }
-  }, [_c('span', {
-    staticClass: "icon"
-  }, [_c('i', {
-    staticClass: "fa fa-plus"
-  })])]), _vm._v(" "), _c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "href": "/logout"
-    }
-  }, [_c('span', {
-    staticClass: "icon"
-  }, [_c('i', {
-    staticClass: "fa fa-sign-out"
-  })])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-506bcbd4", module.exports)
-  }
-}
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "hero-head"
-  }, [_c('nav', {
-    staticClass: "navbar container"
-  }, [_c('div', {
-    staticClass: "navbar-brand"
-  }, [_c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "id": "navbar-brand-logo",
-      "href": "/"
-    }
-  }, [_vm._v("PO")]), _vm._v(" "), _c('div', {
-    staticClass: "navbar-burger burger",
-    class: {
-      'is-active': _vm.isActive
-    },
-    on: {
-      "click": function($event) {
-        _vm.toggleNav()
-      }
-    }
-  }, [_c('span'), _vm._v(" "), _c('span'), _vm._v(" "), _c('span')])]), _vm._v(" "), _c('div', {
-    staticClass: "navbar-menu",
-    class: {
-      'is-active': _vm.isActive
-    }
-  }, [_vm._m(0)])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "navbar-end"
-  }, [_c('a', {
-    staticClass: "navbar-item ",
-    attrs: {
-      "href": "/blog"
-    }
-  }, [_vm._v("\n                Blog\n                ")]), _vm._v(" "), _c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "href": "https://twitter.com/OuimetPatrique",
-      "target": "_blank"
-    }
-  }, [_c('span', {
-    staticClass: "icon"
-  }, [_c('i', {
-    staticClass: "fa fa-twitter"
-  })])]), _vm._v(" "), _c('a', {
-    staticClass: "navbar-item",
-    attrs: {
-      "href": "https://github.com/patoui",
-      "target": "_blank"
-    }
-  }, [_c('span', {
-    staticClass: "icon"
-  }, [_c('i', {
-    staticClass: "fa fa-github"
-  })])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-bb81a8de", module.exports)
-  }
-}
-
-/***/ }),
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
 /* 13 */
 /***/ (function(module, exports) {
 

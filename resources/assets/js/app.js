@@ -15,9 +15,12 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('admin-navigation-vue', require('./components/AdminNavigation.vue'));
-Vue.component('navigation-vue', require('./components/Navigation.vue'));
-
-const app = new Vue({
-    el: '#app'
+const nav = new Vue({
+    el: '#nav',
+    data: { isActive: false },
+    methods: {
+        toggleNav() {
+            this.isActive = !this.isActive;
+        }
+    }
 });

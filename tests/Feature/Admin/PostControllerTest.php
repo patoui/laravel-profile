@@ -11,9 +11,7 @@ class PostControllerTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic test example.
-     *
-     * @return void
+     * Test to view the post create page as an authenticated user
      */
     public function testCreate()
     {

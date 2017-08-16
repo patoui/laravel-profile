@@ -6,7 +6,7 @@
 <section class="hero is-primary is-bold">
 
     <!-- Navigation -->
-    <div class="hero-head">
+    <div id="nav" class="hero-head">
         <nav class="navbar container">
             <div class="navbar-brand">
                 <a id="navbar-brand-logo" class="navbar-item" href="/">PO</a>

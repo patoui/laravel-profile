@@ -21,7 +21,10 @@ class PostController extends Controller
             [
                 'title' => 'required|string',
                 'body' => 'required|string',
-                'slug' => 'required|unique:posts,slug',
+                'slug' => [
+                    'required',
+                    Rule::unique('posts', 'slug')
+                ],
             ]
         );
 
@@ -59,7 +62,7 @@ class PostController extends Controller
                 'body' => 'required|string',
                 'slug' => [
                     'required',
-                    Rule::unique('posts')->ignore($post->id)
+                    Rule::unique('posts', 'slug')->ignore($post->id)
                 ],
             ]
         );

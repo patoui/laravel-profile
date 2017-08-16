@@ -25,13 +25,13 @@ class CommentTest extends TestCase
 
     public function testGetShortTimestampAttributeToday()
     {
-        $timestamp = Carbon::today();
+        $timestamp = Carbon::now()->subSeconds(10);
         $comment = factory(Comment::class)->make([
             'created_at' => $timestamp
         ]);
 
         $this->assertEquals(
-            $timestamp->diffForHumans(),
+            '10 seconds ago',
             $comment->short_timestamp
         );
     }

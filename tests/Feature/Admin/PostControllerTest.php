@@ -60,21 +60,40 @@ class PostControllerTest extends TestCase
         // Arrange
         $this->auth();
         $post = factory(Post::class)->create([
-            'title' => 'First Title'
+            'title' => 'First Title',
+            'body' => 'First Body',
+            'slug' => 'first-title',
         ]);
 
         // Act
         $response = $this->put(
             'admin/post/' . $post->id,
-            ['title' => 'Second Title']
+            [
+                'title' => 'Second Title',
+                'body' => 'Second Body',
+                'slug' => 'second-title',
+            ]
         );
 
         // Assert
         $response->assertStatus(302);
 
+        // Assert title was updated
         $this->assertEquals(
             'Second Title',
             $post->fresh()->title
+        );
+
+        // Assert body was updated
+        $this->assertEquals(
+            'Second Body',
+            $post->fresh()->body
+        );
+
+        // Assert slug was updated
+        $this->assertEquals(
+            'second-title',
+            $post->fresh()->slug
         );
     }
 

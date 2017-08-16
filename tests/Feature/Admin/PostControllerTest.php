@@ -16,10 +16,14 @@ class PostControllerTest extends TestCase
      */
     public function testCreate()
     {
+        // Arrange
         $this->auth();
 
-        $this->get('admin/post/create')
-            ->assertStatus(200);
+        // Act
+        $response = $this->get('admin/post/create');
+
+        // Assert
+        $response->assertStatus(200);
     }
 
     public function testPost()

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Post;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -39,6 +40,19 @@ class PostControllerTest extends TestCase
         // Assert
         $response->assertStatus(302)
             ->assertRedirect('admin/dashboard');
+    }
+
+    public function testEdit()
+    {
+        // Arrange
+        $this->auth();
+        $post = factory(Post::class)->create();
+
+        // Act
+        $response = $this->get('admin/post/' . $post->id . '/edit');
+
+        // Assert
+        $response->assertStatus(200);
     }
 
     private function auth()

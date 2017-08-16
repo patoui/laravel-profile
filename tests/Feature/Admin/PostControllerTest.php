@@ -26,6 +26,9 @@ class PostControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Test to store a post as an authenticated user
+     */
     public function testPost()
     {
         // Arrange
@@ -51,6 +54,9 @@ class PostControllerTest extends TestCase
         );
     }
 
+    /**
+     * Test to view the post edit page as an authenticated user
+     */
     public function testEdit()
     {
         // Arrange
@@ -64,6 +70,9 @@ class PostControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Test to update a post as an authenticated user
+     */
     public function testUpdate()
     {
         // Arrange
@@ -106,6 +115,9 @@ class PostControllerTest extends TestCase
         );
     }
 
+    /**
+     * Helper method to setup authenticated user
+     */
     private function auth()
     {
         $user = factory(User::class)->create();

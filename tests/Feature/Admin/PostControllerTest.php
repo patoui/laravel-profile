@@ -55,6 +55,29 @@ class PostControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function testUpdate()
+    {
+        // Arrange
+        $this->auth();
+        $post = factory(Post::class)->create([
+            'title' => 'First Title'
+        ]);
+
+        // Act
+        $response = $this->put(
+            'admin/post/' . $post->id,
+            ['title' => 'Second Title']
+        );
+
+        // Assert
+        $response->assertStatus(302);
+
+        $this->assertEquals(
+            'Second Title',
+            $post->fresh()->title
+        );
+    }
+
     private function auth()
     {
         $user = factory(User::class)->create();

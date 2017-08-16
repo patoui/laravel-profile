@@ -12,7 +12,6 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('/image/{arg1}/{arg2?}', 'ImageController@show');
 
 // DO NOT REMOVE
 Route::get('/cass-and-pat/2016', 'CassAndPatController@show2016');

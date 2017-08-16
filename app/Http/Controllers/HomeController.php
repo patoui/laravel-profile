@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Show the posts.
+     * Show home page.
      *
      * @return \Illuminate\Http\Response
      */

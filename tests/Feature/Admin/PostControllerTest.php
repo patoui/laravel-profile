@@ -44,6 +44,11 @@ class PostControllerTest extends TestCase
         // Assert
         $response->assertStatus(302)
             ->assertRedirect('admin/dashboard');
+
+        // Assert model was created
+        $this->assertNotNull(
+            app(Post::class)->where('title', 'My New Post Title')->first()
+        );
     }
 
     public function testEdit()

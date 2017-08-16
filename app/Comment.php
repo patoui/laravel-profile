@@ -8,6 +8,11 @@ class Comment extends Model
 {
     protected $fillable = ['body'];
 
+    /**
+     * Short human friendly timestamp
+     *
+     * @return string
+     */
     public function getShortTimestampAttribute()
     {
         $local = $this->created_at->setTimezone('America/Toronto');

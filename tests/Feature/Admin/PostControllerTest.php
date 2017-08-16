@@ -21,6 +21,26 @@ class PostControllerTest extends TestCase
             ->assertStatus(200);
     }
 
+    public function testPost()
+    {
+        // Arrange
+        $this->auth();
+
+        // Act
+        $response = $this->post(
+            'admin/post',
+            [
+                'title' => 'My New Post Title',
+                'body' => 'My New Post Body',
+                'slug' => 'my-new-post-body',
+            ]
+        );
+
+        // Assert
+        $response->assertStatus(302)
+            ->assertRedirect('admin/dashboard');
+    }
+
     private function auth()
     {
         $user = factory(User::class)->create();

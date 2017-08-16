@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Rules\Slug;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -23,6 +24,7 @@ class PostController extends Controller
                 'body' => 'required|string',
                 'slug' => [
                     'required',
+                    new Slug,
                     Rule::unique('posts', 'slug')
                 ],
             ]
@@ -62,6 +64,7 @@ class PostController extends Controller
                 'body' => 'required|string',
                 'slug' => [
                     'required',
+                    new Slug,
                     Rule::unique('posts', 'slug')->ignore($post->id)
                 ],
             ]

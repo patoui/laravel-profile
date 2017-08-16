@@ -39,15 +39,6 @@ class PostController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function publish($id)
-    {
-        $post = Post::findOrFail($id);
-
-        $post->togglePublish();
-
-        return redirect()->route('admin.dashboard');
-    }
-
     public function edit($id)
     {
         return view('admin.post.edit')->with('post', Post::findOrFail($id));

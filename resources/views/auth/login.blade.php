@@ -32,10 +32,10 @@
                             <button class="button is-primary is-submit">Login</button>
                         </div>
                     </div>
-                    <footer class="card-footer">
+                    <!-- <footer class="card-footer">
                         <a href="/register" class="card-footer-item">Sign Up</a>
                         <a href="/password/reset" class="card-footer-item">Forgot Password?</a>
-                    </footer>
+                    </footer> -->
                 </form>
             </div>
         </div>

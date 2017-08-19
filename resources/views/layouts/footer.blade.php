@@ -5,17 +5,24 @@
                 <h3 class="is-size-4">Want to get notifications about my latest posts!</h3>
             </div>
             <div class="column">
-                <div class="field has-addons" style="margin: 0 auto;">
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Email">
+                <form method="post" action="{{ route('subscription.store') }}">
+                    {{ csrf_field() }}
+                    <div class="field has-addons" style="margin: 0 auto;">
+                        <div class="control">
+                            <input class="input" type="text" name="subscription_email" placeholder="Email">
+                        </div>
+                        <div class="control">
+                            <button class="button"
+                                type="submit"
+                                style="background-color: #007F6E; color: white; border: 1px solid rgba(0,0,0,0);">
+                            Subscribe!
+                            </button>
+                        </div>
                     </div>
-                    <div class="control">
-                        <a class="button"
-                            style="background-color: #007F6E; color: white; border: 1px solid rgba(0,0,0,0);">
-                        Subscribe!
-                        </a>
-                    </div>
-                </div>
+                    @if ($errors->has('subscription_email'))
+                    <p class="help is-danger">{{ $errors->first('subscription_email') }}</p>
+                    @endif
+                </form>
             </div>
         </div>
         <hr>

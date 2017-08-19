@@ -11,21 +11,25 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
 // DO NOT REMOVE
-Route::get('/cass-and-pat/2016', 'CassAndPatController@show2016');
-Route::post('/contact', 'ContactController@store')->name('contact.store');
+Route::get('cass-and-pat/2016', 'CassAndPatController@show2016');
+Route::post('contact', 'ContactController@store')->name('contact.store');
 
 // Blog
-Route::get('/blog', 'BlogController@index')->name('post.index');
+Route::get('blog', 'BlogController@index')->name('post.index');
 
 // Post
-Route::get('/post/{slug}', 'PostController@show')->name('post.show');
+Route::get('post/{slug}', 'PostController@show')->name('post.show');
 
 // Comment
-Route::post('/post/{slug}/comment', 'PostCommentController@store')
+Route::post('post/{slug}/comment', 'PostCommentController@store')
     ->name('post.comment.store');
+
+// Subscription
+Route::post('subscription', 'SubscriptionController@store')
+    ->name('subscription.store');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

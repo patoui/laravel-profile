@@ -2,42 +2,7 @@
 
 @section('title', 'Patrique Ouimet')
 
-@section('content')
-<section class="hero is-primary is-bold">
-
-    <!-- Navigation -->
-    <div id="nav" class="hero-head">
-        <nav class="navbar container">
-            <div class="navbar-brand">
-                <a id="navbar-brand-logo" class="navbar-item" href="/">PO</a>
-
-                <div class="navbar-burger burger" :class="{ 'is-active': isActive }" @click="toggleNav()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-
-            <div class="navbar-menu" :class="{ 'is-active': isActive }">
-                <div class="navbar-end">
-                    <a class="navbar-item " href="/blog">
-                    Blog
-                    </a>
-                    <a class="navbar-item" href="https://twitter.com/OuimetPatrique" target="_blank">
-                        <span class="icon">
-                            <i class="fa fa-twitter"></i>
-                        </span>
-                    </a>
-                    <a class="navbar-item" href="https://github.com/patoui" target="_blank">
-                        <span class="icon">
-                            <i class="fa fa-github"></i>
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </div>
-
+@section('hero-body')
     <div class="hero-body">
         <div class="container has-text-centered">
             <img src="/image/black-white-profile.png" alt="Grayscale profile picture" style="border-radius: 50%;">
@@ -46,7 +11,9 @@
             <h2 class="subtitle">Developer</h2>
         </div>
     </div>
-</section>
+@endsection
+
+@section('content')
 <section class="section">
     <div class="container">
         <h2 class="title has-text-centered">Work History</h2>

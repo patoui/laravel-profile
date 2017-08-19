@@ -9,9 +9,15 @@
 
 @section('title', $post->title)
 
-@section('content')
+@section('hero-body')
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">{{ $post->title }}</h1>
+        </div>
+    </div>
+@endsection
 
-@include('navigation.main', ['title' => $post->title])
+@section('content')
 
 <section class="section">
     <div class="container">

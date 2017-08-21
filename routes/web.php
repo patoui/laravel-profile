@@ -25,7 +25,8 @@ Route::get('post/{slug}', 'PostController@show')->name('post.show');
 
 // Comment
 Route::post('post/{slug}/comment', 'PostCommentController@store')
-    ->name('post.comment.store');
+    ->name('post.comment.store')
+    ->middleware('auth');
 
 // Subscription
 Route::post('subscription', 'SubscriptionController@store')

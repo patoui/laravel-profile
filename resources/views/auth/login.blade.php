@@ -8,7 +8,7 @@
             <div class="card">
                 <header class="card-header">
                     <p class="card-header-title has-text-centered">
-                        Blog
+                        Login
                     </p>
                 </header>
                 <form method="post" action="{{ route('login') }}">
@@ -32,10 +32,14 @@
                             <button class="button is-primary is-submit">Login</button>
                         </div>
                     </div>
-                    <!-- <footer class="card-footer">
-                        <a href="/register" class="card-footer-item">Sign Up</a>
-                        <a href="/password/reset" class="card-footer-item">Forgot Password?</a>
-                    </footer> -->
+                    <footer class="card-footer">
+                        <a href="{{ url('/auth/github') }}" class="card-footer-item"><i class="fa fa-github"></i>&nbsp;Github</a>
+                        <a href="{{ url('/auth/twitter') }}" class="card-footer-item"><i class="fa fa-twitter"></i>&nbsp;Twitter</a>
+                        <a href="{{ url('/auth/facebook') }}" class="card-footer-item"><i class="fa fa-facebook"></i>&nbsp;Facebook</a>
+
+                        <!-- <a href="/register" class="card-footer-item">Sign Up</a>
+                        <a href="/password/reset" class="card-footer-item">Forgot Password?</a> -->
+                    </footer>
                 </form>
             </div>
         </div>

@@ -20,7 +20,8 @@
         "laravel/scout": "^3.0",
         "intervention/image": "^2.4",
         "doctrine/dbal": "2.5.x-dev",
-        "erusev/parsedown": "^1.6"
+        "erusev/parsedown": "^1.6",
+        "laravel/socialite": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

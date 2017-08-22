@@ -1,5 +1,5 @@
 <!-- Navigation -->
-@if (Auth::user())
+@if (Auth::user() && Auth::user()->email == 'patrique.ouimet@gmail.com')
 <div id="nav" class="hero-head">
     <nav class="navbar container">
         <div class="navbar-brand">

@@ -39,20 +39,14 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
-    /**
-     * Handle an authentication attempt.
-     *
-     * @return Response
-     */
-    public function authenticate()
-    {
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            if ($email == 'patrique.ouimet@gmail.com') {
-                return redirect()->route('admin.dashboard');
-            }
 
-            return redirect()->route('home');
+    public function redirectTo()
+    {
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('admin.dashboard')->getTargetUrl();
         }
+
+        return redirect()->route('home')->getTargetUrl();
     }
 
     /**
@@ -66,15 +60,15 @@ class LoginController extends Controller
     }
 
     /**
-     * Obtain the user information from GitHub.
+     * Obtain the user information from provider.
      *
      * @return Response
      */
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback()
     {
-        $user = Socialite::driver($provider)->user();
+        $user = Socialite::driver('github')->user();
 
-        $authUser = $this->findOrCreateUser($user, $provider);
+        $authUser = $this->findOrCreateUser($user, 'github');
         Auth::login($authUser, true);
 
         if ($authUser->email == 'patrique.ouimet@gmail.com') {

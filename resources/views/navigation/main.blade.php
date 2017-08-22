@@ -1,9 +1,9 @@
 <!-- Navigation -->
-@if (Auth::user() && Auth::user()->email == 'patrique.ouimet@gmail.com')
+@if (Auth::user() && Auth::user()->isAdmin())
 <div id="nav" class="hero-head">
     <nav class="navbar container">
         <div class="navbar-brand">
-            <a id="navbar-brand-logo" class="navbar-item" href="/">PO</a>
+            <a id="navbar-brand-logo" class="navbar-item" href="{{ route('home') }}">PO</a>
 
             <div class="navbar-burger burger" @click="toggleNav()">
                 <span></span>
@@ -14,9 +14,9 @@
 
         <div class="navbar-menu" :class="{ 'is-active' : isActive }">
             <div class="navbar-end">
-                <a class="navbar-item" href="/blog">Blog</a>
-                <a class="navbar-item" href="/admin/dashboard">Dashboard</a>
-                <a class="navbar-item" href="/admin/post/create">
+                <a class="navbar-item" href="{{ route('post.index') }}">Blog</a>
+                <a class="navbar-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                <a class="navbar-item" href="{{ route('admin.post.create') }}">
                     <span class="icon">
                         <i class="fa fa-plus"></i>
                     </span>
@@ -45,7 +45,7 @@
 
         <div class="navbar-menu" :class="{ 'is-active': isActive }">
             <div class="navbar-end">
-                <a class="navbar-item " href="/blog">Blog</a>
+                <a class="navbar-item " href="{{ route('post.index') }}">Blog</a>
                 <a class="navbar-item" href="https://twitter.com/OuimetPatrique" target="_blank">
                     <span class="icon">
                         <i class="fa fa-twitter"></i>
@@ -54,6 +54,11 @@
                 <a class="navbar-item" href="https://github.com/patoui" target="_blank">
                     <span class="icon">
                         <i class="fa fa-github"></i>
+                    </span>
+                </a>
+                <a class="navbar-item" href="{{ Auth::user() ? route('logout') : route('login') }}">
+                    <span class="icon">
+                        <i class="fa fa-sign-{{ Auth::user() ? 'out' : 'in' }}" aria-hidden="true"></i>
                     </span>
                 </a>
             </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-footerless')
 
 @section('title', 'Update: ' . $post->title)
 

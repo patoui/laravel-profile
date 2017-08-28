@@ -19,19 +19,20 @@
 
     <!-- Additional CSS -->
     @yield('css')
-
-    <!-- fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-
-    <style type="text/css">
-    /*html, body {
-        font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    }*/
-    </style>
 </head>
 <body>
 
     <div>
+
+        <section class="hero is-primary is-bold">
+
+            <!-- Navigation -->
+            @include('navigation.main')
+
+            <!-- Headline -->
+            @yield('hero-body')
+
+        </section>
 
         <!-- Main Content -->
         @yield('content')

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-footerless')
 
 @section('title', 'Articles')
 
@@ -64,4 +64,3 @@ td h2 {
     </section>
 
 @endsection
-

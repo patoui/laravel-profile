@@ -1,4 +1,3 @@
-<!-- Navigation -->
 @if (Auth::user() && Auth::user()->isAdmin())
 <div id="nav" class="hero-head">
     <nav class="navbar container">
@@ -64,5 +63,5 @@
             </div>
         </div>
     </nav>
-@endif
 </div>
+@endif

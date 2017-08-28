@@ -1,4 +1,4 @@
-@extends('layouts.app-navless')
+@extends('layouts.app-footerless')
 
 @section('favicon', '/img/cass-and-pat/heart_shadow.ico')
 @section('title', 'Cass &amp; Pat 2016')

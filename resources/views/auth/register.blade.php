@@ -1,4 +1,4 @@
-@extends('layouts.app-navless')
+@extends('layouts.app-footerless')
 
 @section('content')
 <div class="container is-fluid">

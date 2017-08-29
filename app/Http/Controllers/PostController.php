@@ -11,6 +11,10 @@ class PostController extends Controller
     {
         $post = Post::findOrFailBySlug($slug);
 
+        $post->analytics()->create([
+            'headers' => json_encode(request()->headers->all())
+        ]);
+
         return view('post.show')
             ->with('post', $post)
             ->with('comments', $post->comments);

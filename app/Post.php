@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Comment;
+use App\PostAnalytics;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -24,6 +25,14 @@ class Post extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    /**
+     * Post analytics relationship
+     */
+    public function analytics()
+    {
+        return $this->hasMany(PostAnalytics::class);
+    }
 
     /**
      * Comments relationship

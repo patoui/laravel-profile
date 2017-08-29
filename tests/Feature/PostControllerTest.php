@@ -29,5 +29,10 @@ class PostControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertSee('First Title')
             ->assertSee('First Body');
+
+        // Assert analytics were stored
+        $this->assertNotNull(
+            $post->fresh()->analytics()->first()
+        );
     }
 }

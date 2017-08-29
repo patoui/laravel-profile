@@ -6,5 +6,4 @@
 
   ga('create', {!! json_encode(config('google.analytics')) !!}, 'auto');
   ga('send', 'pageview');
-
 </script>

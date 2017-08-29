@@ -54,9 +54,9 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider($provider)
+    public function redirectToProvider()
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver('github')->redirect();
     }
 
     /**

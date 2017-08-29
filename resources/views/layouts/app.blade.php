@@ -47,6 +47,8 @@
     <!-- Additional JS -->
     @yield('javascript')
 
+    @include('google.analytics')
+
 </body>
 
 </html>

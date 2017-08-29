@@ -19,6 +19,8 @@
 
     <!-- Additional CSS -->
     @yield('css')
+
+    @include('google.analytics')
 </head>
 <body>
 
@@ -44,8 +46,6 @@
 
     <!-- Additional JS -->
     @yield('javascript')
-
-    @include('google.analytics')
 
 </body>
 

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Post;
+use App\Observers\PostObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Post::observe(PostObserver::class);
     }
 
     /**
@@ -23,12 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if ($this->app->environment('development', 'local')) {
+        if ($this->app->environment('development', 'local', 'dusk', 'testing')) {
             $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }
         if ($this->app->environment('dusk', 'testing')) {
             $this->app->register(\PatOui\Scout\TestingScoutServiceProvider::class);
-            $this->app->register(\Laravel\Dusk\DuskServiceProvider::class);
         }
     }
 }

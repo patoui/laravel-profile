@@ -1,24 +1,7 @@
 @if (session()->has('flash_notification.message'))
-    @if (session()->has('flash_notification.overlay'))
-        @include('flash::modal', [
-            'modalClass' => 'flash-modal',
-            'title'      => session('flash_notification.title'),
-            'body'       => session('flash_notification.message')
-        ])
-    @else
-        <div id="flash-message" class="flash-format alert
-                    alert-{{ session('flash_notification.level') }}
-                    {{ session()->has('flash_notification.important') ? 'alert-important' : '' }}"
-        >
-            @if(session()->has('flash_notification.important'))
-                <button type="button"
-                        class="close"
-                        data-dismiss="alert"
-                        aria-hidden="true"
-                >&times;</button>
-            @endif
-
-            {!! session('flash_notification.message') !!}
-        </div>
-    @endif
+    <div class="notification is-primary"
+        style="position: fixed; bottom: 10px; right: 10px; margin-bottom: 0; z-index: 99999;">
+        <button class="delete"></button>
+        <span>{!! session('flash_notification.message') !!}</span>
+    </div>
 @endif

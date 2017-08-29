@@ -1,0 +1,75 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Days+One);
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Github
+@import "node_modules/github-markdown-css/github-markdown";
+
+// Variables
+@import "variables";
+
+// Bulma
+@import "node_modules/bulma/bulma";
+
+// Font Awesome
+@import "node_modules/font-awesome/scss/font-awesome";
+
+/* START: GLOBAL */
+html {
+    overflow: auto;
+}
+
+.main {
+    min-height: 425px;
+}
+/* END: GLOBAL */
+
+/* START: GITHUB */
+.markdown-body {
+    font-family: inherit;
+}
+/* END: GITHUB */
+
+/* START: NAV */
+.hero-head {
+    box-shadow: 0 0 1px rgba(255,255,255,0.5);
+}
+
+.navbar {
+    color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0);
+}
+
+.navbar-burger span {
+    background-color: #4a4a4a;
+}
+
+.navbar-burger.is-active span {
+    background-color: #4a4a4a;
+}
+
+.navbar-brand {
+    width: inherit;
+}
+
+#navbar-brand-logo {
+    font-family: 'Days One', sans-serif;
+    font-size: 25px;
+}
+/* END: NAV */
+
+/* START: LOGIN */
+#login {
+    padding: 40px;
+    margin: 0 10px;
+}
+
+#login .card-header-title {
+    display: block;
+}
+
+#login .is-submit {
+    width: 100%;
+}
+/* END: LOGIN */

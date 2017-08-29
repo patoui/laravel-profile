@@ -16,6 +16,22 @@
 @section('content')
 <section class="section">
     <div class="container">
+        <h2 class="title has-text-centered">About Me</h2>
+        <div class="columns">
+            <div class="column is-size-5">
+                <p>
+                    Hi there! I'm Patrique Ouimet, a developer who specializes in: PHP (Laravel), JavaScript (AngularJS, VueJS), and CSS (Sass). I have an obssession with learning, whether it’s to sharpen my existing skills or to explore new ones such as: D3.js, Python (Django), CreativeJS, MeteorJS, etc. I also enjoy running, hiking, biking, weight lifting, soccer, and basketball.
+                </p>
+                <br>
+                <p>
+                    As of late, I’ve decided to try myself at blogging to share some tips and tricks I’ve learnt during my time as a developer. Whether they be technical, interpersonel, or otherwise; my hope is that fellow developers may learn something from my blog.
+                </p>
+                <br>
+                <p>
+                    If you have any suggestions or materials that would assist me in becoming a better developer or to help me write better content, please don’t hesitate to contact me on Twitter @OuimetPatrique.
+                </p>
+            </div>
+        </div>
         <h2 class="title has-text-centered">Work History</h2>
         <div class="columns">
             <div class="column">

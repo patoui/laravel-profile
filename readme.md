@@ -4,6 +4,7 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
+* Update framework tag
 * Add gates/policies for admin
 * Add reply to comments (thread/nested comments)
 * Fix Facebook preview image, default to profile picture

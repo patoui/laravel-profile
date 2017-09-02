@@ -4,6 +4,8 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
+* Add links to resources used for the article
+* Add link to gist used for the article
 * Add gates/policies for admin
 * Add reply to comments (thread/nested comments)
 * Fix Facebook preview image, default to profile picture

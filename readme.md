@@ -4,8 +4,6 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Add links to resources used for the article
-* Add link to gist used for the article
 * Add gates/policies for admin
 * Add reply to comments (thread/nested comments)
 * Fix Facebook preview image, default to profile picture
@@ -17,10 +15,12 @@ TODO:
 
 DONE:
 
-* ~~Update home page UI~~
-* ~~Add Github markdown parser~~
-* ~~Add CSS classes for Github markdown (override Bulma CSS)~~
-* ~~Add logged in user nav~~
-* ~~Add user registration~~
-* ~~Add user login (Laravel Socialite)~~
+* ~~Add link to gist used for the article~~
+* ~~Add links to resources used for the article~~
 * ~~Add user commenting~~
+* ~~Add user login (Laravel Socialite)~~
+* ~~Add logged in user nav~~
+* ~~Add CSS classes for Github markdown (override Bulma CSS)~~
+* ~~Add Github markdown parser~~
+* ~~Add user registration~~
+* ~~Update home page UI~~

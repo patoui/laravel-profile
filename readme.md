@@ -4,7 +4,6 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Update framework tag
 * Add gates/policies for admin
 * Add reply to comments (thread/nested comments)
 * Fix Facebook preview image, default to profile picture
@@ -16,6 +15,7 @@ TODO:
 
 DONE:
 
+* ~~Update framework version~~
 * ~~Add link to gist used for the article~~
 * ~~Add links to resources used for the article~~
 * ~~Add user commenting~~

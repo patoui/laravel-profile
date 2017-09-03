@@ -46,6 +46,10 @@ class PostTest extends TestCase
         try {
             $exists = app(Post::class)->findOrFailBySlug('my-articles-title');
         } catch (ModelNotFoundException $e) {
+            $this->assertEquals(
+                'No query results for model [App\Post].',
+                $e->getMessage()
+            );
             return;
         }
 

@@ -42,6 +42,28 @@ class LoginControllerTest extends TestCase
             ->assertRedirect('admin/dashboard');
     }
 
+    public function testLoginNotAdmin()
+    {
+        // Arrange
+        $user = factory(User::class)->create([
+            'email' => 'john.doe@gmail.com',
+            'password' => bcrypt('testpass'),
+        ]);
+
+        // Act
+        $response = $this->post(
+            'login',
+            [
+                'email' => 'john.doe@gmail.com',
+                'password' => 'testpass',
+            ]
+        );
+
+        // Assert
+        $response->assertStatus(302)
+            ->assertRedirect('/');
+    }
+
     public function testLogout()
     {
         // Arrange

@@ -17,7 +17,7 @@ class DashboardControllerTest extends TestCase
      */
     public function testIndex()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->states('admin')->create();
 
         $this->actingAs($user)
             ->get('admin/dashboard')

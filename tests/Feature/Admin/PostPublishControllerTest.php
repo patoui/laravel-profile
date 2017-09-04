@@ -17,7 +17,7 @@ class PostPublishControllerTest extends TestCase
     public function testShow()
     {
         // Arrange
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->states('admin')->create();
 
         $post = factory(Post::class)->create(['published_at' => null]);
 

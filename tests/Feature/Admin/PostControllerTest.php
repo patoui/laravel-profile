@@ -120,7 +120,7 @@ class PostControllerTest extends TestCase
      */
     private function auth()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->states('admin')->create();
 
         $this->actingAs($user);
     }

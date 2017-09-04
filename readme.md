@@ -4,7 +4,6 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Add gates/policies for admin
 * Add reply to comments (thread/nested comments)
 * Fix Facebook preview image, default to profile picture
 * Add Email notifications when new article is published
@@ -15,6 +14,7 @@ TODO:
 
 DONE:
 
+* ~~Add gates/policies for admin~~
 * ~~Update framework version~~
 * ~~Add link to gist used for the article~~
 * ~~Add links to resources used for the article~~

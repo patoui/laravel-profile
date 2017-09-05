@@ -27,7 +27,10 @@ class PostCommentController extends Controller
         );
 
         // Create comment for post
-        $post->createComment(['body' => request('body')]);
+        $post->createComment([
+            'body' => request('body'),
+            'comment_id' => request('comment_id'),
+        ]);
 
         // Redirect back to the post
         return redirect()->route('post.show', ['slug' => $post->slug]);

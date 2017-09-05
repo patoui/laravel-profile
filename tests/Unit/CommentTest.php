@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Comment;
+use App\Post;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,6 +11,28 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class CommentTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function testComments()
+    {
+        // Arrange
+        $post = factory(Post::class)->create();
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id
+        ]);
+        factory(Comment::class, 5)->create([
+            'post_id' => $post->id,
+            'comment_id' => $comment->id
+        ]);
+
+        // Act
+        $comments = $comment->comments;
+
+        // Assert
+        $this->assertEquals(
+            5,
+            $comments->count()
+        );
+    }
 
     public function testGetShortTimestampAttribute()
     {

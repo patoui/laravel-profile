@@ -27,28 +27,9 @@
 <section class="section">
     <div class="container">
         <h4 class="subtitle">Comments</h4>
-        @foreach($comments as $comment)
-        <div class="media">
-            <figure class="media-left">
-                <p class="image is-64x64">
-                    <img src="http://via.placeholder.com/64x64" alt="Avatar placeholder">
-                </p>
-            </figure>
-            <div class="media-content">
-                <div class="content">
-                    <p>
-                        <strong>Anonymous</strong>
-                        <br>
-                        {{ $comment->body }}
-                        <br>
-                        <small>{{ $comment->short_timestamp }}</small>
-                        <!-- TODO: Add like/reply -->
-                        <!-- <a>Like</a> · <a>Reply</a> ·  -->
-                    </p>
-                </div>
-            </div>
+        <div id="comments">
+        @include('post.comments', ['comments' => $comments])
         </div>
-        @endforeach
 
         <form method="post"
             action="{{ route('post.comment.store', ['slug' => $post->slug]) }}"

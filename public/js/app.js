@@ -63,12 +63,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10160,10 +10159,10 @@ Vue$3.compile = compileToFunctions;
 
 module.exports = Vue$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports) {
 
 var g;
@@ -10190,7 +10189,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -10200,9 +10199,9 @@ module.exports = g;
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(7);
+__webpack_require__(4);
 
-window.Vue = __webpack_require__(1);
+window.Vue = __webpack_require__(0);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -10220,20 +10219,46 @@ var nav = new Vue({
     }
 });
 
+var post = new Vue({
+    el: '#comments',
+    data: {
+        comments: {}
+    },
+    methods: {
+        toggleComment: function toggleComment(id) {
+            if (this.comments.hasOwnProperty(id)) {
+                this.$set(this.comments, id, { isActive: !this.comments[id].isActive });
+                // The code below is not reactive, therefore the frontend
+                // does not see the changes
+                // this.comments[id].isActive = ! this.comments[id].isActive;
+            } else {
+                this.$set(this.comments, id, { isActive: true });
+                // The code below is not reactive, therefore the frontend
+                // does not see the changes
+                // this.comments[id] = { isActive: true };
+            }
+        },
+        isCommentActive: function isCommentActive(id) {
+            if (this.comments.hasOwnProperty(id)) {
+                return this.comments[id].isActive;
+            }
+            return false;
+        }
+    }
+});
+
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 5 */,
-/* 6 */,
-/* 7 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(8);
+window._ = __webpack_require__(5);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10250,7 +10275,7 @@ window._ = __webpack_require__(8);
  * and simple, leaving you to focus on building your next great project.
  */
 
-window.Vue = __webpack_require__(1);
+window.Vue = __webpack_require__(0);
 // require('vue-resource');
 
 /**
@@ -10279,7 +10304,7 @@ window.Vue = __webpack_require__(1);
 // });
 
 /***/ }),
-/* 8 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -27368,14 +27393,10 @@ window.Vue = __webpack_require__(1);
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(13)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)(module)))
 
 /***/ }),
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -27403,11 +27424,11 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 14 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(3);
-module.exports = __webpack_require__(4);
+__webpack_require__(2);
+module.exports = __webpack_require__(3);
 
 
 /***/ })

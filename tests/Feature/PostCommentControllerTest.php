@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Comment;
 use App\Post;
 use App\User;
 use Tests\TestCase;
@@ -68,6 +69,46 @@ class PostCommentControllerTest extends TestCase
         $response = $this->post(
             'post/slug-here/comment',
             ['body' => 'Awesome post!']
+        );
+    }
+
+    /**
+     * Test storing a post comment on a comment
+     */
+    public function testStoreOnComment()
+    {
+        // Arrange
+        $this->be($user = factory(User::class)->create());
+
+        $post = factory(Post::class)->create([
+            'title' => 'First Title',
+            'body' => 'First Body',
+            'slug' => 'first-title',
+        ]);
+
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+            'body' => 'Awesome post!',
+        ]);
+
+        // Act
+        $response = $this->post(
+            'post/' . $post->slug . '/comment',
+            [
+                'comment_id' => $comment->id,
+                'body' => 'Sure was!'
+            ]
+        );
+
+        // Assert
+        $response->assertStatus(302)
+            ->assertRedirect('post/' . $post->slug);
+
+        $this->assertNotNull(
+            Comment::where('post_id', $post->id)
+                ->where('comment_id', $comment->id)
+                ->where('body', 'Sure was!')
+                ->first()
         );
     }
 }

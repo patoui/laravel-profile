@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Favourite;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,6 +27,41 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
+    public function toggleFavourite($model)
+    {
+        // Verify argument is an object
+        if (! is_object($model)) {
+            throw new \Exception('Model must be passed');
+        }
+
+        // Get model class name
+        $class = get_class($model);
+
+        if (! in_array($class, ['App\Comment'])) {
+            throw new \Exception('Model class must be \'App\Comment\'');
+        }
+
+        $favourite = $this->favourites()
+            ->where('favouritable_id', $model->id)
+            ->where('favouritable_type', $class)
+            ->first();
+
+        if (! $favourite) {
+            // Create favourite
+            return $this->favourites()->create([
+                'favouritable_id' => $model->id,
+                'favouritable_type' => $class,
+            ]);
+        }
+
+        return null;
+    }
 
     public function isAdmin()
     {

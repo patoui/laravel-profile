@@ -19,6 +19,16 @@ class Comment extends Model
     }
 
     /**
+     * Comments on a comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function post()
+    {
+        return $this->belongsTo(Post::class);
+    }
+
+    /**
      * Short human friendly timestamp
      *
      * @return string

@@ -28,6 +28,10 @@ Route::post('post/{slug}/comment', 'PostCommentController@store')
     ->name('post.comment.store')
     ->middleware('auth');
 
+Route::post('comment/{comment}', 'CommentFavouriteController@store')
+    ->name('comment.favourite.store')
+    ->middleware('auth');
+
 // Subscription
 Route::post('subscription', 'SubscriptionController@store')
     ->name('subscription.store');

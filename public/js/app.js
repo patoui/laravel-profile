@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10199,7 +10199,7 @@ module.exports = g;
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-__webpack_require__(4);
+__webpack_require__(5);
 
 window.Vue = __webpack_require__(0);
 
@@ -10219,46 +10219,19 @@ var nav = new Vue({
     }
 });
 
-var post = new Vue({
-    el: '#comments',
-    data: {
-        comments: {}
-    },
-    methods: {
-        toggleComment: function toggleComment(id) {
-            if (this.comments.hasOwnProperty(id)) {
-                this.$set(this.comments, id, { isActive: !this.comments[id].isActive });
-                // The code below is not reactive, therefore the frontend
-                // does not see the changes
-                // this.comments[id].isActive = ! this.comments[id].isActive;
-            } else {
-                this.$set(this.comments, id, { isActive: true });
-                // The code below is not reactive, therefore the frontend
-                // does not see the changes
-                // this.comments[id] = { isActive: true };
-            }
-        },
-        isCommentActive: function isCommentActive(id) {
-            if (this.comments.hasOwnProperty(id)) {
-                return this.comments[id].isActive;
-            }
-            return false;
-        }
-    }
-});
-
 /***/ }),
-/* 3 */
+/* 3 */,
+/* 4 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(5);
+window._ = __webpack_require__(6);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10304,7 +10277,7 @@ window.Vue = __webpack_require__(0);
 // });
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -27393,10 +27366,10 @@ window.Vue = __webpack_require__(0);
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)(module)))
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -27424,11 +27397,11 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(2);
-module.exports = __webpack_require__(3);
+module.exports = __webpack_require__(4);
 
 
 /***/ })

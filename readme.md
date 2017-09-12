@@ -4,7 +4,6 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Fix Facebook preview image, default to profile picture
 * Add Email notifications when new article is published
 * Add SMS notifications when new article is published (bit.ly to save characters)
 * Add "Next" and "Previous" to scroll through post
@@ -13,6 +12,7 @@ TODO:
 
 DONE:
 
+* ~~Fix Facebook preview image, default to profile picture~~
 * ~~Add reply to comments (thread/nested comments)~~
 * ~~Add gates/policies for admin~~
 * ~~Update framework version~~

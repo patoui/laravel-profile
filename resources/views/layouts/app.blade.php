@@ -47,7 +47,9 @@
     <!-- Additional JS -->
     @yield('javascript')
 
-    @include('google.analytics')
+    @if (! app()->environment('development', 'testing', 'dusk'))
+        @include('google.analytics')
+    @endif
 
 </body>
 

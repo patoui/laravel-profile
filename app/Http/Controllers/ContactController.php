@@ -9,6 +9,12 @@ use Validator;
 
 class ContactController extends Controller
 {
+    /**
+     * Send contact request email
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         $validator = Validator::make(

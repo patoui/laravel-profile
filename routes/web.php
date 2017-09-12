@@ -17,10 +17,8 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('cass-and-pat/2016', 'CassAndPatController@show2016');
 Route::post('contact', 'ContactController@store')->name('contact.store');
 
-// Blog
-Route::get('blog', 'BlogController@index')->name('post.index');
-
 // Post
+Route::get('blog', 'PostController@index')->name('post.index');
 Route::get('post/{slug}', 'PostController@show')->name('post.show');
 
 // Comment

@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class CommentFavouriteController extends Controller
 {
+    /**
+     * Favourite a comment
+     *
+     * @param  Comment $comment
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Comment $comment)
     {
         $favourite = auth()->user()->toggleFavourite($comment);

@@ -24,6 +24,10 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->state(App\User::class, 'me', [
+    'email' => 'patrique.ouimet@gmail.com',
+]);
+
 $factory->state(App\User::class, 'admin', [
     'email' => 'patrique.ouimet@gmail.com'
 ]);

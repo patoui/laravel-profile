@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Comment;
+use App\Notifications\UserCommented;
 use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
@@ -27,10 +28,13 @@ class PostCommentController extends Controller
         );
 
         // Create comment for post
-        $post->createComment([
+        $comment = $post->createComment([
             'body' => request('body'),
             'comment_id' => request('comment_id'),
         ]);
+
+        // Notify me when someone comments
+        me()->notify(new UserCommented($comment));
 
         // Redirect back to the post
         return redirect()->route('post.show', ['slug' => $post->slug]);

@@ -26,6 +26,8 @@ class PostCommentControllerTest extends TestCase
             'slug' => 'first-title',
         ]);
 
+        factory(User::class)->states('me')->create();
+
         // Act
         $response = $this->post(
             'post/' . $post->slug . '/comment',
@@ -90,6 +92,8 @@ class PostCommentControllerTest extends TestCase
             'post_id' => $post->id,
             'body' => 'Awesome post!',
         ]);
+
+        factory(User::class)->states('me')->create();
 
         // Act
         $response = $this->post(

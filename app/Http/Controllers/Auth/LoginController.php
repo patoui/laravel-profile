@@ -40,6 +40,24 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        if (session()->has('url.intended')
+            && strpos(session('url.intended'), 'comment') !== false) {
+            session()->put('url.intended', url()->previous() . '#post-comment');
+        }
+
+        return view('auth.login');
+    }
+
+    /**
+     * @return string route to where redirect a user
+     */
     public function redirectTo()
     {
         if (Auth::user()->isAdmin()) {

@@ -15,7 +15,7 @@ class PostController extends Controller
     public function index()
     {
         // Get published posts
-        $posts = Post::published()->get();
+        $posts = Post::published()->latest()->get();
 
         return view('post.index')
             ->with('posts', $posts);

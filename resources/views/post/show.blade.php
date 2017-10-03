@@ -35,7 +35,8 @@
         @include('post.comments', ['comments' => $comments])
         </div>
 
-        <form method="post"
+        <form id="post-comment"
+            method="post"
             action="{{ route('post.comment.store', ['slug' => $post->slug]) }}"
             class="media">
             {{ csrf_field() }}

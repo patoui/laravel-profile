@@ -13,8 +13,6 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-// DO NOT REMOVE
-Route::get('cass-and-pat/2016', 'CassAndPatController@show2016');
 Route::post('contact', 'ContactController@store')->name('contact.store');
 
 // Post

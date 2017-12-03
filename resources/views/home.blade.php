@@ -5,7 +5,7 @@
 @section('hero-body')
     <div class="hero-body">
         <div class="container has-text-centered">
-            <img src="{{ Storage::url('image/black-white-profile.png') }}" alt="Grayscale profile picture" style="border-radius: 50%;">
+            <img src="/img/black-white-profile.png" alt="Grayscale profile picture" style="border-radius: 50%;">
             <h1 class="title" style="margin-top: 24px;">Patrique Ouimet</h1>
             <hr style="max-width: 140px; margin: 0 auto 24px auto;" />
             <h2 class="subtitle">Developer</h2>
@@ -38,14 +38,14 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="{{ Storage::url('image/tether-website.png') }}" class="img-responsive img-centered">
+                            <img src="/img/tether-website.png" class="img-responsive img-centered">
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="{{ Storage::url('image/mobilexco-logo.png') }}" alt="MobileXCo logo">
+                                    <img src="/img/mobilexco-logo.png" alt="MobileXCo logo">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -69,14 +69,14 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="{{ Storage::url('image/thejobwindow-website.png') }}" class="img-responsive img-centered">
+                            <img src="/img/thejobwindow-website.png" class="img-responsive img-centered">
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="{{ Storage::url('image/thejobwindow-logo.png') }}" alt="The Job Window logo">
+                                    <img src="/img/thejobwindow-logo.png" alt="The Job Window logo">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -99,14 +99,14 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="{{ Storage::url('image/25todine-website.png') }}" class="img-responsive img-centered">
+                            <img src="/img/25todine-website.png" class="img-responsive img-centered">
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="{{ Storage::url('image/25todine-logo.png') }}" alt="25 to Dine logo">
+                                    <img src="/img/25todine-logo.png" alt="25 to Dine logo">
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -127,14 +127,14 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="{{ Storage::url('image/aegolfpass-website.png') }}" class="img-responsive img-centered">
+                            <img src="/img/aegolfpass-website.png" class="img-responsive img-centered">
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="{{ Storage::url('image/aegolfpass-logo.png') }}" alt="AE Golf Pass logo">
+                                    <img src="/img/aegolfpass-logo.png" alt="AE Golf Pass logo">
                                 </figure>
                             </div>
                             <div class="media-content">

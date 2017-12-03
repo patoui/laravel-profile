@@ -8,7 +8,7 @@
 <meta property="og:type"        content="article" />
 <meta property="og:title"       content="{{ $post->title }}" />
 <meta property="og:description" content="{{ $post->short_body }}" />
-<meta property="og:image"       content="{{ data_get($post, 'image', Request::root() . Storage::url('image/black-white-profile.png')) }}" />
+<meta property="og:image"       content="{{ data_get($post, 'image', Request::root() . '/img/black-white-profile.png') }}" />
 @endsection
 
 @section('title', $post->title)

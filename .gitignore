@@ -4,6 +4,7 @@
 /.idea
 /coverage
 /tags
+/storage/app/media/*
 Homestead.json
 Homestead.yaml
 .env

@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
-use App\Post;
+use App\Policies\DashboardPolicy;
+use App\Policies\MediaPolicy;
 use App\Policies\PostPolicy;
 use App\Policies\PostPublishPolicy;
-use Illuminate\Support\Facades\Gate;
+use App\Post;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -32,8 +34,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('post.update', 'App\Policies\PostPolicy@update');
         Gate::define('post.delete', 'App\Policies\PostPolicy@delete');
         Gate::define('post.publish', 'App\Policies\PostPublishPolicy@publish');
-        Gate::define('dashboard-index', function ($user) {
-            return $user->isAdmin();
-        });
+        Gate::define('dashboard.index', 'App\Policies\DashboardPolicy@index');
+        Gate::define('media.index', 'App\Policies\MediaPolicy@index');
+        Gate::define('media.create', 'App\Policies\MediaPolicy@create');
+        Gate::define('media.edit', 'App\Policies\MediaPolicy@edit');
+        Gate::define('media.store', 'App\Policies\MediaPolicy@store');
+        Gate::define('media.update', 'App\Policies\MediaPolicy@update');
+        Gate::define('media.delete', 'App\Policies\MediaPolicy@delete');
     }
 }

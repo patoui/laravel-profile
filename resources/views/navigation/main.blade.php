@@ -1,6 +1,6 @@
 @if (Auth::user() && Auth::user()->isAdmin())
 <div id="nav" class="hero-head">
-    <nav class="navbar container">
+    <nav class="navbar">
         <div class="navbar-brand">
             <a id="navbar-brand-logo" class="navbar-item" href="{{ route('home') }}">PO</a>
 
@@ -31,7 +31,7 @@
 </div>
 @else
 <div id="nav" class="hero-head">
-    <nav class="navbar container">
+    <nav class="navbar">
         <div class="navbar-brand">
             <a id="navbar-brand-logo" class="navbar-item" href="/">PO</a>
 

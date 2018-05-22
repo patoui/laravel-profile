@@ -82,7 +82,7 @@
 @if ($previousPost)
 <section class="section">
     <div class="container">
-        <a href="{{ route('post.show', ['slug' => $previousPost->slug]) }}" class="button is-secondary">Previous: {{ $previousPost->title }}</a>
+        <a href="{{ route('post.show', ['slug' => $previousPost->slug]) }}" class="button is-secondary" style="white-space: normal; padding: 25px;">Previous: {{ $previousPost->title }}</a>
     </div>
 </section>
 @endif

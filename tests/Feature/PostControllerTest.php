@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Post;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Carbon\Carbon;
 
 class PostControllerTest extends TestCase
 {
@@ -16,10 +17,17 @@ class PostControllerTest extends TestCase
     public function testShow()
     {
         // Arrange
-        $post = factory(Post::class)->create([
+        $previousPost = factory(Post::class)->create([
             'title' => 'First Title',
             'body' => 'First Body',
             'slug' => 'first-title',
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        $post = factory(Post::class)->create([
+            'title' => 'Second Title',
+            'body' => 'Second Body',
+            'slug' => 'second-title',
+            'published_at' => Carbon::now(),
         ]);
 
         // Act
@@ -27,8 +35,9 @@ class PostControllerTest extends TestCase
 
         // Assert
         $response->assertStatus(200)
-            ->assertSee('First Title')
-            ->assertSee('First Body');
+            ->assertSee('Second Title')
+            ->assertSee('Second Body')
+            ->assertSee('Previous: First Title');
 
         // Assert analytics were stored
         $this->assertNotNull(

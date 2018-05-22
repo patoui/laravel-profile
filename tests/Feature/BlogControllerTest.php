@@ -18,8 +18,8 @@ class BlogControllerTest extends TestCase
     public function testIndex()
     {
         // Arrange
-        $post = factory(Post::class)->create();
-        $unpublished = factory(Post::class)->create(['published_at' => null]);
+        $post = factory(Post::class)->states(['published'])->create();
+        $unpublished = factory(Post::class)->create();
 
         // Act
         $response = $this->get('blog');

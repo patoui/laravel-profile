@@ -79,6 +79,13 @@
         </form>
     </div>
 </section>
+@if ($previousPost)
+<section class="section">
+    <div class="container">
+        <a href="{{ route('post.show', ['slug' => $previousPost->slug]) }}" class="button is-secondary">Previous: {{ $previousPost->title }}</a>
+    </div>
+</section>
+@endif
 @endsection
 
 @section('javascript')

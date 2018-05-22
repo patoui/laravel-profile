@@ -128,4 +128,19 @@ class Post extends Model
     {
         return $query->whereNotNull('published_at');
     }
+
+    /**
+     * Get the previous published post
+     *
+     * @return null|App\Post
+     */
+    public function previousPublished()
+    {
+        return (new self)
+            ->where('id', '<>', $this->id)
+            ->where('published_at', '<', $this->published_at)
+            ->published()
+            ->latest()
+            ->first();
+    }
 }

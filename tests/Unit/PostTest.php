@@ -103,7 +103,7 @@ class PostTest extends TestCase
 
     public function testTogglePublish()
     {
-        $post = factory(Post::class)->create(['published_at' => null]);
+        $post = factory(Post::class)->create();
 
         $post->togglePublish();
 
@@ -112,12 +112,26 @@ class PostTest extends TestCase
 
     public function testScopePublished()
     {
-        factory(Post::class, 2)->create(['published_at' => null]);
-        factory(Post::class)->create(['published_at' => Carbon::yesterday()]);
+        factory(Post::class, 2)->create();
+        factory(Post::class)->states(['published'])->create();
 
         $this->assertEquals(
             1,
             app(Post::class)->published()->count()
         );
+    }
+
+    public function testPrevious()
+    {
+        $previousPost = factory(Post::class)->create([
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        $post = factory(Post::class)->create([
+            'published_at' => Carbon::now(),
+        ]);
+
+        $previousPostFound = $post->previousPublished();
+
+        $this->assertEquals($previousPost->title, $previousPostFound->title);
     }
 }

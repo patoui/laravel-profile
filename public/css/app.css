@@ -14679,6 +14679,14 @@ html {
 
 /* END: LOGIN */
 
+/* START: BLOG (POST INDEX) */
+
+.table {
+  width: 100%;
+}
+
+/* END: BLOG (POST INDEX) */
+
 /* START: POST */
 
 #post.level {

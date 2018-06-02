@@ -40,6 +40,7 @@ class PostController extends Controller
         return view('post.show')
             ->with('post', $post)
             ->with('previousPost', $post->previousPublished())
+            ->with('nextPost', $post->nextPublished())
             ->with('comments', $post->comments);
     }
 }

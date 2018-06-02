@@ -79,10 +79,21 @@
         </form>
     </div>
 </section>
-@if ($previousPost)
+@if ($previousPost || $nextPost)
 <section class="section">
     <div class="container">
-        <a href="{{ route('post.show', ['slug' => $previousPost->slug]) }}" class="button is-secondary" style="white-space: normal; padding: 25px;">Previous: {{ $previousPost->title }}</a>
+        <div class="columns">
+            <div class="column">
+                @if ($previousPost)
+                    <a href="{{ route('post.show', ['slug' => $previousPost->slug]) }}" class="button is-secondary" style="white-space: normal; padding: 25px;">Previous: {{ $previousPost->title }}</a>
+                @endif
+            </div>
+            <div class="column has-text-right">
+                @if ($nextPost)
+                    <a href="{{ route('post.show', ['slug' => $nextPost->slug]) }}" class="button is-secondary" style="white-space: normal; padding: 25px;">Next: {{ $nextPost->title }}</a>
+                @endif
+            </div>
+        </div>
     </div>
 </section>
 @endif

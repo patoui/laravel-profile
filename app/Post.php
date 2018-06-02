@@ -143,4 +143,19 @@ class Post extends Model
             ->latest()
             ->first();
     }
+
+    /**
+     * Get the next published post
+     *
+     * @return null|App\Post
+     */
+    public function nextPublished()
+    {
+        return (new self)
+            ->where('id', '<>', $this->id)
+            ->where('published_at', '>', $this->published_at)
+            ->published()
+            ->latest()
+            ->first();
+    }
 }

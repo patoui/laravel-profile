@@ -21,12 +21,18 @@ class PostControllerTest extends TestCase
             'title' => 'First Title',
             'body' => 'First Body',
             'slug' => 'first-title',
-            'published_at' => Carbon::now()->subDay(),
+            'published_at' => Carbon::now()->subDays(2),
         ]);
         $post = factory(Post::class)->create([
             'title' => 'Second Title',
             'body' => 'Second Body',
             'slug' => 'second-title',
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        $nextPost = factory(Post::class)->create([
+            'title' => 'Third Title',
+            'body' => 'Third Body',
+            'slug' => 'third-title',
             'published_at' => Carbon::now(),
         ]);
 
@@ -37,7 +43,8 @@ class PostControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertSee('Second Title')
             ->assertSee('Second Body')
-            ->assertSee('Previous: First Title');
+            ->assertSee('Previous: First Title')
+            ->assertSee('Next: Third Title');
 
         // Assert analytics were stored
         $this->assertNotNull(

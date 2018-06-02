@@ -121,7 +121,7 @@ class PostTest extends TestCase
         );
     }
 
-    public function testPrevious()
+    public function testPreviousPublished()
     {
         $previousPost = factory(Post::class)->create([
             'published_at' => Carbon::now()->subDay(),
@@ -133,5 +133,19 @@ class PostTest extends TestCase
         $previousPostFound = $post->previousPublished();
 
         $this->assertEquals($previousPost->title, $previousPostFound->title);
+    }
+
+    public function testNextPublished()
+    {
+        $post = factory(Post::class)->create([
+            'published_at' => Carbon::now()->subDay(),
+        ]);
+        $nextPost = factory(Post::class)->create([
+            'published_at' => Carbon::now(),
+        ]);
+
+        $nextPostFound = $post->nextPublished();
+
+        $this->assertEquals($nextPost->title, $nextPostFound->title);
     }
 }

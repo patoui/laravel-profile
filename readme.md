@@ -4,7 +4,6 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Add "Next" and "Previous" to scroll through post
 * Add SMS notifications when a comment is added
 * Add Email notifications when new article is published
 * Add admin analytics page
@@ -12,6 +11,7 @@ TODO:
 
 DONE:
 
+* ~~Add "Next" and "Previous" to scroll through post~~
 * ~~Fix Facebook preview image, default to profile picture~~
 * ~~Add reply to comments (thread/nested comments)~~
 * ~~Add gates/policies for admin~~

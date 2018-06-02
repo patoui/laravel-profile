@@ -60,21 +60,11 @@
                     <p class="help is-danger">{{ $errors->first('body') }}</p>
                     @endif
                 </div>
-                <nav class="level">
-                    <div class="level-left">
-                        <div class="level-item">
-                            <button type="submit" class="button is-primary">Submit</button>
-                        </div>
+                <div class="field">
+                    <div class="control has-text-right">
+                        <button type="submit" class="button is-primary">Submit</button>
                     </div>
-                    <!-- TODO: Add 'Press enter to submit' functionality -->
-                    <!-- <div class="level-right">
-                        <div class="level-item">
-                            <label class="checkbox">
-                                <input type="checkbox"> Press enter to submit
-                            </label>
-                        </div>
-                    </div> -->
-                </nav>
+                </div>
             </div>
         </form>
     </div>

@@ -11,6 +11,7 @@ TODO:
 
 DONE:
 
+* ~~Add SSL/HTTPS~~
 * ~~Add "Next" and "Previous" to scroll through post~~
 * ~~Fix Facebook preview image, default to profile picture~~
 * ~~Add reply to comments (thread/nested comments)~~

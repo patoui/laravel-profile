@@ -69,6 +69,8 @@ class MediaControllerTest extends TestCase
      */
     public function testStore()
     {
+        Storage::disk('media');
+
         // Arrange
         $user = factory(User::class)->create([
             'email' => 'patrique.ouimet@gmail.com'

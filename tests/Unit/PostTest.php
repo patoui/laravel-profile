@@ -96,7 +96,7 @@ class PostTest extends TestCase
         ]);
 
         $this->assertEquals(
-            'February 2nd 1:06 AM',
+            'Thu, Feb 2, 2017 1:06 AM',
             $post->short_published_at
         );
     }

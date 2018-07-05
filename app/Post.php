@@ -100,7 +100,7 @@ class Post extends Model
         return $this->published_at
             ? $this->published_at
                 ->setTimezone('America/Toronto')
-                ->format('F jS g:i A')
+                ->toDayDateTimeString()
             : null;
     }
 

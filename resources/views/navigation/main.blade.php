@@ -44,6 +44,9 @@
 
         <div class="navbar-menu" :class="{ 'is-active': isActive }">
             <div class="navbar-end">
+                @auth
+                <a class="navbar-item " href="{{ route('profile.show', auth()->user()) }}">Profile</a>
+                @endauth
                 <a class="navbar-item " href="{{ route('post.index') }}">Blog</a>
                 <a class="navbar-item" href="https://twitter.com/OuimetPatrique" target="_blank">
                     <span class="icon">

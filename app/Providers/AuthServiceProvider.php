@@ -28,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::define('profile.show', 'App\Policies\ProfilePolicy@show');
         Gate::define('post.create', 'App\Policies\PostPolicy@create');
         Gate::define('post.edit', 'App\Policies\PostPolicy@edit');
         Gate::define('post.store', 'App\Policies\PostPolicy@store');

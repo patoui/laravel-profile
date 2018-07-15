@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Favourite;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -68,5 +67,10 @@ class User extends Authenticatable implements HasMedia
     public function isAdmin()
     {
         return 'patrique.ouimet@gmail.com' == $this->email;
+    }
+
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
     }
 }

@@ -46,3 +46,8 @@ Route::post('register', 'Auth\RegisterController@register')
 // Socialite (Github)
 Route::get('auth/github', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/github/callback', 'Auth\LoginController@handleProviderCallback');
+
+// Profile
+Route::get('profile/{profile}', 'ProfileController@show')
+    ->name('profile.show')
+    ->middleware('can:profile.show,profile');

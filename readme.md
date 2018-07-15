@@ -4,6 +4,7 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
+* Added user profile page
 * Add log tracking and notifications when errors occur
 * Add SMS notifications when a comment is added
 * Add Email notifications when new article is published

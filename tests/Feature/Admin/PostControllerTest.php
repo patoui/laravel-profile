@@ -2,10 +2,11 @@
 
 namespace Tests\Feature\Admin;
 
+use App\Activity;
 use App\Post;
 use App\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostControllerTest extends TestCase
 {
@@ -29,28 +30,33 @@ class PostControllerTest extends TestCase
     /**
      * Test to store a post as an authenticated user
      */
-    public function testPost()
+    public function testStore()
     {
         // Arrange
         $this->auth();
 
         // Act
-        $response = $this->post(
-            'admin/post',
-            [
-                'title' => 'My New Post Title',
-                'body' => 'My New Post Body',
-                'slug' => 'my-new-post-body',
-            ]
-        );
+        $response = $this->post('admin/post', [
+            'title' => 'My New Post Title',
+            'body' => 'My New Post Body',
+            'slug' => 'my-new-post-body',
+        ]);
 
         // Assert
-        $response->assertStatus(302)
-            ->assertRedirect('admin/dashboard');
+        $response->assertStatus(302);
+        $response->assertRedirect('admin/dashboard');
 
         // Assert model was created
+        $post = app(Post::class)->where('title', 'My New Post Title')->first();
+        $this->assertNotNull($post);
+
+        // Assert activity was recorded
         $this->assertNotNull(
-            app(Post::class)->where('title', 'My New Post Title')->first()
+            app(Activity::class)->where([
+                'type' => 'created_post',
+                'subject_id' => $post->id,
+                'subject_type' => get_class($post),
+            ])->first()
         );
     }
 

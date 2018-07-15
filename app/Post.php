@@ -2,14 +2,14 @@
 
 namespace App;
 
-use App\Comment;
-use App\PostAnalytics;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Post extends Model
 {
+    use RecordsActivity;
+
     /**
      * Properties that can be filled
      *

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    use RecordsActivity;
+
     protected $fillable = ['comment_id', 'body'];
 
     /**

@@ -2,11 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Activity;
 use App\Comment;
 use App\Post;
 use App\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostCommentControllerTest extends TestCase
 {
@@ -37,6 +38,16 @@ class PostCommentControllerTest extends TestCase
         // Assert
         $response->assertStatus(302)
             ->assertRedirect('post/' . $post->slug);
+
+        // Assert activity was recorded
+        $comment = app(Comment::class)->where('post_id', $post->id)->first();
+        $this->assertNotNull(
+            app(Activity::class)->where([
+                'type' => 'created_comment',
+                'subject_id' => $comment->id,
+                'subject_type' => get_class($comment),
+            ])->first()
+        );
     }
 
     /**
@@ -54,6 +65,9 @@ class PostCommentControllerTest extends TestCase
             'post/slug-here/comment',
             ['body' => 'Awesome post!']
         );
+
+        // Assert activity was not recorded
+        $this->assertNotNull(app(Activity::class)->first());
     }
 
     /**

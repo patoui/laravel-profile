@@ -38,7 +38,7 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/img/tether-website.png" class="img-responsive img-centered">
+                            <img src="/img/tether-website.jpg" class="img-responsive img-centered">
                         </figure>
                     </div>
                     <div class="card-content">
@@ -69,7 +69,7 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/img/thejobwindow-website.png" class="img-responsive img-centered">
+                            <img src="/img/thejobwindow-website.jpg" class="img-responsive img-centered">
                         </figure>
                     </div>
                     <div class="card-content">
@@ -99,7 +99,7 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/img/25todine-website.png" class="img-responsive img-centered">
+                            <img src="/img/25todine-website.jpg" class="img-responsive img-centered">
                         </figure>
                     </div>
                     <div class="card-content">
@@ -127,7 +127,7 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/img/aegolfpass-website.png" class="img-responsive img-centered">
+                            <img src="/img/aegolfpass-website.jpg" class="img-responsive img-centered">
                         </figure>
                     </div>
                     <div class="card-content">

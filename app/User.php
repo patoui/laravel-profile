@@ -73,4 +73,9 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasMany(Activity::class);
     }
+
+    public function getRouteKeyName()
+    {
+        return 'email';
+    }
 }

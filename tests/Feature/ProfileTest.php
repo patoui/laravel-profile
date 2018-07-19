@@ -35,7 +35,7 @@ class ProfileTest extends TestCase
         ]);
 
         // Act
-        $response = $this->get("/profile/{$user->id}");
+        $response = $this->get("/profile/{$user->email}");
 
         // Assert
         $response->assertSuccessful();
@@ -71,6 +71,6 @@ class ProfileTest extends TestCase
         $this->expectException(AuthorizationException::class);
 
         // Act
-        $response = $this->get("/profile/{$other->id}");
+        $response = $this->get("/profile/{$other->email}");
     }
 }

@@ -8,7 +8,7 @@
     <div class="media-content">
         <div class="content">
             <p>
-                <strong>Anonymous</strong><!-- &nbsp;<small>@johnsmith</small> -->&nbsp;<small>{{ $comment->short_timestamp }}</small>
+                <strong>Anonymous</strong>&nbsp;<small>{{ $comment->short_timestamp }}</small>
                 <br>
                 {{ $comment->body }}
             </p>

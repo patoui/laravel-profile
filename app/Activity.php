@@ -31,4 +31,9 @@ class Activity extends Model
             ->toDayDateTimeString()
             : null;
     }
+
+    public function getSubjectUrlAttribute()
+    {
+        return $this->subject->path;
+    }
 }

@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Comment;
 use App\Post;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostControllerTest extends TestCase
 {
@@ -35,16 +36,22 @@ class PostControllerTest extends TestCase
             'slug' => 'third-title',
             'published_at' => Carbon::now(),
         ]);
+        $comment = factory(Comment::class)->create([
+            'post_id' => $post->id,
+            'body' => 'This is a sweet post!',
+        ]);
 
         // Act
         $response = $this->get('post/' . $post->slug);
 
         // Assert
-        $response->assertStatus(200)
+        $response->assertSuccessful()
             ->assertSee('Second Title')
             ->assertSee('Second Body')
             ->assertSee('Previous: First Title')
-            ->assertSee('Next: Third Title');
+            ->assertSee('Next: Third Title')
+            ->assertSee($comment->body)
+            ->assertSee('id="comment' . $comment->id . '"');
 
         // Assert analytics were stored
         $this->assertNotNull(

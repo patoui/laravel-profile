@@ -45,4 +45,9 @@ class Comment extends Model
 
         return $local->format('F jS g:i A');
     }
+
+    public function getPathAttribute()
+    {
+        return $this->post->path . '#comment' . $this->id;
+    }
 }

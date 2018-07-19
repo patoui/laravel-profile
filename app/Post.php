@@ -158,4 +158,9 @@ class Post extends Model
             ->latest()
             ->first();
     }
+
+    public function getPathAttribute()
+    {
+        return route('post.show', ['slug' => $this->slug]);
+    }
 }

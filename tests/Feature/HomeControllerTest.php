@@ -26,6 +26,6 @@ class HomeControllerTest extends TestCase
         $response = $this->get('/');
 
         $response->assertSuccessful();
-        $response->assertSee("/profile/{$user->id}");
+        $response->assertSee("/profile/{$user->email}");
     }
 }

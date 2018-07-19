@@ -26,7 +26,7 @@
                 @foreach ($activities as $activity)
                 <tr>
                     <td>{{ $activity->human_type }}</td>
-                    <td>{{ $activity->short_content }}</td>
+                    <td><a href="{{ $activity->subject_url }}" alt="Link to Relevant Activity">{{ $activity->short_content }}</a></td>
                     <td style="text-align: right;">{{ $activity->short_created_at }}</td>
                 </tr>
                 @endforeach

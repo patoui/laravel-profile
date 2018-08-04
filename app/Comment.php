@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Favourite;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -49,5 +50,10 @@ class Comment extends Model
     public function getPathAttribute()
     {
         return $this->post->path . '#comment' . $this->id;
+    }
+
+    public function favourites()
+    {
+        return $this->morphMany(Favourite::class, 'favouritable');
     }
 }

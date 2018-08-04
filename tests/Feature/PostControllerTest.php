@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Comment;
+use App\Favourite;
 use App\Post;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -40,6 +42,11 @@ class PostControllerTest extends TestCase
             'post_id' => $post->id,
             'body' => 'This is a sweet post!',
         ]);
+        $favourite = factory(Favourite::class)->create([
+            'favouritable_id' => $comment->id,
+            'favouritable_type' => get_class($comment),
+            'user_id' => factory(User::class)->create()->id,
+        ]);
 
         // Act
         $response = $this->get('post/' . $post->slug);
@@ -51,11 +58,10 @@ class PostControllerTest extends TestCase
             ->assertSee('Previous: First Title')
             ->assertSee('Next: Third Title')
             ->assertSee($comment->body)
-            ->assertSee('id="comment' . $comment->id . '"');
+            ->assertSee('id="comment' . $comment->id . '"')
+            ->assertSee('<span>1</span><span class="icon is-small"><i class="fa fa-thumbs-o-up"></i>');
 
         // Assert analytics were stored
-        $this->assertNotNull(
-            $post->fresh()->analytics()->first()
-        );
+        $this->assertNotNull($post->fresh()->analytics()->first());
     }
 }

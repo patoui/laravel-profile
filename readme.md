@@ -4,7 +4,6 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Add favourite comment count
 * Add favouriting post with count
 * Update replies to async
 * Update favouriting to async
@@ -15,6 +14,7 @@ TODO:
 
 DONE:
 
+* ~~Add favourite comment count~~
 * ~~Added user profile page~~
 * ~~Add SSL/HTTPS~~
 * ~~Add "Next" and "Previous" to scroll through post~~

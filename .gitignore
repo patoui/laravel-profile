@@ -6,6 +6,7 @@
 /tags
 /storage/app/media/*
 /storage/framework/*
+/storage/debugbar
 Homestead.json
 Homestead.yaml
 .env

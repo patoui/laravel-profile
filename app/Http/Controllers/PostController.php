@@ -17,8 +17,7 @@ class PostController extends Controller
         // Get published posts
         $posts = Post::published()->latest()->get();
 
-        return view('post.index')
-            ->with('posts', $posts);
+        return view('post.index')->with('posts', $posts);
     }
 
     /**

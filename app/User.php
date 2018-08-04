@@ -44,8 +44,10 @@ class User extends Authenticatable implements HasMedia
         // Get model class name
         $class = get_class($model);
 
-        if (! in_array($class, ['App\Comment'])) {
-            throw new \Exception('Model class must be \'App\Comment\'');
+        if (! in_array($class, ['App\Comment', 'App\Post'])) {
+            throw new \Exception(
+                'Model class must be \'App\Comment\' or \'App\Post\''
+            );
         }
 
         $favourite = $this->favourites()
@@ -53,15 +55,14 @@ class User extends Authenticatable implements HasMedia
             ->where('favouritable_type', $class)
             ->first();
 
-        if (! $favourite) {
-            // Create favourite
+        if ($favourite) {
+            return $favourite->delete();
+        } else {
             return $this->favourites()->create([
                 'favouritable_id' => $model->id,
                 'favouritable_type' => $class,
             ]);
         }
-
-        return null;
     }
 
     public function isAdmin()

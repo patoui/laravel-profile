@@ -18,6 +18,9 @@ Route::post('contact', 'ContactController@store')->name('contact.store');
 // Post
 Route::get('blog', 'PostController@index')->name('post.index');
 Route::get('post/{slug}', 'PostController@show')->name('post.show');
+Route::post('post/{slug}', 'PostFavouriteController@store')
+    ->name('post.favourite.store')
+    ->middleware('auth');
 
 // Comment
 Route::post('post/{slug}/comment', 'PostCommentController@store')

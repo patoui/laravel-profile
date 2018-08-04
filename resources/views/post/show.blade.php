@@ -17,6 +17,15 @@
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title">{{ $post->title }}</h1>
+            <p style="margin-bottom: 5px;">{{ $post->short_published_at }}</p>
+            @auth
+            <form method="post" action="{{ route('post.favourite.store', ['slug' => $post->slug]) }}">
+                {{ csrf_field() }}
+                <button type="submit" class="button" style="color: white; border: 1px solid #00e0bf; background: rgba(0,0,0,0);">
+                    <span class="icon"><i class="fa fa-thumbs-o-up"></i></span><span>{{ $post->favourites()->count() }}</span>
+                </button>
+            </form>
+            @endauth
         </div>
     </div>
 @endsection

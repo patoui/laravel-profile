@@ -57,6 +57,16 @@ class Post extends Model
     }
 
     /**
+     * Favourites relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function favourites()
+    {
+        return $this->morphMany(Favourite::class, 'favouritable');
+    }
+
+    /**
      * Scoped by slug
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

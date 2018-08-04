@@ -18,12 +18,14 @@
                 <button type="button" class="button level-item" v-on:click="toggleComment({{ json_encode($comment->id) }})">
                     <span class="icon is-small"><i class="fa fa-reply"></i></span>
                 </button>
+                @auth
                 <form method="post" action="{{ route('comment.favourite.store', ['comment' => $comment->id]) }}">
                     {{ csrf_field() }}
                     <button type="submit" class="button level-item">
-                        <span>{{ $comment->favourites()->count() }}</span><span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
+                        <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span><span>{{ $comment->favourites()->count() }}</span>
                     </button>
                 </form>
+                @endauth
             </div>
         </nav>
 

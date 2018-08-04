@@ -52,6 +52,11 @@ class Comment extends Model
         return $this->post->path . '#comment' . $this->id;
     }
 
+    /**
+     * Favourites relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function favourites()
     {
         return $this->morphMany(Favourite::class, 'favouritable');

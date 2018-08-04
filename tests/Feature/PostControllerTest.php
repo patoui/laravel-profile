@@ -59,7 +59,7 @@ class PostControllerTest extends TestCase
             ->assertSee('Next: Third Title')
             ->assertSee($comment->body)
             ->assertSee('id="comment' . $comment->id . '"')
-            ->assertSee('<span>1</span><span class="icon is-small"><i class="fa fa-thumbs-o-up"></i>');
+            ->assertSee('<span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span><span>1</span>');
 
         // Assert analytics were stored
         $this->assertNotNull($post->fresh()->analytics()->first());

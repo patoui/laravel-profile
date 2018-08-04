@@ -57,17 +57,15 @@ class Post extends Model
     }
 
     /**
-     * Find a post by its slug or throw a model not found exception.
+     * Scoped by slug
      *
-     * @param  mixed  $slug
-     * @param  array  $columns
-     * @return App\Post
-     *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $slug
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public static function findOrFailBySlug($slug, $columns = ['*'])
+    public function scopeSlug($query, $slug)
     {
-        return (new static)->where('slug', $slug)->firstOrFail($columns);
+        return $query->where('slug', $slug);
     }
 
     /**

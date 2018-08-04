@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use App\Post;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostTest extends TestCase
 {
@@ -28,7 +28,7 @@ class PostTest extends TestCase
         );
     }
 
-    public function testFindOrFailBySlug()
+    public function testScopeSlug()
     {
         $post = factory(Post::class)->create([
             'title' => 'My Article\'s Title',
@@ -36,24 +36,9 @@ class PostTest extends TestCase
             'slug' => 'my-articles-title',
         ]);
 
-        $exists = app(Post::class)->findOrFailBySlug($post->slug);
+        $exists = app(Post::class)->slug($post->slug)->exists();
 
         $this->assertNotNull($exists);
-    }
-
-    public function testFindOrFailBySlugFail()
-    {
-        try {
-            $exists = app(Post::class)->findOrFailBySlug('my-articles-title');
-        } catch (ModelNotFoundException $e) {
-            $this->assertEquals(
-                'No query results for model [App\Post].',
-                $e->getMessage()
-            );
-            return;
-        }
-
-        $this->fail('Model should throw exception \'ModelNotFoundException\'');
     }
 
     public function testGetShortBodyAttribute()

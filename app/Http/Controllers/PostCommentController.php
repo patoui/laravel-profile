@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
 use App\Comment;
 use App\Notifications\UserCommented;
+use App\Post;
 use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
@@ -18,7 +18,7 @@ class PostCommentController extends Controller
     public function store($slug)
     {
         // Find post by slug or throw exception
-        $post = Post::findOrFailBySlug($slug);
+        $post = Post::slug($slug)->firstOrFail();
 
         // Validate comment input
         $this->validate(

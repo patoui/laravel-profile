@@ -4,6 +4,10 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
+* Add favourite comment count
+* Add favouriting post with count
+* Update replies to async
+* Update favouriting to async
 * Add log tracking and notifications when errors occur
 * Add SMS notifications when a comment is added
 * Add Email notifications when new article is published

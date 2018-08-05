@@ -21,7 +21,7 @@
             <form method="post" action="{{ route('post.favourite.store', ['slug' => $post->slug]) }}">
                 {{ csrf_field() }}
                 <button type="submit" class="button" style="color: white; border: 1px solid #00e0bf; background: rgba(0,0,0,0);">
-                    <span class="icon"><i class="fa fa-thumbs-o-up"></i></span><span>{{ $post->favourites()->count() }}</span>
+                    <span class="icon"><i class="fa fa-thumbs-o-up"></i></span><span>{{ $post->favourites_count }}</span>
                 </button>
             </form>
         </div>
@@ -39,7 +39,7 @@
     <div class="container">
         <h4 class="subtitle">Comments</h4>
         <div id="comments">
-        @include('post.comments', ['comments' => $comments])
+        @include('post.comments', ['comments' => $post->comments])
         </div>
 
         <form id="post-comment"

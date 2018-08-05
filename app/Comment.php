@@ -9,7 +9,19 @@ class Comment extends Model
 {
     use RecordsActivity;
 
+    /**
+     * Properties that can be filled
+     *
+     * @var array
+     */
     protected $fillable = ['comment_id', 'body'];
+
+    /**
+     * Mutated properties to append
+     *
+     * @var array
+     */
+    protected $appends = ['favourites_count'];
 
     /**
      * Comments on a comment
@@ -60,5 +72,15 @@ class Comment extends Model
     public function favourites()
     {
         return $this->morphMany(Favourite::class, 'favouritable');
+    }
+
+    /**
+     * Favourites count
+     *
+     * @return integer
+     */
+    public function getFavouritesCountAttribute()
+    {
+        return $this->favourites()->count();
     }
 }

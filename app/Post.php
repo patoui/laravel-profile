@@ -18,6 +18,13 @@ class Post extends Model
     protected $fillable = ['title', 'body', 'slug'];
 
     /**
+     * Mutated properties to append
+     *
+     * @var array
+     */
+    protected $appends = ['favourites_count'];
+
+    /**
      * List of model properties to be casted
      *
      * @var array
@@ -64,6 +71,16 @@ class Post extends Model
     public function favourites()
     {
         return $this->morphMany(Favourite::class, 'favouritable');
+    }
+
+    /**
+     * Favourites count
+     *
+     * @return integer
+     */
+    public function getFavouritesCountAttribute()
+    {
+        return $this->favourites()->count();
     }
 
     /**
@@ -144,7 +161,7 @@ class Post extends Model
      */
     public function previousPublished()
     {
-        return (new self)
+        return $this->newQuery()
             ->where('id', '<>', $this->id)
             ->where('published_at', '<', $this->published_at)
             ->published()
@@ -159,7 +176,7 @@ class Post extends Model
      */
     public function nextPublished()
     {
-        return (new self)
+        return $this->newQuery()
             ->where('id', '<>', $this->id)
             ->where('published_at', '>', $this->published_at)
             ->published()

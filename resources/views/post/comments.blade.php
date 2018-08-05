@@ -21,7 +21,7 @@
                 <form method="post" action="{{ route('comment.favourite.store', ['comment' => $comment->id]) }}">
                     {{ csrf_field() }}
                     <button type="submit" class="button level-item">
-                        <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span><span>{{ $comment->favourites()->count() }}</span>
+                        <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span><span>{{ $comment->favourites_count }}</span>
                     </button>
                 </form>
             </div>

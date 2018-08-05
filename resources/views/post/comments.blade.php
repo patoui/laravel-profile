@@ -2,7 +2,7 @@
 <div id="comment{{ $comment->id }}" class="media">
     <figure class="media-left">
         <p class="image is-64x64">
-            <img src="http://via.placeholder.com/64x64" alt="Avatar placeholder">
+            <img src="https://via.placeholder.com/64x64" alt="Avatar placeholder">
         </p>
     </figure>
     <div class="media-content">
@@ -43,7 +43,7 @@
             <!-- TODO: Add avatar -->
             <figure class="media-left">
                 <p class="image is-64x64">
-                    <img src="http://via.placeholder.com/64x64" alt="Avatar placeholder">
+                    <img src="https://via.placeholder.com/64x64" alt="Avatar placeholder">
                 </p>
             </figure>
 

@@ -4,7 +4,7 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Update replies to async
+* Update comments to async
 * Update favouriting to async
 * Add log tracking and notifications when errors occur
 * Add SMS notifications when a comment is added

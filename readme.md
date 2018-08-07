@@ -4,6 +4,7 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
+* Update navigation to vue component
 * Update comments to async
 * Update favouriting to async
 * Add log tracking and notifications when errors occur

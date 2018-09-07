@@ -17,6 +17,6 @@ class PostPublishPolicy
      */
     public function publish(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 }

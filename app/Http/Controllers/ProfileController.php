@@ -10,7 +10,7 @@ class ProfileController extends Controller
     public function show(User $profile)
     {
         return view('profile.show')
-            ->with('user', auth()->user())
-            ->with('activities', auth()->user()->activities()->get());
+            ->with('user', $profile)
+            ->with('activities', $profile->activities()->get());
     }
 }

@@ -60,7 +60,7 @@ class LoginController extends Controller
      */
     public function redirectTo()
     {
-        if (Auth::user()->isAdmin()) {
+        if (Auth::user()->is_admin) {
             return redirect()->route('admin.dashboard')->getTargetUrl();
         }
 

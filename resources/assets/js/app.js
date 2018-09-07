@@ -15,12 +15,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const nav = new Vue({
-    el: '#nav',
-    data: { isActive: false },
-    methods: {
-        toggleNav() {
-            this.isActive = ! this.isActive;
-        }
-    }
+Vue.component('navigation', require('./components/Navigation.vue'));
+
+const app = new Vue({
+    el: '#app'
 });

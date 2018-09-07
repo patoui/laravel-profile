@@ -17,6 +17,6 @@ class DashboardPolicy
      */
     public function index(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 }

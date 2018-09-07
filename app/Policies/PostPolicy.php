@@ -18,7 +18,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -29,7 +29,7 @@ class PostPolicy
      */
     public function edit(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -40,7 +40,7 @@ class PostPolicy
      */
     public function store(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -52,7 +52,7 @@ class PostPolicy
      */
     public function update(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -64,6 +64,6 @@ class PostPolicy
      */
     public function delete(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 }

@@ -22,12 +22,12 @@
 </head>
 <body>
 
-    <div>
+    <div id="app">
 
         <section class="hero is-primary is-bold">
 
             <!-- Navigation -->
-            @include('navigation.main')
+            <navigation :user="{{ auth()->user() ? auth()->user()->toJson() : '{}' }}"></navigation>
 
             <!-- Headline -->
             @yield('hero-body')

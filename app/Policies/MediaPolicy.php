@@ -17,7 +17,7 @@ class MediaPolicy
      */
     public function index(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -28,7 +28,7 @@ class MediaPolicy
      */
     public function create(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -39,7 +39,7 @@ class MediaPolicy
      */
     public function edit(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -50,7 +50,7 @@ class MediaPolicy
      */
     public function store(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -61,7 +61,7 @@ class MediaPolicy
      */
     public function update(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 
     /**
@@ -72,6 +72,6 @@ class MediaPolicy
      */
     public function delete(User $user)
     {
-        return $user->isAdmin();
+        return $user->is_admin;
     }
 }

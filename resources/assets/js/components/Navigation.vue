@@ -1,6 +1,6 @@
 <template>
 <div class="hero-head">
-    <nav class="navbar container">
+    <nav class="navbar">
         <div class="navbar-brand">
             <a id="navbar-brand-logo" class="navbar-item" href="/">PO</a>
 
@@ -13,17 +13,17 @@
 
         <div class="navbar-menu" :class="{ 'is-active': isActive }">
             <div class="navbar-end">
-                <a class="navbar-item " href="/blog">
-                Blog
-                </a>
-                <a class="navbar-item" href="https://twitter.com/OuimetPatrique" target="_blank">
+                <a v-if="isAuthed()" class="navbar-item " :href="'/profile/' + user.email">Profile</a>
+                <a class="navbar-item " href="/blog">Blog</a>
+                <a v-if="isAdmin()" class="navbar-item" href="/admin/dashboard">Dashboard</a>
+                <a v-if="isAdmin()" class="navbar-item" href="/admin/post/create">
                     <span class="icon">
-                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-plus"></i>
                     </span>
                 </a>
-                <a class="navbar-item" href="https://github.com/patoui" target="_blank">
+                <a class="navbar-item" :href="isAuthed() ? '/logout' : '/login'">
                     <span class="icon">
-                        <i class="fa fa-github"></i>
+                        <i :class="[isAuthed() ? 'fa-sign-out' : 'fa-sign-in', 'fa']" aria-hidden="true"></i>
                     </span>
                 </a>
             </div>
@@ -34,6 +34,7 @@
 
 <script>
     export default {
+        props: ['user'],
 
         data() {
             return { isActive: false };
@@ -42,6 +43,12 @@
         methods: {
             toggleNav() {
                 this.isActive = !this.isActive;
+            },
+            isAuthed() {
+                return this.user && this.user.email;
+            },
+            isAdmin() {
+                return this.user && this.user.is_admin;
             }
         }
     }

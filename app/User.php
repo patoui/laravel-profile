@@ -25,9 +25,14 @@ class User extends Authenticatable implements HasMedia
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * The attributes that should be appended to arrays.
+     *
+     * @var array
+     */
+    protected $appends = ['is_admin'];
 
     public function favourites()
     {
@@ -65,7 +70,7 @@ class User extends Authenticatable implements HasMedia
         }
     }
 
-    public function isAdmin()
+    public function getIsAdminAttribute()
     {
         return 'patrique.ouimet@gmail.com' == $this->email;
     }

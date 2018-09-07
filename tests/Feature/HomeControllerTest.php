@@ -18,7 +18,7 @@ class HomeControllerTest extends TestCase
         $response->assertDontSee('/profile');
     }
 
-    public function testIndexAuthenticatedUserCanSeeProfileLink()
+    public function testIndexAuthenticatedUserCanSeeEmail()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user);
@@ -26,6 +26,6 @@ class HomeControllerTest extends TestCase
         $response = $this->get('/');
 
         $response->assertSuccessful();
-        $response->assertSee("/profile/{$user->email}");
+        $response->assertSee($user->email);
     }
 }

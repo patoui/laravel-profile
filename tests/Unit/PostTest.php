@@ -3,9 +3,11 @@
 namespace Tests\Unit;
 
 use App\Post;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class PostTest extends TestCase
@@ -14,6 +16,8 @@ class PostTest extends TestCase
 
     public function testCreateComment()
     {
+        factory(User::class)->states('me')->create();
+        Mail::fake();
         $post = factory(Post::class)->create([
             'title' => 'My Article\'s Title',
             'body' => 'My Article\'s Body',

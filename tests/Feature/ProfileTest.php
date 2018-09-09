@@ -9,6 +9,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -23,6 +24,8 @@ class ProfileTest extends TestCase
     public function testAuthenticatedUserCanViewTheirProfile()
     {
         // Arrange
+        factory(User::class)->states('me')->create();
+        Mail::fake();
         $user = factory(User::class)->create([
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
@@ -52,6 +55,7 @@ class ProfileTest extends TestCase
     public function testAuthenticatedUserCannotViewOthersProfile()
     {
         // Arrange
+        factory(User::class)->states('me')->create();
         $user = factory(User::class)->create([
             'name' => 'John Doe',
             'email' => 'john.doe@example.com',
@@ -62,9 +66,11 @@ class ProfileTest extends TestCase
         ]);
         $this->actingAs($user);
         $post = factory(Post::class)->create();
+        Mail::fake();
         $comment = factory(Comment::class)->create([
             'post_id' => $post->id,
             'body' => 'This is my awesome comment',
+            'user_id' => $user->id,
         ]);
 
         // Assert

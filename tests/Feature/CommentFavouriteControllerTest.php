@@ -5,8 +5,9 @@ namespace Tests\Feature;
 use App\Comment;
 use App\Post;
 use App\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
+use Tests\TestCase;
 
 class CommentFavouriteControllerTest extends TestCase
 {
@@ -20,6 +21,8 @@ class CommentFavouriteControllerTest extends TestCase
     public function testStore()
     {
         // Arrange
+        factory(User::class)->states('me')->create();
+        Mail::fake();
         $this->be($user = factory(User::class)->create());
 
         $post = factory(Post::class)->create([

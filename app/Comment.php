@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Events\CommentSaved;
 use App\Favourite;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -10,11 +12,11 @@ class Comment extends Model
     use RecordsActivity;
 
     /**
-     * Properties that can be filled
+     * Guarded properties
      *
      * @var array
      */
-    protected $fillable = ['comment_id', 'body'];
+    protected $guarded = [];
 
     /**
      * Mutated properties to append
@@ -22,6 +24,23 @@ class Comment extends Model
      * @var array
      */
     protected $appends = ['favourites_count'];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = ['saved' => CommentSaved::class];
+
+    /**
+     * Owner of the comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     /**
      * Comments on a comment
@@ -82,5 +101,17 @@ class Comment extends Model
     public function getFavouritesCountAttribute()
     {
         return $this->favourites()->count();
+    }
+
+    /**
+     * Get all mentioned users within the comment body
+     *
+     * @return array
+     */
+    public function mentionedUsers()
+    {
+        preg_match_all('/@([\w\-]+)/', $this->body, $matches);
+
+        return $matches[1];
     }
 }

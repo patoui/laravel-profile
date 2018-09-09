@@ -4,16 +4,16 @@ namespace App\Notifications;
 
 use App\Comment;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
-class UserCommented extends Notification
+class UserMentioned extends Notification
 {
     use Queueable;
 
     /**
-     * @var Comment
+     * @var App\Comment
      */
     protected $comment;
 
@@ -35,26 +35,7 @@ class UserCommented extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-            ->subject('Someone commented on \''.$this->comment->post->title.'\'!')
-            ->greeting('Someone commented on \''.$this->comment->post->title.'\'!')
-            ->action(
-                'Click here to view it',
-                url($this->comment->path)
-            )
-            ->line('Comment contents:')
-            ->line($this->comment->body);
+        return ['database'];
     }
 
     /**
@@ -66,7 +47,8 @@ class UserCommented extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => $this->comment->owner->name . ' mentioned you in ' . $this->comment->post->title,
+            'link' => $this->comment->path
         ];
     }
 }

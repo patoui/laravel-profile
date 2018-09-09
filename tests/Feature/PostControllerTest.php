@@ -8,6 +8,7 @@ use App\Post;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class PostControllerTest extends TestCase
@@ -20,6 +21,8 @@ class PostControllerTest extends TestCase
     public function testShow()
     {
         // Arrange
+        factory(User::class)->states('me')->create();
+        Mail::fake();
         $previousPost = factory(Post::class)->create([
             'title' => 'First Title',
             'body' => 'First Body',

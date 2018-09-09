@@ -7,6 +7,7 @@ use App\Comment;
 use App\Post;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class PostCommentControllerTest extends TestCase
@@ -19,6 +20,8 @@ class PostCommentControllerTest extends TestCase
     public function testStore()
     {
         // Arrange
+        factory(User::class)->states('me')->create();
+        Mail::fake();
         $this->be($user = factory(User::class)->create());
 
         $post = factory(Post::class)->create([
@@ -26,8 +29,6 @@ class PostCommentControllerTest extends TestCase
             'body' => 'First Body',
             'slug' => 'first-title',
         ]);
-
-        factory(User::class)->states('me')->create();
 
         // Act
         $response = $this->post(
@@ -76,6 +77,8 @@ class PostCommentControllerTest extends TestCase
     public function testStorePostNotFound()
     {
         // Arrange
+        factory(User::class)->states('me')->create();
+        Mail::fake();
         $this->be($user = factory(User::class)->create());
         $this->expectException(
             'Illuminate\Database\Eloquent\ModelNotFoundException'
@@ -94,6 +97,8 @@ class PostCommentControllerTest extends TestCase
     public function testStoreOnComment()
     {
         // Arrange
+        factory(User::class)->states('me')->create();
+        Mail::fake();
         $this->be($user = factory(User::class)->create());
 
         $post = factory(Post::class)->create([
@@ -106,8 +111,6 @@ class PostCommentControllerTest extends TestCase
             'post_id' => $post->id,
             'body' => 'Awesome post!',
         ]);
-
-        factory(User::class)->states('me')->create();
 
         // Act
         $response = $this->post(
@@ -128,5 +131,41 @@ class PostCommentControllerTest extends TestCase
                 ->where('body', 'Sure was!')
                 ->first()
         );
+    }
+
+    /**
+     * Test storing a post comment and `@` a user and triggers a notification
+     */
+    public function testStoreNotifyMentionedUser()
+    {
+        // Arrange
+        factory(User::class)->states('me')->create();
+        Mail::fake();
+        $john = factory(User::class)->create(['name' => 'johndoe']);
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
+
+        $post = factory(Post::class)->create([
+            'title' => 'First Title',
+            'body' => 'First Body',
+            'slug' => 'first-title',
+        ]);
+
+        // Act
+        $response = $this->post('post/' . $post->slug . '/comment', [
+            'body' => 'Great post @johndoe!'
+        ]);
+
+        // Assert
+        $response->assertStatus(302)
+            ->assertRedirect('post/' . $post->slug);
+
+        $this->assertNotNull(
+            Comment::where('post_id', $post->id)
+                ->where('body', 'Great post @johndoe!')
+                ->first()
+        );
+
+        $this->assertCount(1, $john->notifications);
     }
 }

@@ -4,7 +4,6 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Add ability to @users in replies (include notifications)
 * Update comments to async
 * Update favouriting to async
 * Add log tracking and notifications when errors occur
@@ -14,6 +13,7 @@ TODO:
 
 DONE:
 
+* ~~Add ability to @users in replies (include notifications)~~
 * ~~Update navigation to vue component~~
 * ~~Add favouriting post with count~~
 * ~~Add favourite comment count~~

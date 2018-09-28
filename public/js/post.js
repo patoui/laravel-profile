@@ -88,7 +88,7 @@ var post = new Vue({
             }
         },
         isCommentActive: function isCommentActive(id) {
-            if (this.comments.hasOwnProperty(id)) {
+            if (this.hasOwnProperty('comments') && this.comments && this.comments.hasOwnProperty(id)) {
                 return this.comments[id].isActive;
             }
             return false;

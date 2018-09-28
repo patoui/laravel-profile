@@ -33,7 +33,8 @@ class PostCommentController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        // Redirect back to the post
-        return redirect()->route('post.show', ['slug' => $post->slug]);
+        return request()->expectsJson() ?
+            ['success' => 'Successfully saved comment'] :
+            redirect()->route('post.show', ['slug' => $post->slug]);
     }
 }

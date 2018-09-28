@@ -10286,39 +10286,39 @@ label.panel-block:hover {
 }
 
 .columns.is-variable.is-0 {
-  --columnGap: 0rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .columns.is-variable.is-1 {
-  --columnGap: 0.25rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .columns.is-variable.is-2 {
-  --columnGap: 0.5rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .columns.is-variable.is-3 {
-  --columnGap: 0.75rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .columns.is-variable.is-4 {
-  --columnGap: 1rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .columns.is-variable.is-5 {
-  --columnGap: 1.25rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .columns.is-variable.is-6 {
-  --columnGap: 1.5rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .columns.is-variable.is-7 {
-  --columnGap: 1.75rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .columns.is-variable.is-8 {
-  --columnGap: 2rem;
+  --columnGap: $i * 0.25rem;
 }
 
 .tile {
@@ -14668,7 +14668,7 @@ html {
 
 .navbar {
   color: rgba(0, 0, 0, 0.6);
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .navbar-burger span {

@@ -38,9 +38,11 @@
 <section class="section">
     <div class="container">
         <h4 class="subtitle">Comments</h4>
-        <div id="comments">
-        @include('post.comments', ['comments' => $post->comments])
-        </div>
+        {{-- <div id="comments">
+            @include('post.comments', ['comments' => $post->comments])
+        </div> --}}
+
+        <comments :initial-post="{{ $post->toJson() }}"></comments>
 
         <form id="post-comment"
             method="post"
@@ -97,5 +99,5 @@
 @endsection
 
 @section('javascript')
-<script src="{{ mix('/js/post.js') }}"></script>
+{{-- <script src="{{ mix('/js/post.js') }}"></script> --}}
 @endsection

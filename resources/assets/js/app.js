@@ -16,7 +16,6 @@ window.Vue = require('vue');
  */
 
 Vue.component('navigation', require('./components/Navigation.vue'));
+Vue.component('comments', require('./components/Comments.vue'));
 
-const app = new Vue({
-    el: '#app'
-});
+const app = new Vue({ el: '#app' });

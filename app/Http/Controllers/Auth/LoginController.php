@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\User;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
@@ -24,13 +24,6 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/admin/dashboard';
-
-    /**
      * Create a new controller instance.
      *
      * @return void
@@ -47,12 +40,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        if (session()->has('url.intended')
-            && strpos(session('url.intended'), 'comment') !== false) {
-            session()->put('url.intended', url()->previous() . '#post-comment');
-        }
-
-        return view('auth.login');
+        return view('auth.login')->with('intended', request('intended'));
     }
 
     /**
@@ -64,7 +52,9 @@ class LoginController extends Controller
             return redirect()->route('admin.dashboard')->getTargetUrl();
         }
 
-        return redirect()->route('home')->getTargetUrl();
+        return request()->filled('intended') ?
+            request('intended') :
+            redirect()->route('home')->getTargetUrl();
     }
 
     /**

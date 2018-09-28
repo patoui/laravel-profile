@@ -11,7 +11,7 @@
                         Login
                     </p>
                 </header>
-                <form method="post" action="{{ route('login') }}">
+                <form method="post" action="{{ route('login', ['intended' => $intended]) }}">
                     {{ csrf_field() }}
                     <div class="card-content">
                         <div class="content">

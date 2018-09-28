@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Patrique Ouimet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Additional meta tags -->
     @yield('meta')
 

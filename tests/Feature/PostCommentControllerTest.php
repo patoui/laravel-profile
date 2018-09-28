@@ -57,9 +57,7 @@ class PostCommentControllerTest extends TestCase
     public function testStoreUnauthenticated()
     {
         // Arrange
-        $this->expectException(
-            'Illuminate\Auth\AuthenticationException'
-        );
+        $this->expectException('Illuminate\Auth\AuthenticationException');
 
         // Act
         $response = $this->post(

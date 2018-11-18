@@ -200,6 +200,16 @@
                         @endif
                     </div>
 
+                    <div class="field">
+                        <p class="control">
+                            {!! Recaptcha::render() !!}
+                        </p>
+
+                        @if ($errors->has('g-recaptcha-response'))
+                        <p class="help is-danger">{{ $errors->first('g-recaptcha-response') }}</p>
+                        @endif
+                    </div>
+
                     <p class="control">
                         <button type="submit" class="button is-primary is-fullwidth">Send</button>
                     </p>

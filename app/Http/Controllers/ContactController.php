@@ -17,6 +17,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make(
             $request->all(),
             [
@@ -24,6 +25,7 @@ class ContactController extends Controller
                 'email' => 'required|email',
                 'phone' => 'required',
                 'message' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha',
             ]
         );
 
@@ -35,10 +37,10 @@ class ContactController extends Controller
 
         Mail::to('patrique.ouimet@gmail.com')->send(
             new ContactMe(
-                $request->get('name',''),
-                $request->get('email',''),
-                $request->get('phone',''),
-                $request->get('message','')
+                $request->get('name', ''),
+                $request->get('email', ''),
+                $request->get('phone', ''),
+                $request->get('message', '')
             )
         );
 

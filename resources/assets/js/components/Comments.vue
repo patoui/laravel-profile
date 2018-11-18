@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div v-for="(comment, index) in comments" v-bind:id="'comment' + comment.id" class="media">
+    <div v-for="(comment, index) in comments" :key="index" v-bind:id="'comment' + comment.id" class="media">
         <figure class="media-left">
             <p class="image is-64x64">
                 <img src="https://via.placeholder.com/64x64" alt="Avatar placeholder">
@@ -62,7 +62,9 @@
                 </div>
             </form>
 
-            <!-- @include('post.comments', ['comments' => $comment->comments]) -->
+            <div v-if="comment.comments">
+                <comments :initial-post="initialPost" :initial-comments="comment.comments"></comments>
+            </div>
         </div>
     </div>
 </div>
@@ -85,7 +87,11 @@
 
         mounted() {
             this.post = this.initialPost;
-            this.comments = this.initialPost.comments;
+            if (this.initialComments) {
+                this.comments = this.initialComments;
+            } else {
+                this.comments = this.initialPost.comments;
+            }
         },
 
         methods: {

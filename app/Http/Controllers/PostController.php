@@ -29,7 +29,7 @@ class PostController extends Controller
     public function show($slug)
     {
         // Find post by the slug or 404
-        $post = Post::with('comments')->slug($slug)->firstOrFail();
+        $post = Post::with('comments.comments')->slug($slug)->firstOrFail();
 
         // Create analytics entry
         $post->analytics()->create([

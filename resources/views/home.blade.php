@@ -5,7 +5,10 @@
 @section('hero-body')
     <div class="hero-body">
         <div class="container has-text-centered">
-            <img src="/img/black-white-profile.png" alt="Grayscale profile picture" style="border-radius: 50%;">
+            <picture>
+                <source srcset="/img/black-white-profile.webp" type="image/webp">
+                <img src="/img/black-white-profile.png" type="image/png" alt="Grayscale profile picture" style="border-radius: 50%;" />
+            </picture>
             <h1 class="title" style="margin-top: 24px;">Patrique Ouimet</h1>
             <hr style="max-width: 140px; margin: 0 auto 24px auto;" />
             <h2 class="subtitle">Developer</h2>
@@ -38,14 +41,20 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/img/tether-website.jpg" class="img-responsive img-centered">
+                            <picture>
+                                <source srcset="/img/tether-website.webp" type="image/webp">
+                                <img src="/img/tether-website.jpg" alt="Tether Website" class="img-responsive img-centered" />
+                            </picture>
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="/img/mobilexco-logo.png" alt="MobileXCo logo">
+                                    <picture>
+                                        <source srcset="/img/mobilexco-logo.webp" type="image/webp">
+                                        <img src="/img/mobilexco-logo.png" alt="MobileXCo logo" />
+                                    </picture>
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -69,14 +78,20 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/img/thejobwindow-website.jpg" class="img-responsive img-centered">
+                            <picture>
+                                <source srcset="/img/thejobwindow-website.webp" type="image/webp">
+                                <img src="/img/thejobwindow-website.jpg" alt="The Job Window Website"  class="img-responsive img-centered" />
+                            </picture>
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="/img/thejobwindow-logo.png" alt="The Job Window logo">
+                                    <picture>
+                                        <source srcset="/img/thejobwindow-logo.webp" type="image/webp">
+                                        <img src="/img/thejobwindow-logo.png" alt="The Job Window Logo" />
+                                    </picture>
                                 </figure>
                             </div>
                             <div class="media-content">
@@ -99,14 +114,20 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/img/25todine-website.jpg" class="img-responsive img-centered">
+                            <picture>
+                                <source srcset="/img/25todine-website.webp" type="image/webp">
+                                <img src="/img/25todine-website.jpg" alt="25 to Dine Website" class="img-responsive img-centered" />
+                            </picture>
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="/img/25todine-logo.png" alt="25 to Dine logo">
+                                    <picture>
+                                        <source srcset="/img/25todine-logo.webp" type="image/webp">
+                                        <img src="/img/25todine-logo.png" alt="25 to Dine Logo" />
+                                    </picture>
                                 </figure>
                             </div>
                             <div class="media-content">

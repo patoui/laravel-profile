@@ -148,14 +148,20 @@
                 <div class="card">
                     <div class="card-image">
                         <figure class="image">
-                            <img src="/img/aegolfpass-website.jpg" class="img-responsive img-centered">
+                            <picture>
+                                <source srcset="/img/aegolfpass-website.webp" type="image/webp">
+                                <img src="/img/aegolfpass-website.jpg" alt="AE Golfpass Website" class="img-responsive img-centered" />
+                            </picture>
                         </figure>
                     </div>
                     <div class="card-content">
                         <div class="media">
                             <div class="media-left">
                                 <figure class="image is-48x48">
-                                    <img src="/img/aegolfpass-logo.png" alt="AE Golf Pass logo">
+                                    <picture>
+                                        <source srcset="/img/aegolfpass-logo.webp" type="image/webp">
+                                        <img src="/img/aegolfpass-logo.png" alt="AE Golfpass Logo" />
+                                    </picture>
                                 </figure>
                             </div>
                             <div class="media-content">

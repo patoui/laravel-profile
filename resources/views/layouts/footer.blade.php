@@ -29,7 +29,7 @@
         <div class="content has-text-centered">
             <p>Website by Patrique Ouimet.</p>
             <p>
-                <a class="icon" href="https://twitter.com/OuimetPatrique">
+                <a class="icon" href="https://twitter.com/patoui2">
                     <i class="fa fa-twitter"></i>
                 </a>
                 <a class="icon" href="https://github.com/patoui">

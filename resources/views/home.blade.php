@@ -27,11 +27,11 @@
                 </p>
                 <br>
                 <p>
-                    As of late, I’ve decided to try myself at blogging to share some tips and tricks I’ve learnt during my time as a developer. Whether they be technical, interpersonel, or otherwise; my hope is that fellow developers may learn something from my blog.
+                    As of late I’ve decided to try myself at blogging to share some tips and tricks I’ve learned during my time as a developer, whether they be technical, interpersonel, or otherwise; my hope is that fellow developers may learn something from my blog.
                 </p>
                 <br>
                 <p>
-                    If you have any suggestions or materials that would assist me in becoming a better developer or to help me write better content, please don’t hesitate to contact me on Twitter @OuimetPatrique.
+                    If you have any suggestions or materials that would assist me in becoming a better developer or to help me write better content, please don’t hesitate to contact me on Twitter @patoui2.
                 </p>
             </div>
         </div>

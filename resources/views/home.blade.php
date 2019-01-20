@@ -23,7 +23,7 @@
         <div class="columns">
             <div class="column is-size-5">
                 <p>
-                    Hi there! I'm Patrique Ouimet, a developer who specializes in: PHP (Laravel), JavaScript (AngularJS, VueJS), and CSS (Sass). I have an obssession with learning, whether it’s to sharpen my existing skills or to explore new ones such as: D3.js, Python (Django), CreativeJS, MeteorJS, etc. I also enjoy running, hiking, biking, weight lifting, soccer, and basketball.
+                    Hi there! I'm Patrique Ouimet, a developer who specializes in: PHP (Laravel), JavaScript (AngularJS, VueJS), and CSS (Sass). I have an obssession with learning, whether it’s to sharpen my existing skills or to explore new ones such as: Ruby (Ruby on Rails), Python (Django), AdonisJS, React, etc. I also enjoy running, hiking, biking, weight lifting, soccer, and basketball.
                 </p>
                 <br>
                 <p>

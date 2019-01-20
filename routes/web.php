@@ -54,3 +54,10 @@ Route::get('auth/github/callback', 'Auth\LoginController@handleProviderCallback'
 Route::get('profile/{profile}', 'ProfileController@show')
     ->name('profile.show')
     ->middleware('can:profile.show,profile');
+
+Route::get('sms', 'SmsController@index')
+    ->name('sms.index')
+    ->middleware('can:sms.index');
+Route::post('sms', 'SmsController@store')
+    ->name('sms.store')
+    ->middleware('can:sms.store');

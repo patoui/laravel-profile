@@ -72,7 +72,10 @@ class User extends Authenticatable implements HasMedia
 
     public function getIsAdminAttribute()
     {
-        return 'patrique.ouimet@gmail.com' == $this->email;
+        return !!in_array($this->email, [
+            'patrique.ouimet@gmail.com',
+            'taylorjdunphy@gmail.com',
+        ]);
     }
 
     public function activities()

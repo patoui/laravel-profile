@@ -42,5 +42,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('media.store', 'App\Policies\MediaPolicy@store');
         Gate::define('media.update', 'App\Policies\MediaPolicy@update');
         Gate::define('media.delete', 'App\Policies\MediaPolicy@delete');
+        Gate::define('sms.index', 'App\Policies\SmsPolicy@index');
+        Gate::define('sms.store', 'App\Policies\SmsPolicy@store');
     }
 }

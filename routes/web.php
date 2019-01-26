@@ -31,6 +31,13 @@ Route::post('comment/{comment}', 'CommentFavouriteController@store')
     ->name('comment.favourite.store')
     ->middleware('auth');
 
+// Tip
+Route::get('tip', 'TipController@index')->name('tip.index');
+Route::get('tip/{slug}', 'TipController@show')->name('tip.show');
+Route::post('tip/{slug}', 'TipFavouriteController@store')
+    ->name('tip.favourite.store')
+    ->middleware('auth');
+
 // Subscription
 Route::post('subscription', 'SubscriptionController@store')
     ->name('subscription.store');

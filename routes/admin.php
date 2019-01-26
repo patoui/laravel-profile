@@ -32,25 +32,39 @@ Route::get('/media/{media}/delete', 'MediaController@delete')
     ->name('admin.media.delete')
     ->middleware('can:media.delete');
 
+// Post
 Route::get('/post/create', 'PostController@create')
     ->name('admin.post.create')
     ->middleware('can:post.create');
-
 Route::post('/post', 'PostController@store')
     ->name('admin.post.store')
     ->middleware('can:post.store');
-
 Route::get('/post/{id}/publish', 'PostPublishController@show')
     ->name('admin.post.publish')
     ->middleware('can:post.publish');
-
 Route::get('/post/{id}/edit', 'PostController@edit')
     ->name('admin.post.edit')
     ->middleware('can:post.edit');
-
 Route::put('/post/{id}', 'PostController@update')
     ->name('admin.post.update')
     ->middleware('can:post.update');
+
+// Tip
+Route::get('/tip/create', 'TipController@create')
+    ->name('admin.tip.create')
+    ->middleware('can:tip.create');
+Route::post('/tip', 'TipController@store')
+    ->name('admin.tip.store')
+    ->middleware('can:tip.store');
+Route::get('/tip/{id}/publish', 'TipPublishController@show')
+    ->name('admin.tip.publish')
+    ->middleware('can:tip.publish');
+Route::get('/tip/{id}/edit', 'TipController@edit')
+    ->name('admin.tip.edit')
+    ->middleware('can:tip.edit');
+Route::put('/tip/{id}', 'TipController@update')
+    ->name('admin.tip.update')
+    ->middleware('can:tip.update');
 
 Route::get('/dashboard', 'DashboardController@index')
     ->name('admin.dashboard')

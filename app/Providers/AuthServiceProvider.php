@@ -35,6 +35,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('post.update', 'App\Policies\PostPolicy@update');
         Gate::define('post.delete', 'App\Policies\PostPolicy@delete');
         Gate::define('post.publish', 'App\Policies\PostPublishPolicy@publish');
+        Gate::define('tip.create', 'App\Policies\TipPolicy@create');
+        Gate::define('tip.edit', 'App\Policies\TipPolicy@edit');
+        Gate::define('tip.store', 'App\Policies\TipPolicy@store');
+        Gate::define('tip.update', 'App\Policies\TipPolicy@update');
+        Gate::define('tip.delete', 'App\Policies\TipPolicy@delete');
+        Gate::define('tip.publish', 'App\Policies\TipPublishPolicy@publish');
         Gate::define('dashboard.index', 'App\Policies\DashboardPolicy@index');
         Gate::define('media.index', 'App\Policies\MediaPolicy@index');
         Gate::define('media.create', 'App\Policies\MediaPolicy@create');

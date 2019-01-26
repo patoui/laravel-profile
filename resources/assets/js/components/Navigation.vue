@@ -14,13 +14,9 @@
         <div class="navbar-menu" :class="{ 'is-active': isActive }">
             <div class="navbar-end">
                 <a v-if="isAuthed()" class="navbar-item " :href="'/profile/' + user.email">Profile</a>
+                <a class="navbar-item " href="/tip">Tips</a>
                 <a class="navbar-item " href="/blog">Blog</a>
                 <a v-if="isAdmin()" class="navbar-item" href="/admin/dashboard">Dashboard</a>
-                <a v-if="isAdmin()" class="navbar-item" href="/admin/post/create">
-                    <span class="icon">
-                        <i class="fa fa-plus"></i>
-                    </span>
-                </a>
                 <a class="navbar-item" :href="isAuthed() ? '/logout' : '/login'">
                     <span class="icon">
                         <i :class="[isAuthed() ? 'fa-sign-out' : 'fa-sign-in', 'fa']" aria-hidden="true"></i>

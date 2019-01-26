@@ -49,9 +49,9 @@ class User extends Authenticatable implements HasMedia
         // Get model class name
         $class = get_class($model);
 
-        if (! in_array($class, ['App\Comment', 'App\Post'])) {
+        if (! in_array($class, ['App\Comment', 'App\Post', 'App\Tip'])) {
             throw new \Exception(
-                'Model class must be \'App\Comment\' or \'App\Post\''
+                "Model class must be 'App\Comment', 'App\Post' or 'App\Tip'"
             );
         }
 

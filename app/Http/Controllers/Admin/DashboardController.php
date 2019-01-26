@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Post;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Post;
+use App\Tip;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
@@ -18,6 +19,9 @@ class DashboardController extends Controller
         return view('admin.home')
             ->with('posts', Post::get())
             ->with('postsCount', Post::count())
-            ->with('postsPublishedCount', Post::published()->count());
+            ->with('postsPublishedCount', Post::published()->count())
+            ->with('tips', Tip::get())
+            ->with('tipsCount', Tip::count())
+            ->with('tipsPublishedCount', Tip::published()->count());
     }
 }

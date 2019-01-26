@@ -21,6 +21,6 @@ class DashboardControllerTest extends TestCase
 
         $this->actingAs($user)
             ->get('admin/dashboard')
-            ->assertStatus(200);
+            ->assertSuccessful();
     }
 }

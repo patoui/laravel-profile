@@ -2,10 +2,11 @@
 
 namespace App;
 
+use App\RecordsActivity;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Tip extends Model
 {
     use RecordsActivity;
 
@@ -17,20 +18,6 @@ class Post extends Model
     protected $guarded = [];
 
     /**
-     * Properties that can be filled
-     *
-     * @var array
-     */
-    protected $fillable = ['title', 'body', 'slug'];
-
-    /**
-     * Mutated properties to append
-     *
-     * @var array
-     */
-    protected $appends = ['favourites_count'];
-
-    /**
      * List of model properties to be casted
      *
      * @var array
@@ -38,33 +25,11 @@ class Post extends Model
     protected $casts = ['published_at' => 'datetime'];
 
     /**
-     * Post analytics relationship
+     * Tip analytics relationship
      */
     public function analytics()
     {
-        return $this->hasMany(PostAnalytics::class);
-    }
-
-    /**
-     * Comments relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function comments()
-    {
-        return $this->hasMany(Comment::class)
-            ->whereNull('comment_id');
-    }
-
-    /**
-     * Create comment from array of data
-     *
-     * @param  array $data array of data
-     * @return App\Comment
-     */
-    public function createComment($data)
-    {
-        return $this->comments()->create($data);
+        return $this->hasMany(TipAnalytics::class);
     }
 
     /**
@@ -110,13 +75,13 @@ class Post extends Model
     }
 
     /**
-     * First 100 characters of the post body
+     * First 100 characters of the tip body
      *
      * @return string
      */
     public function getShortBodyAttribute()
     {
-        return substr(strip_tags($this->parsed_body), 0, 100);
+        return substr(strip_tags($this->body), 0, 100);
     }
 
     /**
@@ -148,7 +113,7 @@ class Post extends Model
     }
 
     /**
-     * Query scope to get published posts
+     * Query scope to get published tips
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -159,30 +124,34 @@ class Post extends Model
     }
 
     /**
-     * Get the previous published post
+     * Get the previous published tip
      *
-     * @return null|App\Post
+     * @return null|App\Tip
      */
     public function previousPublished()
     {
         return $this->newQuery()
             ->where('id', '<>', $this->id)
-            ->where('published_at', '<', $this->published_at)
+            ->when($this->published_at, function ($q) {
+                return $q->where('published_at', '<', $this->published_at);
+            })
             ->published()
             ->latest()
             ->first();
     }
 
     /**
-     * Get the next published post
+     * Get the next published tip
      *
-     * @return null|App\Post
+     * @return null|App\Tip
      */
     public function nextPublished()
     {
         return $this->newQuery()
             ->where('id', '<>', $this->id)
-            ->where('published_at', '>', $this->published_at)
+            ->when($this->published_at, function ($q) {
+                return $q->where('published_at', '>', $this->published_at);
+            })
             ->published()
             ->latest()
             ->first();
@@ -190,6 +159,6 @@ class Post extends Model
 
     public function getPathAttribute()
     {
-        return route('post.show', ['slug' => $this->slug]);
+        return route('tip.show', ['slug' => $this->slug]);
     }
 }

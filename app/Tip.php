@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Association;
 use App\RecordsActivity;
+use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +25,24 @@ class Tip extends Model
      * @var array
      */
     protected $casts = ['published_at' => 'datetime'];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function addTags(array $tags)
+    {
+        $ids = [];
+
+        foreach ($tags as $key => $tag) {
+            $ids[] = Tag::firstOrCreate(['name' => strtolower($tag)])->id;
+        }
+
+        $this->tags()->sync($ids);
+
+        return $this->tags;
+    }
 
     /**
      * Tip analytics relationship

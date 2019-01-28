@@ -32,3 +32,6 @@
     <p class="help is-danger">{{ $errors->first('body') }}</p>
     @endif
 </div>
+
+<tags :initial-tags="{{ json_encode($tags) }}"
+    :initial-errors="{{ json_encode($errors) }}"></tags>

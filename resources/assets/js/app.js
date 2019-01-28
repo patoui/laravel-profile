@@ -17,5 +17,6 @@ window.Vue = require('vue');
 
 Vue.component('navigation', require('./components/Navigation.vue'));
 Vue.component('comments', require('./components/Comments.vue'));
+Vue.component('tags', require('./components/Tags.vue'));
 
 const app = new Vue({ el: '#app' });

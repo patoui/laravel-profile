@@ -40,17 +40,14 @@ class TipControllerTest extends TestCase
             'title' => 'My New Tip Title',
             'body' => 'My New Tip Body',
             'slug' => 'my-new-tip-body',
+            'tags' => ['one', 'two', 'three'],
         ]);
 
         // Assert
         $response->assertStatus(302);
-        $response->assertRedirect('admin/dashboard');
-
-        // Assert model was created
+        $response->assertRedirect('/admin/dashboard');
         $tip = app(Tip::class)->where('title', 'My New Tip Title')->first();
         $this->assertNotNull($tip);
-
-        // Assert activity was recorded
         $this->assertNotNull(
             app(Activity::class)->where([
                 'type' => 'created_tip',
@@ -58,6 +55,10 @@ class TipControllerTest extends TestCase
                 'subject_type' => get_class($tip),
             ])->first()
         );
+        $this->assertEquals('My New Tip Title', $tip->fresh()->title);
+        $this->assertEquals('My New Tip Body', $tip->fresh()->body);
+        $this->assertEquals('my-new-tip-body', $tip->fresh()->slug);
+        $this->assertEquals(3, $tip->tags()->count());
     }
 
     /**
@@ -90,35 +91,20 @@ class TipControllerTest extends TestCase
         ]);
 
         // Act
-        $response = $this->put(
-            'admin/tip/' . $tip->id,
-            [
-                'title' => 'Second Title',
-                'body' => 'Second Body',
-                'slug' => 'second-title',
-            ]
-        );
+        $response = $this->put("admin/tip/{$tip->id}", [
+            'title' => 'Second Title',
+            'body' => 'Second Body',
+            'slug' => 'second-title',
+            'tags' => ['one', 'two', 'three'],
+        ]);
 
         // Assert
         $response->assertStatus(302);
-
-        // Assert title was updated
-        $this->assertEquals(
-            'Second Title',
-            $tip->fresh()->title
-        );
-
-        // Assert body was updated
-        $this->assertEquals(
-            'Second Body',
-            $tip->fresh()->body
-        );
-
-        // Assert slug was updated
-        $this->assertEquals(
-            'second-title',
-            $tip->fresh()->slug
-        );
+        $response->assertRedirect('/admin/dashboard');
+        $this->assertEquals('Second Title', $tip->fresh()->title);
+        $this->assertEquals('Second Body', $tip->fresh()->body);
+        $this->assertEquals('second-title', $tip->fresh()->slug);
+        $this->assertEquals(3, $tip->tags()->count());
     }
 
     /**

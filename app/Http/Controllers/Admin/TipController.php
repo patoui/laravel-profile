@@ -12,60 +12,68 @@ class TipController extends Controller
 {
     public function create()
     {
-        return view('admin.tip.create')->with('tip', new Tip);
+        return view('admin.tip.create')
+            ->with('tip', new Tip)
+            ->with('tags', []);
     }
 
     public function store()
     {
-        $this->validate(
-            request(),
-            [
-                'title' => 'required|string',
-                'body' => 'required|string',
-                'slug' => [
-                    'required',
-                    new Slug,
-                    Rule::unique('tips', 'slug')
-                ],
-            ]
-        );
+        request()->validate([
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'slug' => [
+                'required',
+                new Slug,
+                Rule::unique('tips', 'slug')
+            ],
+            'tags' => 'nullable|array',
+            'tags.*' => 'nullable|string|alpha_num',
+        ]);
 
-        Tip::create([
+        $tip = Tip::create([
             'title' => request('title'),
             'body' => request('body'),
             'slug' => request('slug')
         ]);
+
+        $tip->addTags(request('tags', []));
 
         return redirect()->route('admin.dashboard');
     }
 
     public function edit($id)
     {
-        return view('admin.tip.edit')->with('tip', Tip::findOrFail($id));
+        $tip = Tip::findOrFail($id);
+
+        return view('admin.tip.edit')
+            ->with('tip', $tip)
+            ->with('tags', $tip->tags()->pluck('name'));
     }
 
     public function update($id)
     {
         $tip = Tip::findOrFail($id);
 
-        $this->validate(
-            request(),
-            [
-                'title' => 'required|string',
-                'body' => 'required|string',
-                'slug' => [
-                    'required',
-                    new Slug,
-                    Rule::unique('tips', 'slug')->ignore($tip->id)
-                ],
-            ]
-        );
+        request()->validate([
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'slug' => [
+                'required',
+                new Slug,
+                Rule::unique('tips', 'slug')->ignore($tip->id)
+            ],
+            'tags' => 'nullable|array',
+            'tags.*' => 'nullable|string|alpha_num',
+        ]);
 
         $tip->update([
             'title' => request('title'),
             'body' => request('body'),
             'slug' => request('slug')
         ]);
+
+        $tip->addTags(request('tags', []));
 
         return redirect()->route('admin.dashboard');
     }

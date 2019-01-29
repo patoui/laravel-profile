@@ -116,7 +116,14 @@ class Post extends Model
      */
     public function getShortBodyAttribute()
     {
-        return substr(strip_tags($this->parsed_body), 0, 100);
+        return substr( // get first 100 characters
+            trim( // remove trailing whitespace
+                preg_replace(
+                    '/[^\da-z ]/i', // remove all non alphanumeric
+                    '',
+                    preg_replace("/(\r?\n){2,}/", ' ', strip_tags($this->body)) // convert newline characters to a space
+                )
+            ), 0, 100);
     }
 
     /**

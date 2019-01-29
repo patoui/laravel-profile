@@ -2,17 +2,6 @@
 
 @section('title', 'Articles')
 
-@section('css')
-<style type="text/css">
-td h2 {
-    font-weight: bold;
-}
-tr td:last-child {
-    text-align: right;
-}
-</style>
-@endsection
-
 @section('hero-body')
     <div class="hero-body">
         <div class="container has-text-centered">
@@ -30,12 +19,15 @@ tr td:last-child {
                 @foreach($tips as $tip)
                 <tr>
                     <td>
-                        <a href="/tip/{{ $tip->slug }}">
-                            <h2>{{ $tip->title }}</h2>
-                        </a>
-                        <p>{{ $tip->short_body }}</p>
+                        <p><a href="/tip/{{ $tip->slug }}" class="is-size-5 has-text-black">{{ $tip->title }}</a></p>
+                        <p class="is-size-7 has-text-grey">{{ $tip->short_published_at }}</p>
+                        <p class="has-text-grey-dark" style="margin: 10px 0;">{{ $tip->short_body }}</p>
+                        <p class="is-size-7">
+                            @foreach($tip->tags as $tag)
+                            <a href="{{ route('tip.index', ['tag' => $tag->name]) }}" class="button is-small is-text">{{ '#' . $tag->name }}</a>
+                            @endforeach
+                        </p>
                     </td>
-                    <td>{{ $tip->short_published_at }}</td>
                 </tr>
                 @endforeach
             </tbody>

@@ -9,8 +9,25 @@ class TipController extends Controller
 {
     public function index()
     {
-        return view('tip.index')
-            ->with('tips', Tip::published()->latest()->get());
+        // TODO: clean this up
+        $tip = Tip::with('tags')
+            ->published()
+            ->latest()
+            ->when(request('tag'), function ($query) {
+                return $query->whereIn('tips.id', function ($q) {
+                    return $q->from('tag_tip')
+                        ->select('tip_id')
+                        ->where('tag_id', function ($inner) {
+                            return $inner->from('tags')
+                                ->select('tags.id')
+                                ->where('tags.name', request('tag'))
+                                ->pluck('tags.id');
+                        });
+                });
+            })
+            ->get();
+
+        return view('tip.index')->with('tips', $tip);
     }
 
     /**

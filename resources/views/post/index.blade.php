@@ -2,17 +2,6 @@
 
 @section('title', 'Articles')
 
-@section('css')
-<style type="text/css">
-td h2 {
-    font-weight: bold;
-}
-tr td:last-child {
-    text-align: right;
-}
-</style>
-@endsection
-
 @section('hero-body')
     <div class="hero-body">
         <div class="container has-text-centered">
@@ -31,12 +20,10 @@ tr td:last-child {
                 @foreach($posts as $post)
                 <tr>
                     <td>
-                        <a href="/post/{{ $post->slug }}">
-                            <h2>{{ $post->title }}</h2>
-                        </a>
-                        <p>{{ $post->short_body }}</p>
+                        <p><a href="/post/{{ $post->slug }}" class="is-size-5 has-text-black">{{ $post->title }}</a></p>
+                        <p class="is-size-7 has-text-grey">{{ $post->short_published_at }}</p>
+                        <p class="has-text-grey-dark" style="margin: 10px 0;">{{ $post->short_body }}</p>
                     </td>
-                    <td>{{ $post->short_published_at }}</td>
                 </tr>
                 @endforeach
             </tbody>

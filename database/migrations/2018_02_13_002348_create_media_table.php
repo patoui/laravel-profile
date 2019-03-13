@@ -26,6 +26,7 @@ class CreateMediaTable extends Migration
             $table->nullableTimestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */

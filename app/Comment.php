@@ -3,8 +3,6 @@
 namespace App;
 
 use App\Events\CommentSaved;
-use App\Favourite;
-use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -12,14 +10,14 @@ class Comment extends Model
     use RecordsActivity;
 
     /**
-     * Guarded properties
+     * Guarded properties.
      *
      * @var array
      */
     protected $guarded = [];
 
     /**
-     * Mutated properties to append
+     * Mutated properties to append.
      *
      * @var array
      */
@@ -33,7 +31,7 @@ class Comment extends Model
     protected $dispatchesEvents = ['saved' => CommentSaved::class];
 
     /**
-     * Owner of the comment
+     * Owner of the comment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -43,17 +41,17 @@ class Comment extends Model
     }
 
     /**
-     * Comments on a comment
+     * Comments on a comment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(self::class);
     }
 
     /**
-     * Comments on a comment
+     * Comments on a comment.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -63,7 +61,7 @@ class Comment extends Model
     }
 
     /**
-     * Short human friendly timestamp
+     * Short human friendly timestamp.
      *
      * @return string
      */
@@ -80,11 +78,11 @@ class Comment extends Model
 
     public function getPathAttribute()
     {
-        return $this->post->path . '#comment' . $this->id;
+        return $this->post->path.'#comment'.$this->id;
     }
 
     /**
-     * Favourites relationship
+     * Favourites relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -94,9 +92,9 @@ class Comment extends Model
     }
 
     /**
-     * Favourites count
+     * Favourites count.
      *
-     * @return integer
+     * @return int
      */
     public function getFavouritesCountAttribute()
     {
@@ -104,7 +102,7 @@ class Comment extends Model
     }
 
     /**
-     * Get all mentioned users within the comment body
+     * Get all mentioned users within the comment body.
      *
      * @return array
      */

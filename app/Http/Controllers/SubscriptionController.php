@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class SubscriptionController extends Controller
 {
     /**
-     * Store a subscription
+     * Store a subscription.
      *
      * @return Illuminate\Http\RedirectResponse
      */

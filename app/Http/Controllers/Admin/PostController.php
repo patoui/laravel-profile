@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Post;
 use App\Rules\Slug;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {

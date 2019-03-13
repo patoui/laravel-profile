@@ -2,13 +2,9 @@
 
 namespace App\Providers;
 
-use App\Policies\DashboardPolicy;
-use App\Policies\MediaPolicy;
-use App\Policies\PostPolicy;
-use App\Policies\PostPublishPolicy;
 use App\Post;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {

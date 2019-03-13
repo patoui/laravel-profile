@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Favourite;
-use Illuminate\Http\Request;
 
 class CommentFavouriteController extends Controller
 {
     /**
-     * Favourite a comment
+     * Favourite a comment.
      *
      * @param  Comment $comment
      * @return \Illuminate\Http\RedirectResponse

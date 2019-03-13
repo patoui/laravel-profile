@@ -3,8 +3,8 @@
 namespace App\Events;
 
 use App\Comment;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Foundation\Events\Dispatchable;
 
 class CommentSaved
 {

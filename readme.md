@@ -1,4 +1,6 @@
 # Personal Website/Blog
+  
+[![StyleCI](https://styleci.io/repos/73735220/shield)](https://styleci.io/repos/73735220)
 
 Serves as a portfolio of myself and a place where I can post articles about content relevant to me.
 

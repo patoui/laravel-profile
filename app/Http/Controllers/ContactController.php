@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactMe;
-use Illuminate\Http\Request;
 use Mail;
 use Validator;
+use App\Mail\ContactMe;
+use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
     /**
-     * Send contact request email
+     * Send contact request email.
      *
      * @param  Request $request
      * @return \Illuminate\Http\RedirectResponse

@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\Association;
-use App\RecordsActivity;
-use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,14 +10,14 @@ class Tip extends Model
     use RecordsActivity;
 
     /**
-     * List of guarded model properties
+     * List of guarded model properties.
      *
      * @var array
      */
     protected $guarded = [];
 
     /**
-     * List of model properties to be casted
+     * List of model properties to be casted.
      *
      * @var array
      */
@@ -45,7 +42,7 @@ class Tip extends Model
     }
 
     /**
-     * Tip analytics relationship
+     * Tip analytics relationship.
      */
     public function analytics()
     {
@@ -53,7 +50,7 @@ class Tip extends Model
     }
 
     /**
-     * Favourites relationship
+     * Favourites relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -63,9 +60,9 @@ class Tip extends Model
     }
 
     /**
-     * Favourites count
+     * Favourites count.
      *
-     * @return integer
+     * @return int
      */
     public function getFavouritesCountAttribute()
     {
@@ -73,7 +70,7 @@ class Tip extends Model
     }
 
     /**
-     * Scoped by slug
+     * Scoped by slug.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $slug
@@ -85,7 +82,7 @@ class Tip extends Model
     }
 
     /**
-     * Parse github markdown to html
+     * Parse github markdown to html.
      *
      * @return string
      */
@@ -95,7 +92,7 @@ class Tip extends Model
     }
 
     /**
-     * First 100 characters of the tip body
+     * First 100 characters of the tip body.
      *
      * @return string
      */
@@ -112,7 +109,7 @@ class Tip extends Model
     }
 
     /**
-     * Short human friendly published date
+     * Short human friendly published date.
      *
      * @return string|null
      */
@@ -126,7 +123,7 @@ class Tip extends Model
     }
 
     /**
-     * Toggle published status
+     * Toggle published status.
      *
      * @return void
      */
@@ -140,7 +137,7 @@ class Tip extends Model
     }
 
     /**
-     * Query scope to get published tips
+     * Query scope to get published tips.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -151,7 +148,7 @@ class Tip extends Model
     }
 
     /**
-     * Get the previous published tip
+     * Get the previous published tip.
      *
      * @return null|App\Tip
      */
@@ -168,7 +165,7 @@ class Tip extends Model
     }
 
     /**
-     * Get the next published tip
+     * Get the next published tip.
      *
      * @return null|App\Tip
      */

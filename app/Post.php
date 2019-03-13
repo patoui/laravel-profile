@@ -10,35 +10,35 @@ class Post extends Model
     use RecordsActivity;
 
     /**
-     * List of guarded model properties
+     * List of guarded model properties.
      *
      * @var array
      */
     protected $guarded = [];
 
     /**
-     * Properties that can be filled
+     * Properties that can be filled.
      *
      * @var array
      */
     protected $fillable = ['title', 'body', 'slug'];
 
     /**
-     * Mutated properties to append
+     * Mutated properties to append.
      *
      * @var array
      */
     protected $appends = ['favourites_count'];
 
     /**
-     * List of model properties to be casted
+     * List of model properties to be casted.
      *
      * @var array
      */
     protected $casts = ['published_at' => 'datetime'];
 
     /**
-     * Post analytics relationship
+     * Post analytics relationship.
      */
     public function analytics()
     {
@@ -46,7 +46,7 @@ class Post extends Model
     }
 
     /**
-     * Comments relationship
+     * Comments relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -57,7 +57,7 @@ class Post extends Model
     }
 
     /**
-     * Create comment from array of data
+     * Create comment from array of data.
      *
      * @param  array $data array of data
      * @return App\Comment
@@ -68,7 +68,7 @@ class Post extends Model
     }
 
     /**
-     * Favourites relationship
+     * Favourites relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -78,9 +78,9 @@ class Post extends Model
     }
 
     /**
-     * Favourites count
+     * Favourites count.
      *
-     * @return integer
+     * @return int
      */
     public function getFavouritesCountAttribute()
     {
@@ -88,7 +88,7 @@ class Post extends Model
     }
 
     /**
-     * Scoped by slug
+     * Scoped by slug.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $slug
@@ -100,7 +100,7 @@ class Post extends Model
     }
 
     /**
-     * Parse github markdown to html
+     * Parse github markdown to html.
      *
      * @return string
      */
@@ -110,7 +110,7 @@ class Post extends Model
     }
 
     /**
-     * First 100 characters of the post body
+     * First 100 characters of the post body.
      *
      * @return string
      */
@@ -127,7 +127,7 @@ class Post extends Model
     }
 
     /**
-     * Short human friendly published date
+     * Short human friendly published date.
      *
      * @return string|null
      */
@@ -141,7 +141,7 @@ class Post extends Model
     }
 
     /**
-     * Toggle published status
+     * Toggle published status.
      *
      * @return void
      */
@@ -155,7 +155,7 @@ class Post extends Model
     }
 
     /**
-     * Query scope to get published posts
+     * Query scope to get published posts.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -166,7 +166,7 @@ class Post extends Model
     }
 
     /**
-     * Get the previous published post
+     * Get the previous published post.
      *
      * @return null|App\Post
      */
@@ -181,7 +181,7 @@ class Post extends Model
     }
 
     /**
-     * Get the next published post
+     * Get the next published post.
      *
      * @return null|App\Post
      */

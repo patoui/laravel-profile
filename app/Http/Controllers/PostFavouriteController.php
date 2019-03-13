@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-use Illuminate\Http\Request;
 
 class PostFavouriteController extends Controller
 {
     /**
-     * Favourite a post
+     * Favourite a post.
      *
      * @param  string $slug
      * @return \Illuminate\Http\RedirectResponse

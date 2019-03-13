@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
 use App\Tip;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class TipPolicy

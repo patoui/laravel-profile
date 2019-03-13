@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Media;
+use App\Http\Controllers\Controller;
 
 class MediaController extends Controller
 {
     /**
-     * List all media items for the current user
+     * List all media items for the current user.
      *
      * @return \Illuminate\View\View
      */
@@ -22,7 +22,7 @@ class MediaController extends Controller
     }
 
     /**
-     * Display view to add new media
+     * Display view to add new media.
      *
      * @return \Illuminate\View\View
      */
@@ -32,7 +32,7 @@ class MediaController extends Controller
     }
 
     /**
-     * Display view to add new media
+     * Display view to add new media.
      *
      * @return \Illuminate\View\View
      */
@@ -43,7 +43,7 @@ class MediaController extends Controller
     }
 
     /**
-     * Upload the file to the media library
+     * Upload the file to the media library.
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -63,7 +63,7 @@ class MediaController extends Controller
     }
 
     /**
-     * Display view to add new media
+     * Display view to add new media.
      *
      * @return \Illuminate\View\View
      */
@@ -79,7 +79,7 @@ class MediaController extends Controller
     }
 
     /**
-     * Delete a file to from media library
+     * Delete a file to from media library.
      *
      * @param Media $media
      * @return \Illuminate\Http\RedirectResponse

@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -72,7 +72,7 @@ class User extends Authenticatable implements HasMedia
 
     public function getIsAdminAttribute()
     {
-        return !!in_array($this->email, [
+        return (bool) in_array($this->email, [
             'patrique.ouimet@gmail.com',
             'taylorjdunphy@gmail.com',
         ]);

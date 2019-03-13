@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
 use App\Post;
+use App\Comment;
 use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
 {
     /**
-     * Store a new comment for the given post
+     * Store a new comment for the given post.
      *
      * @param  string $slug the post slug
      * @return \Illuminate\Http\RedirectResponse

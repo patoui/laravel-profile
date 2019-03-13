@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Tip;
-use Illuminate\Http\Request;
 
 class TipFavouriteController extends Controller
 {
     /**
-     * Favourite a tip
+     * Favourite a tip.
      *
      * @param  string $slug
      * @return \Illuminate\Http\RedirectResponse

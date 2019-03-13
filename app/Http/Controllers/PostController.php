@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     /**
-     * List published posts
+     * List published posts.
      *
      * @return \Illuminate\View\View
      */
@@ -21,7 +21,7 @@ class PostController extends Controller
     }
 
     /**
-     * Display post details
+     * Display post details.
      *
      * @param  string $slug
      * @return \Illuminate\View\View

@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\CommentSaved;
 use App\Notifications\UserCommented;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class NotifyMe
 {

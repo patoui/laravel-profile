@@ -4,8 +4,6 @@ namespace App\Notifications;
 
 use App\Comment;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class UserMentioned extends Notification
@@ -47,7 +45,7 @@ class UserMentioned extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->comment->owner->name . ' mentioned you in ' . $this->comment->post->title,
+            'message' => $this->comment->owner->name.' mentioned you in '.$this->comment->post->title,
             'link' => $this->comment->path
         ];
     }

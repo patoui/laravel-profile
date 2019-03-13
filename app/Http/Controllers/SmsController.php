@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use Illuminate\Http\Request;
 use Twilio\Rest\Client;
+use Illuminate\Http\Request;
 
 class SmsController extends Controller
 {

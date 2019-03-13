@@ -5,7 +5,6 @@ namespace App\Notifications;
 use App\Comment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class UserCommented extends Notification

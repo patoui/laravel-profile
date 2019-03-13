@@ -31,7 +31,7 @@ class TipController extends Controller
     }
 
     /**
-     * Display tip details
+     * Display tip details.
      *
      * @param  string $slug
      * @return \Illuminate\View\View

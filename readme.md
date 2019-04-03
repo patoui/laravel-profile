@@ -1,11 +1,14 @@
 # Personal Website/Blog
-  
+
 [![StyleCI](https://styleci.io/repos/73735220/shield)](https://styleci.io/repos/73735220)
 
 Serves as a portfolio of myself and a place where I can post articles about content relevant to me.
 
 TODO:
 
+* Add RSS feed
+* Update to TailwindCSS
+* Upgrade to Laravel's latest version
 * Update comments to async
 * Update favouriting to async
 * Add log tracking and notifications when errors occur

@@ -1,6 +1,8 @@
 # Personal Website/Blog
 
+[![Build Status](https://travis-ci.org/patoui/laravel-profile.svg?branch=master)](https://travis-ci.org/patoui/laravel-profile)
 [![StyleCI](https://styleci.io/repos/73735220/shield)](https://styleci.io/repos/73735220)
+
 
 Serves as a portfolio of myself and a place where I can post articles about content relevant to me.
 

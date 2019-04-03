@@ -104,6 +104,7 @@ class LoginController extends Controller
             if (! $authUser->provider_id) {
                 $authUser->update(['provider' => $provider, 'provider_id' => $user->id]);
             }
+
             return $authUser;
         }
 

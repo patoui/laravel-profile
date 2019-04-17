@@ -10,7 +10,6 @@ TODO:
 
 * Add RSS feed
 * Update to TailwindCSS
-* Upgrade to Laravel's latest version
 * Update comments to async
 * Update favouriting to async
 * Add log tracking and notifications when errors occur
@@ -20,6 +19,7 @@ TODO:
 
 DONE:
 
+* ~~Upgrade to Laravel's latest version~~
 * ~~Add ability to @users in replies (include notifications)~~
 * ~~Update navigation to vue component~~
 * ~~Add favouriting post with count~~

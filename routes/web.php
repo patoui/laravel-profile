@@ -1,19 +1,11 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
+use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::get('/', 'HomeController@index')->name('home');
-
-Route::post('contact', 'ContactController@store')->name('contact.store');
+Route::post('contact', 'ContactController@store')
+    ->name('contact.store')
+    ->middleware(ProtectAgainstSpam::class);
 
 // Post
 Route::get('blog', 'PostController@index')->name('post.index');
@@ -48,10 +40,13 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')
-    ->name('register');
-Route::post('register', 'Auth\RegisterController@register')
-    ->name('register.store');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register')->name('register.store');
+
+// Verification
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 // Socialite (Github)
 Route::get('auth/github', 'Auth\LoginController@redirectToProvider');

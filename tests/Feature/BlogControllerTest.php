@@ -10,22 +10,17 @@ class BlogControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test to display a list of post
-     *
-     * @return void
-     */
     public function testIndex()
     {
         // Arrange
-        $post = factory(Post::class)->states(['published'])->create();
+        $post = factory(Post::class)->states('published')->create();
         $unpublished = factory(Post::class)->create();
 
         // Act
         $response = $this->get('blog');
 
         // Assert
-        $response->assertStatus(200);
+        $response->assertSuccessful();
         $response->assertSee($post->title);
         $response->assertDontSee($unpublished->title);
     }

@@ -15,8 +15,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('navigation', require('./components/Navigation.vue'));
-Vue.component('comments', require('./components/Comments.vue'));
-Vue.component('tags', require('./components/Tags.vue'));
+Vue.component('navigation', require('./components/Navigation.vue').default);
+Vue.component('comments', require('./components/Comments.vue').default);
+Vue.component('tags', require('./components/Tags.vue').default);
 
 const app = new Vue({ el: '#app' });

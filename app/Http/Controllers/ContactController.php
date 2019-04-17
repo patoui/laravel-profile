@@ -9,25 +9,14 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    /**
-     * Send contact request email.
-     *
-     * @param  Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'name' => 'required',
-                'email' => 'required|email',
-                'phone' => 'required',
-                'message' => 'required',
-                'g-recaptcha-response' => 'required|recaptcha',
-            ]
-        );
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'message' => 'required',
+        ]);
 
         if ($validator->fails()) {
             return redirect('/#contact')

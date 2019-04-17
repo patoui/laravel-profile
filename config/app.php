@@ -167,7 +167,6 @@ return [
          */
         Laracasts\Flash\FlashServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
     ],
 
     /*

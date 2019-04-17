@@ -185,6 +185,7 @@
             <div class="column">
                 <h2 class="title has-text-centered">Contact Me</h2>
                 <form action="{{ route('contact.store') }}" method="post">
+                    @honeypot
                     {{ csrf_field() }}
 
                     <div class="field">
@@ -224,16 +225,6 @@
 
                         @if ($errors->has('message'))
                         <p class="help is-danger">{{ $errors->first('message') }}</p>
-                        @endif
-                    </div>
-
-                    <div class="field">
-                        <p class="control">
-                            {!! Recaptcha::render() !!}
-                        </p>
-
-                        @if ($errors->has('g-recaptcha-response'))
-                        <p class="help is-danger">{{ $errors->first('g-recaptcha-response') }}</p>
                         @endif
                     </div>
 

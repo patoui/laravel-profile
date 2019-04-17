@@ -33,30 +33,6 @@ class CommentTest extends TestCase
         $this->assertEquals($user->id, $owner->id);
     }
 
-    public function testComments()
-    {
-        // Arrange
-        factory(User::class)->states('me')->create();
-        Mail::fake();
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
-            'post_id' => $post->id
-        ]);
-        factory(Comment::class, 5)->create([
-            'post_id' => $post->id,
-            'comment_id' => $comment->id
-        ]);
-
-        // Act
-        $comments = $comment->comments;
-
-        // Assert
-        $this->assertEquals(
-            5,
-            $comments->count()
-        );
-    }
-
     public function testGetShortTimestampAttribute()
     {
         $comment = factory(Comment::class)->make([

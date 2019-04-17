@@ -61,10 +61,6 @@
                     </nav>
                 </div>
             </form>
-
-            <div v-if="comment.comments">
-                <comments :initial-post="initialPost" :initial-comments="comment.comments"></comments>
-            </div>
         </div>
     </div>
 </div>

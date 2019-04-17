@@ -43,16 +43,6 @@ class Comment extends Model
     /**
      * Comments on a comment.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function comments()
-    {
-        return $this->hasMany(self::class);
-    }
-
-    /**
-     * Comments on a comment.
-     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function post()

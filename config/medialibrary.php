@@ -6,7 +6,7 @@ return [
      * The filesystems on which to store added files and derived images by default. Choose
      * one or more of the filesystems you've configured in config/filesystems.php.
      */
-    'default_filesystem' => 'media',
+    'disk_name' => 'media',
 
     /*
      * The maximum file size of an item in bytes.
@@ -23,7 +23,7 @@ return [
     /*
      * The class name of the media model that should be used.
      */
-    'media_model' => Spatie\MediaLibrary\Media::class,
+    'media_model' => Spatie\MediaLibrary\Models\Media::class,
 
     /*
      * The engine that should perform the image conversions.

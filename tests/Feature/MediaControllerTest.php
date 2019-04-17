@@ -13,26 +13,16 @@ class MediaControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * View files in media library
-     *
-     * @return void
-     */
     public function testIndex()
     {
         // Arrange
-        $user = factory(User::class)->create([
-            'email' => 'patrique.ouimet@gmail.com'
-        ]);
+        $user = factory(User::class)->states('me')->create();
         Storage::fake('media');
         $image = UploadedFile::fake()->image('test.png', 100, 100)->size(100);
-        $user->addMedia($image)
-           ->preservingOriginal()
-           ->toMediaCollection();
+        $user->addMedia($image)->preservingOriginal()->toMediaCollection();
 
         // Act
-        $response = $this->actingAs($user)
-            ->get('/admin/media');
+        $response = $this->actingAs($user)->get('/admin/media');
 
         // Assert
         $response->assertSuccessful();
@@ -41,46 +31,30 @@ class MediaControllerTest extends TestCase
         Storage::disk('media')->assertExists('1/test.png');
     }
 
-    /**
-     * View to upload new files
-     *
-     * @return void
-     */
     public function testCreate()
     {
         // Arrange
-        $user = factory(User::class)->create([
-            'email' => 'patrique.ouimet@gmail.com'
-        ]);
+        $user = factory(User::class)->states('me')->create();
 
         // Act
-        $response = $this->actingAs($user)
-            ->get('/admin/media/create');
+        $response = $this->actingAs($user)->get('/admin/media/create');
 
         // Assert
         $response->assertSuccessful();
         $response->assertSee('Add Media');
     }
 
-    /**
-     * Upload the file to the media library
-     *
-     * @return void
-     */
     public function testStore()
     {
         Storage::disk('media');
 
         // Arrange
-        $user = factory(User::class)->create([
-            'email' => 'patrique.ouimet@gmail.com'
-        ]);
+        $user = factory(User::class)->states('me')->create();
         Storage::fake('media');
         $image = UploadedFile::fake()->image('upload-test.png', 100, 100)->size(100);
 
         // Act
-        $response = $this->actingAs($user)
-            ->post('/admin/media', ['media' => $image]);
+        $response = $this->actingAs($user)->post('/admin/media', ['media' => $image]);
 
         // Assert
         $response->assertRedirect('/admin/media');

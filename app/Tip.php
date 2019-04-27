@@ -9,18 +9,8 @@ class Tip extends Model
 {
     use RecordsActivity;
 
-    /**
-     * List of guarded model properties.
-     *
-     * @var array
-     */
     protected $guarded = [];
 
-    /**
-     * List of model properties to be casted.
-     *
-     * @var array
-     */
     protected $casts = ['published_at' => 'datetime'];
 
     public function tags()
@@ -41,61 +31,31 @@ class Tip extends Model
         return $this->tags;
     }
 
-    /**
-     * Tip analytics relationship.
-     */
     public function analytics()
     {
         return $this->hasMany(TipAnalytics::class);
     }
 
-    /**
-     * Favourites relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
     public function favourites()
     {
         return $this->morphMany(Favourite::class, 'favouritable');
     }
 
-    /**
-     * Favourites count.
-     *
-     * @return int
-     */
     public function getFavouritesCountAttribute()
     {
         return $this->favourites()->count();
     }
 
-    /**
-     * Scoped by slug.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $slug
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function scopeSlug($query, $slug)
     {
         return $query->where('slug', $slug);
     }
 
-    /**
-     * Parse github markdown to html.
-     *
-     * @return string
-     */
-    public function getParsedBodyAttribute()
+    public function getShortTitleAttribute()
     {
-        return (new \Parsedown())->text($this->body);
+        return substr($this->title, 0, 100);
     }
 
-    /**
-     * First 100 characters of the tip body.
-     *
-     * @return string
-     */
     public function getShortBodyAttribute()
     {
         return substr( // get first 100 characters
@@ -108,11 +68,6 @@ class Tip extends Model
             ), 0, 100);
     }
 
-    /**
-     * Short human friendly published date.
-     *
-     * @return string|null
-     */
     public function getShortPublishedAtAttribute()
     {
         return $this->published_at
@@ -122,11 +77,6 @@ class Tip extends Model
             : null;
     }
 
-    /**
-     * Toggle published status.
-     *
-     * @return void
-     */
     public function togglePublish()
     {
         $this->published_at = $this->published_at
@@ -136,22 +86,11 @@ class Tip extends Model
         $this->save();
     }
 
-    /**
-     * Query scope to get published tips.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function scopePublished($query)
     {
         return $query->whereNotNull('published_at');
     }
 
-    /**
-     * Get the previous published tip.
-     *
-     * @return null|App\Tip
-     */
     public function previousPublished()
     {
         return $this->newQuery()
@@ -164,11 +103,6 @@ class Tip extends Model
             ->first();
     }
 
-    /**
-     * Get the next published tip.
-     *
-     * @return null|App\Tip
-     */
     public function nextPublished()
     {
         return $this->newQuery()

@@ -1,13 +1,5 @@
 <?php
 
-/*
-TODO:
- - Ability to update media
- - Add UI buttons to media index
- - Add media library within post
- - Add "copy link"
-*/
-
 Route::get('/media', 'MediaController@index')
     ->name('admin.media.index')
     ->middleware('can:media.index');

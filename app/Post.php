@@ -77,43 +77,21 @@ class Post extends Model
         return $this->morphMany(Favourite::class, 'favouritable');
     }
 
-    /**
-     * Favourites count.
-     *
-     * @return int
-     */
     public function getFavouritesCountAttribute()
     {
         return $this->favourites()->count();
     }
 
-    /**
-     * Scoped by slug.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $slug
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function scopeSlug($query, $slug)
     {
         return $query->where('slug', $slug);
     }
 
-    /**
-     * Parse github markdown to html.
-     *
-     * @return string
-     */
-    public function getParsedBodyAttribute()
+    public function getShortTitleAttribute()
     {
-        return (new \Parsedown())->text($this->body);
+        return substr($this->title, 0, 50);
     }
 
-    /**
-     * First 100 characters of the post body.
-     *
-     * @return string
-     */
     public function getShortBodyAttribute()
     {
         return substr( // get first 100 characters
@@ -126,17 +104,12 @@ class Post extends Model
             ), 0, 100);
     }
 
-    /**
-     * Short human friendly published date.
-     *
-     * @return string|null
-     */
     public function getShortPublishedAtAttribute()
     {
         return $this->published_at
             ? $this->published_at
                 ->setTimezone('America/Toronto')
-                ->toDayDateTimeString()
+                ->toFormattedDateString()
             : null;
     }
 

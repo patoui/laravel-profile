@@ -17,7 +17,7 @@ Route::post('post/{slug}', 'PostFavouriteController@store')
 // Comment
 Route::post('post/{slug}/comment', 'PostCommentController@store')
     ->name('post.comment.store')
-    ->middleware('auth');
+    ->middleware('auth', ProtectAgainstSpam::class);
 
 Route::post('comment/{comment}', 'CommentFavouriteController@store')
     ->name('comment.favourite.store')
@@ -63,3 +63,4 @@ Route::get('sms', 'SmsController@index')
 Route::post('sms', 'SmsController@store')
     ->name('sms.store')
     ->middleware('can:sms.store');
+

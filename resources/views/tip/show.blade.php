@@ -13,48 +13,34 @@
 
 @section('title', $tip->title)
 
-@section('hero-body')
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <h1 class="title">{{ $tip->title }}</h1>
-            <p style="margin-bottom: 5px;">{{ $tip->short_published_at }}</p>
-            <form method="post" action="{{ route('tip.favourite.store', ['slug' => $tip->slug]) }}">
-                {{ csrf_field() }}
-                <button type="submit" class="button" style="color: white; border: 1px solid #00e0bf; background: rgba(0,0,0,0);">
-                    <span class="icon"><i class="fa fa-thumbs-o-up"></i></span><span>{{ $tip->favourites_count }}</span>
-                </button>
-            </form>
-        </div>
-    </div>
+@section('css')
+@gitdown
 @endsection
 
 @section('content')
+<h1 class="w-full text-4xl text-center font-bold">{{ $tip->title }}</h1>
+<p class="w-full text-sm text-center text-gray-600">{{ $tip->short_published_at }}</p>
+<form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('tip.favourite.store', ['slug' => $tip->slug]) }}">
+    {{ csrf_field() }}
+    <button type="submit">
+        <i class="fas fa-thumbs-up mr-2"></i>{{ $tip->favourites_count }}
+    </button>
+</form>
 
-<section class="section">
-    <div class="container">
-        <article class="markdown-body">{!! $tip->parsed_body !!}</article>
-    </div>
-</section>
+<div class="w-full pt-4 pb-4 markdown-body">{!! GitDown::parseAndCache($tip->body) !!}</div>
+
 @if ($previousTip || $nextTip)
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                @if ($previousTip)
-                    <a href="{{ route('tip.show', ['slug' => $previousTip->slug]) }}" class="button is-secondary" style="white-space: normal; padding: 25px;">Previous: {{ $previousTip->title }}</a>
-                @endif
-            </div>
-            <div class="column has-text-right">
-                @if ($nextTip)
-                    <a href="{{ route('tip.show', ['slug' => $nextTip->slug]) }}" class="button is-secondary" style="white-space: normal; padding: 25px;">Next: {{ $nextTip->title }}</a>
-                @endif
-            </div>
-        </div>
+<div class="flex w-full mt-4 mb-4">
+    <div class="w-1/2">
+        @if ($previousTip)
+            <a class="underline" href="{{ route('tip.show', ['slug' => $previousTip->slug]) }}">&#8678; {{ $previousTip->short_title }}</a>
+        @endif
     </div>
-</section>
+    <div class="w-1/2 text-right">
+        @if ($nextTip)
+            <a class="underline" href="{{ route('tip.show', ['slug' => $nextTip->slug]) }}">{{ $nextTip->short_title }} &#8680;</a>
+        @endif
+    </div>
+</div>
 @endif
-@endsection
-
-@section('javascript')
-{{-- <script src="{{ mix('/js/tip.js') }}"></script> --}}
 @endsection

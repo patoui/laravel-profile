@@ -1,34 +1,23 @@
 {{ csrf_field() }}
-
-<div class="field">
-    <label class="label">Title</label>
-    <p class="control">
-        <input name="title" class="input{{ $errors->has('title') ? ' is-danger' : '' }}" type="text" value="{{ old('title', $post->title) }}" required autofocus>
-    </p>
-
+<div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2 {{ $errors->has('title') ? 'border-red-500' : '' }}" for="title"></label>
+    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" name="title" type="text" placeholder="Title" value="{{ old('title', $post->title) }}">
     @if ($errors->has('title'))
-    <p class="help is-danger">{{ $errors->first('title') }}</p>
+    <p class="text-red-500 text-xs italic">{{ $errors->first('title') }}</p>
     @endif
 </div>
-
-<div class="field">
-    <label class="label">URL</label>
-    <p class="control">
-        <input name="slug" class="input{{ $errors->has('slug') ? ' is-danger' : '' }}" type="text" value="{{ old('slug', $post->slug) }}">
-    </p>
-
+<div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2 {{ $errors->has('slug') ? 'border-red-500' : '' }}" for="slug"></label>
+    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="slug" name="slug" type="text" placeholder="Slug" value="{{ old('slug', $post->slug) }}">
     @if ($errors->has('slug'))
-    <p class="help is-danger">{{ $errors->first('slug') }}</p>
+    <p class="text-red-500 text-xs italic">{{ $errors->first('slug') }}</p>
     @endif
 </div>
-
-<div class="field">
-    <label class="label">Body</label>
-    <p class="control">
-        <textarea name="body" class="textarea{{ $errors->has('body') ? ' is-danger' : '' }}" rows="10">{{ old('body', $post->body) }}</textarea>
-    </p>
-
+<div class="mb-4">
+    <label class="block text-gray-700 text-sm font-bold mb-2 {{ $errors->has('body') ? 'border-red-500' : '' }}" for="name"></label>
+    <textarea name="body" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="10" placeholder="Body">{{ old('body', $post->body) }}</textarea>
     @if ($errors->has('body'))
-    <p class="help is-danger">{{ $errors->first('body') }}</p>
+    <p class="text-red-500 text-xs italic">{{ $errors->first('body') }}</p>
     @endif
 </div>
+

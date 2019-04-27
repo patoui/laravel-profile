@@ -13,88 +13,34 @@
 
 @section('title', $post->title)
 
-@section('hero-body')
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <h1 class="title">{{ $post->title }}</h1>
-            <p style="margin-bottom: 5px;">{{ $post->short_published_at }}</p>
-            <form method="post" action="{{ route('post.favourite.store', ['slug' => $post->slug]) }}">
-                {{ csrf_field() }}
-                <button type="submit" class="button" style="color: white; border: 1px solid #00e0bf; background: rgba(0,0,0,0);">
-                    <span class="icon"><i class="fa fa-thumbs-o-up"></i></span><span>{{ $post->favourites_count }}</span>
-                </button>
-            </form>
-        </div>
-    </div>
+@section('css')
+@gitdown
 @endsection
 
 @section('content')
+<h1 class="w-full text-4xl text-center font-bold">{{ $post->title }}</h1>
+<p class="w-full text-sm text-center text-gray-600">{{ $post->short_published_at }}</p>
+<form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('post.favourite.store', ['slug' => $post->slug]) }}">
+    {{ csrf_field() }}
+    <button type="submit">
+        <i class="fas fa-thumbs-up mr-2"></i>{{ $post->favourites_count }}
+    </button>
+</form>
 
-<section class="section">
-    <div class="container">
-        <article class="markdown-body">{!! $post->parsed_body !!}</article>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-        <h4 class="subtitle">Comments</h4>
+<div class="w-full pt-4 pb-4 markdown-body">{!! GitDown::parseAndCache($post->body) !!}</div>
 
-        <comments :initial-post="{{ $post->toJson() }}"></comments>
-
-        <form id="post-comment"
-            method="post"
-            action="{{ route('post.comment.store', ['slug' => $post->slug]) }}"
-            class="media">
-            {{ csrf_field() }}
-
-            <!-- TODO: Add avatar -->
-            <figure class="media-left">
-                <p class="image is-64x64">
-                    <img src="https://via.placeholder.com/64x64" alt="Avatar placeholder">
-                </p>
-            </figure>
-
-            <div class="media-content">
-                <div class="field">
-                    <p class="control">
-                        <textarea name="body"
-                            class="textarea{{ $errors->has('body') ? ' is-danger' : '' }}"
-                            placeholder="Write a comment, would love to hear your feedback!"></textarea>
-                    </p>
-
-                    @if ($errors->has('body'))
-                    <p class="help is-danger">{{ $errors->first('body') }}</p>
-                    @endif
-                </div>
-                <div class="field">
-                    <div class="control has-text-right">
-                        <button type="submit" class="button is-primary">Submit</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</section>
 @if ($previousPost || $nextPost)
-<section class="section">
-    <div class="container">
-        <div class="columns">
-            <div class="column">
-                @if ($previousPost)
-                    <a href="{{ route('post.show', ['slug' => $previousPost->slug]) }}" class="button is-secondary" style="white-space: normal; padding: 25px;">Previous: {{ $previousPost->title }}</a>
-                @endif
-            </div>
-            <div class="column has-text-right">
-                @if ($nextPost)
-                    <a href="{{ route('post.show', ['slug' => $nextPost->slug]) }}" class="button is-secondary" style="white-space: normal; padding: 25px;">Next: {{ $nextPost->title }}</a>
-                @endif
-            </div>
-        </div>
+<div class="flex w-full mt-4 mb-4">
+    <div class="w-1/2">
+        @if ($previousPost)
+            <a class="underline" href="{{ route('post.show', ['slug' => $previousPost->slug]) }}">&#8678; {{ $previousPost->short_title }}</a>
+        @endif
     </div>
-</section>
+    <div class="w-1/2 text-right">
+        @if ($nextPost)
+            <a class="underline" href="{{ route('post.show', ['slug' => $nextPost->slug]) }}">{{ $nextPost->short_title }} &#8680;</a>
+        @endif
+    </div>
+</div>
 @endif
-@endsection
-
-@section('javascript')
-{{-- <script src="{{ mix('/js/post.js') }}"></script> --}}
 @endsection

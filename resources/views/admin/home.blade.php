@@ -1,124 +1,69 @@
-@extends('layouts.app-footerless')
+@extends('layouts.app')
 
 @section('title', 'Articles')
 
-@section('hero-body')
-    <div class="hero-body">
-        <div class="container">
-            <div class="level">
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">Posts</p>
-                        <p class="title">{{ $postsCount }}</p>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">Published Posts</p>
-                        <p class="title">{{ $postsPublishedCount }}</p>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">Tips</p>
-                        <p class="title">{{ $tipsCount }}</p>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">Published Tips</p>
-                        <p class="title">{{ $tipsPublishedCount }}</p>
-                    </div>
-                </div>
-            </div>
+@section('content')
+<h1 class="w-full text-center text-4xl">Stats</h1>
+<div class="flex mb-4 w-full">
+    <div class="w-1/2 text-center text-xl">
+        <p>Articles: {{ $postsPublishedCount . ' / ' . $postsCount }}</p>
+    </div>
+    <div class="w-1/2 text-center text-xl">
+        <p>Tips: {{ $tipsPublishedCount . ' / ' . $tipsCount }}</p>
+    </div>
+</div>
+
+<div class="flex pt-4 pb-2 w-full items-center border-solid border-t-2">
+    <div class="w-3/5">
+        <h1 class="text-4xl">Articles</h1>
+    </div>
+    <div class="w-2/5 text-right">
+        <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="/admin/post/create">New +</a>
+    </div>
+</div>
+@foreach($posts as $post)
+<div class="flex mb-6 w-full">
+    <div class="w-4/5">
+        <a href="{{ route('post.show', ['slug' => $post->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $post->title }}</a>
+        <p class="mt-2 mb-2 text-sm text-gray-700">{{ $post->short_body }}</p>
+        <p class="text-sm text-gray-600">{{ $post->published_at ? 'Published on ' . $post->short_published_at : 'Not published' }}</p>
+    </div>
+    <div class="w-1/5 text-right">
+        <a class="mr-2" href="{{ route('admin.post.edit', ['id' => $post->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+        <a href="{{ route('admin.post.publish', ['id' => $post->id]) }}">
+            <i class="{{ $post->published_at ? 'fas' : 'far' }} fa-file"></i>
+        </a>
+    </div>
+</div>
+@endforeach
+
+<div class="flex pt-4 pb-2 w-full items-center border-solid border-t-2">
+    <div class="w-3/5">
+        <h1 class="text-4xl">Tips</h1>
+    </div>
+    <div class="w-2/5 text-right">
+        <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="/admin/tip/create">New +</a>
+    </div>
+</div>
+@foreach($tips as $tip)
+<div class="flex mb-6 w-full">
+    <div class="w-4/5">
+        <a href="{{ route('tip.show', ['slug' => $tip->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $tip->title }}</a>
+        <p class="mt-2 mb-2 text-sm text-gray-700">{{ $tip->short_body }}</p>
+        <p class="text-sm text-gray-600">{{ $tip->published_at ? 'Published on ' . $tip->short_published_at : 'Not published' }}</p>
+        <div>
+            @foreach($tip->tags as $tag)
+            <a href="{{ route('tip.index', ['tag' => $tag->name]) }}" class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 mr-2 hover:text-black hover:underline">{{ '#' . $tag->name }}</a>
+            @endforeach
         </div>
     </div>
+    <div class="w-1/5 text-right">
+        <a class="mr-2" href="{{ route('admin.tip.edit', ['id' => $tip->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+        <a href="{{ route('admin.tip.publish', ['id' => $tip->id]) }}">
+            <i class="{{ $tip->published_at ? 'fas' : 'far' }} fa-file"></i>
+        </a>
+    </div>
+</div>
+@endforeach
 @endsection
 
-@section('content')
-
-    <section class="section main">
-        <div class="container">
-            <div class="columns is-mobile">
-                <div class="column is-half">
-                    <h2 class="is-size-4">Posts</h2>
-                </div>
-                <div class="column is-half has-text-right">
-                    <a href="/admin/post/create" class="button is-primary">New Post</a>
-                </div>
-            </div>
-            <table class="table">
-                <tbody>
-                    @foreach($posts as $post)
-                    <tr>
-                        <td>
-                            <a href="/post/{{ $post->slug }}">
-                                <h2>{{ $post->title }}</h2>
-                                <span style="color: black;">{{ $post->short_published_at }}</span>
-                            </a>
-                            <p>{{ $post->short_body }}</p>
-                        </td>
-                        <td class="has-text-right">
-                            <span class="icon">
-                                <a href="{{ route('admin.post.edit', ['id' => $post->id]) }}" style="color: black;"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                            </span>
-                            <span class="icon">
-                                <a href="{{ route('admin.post.publish', ['id' => $post->id]) }}" style="color: black;">
-                                    @if($post->published_at)
-                                    <i class="fa fa-file-text" aria-hidden="true"></i>
-                                    @else
-                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                    @endif
-                                </a>
-                            </span>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <section class="section main">
-        <div class="container">
-            <div class="columns is-mobile">
-                <div class="column is-half">
-                    <h2 class="is-size-4">Tips</h2>
-                </div>
-                <div class="column is-half has-text-right">
-                    <a href="/admin/tip/create" class="button is-primary">New Tip</a>
-                </div>
-            </div>
-            <table class="table">
-                <tbody>
-                    @foreach($tips as $tip)
-                    <tr>
-                        <td>
-                            <a href="/tip/{{ $tip->slug }}">
-                                <h2>{{ $tip->title }}</h2>
-                                <span style="color: black;">{{ $tip->short_published_at }}</span>
-                            </a>
-                            <p>{{ $tip->short_body }}</p>
-                        </td>
-                        <td class="has-text-right">
-                            <span class="icon">
-                                <a href="{{ route('admin.tip.edit', ['id' => $tip->id]) }}" style="color: black;"><i class="fa fa-edit" aria-hidden="true"></i></a>
-                            </span>
-                            <span class="icon">
-                                <a href="{{ route('admin.tip.publish', ['id' => $tip->id]) }}" style="color: black;">
-                                    @if($tip->published_at)
-                                    <i class="fa fa-file-text" aria-hidden="true"></i>
-                                    @else
-                                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                    @endif
-                                </a>
-                            </span>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-@endsection

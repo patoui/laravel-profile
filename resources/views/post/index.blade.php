@@ -2,32 +2,13 @@
 
 @section('title', 'Articles')
 
-@section('hero-body')
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <h1 class="title">Articles</h1>
-            <h2 class="subtitle">Stories of my professional development</h2>
-        </div>
-    </div>
-@endsection
-
 @section('content')
-
-<section class="section main">
-    <div class="container">
-        <table class="table">
-            <tbody>
-                @foreach($posts as $post)
-                <tr>
-                    <td>
-                        <p><a href="/post/{{ $post->slug }}" class="is-size-5 has-text-black">{{ $post->title }}</a></p>
-                        <p class="is-size-7 has-text-grey">{{ $post->short_published_at }}</p>
-                        <p class="has-text-grey-dark" style="margin: 10px 0;">{{ $post->short_body }}</p>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <h1 class="text-4xl mb-4">Articles</h1>
+    @foreach($posts as $post)
+    <div class="mb-6 w-full">
+        <a href="{{ route('post.show', ['slug' => $post->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $post->title }}</a>
+        <p class="mt-2 mb-2 text-sm text-gray-700">{{ $post->short_body }}</p>
+        <p class="text-sm text-gray-600">Published on {{ $post->short_published_at }}</p>
     </div>
-</section>
+    @endforeach
 @endsection

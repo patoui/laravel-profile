@@ -1,18 +1,16 @@
-@extends('layouts.app-footerless')
+@extends('layouts.app')
 
 @section('title', 'Create')
 
 @section('content')
-    <section class="section">
-        <div class="container">
-            <form id="tip-form" method="POST" action="{{ route('admin.tip.store') }}">
-
-                @include('admin.tip.form')
-
-                <p class="control">
-                    <button type="submit" class="button is-primary">Submit</button>
-                </p>
-            </form>
-        </div>
-    </section>
+<form id="app" class="w-full" method="post" action="{{ route('admin.tip.store') }}">
+    <h2>New Tip</h2>
+    @include('admin.tip.form')
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Submit</button>
+</form>
 @endsection
+
+@section('javascript')
+<script src="{{ mix('/js/app.js') }}"></script>
+@endsection
+

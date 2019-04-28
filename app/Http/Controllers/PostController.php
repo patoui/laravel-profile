@@ -16,7 +16,7 @@ class PostController extends Controller
 
     public function show($slug)
     {
-        $post = Post::with('comments')->slug($slug)->firstOrFail();
+        $post = Post::with('comments.owner')->slug($slug)->firstOrFail();
 
         $post->analytics()->create([
             'headers' => json_encode(request()->headers->all())

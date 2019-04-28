@@ -9,69 +9,30 @@ class Post extends Model
 {
     use RecordsActivity;
 
-    /**
-     * List of guarded model properties.
-     *
-     * @var array
-     */
     protected $guarded = [];
 
-    /**
-     * Properties that can be filled.
-     *
-     * @var array
-     */
     protected $fillable = ['title', 'body', 'slug'];
 
-    /**
-     * Mutated properties to append.
-     *
-     * @var array
-     */
     protected $appends = ['favourites_count'];
 
-    /**
-     * List of model properties to be casted.
-     *
-     * @var array
-     */
     protected $casts = ['published_at' => 'datetime'];
 
-    /**
-     * Post analytics relationship.
-     */
     public function analytics()
     {
         return $this->hasMany(PostAnalytics::class);
     }
 
-    /**
-     * Comments relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function comments()
     {
         return $this->hasMany(Comment::class)
             ->whereNull('comment_id');
     }
 
-    /**
-     * Create comment from array of data.
-     *
-     * @param  array $data array of data
-     * @return App\Comment
-     */
     public function createComment($data)
     {
         return $this->comments()->create($data);
     }
 
-    /**
-     * Favourites relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
     public function favourites()
     {
         return $this->morphMany(Favourite::class, 'favouritable');

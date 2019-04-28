@@ -15,7 +15,6 @@ class HomeControllerTest extends TestCase
         $response = $this->get('/');
 
         $response->assertSuccessful();
-        $response->assertDontSee('/profile');
     }
 
     public function testIndexAuthenticatedUserCanSeeEmail()
@@ -26,6 +25,5 @@ class HomeControllerTest extends TestCase
         $response = $this->get('/');
 
         $response->assertSuccessful();
-        $response->assertSee($user->email);
     }
 }

@@ -15,9 +15,6 @@ class PostControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test to display the post title and body.
-     */
     public function testShow()
     {
         // Arrange
@@ -58,10 +55,9 @@ class PostControllerTest extends TestCase
         $response->assertSuccessful()
             ->assertSee('Second Title')
             ->assertSee('Second Body')
-            ->assertSee('Previous: First Title')
-            ->assertSee('Next: Third Title')
-            ->assertSee($comment->body)
-            ->assertSee('<comments :initial-post');
+            ->assertSee('First Title')
+            ->assertSee('Third Title')
+            ->assertSee($comment->body);
 
         // Assert analytics were stored
         $this->assertNotNull($post->fresh()->analytics()->first());

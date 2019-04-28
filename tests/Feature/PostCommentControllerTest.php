@@ -14,15 +14,12 @@ class PostCommentControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Test storing a post comment
-     */
     public function testStore()
     {
         // Arrange
         factory(User::class)->states('me')->create();
         Mail::fake();
-        $this->be($user = factory(User::class)->create());
+        $this->actingAs($user = factory(User::class)->create());
 
         $post = factory(Post::class)->create([
             'title' => 'First Title',
@@ -37,8 +34,7 @@ class PostCommentControllerTest extends TestCase
         );
 
         // Assert
-        $response->assertStatus(302)
-            ->assertRedirect('post/' . $post->slug);
+        $response->assertRedirect('post/' . $post->slug);
 
         // Assert activity was recorded
         $comment = app(Comment::class)->where('post_id', $post->id)->first();
@@ -155,8 +151,7 @@ class PostCommentControllerTest extends TestCase
         ]);
 
         // Assert
-        $response->assertStatus(302)
-            ->assertRedirect('post/' . $post->slug);
+        $response->assertRedirect('post/' . $post->slug);
 
         $this->assertNotNull(
             Comment::where('post_id', $post->id)

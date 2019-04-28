@@ -17,6 +17,8 @@ trait CreatesApplication
 
         $app->make(Kernel::class)->bootstrap();
 
+        config()->set('honeypot.enabled', false);
+
         return $app;
     }
 }

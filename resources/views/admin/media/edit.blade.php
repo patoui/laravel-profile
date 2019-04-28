@@ -1,4 +1,4 @@
-@extends('layouts.app-footerless')
+@extends('layouts.app')
 
 @section('title', 'Edit Media')
 

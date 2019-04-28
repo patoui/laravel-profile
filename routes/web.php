@@ -52,11 +52,6 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 Route::get('auth/github', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/github/callback', 'Auth\LoginController@handleProviderCallback');
 
-// Profile
-Route::get('profile/{profile}', 'ProfileController@show')
-    ->name('profile.show')
-    ->middleware('can:profile.show,profile');
-
 Route::get('sms', 'SmsController@index')
     ->name('sms.index')
     ->middleware('can:sms.index');

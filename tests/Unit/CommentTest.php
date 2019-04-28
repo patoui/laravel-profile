@@ -33,28 +33,14 @@ class CommentTest extends TestCase
         $this->assertEquals($user->id, $owner->id);
     }
 
-    public function testGetShortTimestampAttribute()
+    public function testGetShortCreatedAtAttribute()
     {
-        $comment = factory(Comment::class)->make([
-            'created_at' => '2017-02-02 06:06:06'
-        ]);
+        $timestamp = Carbon::parse('April 4th, 2019 11:11 AM');
+        $comment = factory(Comment::class)->make(['created_at' => $timestamp]);
 
         $this->assertEquals(
-            'February 2nd 1:06 AM',
-            $comment->short_timestamp
-        );
-    }
-
-    public function testGetShortTimestampAttributeToday()
-    {
-        $timestamp = Carbon::now()->subSeconds(10);
-        $comment = factory(Comment::class)->make([
-            'created_at' => $timestamp
-        ]);
-
-        $this->assertEquals(
-            '10 seconds ago',
-            $comment->short_timestamp
+            'Apr 4, 2019',
+            $comment->short_created_at
         );
     }
 }

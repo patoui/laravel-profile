@@ -22,21 +22,21 @@
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2 {{ $errors->has('email') ? 'border-red-500' : '' }}" for="email"></label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" type="email" placeholder="Email">
             @if ($errors->has('email'))
             <p class="text-red-500 text-xs italic">{{ $errors->first('email') }}</p>
             @endif
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2 {{ $errors->has('phone') ? 'border-red-500' : '' }}" for="phone"></label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Phone">
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" name="phone" type="text" placeholder="Phone">
             @if ($errors->has('phone'))
             <p class="text-red-500 text-xs italic">{{ $errors->first('phone') }}</p>
             @endif
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2 {{ $errors->has('message') ? 'border-red-500' : '' }}" for="message"></label>
-            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" type="text" placeholder="Message"></textarea>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" name="message" type="text" placeholder="Message"></textarea>
             @if ($errors->has('message'))
             <p class="text-red-500 text-xs italic">{{ $errors->first('message') }}</p>
             @endif

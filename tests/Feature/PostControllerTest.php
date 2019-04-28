@@ -49,6 +49,7 @@ class PostControllerTest extends TestCase
             'user_id' => factory(User::class)->create()->id,
         ]);
         GitDown::shouldReceive('parseAndCache')->andReturn($post->body);
+        GitDown::shouldReceive('styles')->andReturn(null);
 
         // Act
         $response = $this->get('post/' . $post->slug);

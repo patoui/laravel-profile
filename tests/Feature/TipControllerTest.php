@@ -41,6 +41,7 @@ class TipControllerTest extends TestCase
             'published_at' => Carbon::yesterday(),
         ]);
         GitDown::shouldReceive('parseAndCache')->andReturn($tip->body);
+        GitDown::shouldReceive('styles')->andReturn(null);
 
         // Act
         $response = $this->get('/tip/eloquent-vs-collection-count');

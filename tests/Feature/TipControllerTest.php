@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Tip;
 use Carbon\Carbon;
+use GitDown\Facades\GitDown;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -39,6 +40,7 @@ class TipControllerTest extends TestCase
             'body' => 'Use $model->relationship()->count() instead of $model->relationship->count()',
             'published_at' => Carbon::yesterday(),
         ]);
+        GitDown::shouldReceive('parseAndCache')->andReturn($tip->body);
 
         // Act
         $response = $this->get('/tip/eloquent-vs-collection-count');

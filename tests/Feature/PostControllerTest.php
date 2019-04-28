@@ -7,6 +7,7 @@ use App\Favourite;
 use App\Post;
 use App\User;
 use Carbon\Carbon;
+use GitDown\Facades\GitDown;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -47,6 +48,7 @@ class PostControllerTest extends TestCase
             'favouritable_type' => get_class($comment),
             'user_id' => factory(User::class)->create()->id,
         ]);
+        GitDown::shouldReceive('parseAndCache')->andReturn($post->body);
 
         // Act
         $response = $this->get('post/' . $post->slug);

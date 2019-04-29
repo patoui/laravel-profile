@@ -24,7 +24,7 @@
 @foreach($posts as $post)
 <div class="flex mb-6 w-full">
     <div class="w-4/5">
-        <a href="{{ route('post.show', ['slug' => $post->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $post->title }}</a>
+        <a href="{{ route('post.show', ['slug' => $post->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $post->title . ' (' . $post->analytics_count . ')' }}</a>
         <p class="mt-2 mb-2 text-sm text-gray-700">{{ $post->short_body }}</p>
         <p class="text-sm text-gray-600">{{ $post->published_at ? 'Published on ' . $post->short_published_at : 'Not published' }}</p>
     </div>
@@ -48,7 +48,7 @@
 @foreach($tips as $tip)
 <div class="flex mb-6 w-full">
     <div class="w-4/5">
-        <a href="{{ route('tip.show', ['slug' => $tip->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $tip->title }}</a>
+        <a href="{{ route('tip.show', ['slug' => $tip->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $tip->title . ' (' . $tip->analytics_count . ')' }}</a>
         <p class="mt-2 mb-2 text-sm text-gray-700">{{ $tip->short_body }}</p>
         <p class="text-sm text-gray-600">{{ $tip->published_at ? 'Published on ' . $tip->short_published_at : 'Not published' }}</p>
         <div>

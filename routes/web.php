@@ -60,4 +60,3 @@ Route::post('sms', 'SmsController@store')
     ->middleware('can:sms.store');
 
 Route::feeds();
-

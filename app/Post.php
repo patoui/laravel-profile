@@ -3,9 +3,9 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
+use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model implements Feedable
 {

@@ -8,7 +8,6 @@ Serves as a portfolio of myself and a place where I can post articles about cont
 
 TODO:
 
-* Add RSS feed
 * Add log tracking and notifications when errors occur
 * Add SMS notifications when a comment is added
 * Add Email notifications when new article is published
@@ -16,6 +15,7 @@ TODO:
 
 DONE:
 
+* ~~Add RSS feed~~
 * ~~Update to TailwindCSS~~
 * ~~Upgrade to Laravel's latest version~~
 * ~~Add ability to @users in replies (include notifications)~~

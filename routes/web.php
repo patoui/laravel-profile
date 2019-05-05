@@ -58,3 +58,6 @@ Route::get('sms', 'SmsController@index')
 Route::post('sms', 'SmsController@store')
     ->name('sms.store')
     ->middleware('can:sms.store');
+
+Route::feeds();
+

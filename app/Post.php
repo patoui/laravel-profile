@@ -4,8 +4,10 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 
-class Post extends Model
+class Post extends Model implements Feedable
 {
     use RecordsActivity;
 
@@ -132,5 +134,21 @@ class Post extends Model
     public function getPathAttribute()
     {
         return route('post.show', ['slug' => $this->slug]);
+    }
+
+    public function toFeedItem()
+    {
+        return FeedItem::create()
+            ->id($this->id)
+            ->title($this->title)
+            ->summary($this->short_body)
+            ->updated($this->updated_at)
+            ->link(route('post.show', ['slug' => $this->slug]))
+            ->author('Patrique Ouimet');
+    }
+
+    public static function getFeedItems()
+    {
+        return self::all();
     }
 }

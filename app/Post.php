@@ -149,6 +149,6 @@ class Post extends Model implements Feedable
 
     public static function getFeedItems()
     {
-        return self::all();
+        return self::published()->latest()->get()->all();
     }
 }

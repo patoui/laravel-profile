@@ -3,7 +3,7 @@
 @section('title', 'Update: ' . $post->title)
 
 @section('content')
-<form id="post-form" class="w-full" method="post" action="{{ route('admin.post.store') }}">
+<form id="post-form" class="w-full" method="post" action="{{ route('admin.post.update', ['id' => $post->id]) }}">
     {{ method_field('PUT') }}
     <h2>Edit Article</h2>
     @include('admin.post.form')

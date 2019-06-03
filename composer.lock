@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b022688b71bf94db661170f8ae8a2cbf",
+    "content-hash": "92ee03cc2ebe96b729626d3a0c1590e3",
     "packages": [
         {
             "name": "calebporzio/gitdown",
@@ -6144,7 +6144,7 @@
         },
         {
             "name": "wnx/laravel-stats",
-            "version": "dev-master",
+            "version": "v1.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stefanzweifel/laravel-stats.git",
@@ -6208,9 +6208,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "wnx/laravel-stats": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

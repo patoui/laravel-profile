@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use App\User;
-use Illuminate\Http\RedirectResponse;
+use Socialite;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\View\View;
-use Socialite;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller

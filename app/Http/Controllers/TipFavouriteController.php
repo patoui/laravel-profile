@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Tip;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class TipFavouriteController extends Controller
 {

@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Post;
 use App\Tip;
+use App\Post;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;

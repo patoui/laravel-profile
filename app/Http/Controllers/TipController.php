@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Tip;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class TipController extends Controller
 {
@@ -14,7 +14,7 @@ class TipController extends Controller
             ->published()
             ->latest()
             ->when($request->input('tag'), function ($query) use ($request) {
-                return $query->whereIn('tips.id', function ($q) use($request) {
+                return $query->whereIn('tips.id', function ($q) use ($request) {
                     return $q->from('tag_tip')
                         ->select('tip_id')
                         ->where('tag_id', function ($inner) use ($request) {

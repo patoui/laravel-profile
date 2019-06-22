@@ -13,6 +13,7 @@ before_script:
 script:
   - php artisan key:generate
   - vendor/bin/phpunit
+  - php artisan code:analyse --level=max
 
 cache:
   directories:

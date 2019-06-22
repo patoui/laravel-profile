@@ -17,9 +17,9 @@ class TipController extends Controller
             ->with('tags', []);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        request()->validate([
+        $request->validate([
             'title' => 'required|string',
             'body' => 'required|string',
             'slug' => [
@@ -32,12 +32,12 @@ class TipController extends Controller
         ]);
 
         $tip = Tip::create([
-            'title' => request('title'),
-            'body' => request('body'),
-            'slug' => request('slug')
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
+            'slug' => $request->input('slug')
         ]);
 
-        $tip->addTags(request('tags', []));
+        $tip->addTags($request->input('tags', []));
 
         return redirect()->route('admin.dashboard');
     }
@@ -49,9 +49,9 @@ class TipController extends Controller
             ->with('tags', $tip->tags()->pluck('name'));
     }
 
-    public function update(Tip $tip)
+    public function update(Request $request, Tip $tip)
     {
-        request()->validate([
+        $request->validate([
             'title' => 'required|string',
             'body' => 'required|string',
             'slug' => [
@@ -69,7 +69,7 @@ class TipController extends Controller
             'slug' => request('slug')
         ]);
 
-        $tip->addTags(request('tags', []));
+        $tip->addTags($request->input('tags', []));
 
         return redirect()->route('admin.dashboard');
     }

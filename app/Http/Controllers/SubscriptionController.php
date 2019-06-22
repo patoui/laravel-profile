@@ -8,14 +8,13 @@ use Illuminate\Http\RedirectResponse;
 
 class SubscriptionController extends Controller
 {
-    public function store() : RedirectResponse
+    public function store(Request $request) : RedirectResponse
     {
-        $this->validate(
-            request(),
-            ['subscription_email' => 'required|email']
-        );
+        $this->validate($request, ['subscription_email' => 'required|email']);
 
-        Subscription::firstOrCreate(['email' => request('subscription_email')]);
+        Subscription::firstOrCreate([
+            'email' => $request->input('subscription_email')
+        ]);
 
         flash('Thank you for subscribing! Stay tuned, more to come!');
 

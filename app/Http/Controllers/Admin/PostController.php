@@ -15,10 +15,10 @@ class PostController extends Controller
         return view('admin.post.create')->with('post', new Post);
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $this->validate(
-            request(),
+            $request,
             [
                 'title' => 'required|string',
                 'body' => 'required|string',
@@ -31,9 +31,9 @@ class PostController extends Controller
         );
 
         Post::create([
-            'title' => request('title'),
-            'body' => request('body'),
-            'slug' => request('slug')
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
+            'slug' => $request->input('slug')
         ]);
 
         return redirect()->route('admin.dashboard');

@@ -4,23 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Tip;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class TipController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // TODO: clean this up
         $tip = Tip::with('tags')
             ->published()
             ->latest()
-            ->when(request('tag'), function ($query) {
-                return $query->whereIn('tips.id', function ($q) {
+            ->when($request->input('tag'), function ($query) use ($request) {
+                return $query->whereIn('tips.id', function ($q) use($request) {
                     return $q->from('tag_tip')
                         ->select('tip_id')
-                        ->where('tag_id', function ($inner) {
+                        ->where('tag_id', function ($inner) use ($request) {
                             return $inner->from('tags')
                                 ->select('tags.id')
-                                ->where('tags.name', request('tag'))
+                                ->where('tags.name', $request->input('tag'))
                                 ->pluck('tags.id');
                         });
                 });
@@ -30,20 +30,12 @@ class TipController extends Controller
         return view('tip.index')->with('tips', $tip);
     }
 
-    /**
-     * Display tip details.
-     *
-     * @param  string $slug
-     * @return \Illuminate\View\View
-     */
-    public function show($slug)
+    public function show(Request $request, string $slug): View
     {
-        // Find tip by the slug or 404
         $tip = Tip::slug($slug)->firstOrFail();
 
-        // Create analytics entry
         $tip->analytics()->create([
-            'headers' => json_encode(request()->headers->all())
+            'headers' => json_encode($request->headers->all())
         ]);
 
         return view('tip.show')

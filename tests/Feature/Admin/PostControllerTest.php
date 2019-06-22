@@ -90,14 +90,11 @@ class PostControllerTest extends TestCase
         ]);
 
         // Act
-        $response = $this->put(
-            'admin/post/' . $post->id,
-            [
-                'title' => 'Second Title',
-                'body' => 'Second Body',
-                'slug' => 'second-title',
-            ]
-        );
+        $response = $this->put("admin/post/{$post->id}", [
+            'title' => 'Second Title',
+            'body' => 'Second Body',
+            'slug' => 'second-title',
+        ]);
 
         // Assert
         $response->assertStatus(302);

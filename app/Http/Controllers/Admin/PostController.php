@@ -39,32 +39,27 @@ class PostController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function edit($id)
+    public function edit(Post $post)
     {
-        return view('admin.post.edit')->with('post', Post::findOrFail($id));
+        return view('admin.post.edit')->with('post', $post);
     }
 
-    public function update($id)
+    public function update(Request $request, Post $post)
     {
-        $post = Post::findOrFail($id);
-
-        $this->validate(
-            request(),
-            [
-                'title' => 'required|string',
-                'body' => 'required|string',
-                'slug' => [
-                    'required',
-                    new Slug,
-                    Rule::unique('posts', 'slug')->ignore($post->id)
-                ],
-            ]
-        );
+        $this->validate($request, [
+            'title' => 'required|string',
+            'body' => 'required|string',
+            'slug' => [
+                'required',
+                new Slug,
+                Rule::unique('posts', 'slug')->ignore($post->id)
+            ],
+        ]);
 
         $post->update([
-            'title' => request('title'),
-            'body' => request('body'),
-            'slug' => request('slug')
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
+            'slug' => $request->input('slug')
         ]);
 
         return redirect()->route('admin.dashboard');

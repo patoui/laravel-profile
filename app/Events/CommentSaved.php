@@ -10,11 +10,9 @@ class CommentSaved
 {
     use Dispatchable, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
+    /** @var Comment */
+    public $comment;
+
     public function __construct(Comment $comment)
     {
         $this->comment = $comment;

@@ -8,13 +8,7 @@ use App\Notifications\UserMentioned;
 
 class NotifyMentionedUsers
 {
-    /**
-     * Handle the event.
-     *
-     * @param  CommentSaved  $event
-     * @return void
-     */
-    public function handle(CommentSaved $event)
+    public function handle(CommentSaved $event) : void
     {
         User::whereIn('name', $event->comment->mentionedUsers())
             ->get()

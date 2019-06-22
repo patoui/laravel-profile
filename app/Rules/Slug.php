@@ -16,7 +16,7 @@ class Slug implements Rule
     public function passes($attribute, $value)
     {
         // Remove all non-alphanumeric excluding hyphens
-        $slug = preg_replace(
+        $slug = (string) preg_replace(
             '/[^a-zA-Z0-9\-]/',
             '',
             strtolower($value)

@@ -10,59 +10,32 @@ class TipPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can create tips.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function create(User $user)
+    /** Determine whether the user can create tips */
+    public function create(User $user) : bool
     {
         return $user->is_admin;
     }
 
-    /**
-     * Determine whether the user can edit tips.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function edit(User $user)
+    /** Determine whether the user can edit tips */
+    public function edit(User $user) : bool
     {
         return $user->is_admin;
     }
 
-    /**
-     * Determine whether the user can store tips.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function store(User $user)
+    /** Determine whether the user can store tips */
+    public function store(User $user) : bool
     {
         return $user->is_admin;
     }
 
-    /**
-     * Determine whether the user can update the tip.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Tip  $tip
-     * @return mixed
-     */
-    public function update(User $user)
+    /** Determine whether the user can update the tip */
+    public function update(User $user) : bool
     {
         return $user->is_admin;
     }
 
-    /**
-     * Determine whether the user can delete the tip.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Tip  $tip
-     * @return mixed
-     */
-    public function delete(User $user)
+    /** Determine whether the user can delete the tip */
+    public function delete(User $user) : bool
     {
         return $user->is_admin;
     }

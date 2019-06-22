@@ -14,12 +14,13 @@ class PostController extends Controller
         return view('post.index')->with('posts', $posts);
     }
 
-    public function show($slug)
+    public function show(Request $request, $slug)
     {
+        /** @var Post $post */
         $post = Post::with('comments.owner')->slug($slug)->firstOrFail();
 
         $post->analytics()->create([
-            'headers' => json_encode(request()->headers->all())
+            'headers' => json_encode($request->headers->all())
         ]);
 
         return view('post.show')

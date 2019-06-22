@@ -3,6 +3,9 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Illuminate\Database\Eloquent\Model;
@@ -13,21 +16,18 @@ class Post extends Model implements Feedable
 
     protected $guarded = [];
 
-    protected $fillable = ['title', 'body', 'slug'];
-
     protected $appends = ['favourites_count'];
 
     protected $casts = ['published_at' => 'datetime'];
 
-    public function analytics()
+    public function analytics(): HasMany
     {
         return $this->hasMany(PostAnalytics::class);
     }
 
-    public function comments()
+    public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class)
-            ->whereNull('comment_id');
+        return $this->hasMany(Comment::class)->whereNull('comment_id');
     }
 
     public function createComment($data)
@@ -35,39 +35,39 @@ class Post extends Model implements Feedable
         return $this->comments()->create($data);
     }
 
-    public function favourites()
+    public function favourites(): MorphMany
     {
         return $this->morphMany(Favourite::class, 'favouritable');
     }
 
-    public function getFavouritesCountAttribute()
+    public function getFavouritesCountAttribute(): int
     {
         return $this->favourites()->count();
     }
 
-    public function scopeSlug($query, $slug)
+    public function scopeSlug(Builder $builder, string $slug)
     {
-        return $query->where('slug', $slug);
+        return $builder->where('slug', $slug);
     }
 
-    public function getShortTitleAttribute()
+    public function getShortTitleAttribute(): string
     {
         return substr($this->title, 0, 50);
     }
 
-    public function getShortBodyAttribute()
+    public function getShortBodyAttribute(): string
     {
         return substr( // get first 100 characters
             trim( // remove trailing whitespace
-                preg_replace(
+                (string) preg_replace(
                     '/[^\da-z ]/i', // remove all non alphanumeric
                     '',
-                    preg_replace("/(\r?\n){2,}/", ' ', strip_tags($this->body)) // convert newline characters to a space
+                    (string) preg_replace("/(\r?\n){2,}/", ' ', strip_tags($this->body)) // convert newline characters to a space
                 )
             ), 0, 100);
     }
 
-    public function getShortPublishedAtAttribute()
+    public function getShortPublishedAtAttribute(): ?string
     {
         return $this->published_at
             ? $this->published_at
@@ -76,12 +76,7 @@ class Post extends Model implements Feedable
             : null;
     }
 
-    /**
-     * Toggle published status.
-     *
-     * @return void
-     */
-    public function togglePublish()
+    public function togglePublish(): void
     {
         $this->published_at = $this->published_at
             ? $this->published_at = null
@@ -90,25 +85,15 @@ class Post extends Model implements Feedable
         $this->save();
     }
 
-    /**
-     * Query scope to get published posts.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopePublished($query)
+    public function scopePublished(Builder $builder)
     {
-        return $query->whereNotNull('published_at');
+        return $builder->whereNotNull('published_at');
     }
 
-    /**
-     * Get the previous published post.
-     *
-     * @return null|App\Post
-     */
+    /** @return mixed */
     public function previousPublished()
     {
-        return $this->newQuery()
+        return (new self)
             ->where('id', '<>', $this->id)
             ->where('published_at', '<', $this->published_at)
             ->published()
@@ -116,27 +101,23 @@ class Post extends Model implements Feedable
             ->first();
     }
 
-    /**
-     * Get the next published post.
-     *
-     * @return null|App\Post
-     */
+    /** @return mixed */
     public function nextPublished()
     {
-        return $this->newQuery()
+        return (new self)
             ->where('id', '<>', $this->id)
             ->where('published_at', '>', $this->published_at)
-            ->published()
+            ->whereNotNull('published_at')
             ->latest()
             ->first();
     }
 
-    public function getPathAttribute()
+    public function getPathAttribute(): string
     {
         return route('post.show', ['slug' => $this->slug]);
     }
 
-    public function toFeedItem()
+    public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
             ->id($this->id)
@@ -147,7 +128,7 @@ class Post extends Model implements Feedable
             ->author('Patrique Ouimet');
     }
 
-    public static function getFeedItems()
+    public static function getFeedItems(): array
     {
         return self::published()->latest()->get()->all();
     }

@@ -8,11 +8,10 @@ use Spatie\MediaLibrary\Models\Media;
 
 class MediaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $files = auth()->user()->getMedia();
-
-        return view('admin.media.index')->with('files', $files);
+        return view('admin.media.index')
+            ->with('files', $request->user()->getMedia());
     }
 
     public function create()
@@ -29,7 +28,7 @@ class MediaController extends Controller
     {
         $this->validate($request, ['media' => 'required|file']);
 
-        auth()->user()
+        $request->user()
             ->addMedia($request->file('media'))
             ->preservingOriginal()
             ->toMediaCollection();

@@ -4,28 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Comment;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class PostCommentController extends Controller
 {
-    public function store($slug)
+    /**
+     * @return JsonResponse|RedirectResponse
+     * @throws ValidationException
+     */
+    public function store(Request $request, string $slug)
     {
+        /** @var Post $post */
         $post = Post::slug($slug)->firstOrFail();
 
         $this->validate(
-            request(),
+            $request,
             ['body' => 'required|string'],
             ['required' => 'A comment usually has something in it xD']
         );
 
-        $comment = $post->createComment([
-            'body' => request('body'),
-            'comment_id' => request('comment_id'),
-            'user_id' => auth()->id(),
+        $post->createComment([
+            'body' => $request->input('body'),
+            'comment_id' => $request->input('comment_id'),
+            'user_id' => $request->user()->id,
         ]);
 
-        return request()->expectsJson() ?
-            ['success' => 'Successfully saved comment'] :
+        return $request->expectsJson() ?
+            response()->json(['success' => 'Successfully saved comment']) :
             redirect()->route('post.show', ['slug' => $post->slug]);
     }
 }

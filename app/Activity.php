@@ -15,7 +15,10 @@ class Activity extends Model
 
     public function getHumanTypeAttribute()
     {
-        return ucwords(str_replace('_', ' ', $this->type));
+        $type = str_replace('_', ' ', $this->type);
+        $type = is_string($type) ? $type : '';
+
+        return ucwords($type);
     }
 
     public function getShortContentAttribute()

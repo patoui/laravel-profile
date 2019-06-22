@@ -10,39 +10,22 @@ class UserMentioned extends Notification
 {
     use Queueable;
 
-    /**
-     * @var App\Comment
-     */
+    /** @var Comment */
     protected $comment;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
     public function __construct(Comment $comment)
     {
         $this->comment = $comment;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
+    /** Get the notification's delivery channels */
+    public function via() : array
     {
         return ['database'];
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
+    /** Get the array representation of the notification */
+    public function toArray() : array
     {
         return [
             'message' => $this->comment->owner->name.' mentioned you in '.$this->comment->post->title,

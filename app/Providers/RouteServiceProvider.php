@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Post;
+use App\Tip;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -70,7 +73,13 @@ class RouteServiceProvider extends ServiceProvider
             'middleware' => 'admin',
             'namespace' => $this->namespace.'\Admin',
             'prefix' => 'admin',
-        ], function ($router) {
+        ], function (Router $router) {
+            $router->bind('post', function (int $id) {
+                return Post::find($id) ?? abort(404);
+            });
+            $router->bind('tip', function (int $id) {
+                return Tip::find($id) ?? abort(404);
+            });
             require base_path('routes/admin.php');
         });
     }

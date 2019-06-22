@@ -42,19 +42,15 @@ class TipController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function edit($id)
+    public function edit(Tip $tip)
     {
-        $tip = Tip::findOrFail($id);
-
         return view('admin.tip.edit')
             ->with('tip', $tip)
             ->with('tags', $tip->tags()->pluck('name'));
     }
 
-    public function update($id)
+    public function update(Tip $tip)
     {
-        $tip = Tip::findOrFail($id);
-
         request()->validate([
             'title' => 'required|string',
             'body' => 'required|string',

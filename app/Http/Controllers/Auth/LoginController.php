@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use App\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -23,56 +27,37 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    /** @var Request */
+    protected $request;
+
+    public function __construct(Request $request)
     {
+        $this->request = $request;
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    /**
-     * Show the application's login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showLoginForm()
+    public function showLoginForm():  View
     {
         return view('auth.login')->with('intended', request('intended'));
     }
 
-    /**
-     * @return string route to where redirect a user
-     */
-    public function redirectTo()
+    public function redirectTo(): string
     {
-        if (Auth::user()->is_admin) {
+        if ($this->request->user()->is_admin) {
             return redirect()->route('admin.dashboard')->getTargetUrl();
         }
 
-        return request()->filled('intended') ?
-            request('intended') :
+        return $this->request->filled('intended') ?
+            $this->request->input('intended') :
             redirect()->route('home')->getTargetUrl();
     }
 
-    /**
-     * Redirect the user to the GitHub authentication page.
-     *
-     * @return Response
-     */
-    public function redirectToProvider()
+    public function redirectToProvider(): Response
     {
         return Socialite::driver('github')->redirect();
     }
 
-    /**
-     * Obtain the user information from provider.
-     *
-     * @return Response
-     */
-    public function handleProviderCallback()
+    public function handleProviderCallback(): RedirectResponse
     {
         $user = Socialite::driver('github')->user();
 
@@ -86,14 +71,7 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
-    /**
-     * If a user has registered before using social auth, return the user
-     * else, create a new user object.
-     * @param  $user Socialite user object
-     * @param $provider Social auth provider
-     * @return  User
-     */
-    public function findOrCreateUser($user, $provider)
+    public function findOrCreateUser(User $user, string $provider): User
     {
         $authUser = User::where(function ($query) use ($user) {
             $query->where('provider_id', $user->id)

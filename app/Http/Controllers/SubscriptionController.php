@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Subscription;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
-    /**
-     * Store a subscription.
-     *
-     * @return Illuminate\Http\RedirectResponse
-     */
-    public function store()
+    public function store() : RedirectResponse
     {
         $this->validate(
             request(),

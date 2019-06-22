@@ -14,10 +14,10 @@ class AddTagsToTipsTest extends TestCase
     public function testCanAddTagsToATip()
     {
         // Arrange
-        $tip = factory(Tip::class)->states(['published'])->create();
+        $tip = factory(Tip::class)->states('published')->create();
 
         // Act
-        $tags = $tip->addTags(['php', 'laravel', 'collection', 'eloquent', 'learning']);
+        $tip->addTags(['php', 'laravel', 'collection', 'eloquent', 'learning']);
 
         // Assert
         $this->assertEquals(5, $tip->fresh()->tags()->count());

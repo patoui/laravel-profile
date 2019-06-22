@@ -2,12 +2,11 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+
 trait RecordsActivity
 {
-    /**
-     * Boot the trait.
-     */
-    protected static function bootRecordsActivity()
+    protected static function bootRecordsActivity(): void
     {
         foreach (static::getActivitiesToRecord() as $event) {
             static::$event(function ($model) use ($event) {
@@ -20,50 +19,29 @@ trait RecordsActivity
         });
     }
 
-    /**
-     * Fetch all model events that require activity recording.
-     *
-     * @return array
-     */
-    protected static function getActivitiesToRecord()
+    protected static function getActivitiesToRecord(): array
     {
         return ['created'];
     }
 
-    /**
-     * Record new activity for the model.
-     *
-     * @param string $event
-     */
-    protected function recordActivity($event)
+    protected function recordActivity(string $event): void
     {
-        if (auth()->guest()) {
+        if (! request()->user()) {
             return;
         }
 
         $this->activity()->create([
-            'user_id' => auth()->id(),
+            'user_id' => request()->user()->id,
             'type' => $this->getActivityType($event)
         ]);
     }
 
-    /**
-     * Fetch the activity relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function activity()
+    public function activity(): MorphMany
     {
         return $this->morphMany(Activity::class, 'subject');
     }
 
-    /**
-     * Determine the activity type.
-     *
-     * @param  string $event
-     * @return string
-     */
-    protected function getActivityType($event)
+    protected function getActivityType(string $event): string
     {
         $type = strtolower((new \ReflectionClass($this))->getShortName());
 

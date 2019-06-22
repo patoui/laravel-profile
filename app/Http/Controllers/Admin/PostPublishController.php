@@ -7,15 +7,8 @@ use App\Http\Controllers\Controller;
 
 class PostPublishController extends Controller
 {
-    /**
-     * Publish a post.
-     * @param  int $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
-
         $post->togglePublish();
 
         return redirect()->route('admin.dashboard');

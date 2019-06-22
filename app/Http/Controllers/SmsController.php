@@ -8,16 +8,14 @@ use Illuminate\Http\Request;
 
 class SmsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return view('sms.index');
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'message' => 'required|string|max:140'
-        ]);
+        $this->validate($request, ['message' => 'required|string|max:140']);
 
         $client = new Client(config('twilio.account'), config('twilio.token'));
 

@@ -10,59 +10,32 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can create posts.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function create(User $user)
+    /** Determine whether the user can create posts */
+    public function create(User $user) : bool
     {
         return $user->is_admin;
     }
 
-    /**
-     * Determine whether the user can edit posts.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function edit(User $user)
+    /** Determine whether the user can edit posts. */
+    public function edit(User $user) : bool
     {
         return $user->is_admin;
     }
 
-    /**
-     * Determine whether the user can store posts.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function store(User $user)
+    /** Determine whether the user can store posts */
+    public function store(User $user) : bool
     {
         return $user->is_admin;
     }
 
-    /**
-     * Determine whether the user can update the post.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Post  $post
-     * @return mixed
-     */
-    public function update(User $user)
+    /** Determine whether the user can update the post */
+    public function update(User $user) : bool
     {
         return $user->is_admin;
     }
 
-    /**
-     * Determine whether the user can delete the post.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Post  $post
-     * @return mixed
-     */
-    public function delete(User $user)
+    /** Determine whether the user can delete the post */
+    public function delete(User $user) : bool
     {
         return $user->is_admin;
     }

@@ -3,23 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Http\Request;
 
 class PostFavouriteController extends Controller
 {
-    /**
-     * Favourite a post.
-     *
-     * @param  string $slug
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store($slug)
+    public function store(Request $request, string $slug)
     {
-        // Find post by slug or throw exception
         $post = Post::slug($slug)->firstOrFail();
 
-        $favourite = auth()->user()->toggleFavourite($post);
+        $request->user()->toggleFavourite($post);
 
-        // Redirect back to the post
         return redirect()->route('post.show', ['slug' => $slug]);
     }
 }

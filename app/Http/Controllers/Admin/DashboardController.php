@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Tip;
 use App\Post;
-use App\Http\Controllers\Controller;
 use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {

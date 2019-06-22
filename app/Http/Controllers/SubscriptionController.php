@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Subscription;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class SubscriptionController extends Controller
 {

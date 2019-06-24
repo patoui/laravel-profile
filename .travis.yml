@@ -1,20 +1,19 @@
 language: php
-
 php:
   - 7.2
   - 7.3
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 before_script:
-  - printf "\n" | pecl install imagick
+  - yes | pecl install imagick
   - cp .env.travis .env
   - composer install --no-interaction
+  - composer outdated --no-interaction
   - php artisan key:generate
 
 script:
-  - php artisan key:generate
   - vendor/bin/phpunit
   - php artisan code:analyse --level=max
-
-cache:
-  directories:
-    - vendor

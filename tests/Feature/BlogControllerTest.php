@@ -21,7 +21,7 @@ class BlogControllerTest extends TestCase
 
         // Assert
         $response->assertSuccessful();
-        $response->assertSee($post->title);
-        $response->assertDontSee($unpublished->title);
+        $response->assertSee(e($post->title));
+        $response->assertDontSee(e($unpublished->title));
     }
 }

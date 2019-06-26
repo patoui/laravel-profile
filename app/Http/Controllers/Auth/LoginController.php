@@ -1,16 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
-use Auth;
+use App\Http\Controllers\Controller;
 use App\User;
-use Socialite;
-use Illuminate\View\View;
+use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\View\View;
+use Socialite;
+use function redirect;
+use function view;
 
 class LoginController extends Controller
 {
@@ -24,7 +28,6 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
-
     use AuthenticatesUsers;
 
     /** @var Request */
@@ -36,12 +39,12 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function showLoginForm():  View
+    public function showLoginForm() : View
     {
-        return view('auth.login')->with('intended', request('intended'));
+        return view('auth.login')->with('intended', $this->request->input('intended'));
     }
 
-    public function redirectTo(): string
+    public function redirectTo() : string
     {
         if ($this->request->user()->is_admin) {
             return redirect()->route('admin.dashboard')->getTargetUrl();
@@ -52,28 +55,28 @@ class LoginController extends Controller
             redirect()->route('home')->getTargetUrl();
     }
 
-    public function redirectToProvider(): Response
+    public function redirectToProvider() : Response
     {
         return Socialite::driver('github')->redirect();
     }
 
-    public function handleProviderCallback(): RedirectResponse
+    public function handleProviderCallback() : RedirectResponse
     {
         $user = Socialite::driver('github')->user();
 
         $authUser = $this->findOrCreateUser($user, 'github');
         Auth::login($authUser, true);
 
-        if ($authUser->email == 'patrique.ouimet@gmail.com') {
+        if ($authUser->email === 'patrique.ouimet@gmail.com') {
             return redirect()->route('admin.dashboard');
         }
 
         return redirect()->route('home');
     }
 
-    public function findOrCreateUser(User $user, string $provider): User
+    public function findOrCreateUser(User $user, string $provider) : User
     {
-        $authUser = User::where(function ($query) use ($user) {
+        $authUser = User::where(static function ($query) use ($user) : void {
             $query->where('provider_id', $user->id)
                 ->orWhere('email', $user->email);
         })->first();
@@ -90,7 +93,7 @@ class LoginController extends Controller
             'name'     => $user->name,
             'email'    => $user->email,
             'provider' => $provider,
-            'provider_id' => $user->id
+            'provider_id' => $user->id,
         ]);
     }
 }

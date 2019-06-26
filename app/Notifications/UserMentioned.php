@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use App\Comment;
@@ -18,18 +20,18 @@ class UserMentioned extends Notification
         $this->comment = $comment;
     }
 
-    /** Get the notification's delivery channels */
+    /** @return array<string> */
     public function via() : array
     {
         return ['database'];
     }
 
-    /** Get the array representation of the notification */
+    /** @return array<string> */
     public function toArray() : array
     {
         return [
-            'message' => $this->comment->owner->name.' mentioned you in '.$this->comment->post->title,
-            'link' => $this->comment->path
+            'message' => $this->comment->owner->name . ' mentioned you in ' . $this->comment->post->title,
+            'link' => $this->comment->path,
         ];
     }
 }

@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
-use App\Tip;
-use App\Post;
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Post;
+use App\Tip;
+use Illuminate\View\View;
+use function view;
 
 class DashboardController extends Controller
 {
-    public function index(): View
+    public function index() : View
     {
         return view('admin.home')
             ->with('posts', Post::withCount('analytics')->get())

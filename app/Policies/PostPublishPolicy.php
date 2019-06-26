@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\User;
@@ -12,7 +14,6 @@ class PostPublishPolicy
     /**
      * Determine whether the user can publish posts.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function publish(User $user)

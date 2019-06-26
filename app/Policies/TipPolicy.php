@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
-use App\Tip;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 

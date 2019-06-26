@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
-use App\Tip;
 use App\Post;
+use App\Tip;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use function abort;
+use function base_path;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -20,21 +24,9 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        parent::boot();
-    }
-
-    /**
      * Define the routes for the application.
-     *
-     * @return void
      */
-    public function map()
+    public function map() : void
     {
         $this->mapWebRoutes();
 
@@ -47,15 +39,13 @@ class RouteServiceProvider extends ServiceProvider
      * Define the "web" routes for the application.
      *
      * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapWebRoutes() : void
     {
         Route::group([
             'middleware' => 'web',
             'namespace' => $this->namespace,
-        ], function ($router) {
+        ], static function ($router) : void {
             require base_path('routes/web.php');
         });
     }
@@ -64,20 +54,18 @@ class RouteServiceProvider extends ServiceProvider
      * Define the "admin" routes for the application.
      *
      * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
      */
-    protected function mapAdminRoutes()
+    protected function mapAdminRoutes() : void
     {
         Route::group([
             'middleware' => 'admin',
-            'namespace' => $this->namespace.'\Admin',
+            'namespace' => $this->namespace . '\Admin',
             'prefix' => 'admin',
-        ], function (Router $router) {
-            $router->bind('post', function (int $id) {
+        ], static function (Router $router) : void {
+            $router->bind('post', static function (int $id) {
                 return Post::find($id) ?? abort(404);
             });
-            $router->bind('tip', function (int $id) {
+            $router->bind('tip', static function (int $id) {
                 return Tip::find($id) ?? abort(404);
             });
             require base_path('routes/admin.php');
@@ -88,16 +76,14 @@ class RouteServiceProvider extends ServiceProvider
      * Define the "api" routes for the application.
      *
      * These routes are typically stateless.
-     *
-     * @return void
      */
-    protected function mapApiRoutes()
+    protected function mapApiRoutes() : void
     {
         Route::group([
             'middleware' => 'api',
             'namespace' => $this->namespace,
             'prefix' => 'api',
-        ], function ($router) {
+        ], static function ($router) : void {
             require base_path('routes/api.php');
         });
     }

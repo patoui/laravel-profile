@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\User;
@@ -9,7 +11,7 @@ class ProfilePolicy
 {
     use HandlesAuthorization;
 
-    public function show(User $auth, User $user)
+    public function show(User $auth, User $user) : bool
     {
         return $user->id === $auth->id;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -8,23 +10,26 @@ use Illuminate\Queue\SerializesModels;
 
 class ContactMe extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
+    /** @var string */
     public $name;
+
+    /** @var string */
     public $email;
+
+    /** @var string */
     public $phone;
+
+    /** @var string */
     public $comment;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct($name, $email, $phone, $comment)
+    public function __construct(string $name, string $email, string $phone, string $comment)
     {
-        $this->name = $name;
-        $this->email = $email;
-        $this->phone = $phone;
+        $this->name    = $name;
+        $this->email   = $email;
+        $this->phone   = $phone;
         $this->comment = $comment;
     }
 
@@ -33,10 +38,10 @@ class ContactMe extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build() : self
     {
         $address = 'patrique.ouimet@gmail.com';
-        $name = 'no-reply';
+        $name    = 'no-reply';
         $subject = 'Contact Request';
 
         return $this->view('emails.contact-me')

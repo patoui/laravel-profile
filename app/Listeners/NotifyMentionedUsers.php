@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Listeners;
 
-use App\User;
 use App\Events\CommentSaved;
 use App\Notifications\UserMentioned;
+use App\User;
 
 class NotifyMentionedUsers
 {
@@ -12,7 +14,7 @@ class NotifyMentionedUsers
     {
         User::whereIn('name', $event->comment->mentionedUsers())
             ->get()
-            ->each(function ($user) use ($event) {
+            ->each(static function ($user) use ($event) : void {
                 $user->notify(new UserMentioned($event->comment));
             });
     }

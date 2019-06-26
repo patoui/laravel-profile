@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Tip;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use function redirect;
 
 class TipFavouriteController extends Controller
 {
-    public function store(Request $request, string $slug): RedirectResponse
+    public function store(Request $request, string $slug) : RedirectResponse
     {
         $tip = Tip::slug($slug)->firstOrFail();
 

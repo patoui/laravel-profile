@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\User;
@@ -12,7 +14,6 @@ class SmsPolicy
     /**
      * Determine whether the user can view sms index.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function index(User $user)
@@ -23,7 +24,6 @@ class SmsPolicy
     /**
      * Determine whether the user can store posts.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function store(User $user)

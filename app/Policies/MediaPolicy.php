@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Policies;
 
 use App\User;
@@ -12,7 +14,6 @@ class MediaPolicy
     /**
      * Determine whether the user can view the media library.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function index(User $user)
@@ -23,7 +24,6 @@ class MediaPolicy
     /**
      * Determine whether the user can view the add media page.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -34,7 +34,6 @@ class MediaPolicy
     /**
      * Determine whether the user can view the edit media page.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function edit(User $user)
@@ -45,7 +44,6 @@ class MediaPolicy
     /**
      * Determine whether the user can add media to the media library.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function store(User $user)
@@ -56,7 +54,6 @@ class MediaPolicy
     /**
      * Determine whether the user can update media.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function update(User $user)
@@ -67,7 +64,6 @@ class MediaPolicy
     /**
      * Determine whether the user can delete media to from media library.
      *
-     * @param  \App\User  $user
      * @return mixed
      */
     public function delete(User $user)

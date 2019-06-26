@@ -1,15 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMe;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Mail;
 use Validator;
-use App\Mail\ContactMe;
-use Illuminate\Http\Request;
+use function flash;
+use function redirect;
 
 class ContactController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',

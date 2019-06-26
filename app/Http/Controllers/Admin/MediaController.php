@@ -1,30 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Spatie\MediaLibrary\Models\Media;
+use function redirect;
+use function view;
 
 class MediaController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request) : View
     {
         return view('admin.media.index')
             ->with('files', $request->user()->getMedia());
     }
 
-    public function create()
+    public function create() : View
     {
         return view('admin.media.create');
     }
 
-    public function edit(Media $media)
+    public function edit(Media $media) : View
     {
         return view('admin.media.edit')->with('media', $media);
     }
 
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
         $this->validate($request, ['media' => 'required|file']);
 
@@ -36,7 +42,7 @@ class MediaController extends Controller
         return redirect()->route('admin.media.index');
     }
 
-    public function update(Request $request, Media $media)
+    public function update(Request $request, Media $media) : RedirectResponse
     {
         $this->validate($request, ['name' => 'required|string']);
 
@@ -45,7 +51,7 @@ class MediaController extends Controller
         return redirect()->route('admin.media.index');
     }
 
-    public function delete(Media $media)
+    public function delete(Media $media) : RedirectResponse
     {
         $media->delete();
 

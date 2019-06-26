@@ -1,19 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Str;
+use function data_get;
+use function is_string;
+use function str_replace;
+use function ucwords;
 
 class Activity extends Model
 {
+    /** @var array<string> */
     protected $guarded = [];
 
-    public function subject()
+    public function subject() : MorphTo
     {
         return $this->morphTo();
     }
 
-    public function getHumanTypeAttribute()
+    public function getHumanTypeAttribute() : string
     {
         $type = str_replace('_', ' ', $this->type);
         $type = is_string($type) ? $type : '';
@@ -21,12 +30,12 @@ class Activity extends Model
         return ucwords($type);
     }
 
-    public function getShortContentAttribute()
+    public function getShortContentAttribute() : string
     {
-        return str_limit(data_get($this, 'subject.body', ''), 50);
+        return Str::limit(data_get($this, 'subject.body', ''), 50);
     }
 
-    public function getShortCreatedAtAttribute()
+    public function getShortCreatedAtAttribute() : ?string
     {
         return $this->created_at
             ? $this->created_at
@@ -35,7 +44,7 @@ class Activity extends Model
             : null;
     }
 
-    public function getSubjectUrlAttribute()
+    public function getSubjectUrlAttribute() : string
     {
         return $this->subject->path;
     }

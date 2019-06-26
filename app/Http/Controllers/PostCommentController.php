@@ -1,17 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Post;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use function redirect;
+use function response;
 
 class PostCommentController extends Controller
 {
     /**
      * @return JsonResponse|RedirectResponse
+     *
      * @throws ValidationException
      */
     public function store(Request $request, string $slug)

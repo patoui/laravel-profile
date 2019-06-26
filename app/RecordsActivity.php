@@ -1,30 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use ReflectionClass;
+use function request;
+use function sprintf;
+use function strtolower;
 
 trait RecordsActivity
 {
-    protected static function bootRecordsActivity(): void
+    protected static function bootRecordsActivity() : void
     {
         foreach (static::getActivitiesToRecord() as $event) {
-            static::$event(function ($model) use ($event) {
+            static::$event(static function ($model) use ($event) : void {
                 $model->recordActivity($event);
             });
         }
 
-        static::deleting(function ($model) {
+        static::deleting(static function ($model) : void {
             $model->activity()->delete();
         });
     }
 
-    protected static function getActivitiesToRecord(): array
+    /** @return array<string> */
+    protected static function getActivitiesToRecord() : array
     {
         return ['created'];
     }
 
-    protected function recordActivity(string $event): void
+    protected function recordActivity(string $event) : void
     {
         if (! request()->user()) {
             return;
@@ -32,19 +39,19 @@ trait RecordsActivity
 
         $this->activity()->create([
             'user_id' => request()->user()->id,
-            'type' => $this->getActivityType($event)
+            'type' => $this->getActivityType($event),
         ]);
     }
 
-    public function activity(): MorphMany
+    public function activity() : MorphMany
     {
         return $this->morphMany(Activity::class, 'subject');
     }
 
-    protected function getActivityType(string $event): string
+    protected function getActivityType(string $event) : string
     {
-        $type = strtolower((new \ReflectionClass($this))->getShortName());
+        $type = strtolower((new ReflectionClass($this))->getShortName());
 
-        return "{$event}_{$type}";
+        return sprintf('%s_%s', $event, $type);
     }
 }

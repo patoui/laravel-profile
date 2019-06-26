@@ -1,57 +1,58 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
+use Exception;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use function get_class;
+use function in_array;
+use function is_object;
 
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use Notifiable, HasMediaTrait;
+    use Notifiable;
+    use HasMediaTrait;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    /** @var array<string> */
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id'
+        'name',
+        'email',
+        'password',
+        'provider',
+        'provider_id',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    /** @var array<string> */
     protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * The attributes that should be appended to arrays.
-     *
-     * @var array
-     */
+    /** @var array<string> */
     protected $appends = ['is_admin'];
 
-    public function favourites()
+    public function favourites() : HasMany
     {
         return $this->hasMany(Favourite::class);
     }
 
-    public function toggleFavourite($model)
+    public function toggleFavourite(Model $model) : void
     {
         // Verify argument is an object
         if (! is_object($model)) {
-            throw new \Exception('Model must be passed');
+            throw new Exception('Model must be passed');
         }
 
         // Get model class name
         $class = get_class($model);
 
         if (! in_array($class, ['App\Comment', 'App\Post', 'App\Tip'])) {
-            throw new \Exception(
+            throw new Exception(
                 "Model class must be 'App\Comment', 'App\Post' or 'App\Tip'"
             );
         }
@@ -62,16 +63,18 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
             ->first();
 
         if ($favourite) {
-            return $favourite->delete();
-        } else {
-            return $this->favourites()->create([
-                'favouritable_id' => $model->id,
-                'favouritable_type' => $class,
-            ]);
+            $favourite->delete();
+
+            return;
         }
+
+        $this->favourites()->create([
+            'favouritable_id' => $model->id,
+            'favouritable_type' => $class,
+        ]);
     }
 
-    public function getIsAdminAttribute()
+    public function getIsAdminAttribute() : bool
     {
         return (bool) in_array($this->email, [
             'patrique.ouimet@gmail.com',
@@ -79,12 +82,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         ]);
     }
 
-    public function activities()
+    public function activities() : HasMany
     {
         return $this->hasMany(Activity::class);
     }
 
-    public function getRouteKeyName()
+    public function getRouteKeyName() : string
     {
         return 'email';
     }

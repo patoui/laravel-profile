@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Post;
+use function view;
 use App\Rules\Slug;
-use Illuminate\Http\RedirectResponse;
+use function redirect;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\View\View;
-use function redirect;
-use function view;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {

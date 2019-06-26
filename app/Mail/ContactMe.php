@@ -27,9 +27,9 @@ class ContactMe extends Mailable
 
     public function __construct(string $name, string $email, string $phone, string $comment)
     {
-        $this->name    = $name;
-        $this->email   = $email;
-        $this->phone   = $phone;
+        $this->name = $name;
+        $this->email = $email;
+        $this->phone = $phone;
         $this->comment = $comment;
     }
 
@@ -41,7 +41,7 @@ class ContactMe extends Mailable
     public function build() : self
     {
         $address = 'patrique.ouimet@gmail.com';
-        $name    = 'no-reply';
+        $name = 'no-reply';
         $subject = 'Contact Request';
 
         return $this->view('emails.contact-me')

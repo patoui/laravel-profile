@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use function preg_replace;
+use function trim;
 use function route;
+use function substr;
 use function strip_tags;
 use function strtolower;
-use function substr;
-use function trim;
+use function preg_replace;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tip extends Model
 {
@@ -98,7 +98,7 @@ class Tip extends Model
 
     public function togglePublish() : void
     {
-        $this->published_at       = $this->published_at
+        $this->published_at = $this->published_at
             ? $this->published_at = null
             : Carbon::now();
 

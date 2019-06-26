@@ -30,7 +30,7 @@ class UserMentioned extends Notification
     public function toArray() : array
     {
         return [
-            'message' => $this->comment->owner->name . ' mentioned you in ' . $this->comment->post->title,
+            'message' => $this->comment->owner->name.' mentioned you in '.$this->comment->post->title,
             'link' => $this->comment->path,
         ];
     }

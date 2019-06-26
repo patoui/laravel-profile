@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Mail\ContactMe;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Mail;
 use Validator;
 use function flash;
 use function redirect;
+use App\Mail\ContactMe;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class ContactController extends Controller
 {

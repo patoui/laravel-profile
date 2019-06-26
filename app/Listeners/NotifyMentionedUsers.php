@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
+use App\User;
 use App\Events\CommentSaved;
 use App\Notifications\UserMentioned;
-use App\User;
 
 class NotifyMentionedUsers
 {

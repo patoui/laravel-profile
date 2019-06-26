@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Throwable;
-use Twilio\Rest\Client;
+use function view;
 use function config;
 use function redirect;
-use function view;
+use Twilio\Rest\Client;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class SmsController extends Controller
 {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use ReflectionClass;
 use function request;
 use function sprintf;
 use function strtolower;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait RecordsActivity
 {

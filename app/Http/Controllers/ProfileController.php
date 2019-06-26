@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\View\View;
 use function view;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
-use function preg_replace;
-use function str_replace;
 use function strtolower;
+use function str_replace;
+use function preg_replace;
+use Illuminate\Contracts\Validation\Rule;
 
 class Slug implements Rule
 {

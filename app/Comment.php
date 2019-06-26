@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App;
 
 use App\Events\CommentSaved;
+use function preg_match_all;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use function preg_match_all;
 
 class Comment extends Model
 {
@@ -44,7 +44,7 @@ class Comment extends Model
 
     public function getPathAttribute() : ?string
     {
-        return $this->post->path . '#comment' . $this->id;
+        return $this->post->path.'#comment'.$this->id;
     }
 
     public function favourites() : MorphMany

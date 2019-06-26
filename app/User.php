@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App;
 
 use Exception;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use function in_array;
+use function get_class;
+use function is_object;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use function get_class;
-use function in_array;
-use function is_object;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {

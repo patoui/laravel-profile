@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Rules\Slug;
 use App\Tip;
-use Illuminate\Http\RedirectResponse;
+use function view;
+use App\Rules\Slug;
+use function request;
+use function redirect;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\View\View;
-use function redirect;
-use function request;
-use function view;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 class TipController extends Controller
 {

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Comment;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use function redirect;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class CommentFavouriteController extends Controller
 {

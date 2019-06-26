@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Closure;
+use function redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function redirect;
 
 class RedirectIfAuthenticated
 {

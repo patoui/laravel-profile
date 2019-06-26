@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Tip;
-use Illuminate\Http\RedirectResponse;
 use function redirect;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 class TipPublishController extends Controller
 {

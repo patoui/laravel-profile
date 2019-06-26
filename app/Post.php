@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use function trim;
+use function route;
+use function substr;
+use function strip_tags;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use function preg_replace;
-use function route;
-use function strip_tags;
-use function substr;
-use function trim;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Post extends Model implements Feedable
 {
@@ -92,7 +92,7 @@ class Post extends Model implements Feedable
 
     public function togglePublish() : void
     {
-        $this->published_at       = $this->published_at
+        $this->published_at = $this->published_at
             ? $this->published_at = null
             : Carbon::now();
 

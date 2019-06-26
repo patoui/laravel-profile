@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Post;
 use App\Tip;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Route;
+use App\Post;
 use function abort;
 use function base_path;
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -59,7 +59,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'admin',
-            'namespace' => $this->namespace . '\Admin',
+            'namespace' => $this->namespace.'\Admin',
             'prefix' => 'admin',
         ], static function (Router $router) : void {
             $router->bind('post', static function (int $id) {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Subscription;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use function flash;
+use App\Subscription;
 use function redirect;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class SubscriptionController extends Controller
 {

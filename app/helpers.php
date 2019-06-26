@@ -11,5 +11,4 @@ if (! function_exists('me')) {
     {
         return User::where('email', 'patrique.ouimet@gmail.com')->first();
     }
-
 }

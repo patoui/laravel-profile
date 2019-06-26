@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Tip;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use function json_encode;
 use function view;
+use function json_encode;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class TipController extends Controller
 {

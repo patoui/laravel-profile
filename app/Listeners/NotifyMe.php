@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Listeners;
 
+use function me;
 use App\Events\CommentSaved;
 use App\Notifications\UserCommented;
-use function me;
 
 class NotifyMe
 {

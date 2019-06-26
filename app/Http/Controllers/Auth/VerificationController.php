@@ -31,7 +31,7 @@ class VerificationController extends Controller
     /**
      * Create a new controller instance.
      */
-    public function __construct() : void
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('signed')->only('verify');

@@ -105,7 +105,12 @@ class Tip extends Model
         $this->save();
     }
 
-    public function scopePublished(Builder $query) : Builder
+    /**
+     * @param mixed $query
+     *
+     * @return mixed
+     */
+    public function scopePublished($query)
     {
         return $query->whereNotNull('published_at');
     }

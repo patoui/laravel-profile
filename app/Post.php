@@ -99,7 +99,12 @@ class Post extends Model implements Feedable
         $this->save();
     }
 
-    public function scopePublished(Builder $builder) : Builder
+    /**
+     * @param mixed $builder
+     *
+     * @return mixed
+     */
+    public function scopePublished($builder)
     {
         return $builder->whereNotNull('published_at');
     }

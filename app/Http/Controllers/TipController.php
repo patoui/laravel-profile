@@ -35,6 +35,7 @@ class TipController extends Controller
 
     public function show(Request $request, string $slug) : View
     {
+        /** @var Tip $tip */
         $tip = Tip::slug($slug)->firstOrFail();
 
         $tip->analytics()->create([

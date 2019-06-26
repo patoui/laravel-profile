@@ -16,4 +16,5 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+  - vendor/bin/phpcs --standard=Doctrine app
   - php artisan code:analyse --level=max

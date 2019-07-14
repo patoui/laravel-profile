@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -33,10 +34,13 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * @param mixed $request
-     * @param mixed $exception
+     * Render an exception into a response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
-    public function render($request, $exception) : Response
+    public function render($request, Exception $exception)
     {
         if (app()->environment() === 'testing') {
             throw $exception;

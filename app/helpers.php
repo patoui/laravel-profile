@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 use App\User;
 
 if (! function_exists('me')) {
@@ -9,7 +7,7 @@ if (! function_exists('me')) {
     /** @return mixed */
     function me()
     {
-        return User::where('email', 'patrique.ouimet@gmail.com')->first();
+        return app(User::class)->where('email', 'patrique.ouimet@gmail.com')->first();
     }
 
 }

@@ -7,10 +7,8 @@ namespace App\Http\Controllers;
 use App\Mail\ContactMe;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Mail;
-use Validator;
-use function flash;
-use function redirect;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {

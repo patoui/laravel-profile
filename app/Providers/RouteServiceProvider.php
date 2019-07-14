@@ -63,10 +63,14 @@ class RouteServiceProvider extends ServiceProvider
             'prefix' => 'admin',
         ], static function (Router $router) : void {
             $router->bind('post', static function (int $id) {
-                return Post::find($id) ?? abort(404);
+                $post = Post::find($id);
+                abort_if(! $post, 404);
+                return  $post;
             });
             $router->bind('tip', static function (int $id) {
-                return Tip::find($id) ?? abort(404);
+                $tip = Tip::find($id);
+                abort_if(! $tip, 404);
+                return $tip;
             });
             require base_path('routes/admin.php');
         });

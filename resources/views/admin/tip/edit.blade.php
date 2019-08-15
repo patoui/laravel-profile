@@ -3,7 +3,7 @@
 @section('title', 'Update: ' . $tip->title)
 
 @section('content')
-<form id="app" class="w-full" method="post" action="{{ route('admin.tip.store') }}">
+<form id="app" class="w-full" method="post" action="{{ route('admin.tip.update', [$tip->id]) }}">
     {{ method_field('PUT') }}
     <h2>Edit Tip</h2>
     @include('admin.tip.form')

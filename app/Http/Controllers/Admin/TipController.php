@@ -76,7 +76,9 @@ class TipController extends Controller
             'slug' => request('slug'),
         ]);
 
-        $tip->addTags($request->input('tags', []));
+        $tags = (array) $request->input('tags', []);
+
+        $tip->addTags($tags);
 
         return redirect()->route('admin.dashboard');
     }

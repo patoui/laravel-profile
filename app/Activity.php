@@ -24,8 +24,7 @@ class Activity extends Model
 
     public function getHumanTypeAttribute() : string
     {
-        $type = str_replace('_', ' ', $this->type);
-        $type = is_string($type) ? $type : '';
+        $type = (string) str_replace('_', ' ', $this->type);
 
         return ucwords($type);
     }

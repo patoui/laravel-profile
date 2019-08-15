@@ -9,6 +9,8 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
@@ -52,12 +54,12 @@ class Handler extends ExceptionHandler
     /**
      * @param mixed $request
      *
-     * @return mixed
+     * @return RedirectResponse|JsonResponse
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            return new JsonResponse(['error' => 'Unauthenticated.'], 401);
         }
 
         return redirect()->guest('login');

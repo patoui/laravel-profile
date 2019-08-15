@@ -6,15 +6,11 @@ namespace App;
 
 use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use function get_class;
-use function in_array;
-use function is_object;
 
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
@@ -41,7 +37,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         return $this->hasMany(Favourite::class);
     }
 
-    public function toggleFavourite(Model $model) : void
+    /**
+     * @param Comment|Post|Tip $model
+     * @throws Exception
+     */
+    public function toggleFavourite($model) : void
     {
         // Verify argument is an object
         if (! is_object($model)) {
@@ -58,6 +58,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         }
 
         $favourite = $this->favourites()
+            ->getQuery()
             ->where('favouritable_id', $model->id)
             ->where('favouritable_type', $class)
             ->first();

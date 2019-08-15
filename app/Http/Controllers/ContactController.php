@@ -38,6 +38,6 @@ class ContactController extends Controller
 
         flash('Thank you! I\'ll be in touch!');
 
-        return redirect('/');
+        return new RedirectResponse('/');
     }
 }

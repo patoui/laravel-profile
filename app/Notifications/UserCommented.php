@@ -6,6 +6,7 @@ namespace App\Notifications;
 
 use App\Comment;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use function url;
@@ -35,7 +36,7 @@ class UserCommented extends Notification
             ->greeting('Someone commented on \'' . $this->comment->post->title . '\'!')
             ->action(
                 'Click here to view it',
-                url($this->comment->path)
+                app(UrlGenerator::class)->to($this->comment->path)
             )
             ->line('Comment contents:')
             ->line($this->comment->body);

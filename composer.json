@@ -32,6 +32,8 @@
         "nunomaduro/collision": "^2.0",
         "nunomaduro/larastan": "^0.3.4",
         "phpunit/phpunit": "^7.0",
+        "psalm/plugin-laravel": "^0.4.0",
+        "vimeo/psalm": "^3.4",
         "wnx/laravel-stats": "^1.9"
     },
     "config": {

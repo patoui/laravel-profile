@@ -66,12 +66,19 @@
 </div>
 @endforeach
 
+<div class="flex pt-4 pb-2 w-full items-center border-solid border-t-2">
+    <div class="w-3/5">
+        <h1 class="text-4xl">Videos</h1>
+    </div>
+    <div class="w-2/5 text-right">
+        <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{ route('admin.video.create') }}">New +</a>
+    </div>
+</div>
 @foreach($videos as $video)
     <div class="flex mb-6 w-full">
         <div class="w-4/5">
             <a href="{{ route('video.show', ['slug' => $video->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $video->title . ' (' . $video->analytics_count . ')' }}</a>
-            <p class="mt-2 mb-2 text-sm text-gray-700">{{ $video->short_body }}</p>
-            <p class="text-sm text-gray-600">{{ $video->published_at ? 'Published on ' . $video->short_published_at : 'Not published' }}</p>
+            <p class="text-sm text-gray-600 mb-2">{{ $video->published_at ? 'Published on ' . $video->short_published_at : 'Not published' }}</p>
             <div>
                 @foreach($video->tags as $tag)
                     <a href="{{ route('video.index', ['tag' => $tag->name]) }}" class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 mr-2 hover:text-black hover:underline">{{ '#' . $tag->name }}</a>

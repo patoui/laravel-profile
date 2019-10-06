@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Tags\HasTags;
 
 class Video extends Model
 {
-    use HasTags;
+    use HasTags, Publishes;
 
     /** @var array<string> */
     protected $guarded = [];
@@ -22,58 +21,6 @@ class Video extends Model
     public function getRouteKeyName() : string
     {
         return 'slug';
-    }
-
-    /**
-     * @param mixed $query
-     *
-     * @return mixed
-     */
-    public function scopePublished($query)
-    {
-        return $query->whereNotNull('published_at');
-    }
-
-    public function previousPublished() : ?self
-    {
-        return (new self())
-            ->where('id', '<>', $this->id)
-            ->when($this->published_at, function ($q) {
-                return $q->where('published_at', '<', $this->published_at);
-            })
-            ->published()
-            ->latest()
-            ->first();
-    }
-
-    public function nextPublished() : ?self
-    {
-        return (new self())
-            ->where('id', '<>', $this->id)
-            ->when($this->published_at, function ($q) {
-                return $q->where('published_at', '>', $this->published_at);
-            })
-            ->published()
-            ->latest()
-            ->first();
-    }
-
-    public function togglePublish() : void
-    {
-        $this->published_at       = $this->published_at
-            ? $this->published_at = null
-            : Carbon::now();
-
-        $this->save();
-    }
-
-    public function getShortPublishedAtAttribute() : ?string
-    {
-        return $this->published_at
-            ? $this->published_at
-                ->setTimezone('America/Toronto')
-                ->toDayDateTimeString()
-            : null;
     }
 
     public function getEmbedUrlAttribute() : ?string

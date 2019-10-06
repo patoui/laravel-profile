@@ -19,7 +19,7 @@ use function trim;
 
 class Post extends Model implements Feedable
 {
-    use RecordsActivity;
+    use RecordsActivity, Publishes;
 
     /** @var array<string> */
     protected $guarded = [];
@@ -79,56 +79,6 @@ class Post extends Model implements Feedable
             0,
             100
         );
-    }
-
-    public function getShortPublishedAtAttribute() : ?string
-    {
-        return $this->published_at
-            ? $this->published_at
-                ->setTimezone('America/Toronto')
-                ->toFormattedDateString()
-            : null;
-    }
-
-    public function togglePublish() : void
-    {
-        $this->published_at       = $this->published_at
-            ? $this->published_at = null
-            : Carbon::now();
-
-        $this->save();
-    }
-
-    /**
-     * @param mixed $builder
-     *
-     * @return mixed
-     */
-    public function scopePublished($builder)
-    {
-        return $builder->whereNotNull('published_at');
-    }
-
-    /** @return mixed */
-    public function previousPublished()
-    {
-        return (new self())
-            ->where('id', '<>', $this->id)
-            ->where('published_at', '<', $this->published_at)
-            ->published()
-            ->latest()
-            ->first();
-    }
-
-    /** @return mixed */
-    public function nextPublished()
-    {
-        return (new self())
-            ->where('id', '<>', $this->id)
-            ->where('published_at', '>', $this->published_at)
-            ->whereNotNull('published_at')
-            ->latest()
-            ->first();
     }
 
     public function getPathAttribute() : string

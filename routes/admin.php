@@ -1,5 +1,6 @@
 <?php
 
+// Media
 Route::get('/media', 'MediaController@index')
     ->name('admin.media.index')
     ->middleware('can:media.index');

@@ -18,12 +18,12 @@
 @section('content')
     <h1 class="w-full text-4xl text-center font-bold">{{ $video->title }}</h1>
     <p class="w-full text-sm text-center text-gray-600">{{ $video->short_published_at }}</p>
-{{--    <form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('video.favourite.store', ['slug' => $video->slug]) }}">--}}
-{{--        {{ csrf_field() }}--}}
-{{--        <button type="submit">--}}
-{{--            <i class="fas fa-thumbs-up mr-2"></i>{{ $video->favourites_count }}--}}
-{{--        </button>--}}
-{{--    </form>--}}
+    <form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('video.favourite.store', [$video->slug]) }}">
+        {{ csrf_field() }}
+        <button type="submit">
+            <i class="fas fa-thumbs-up mr-2"></i>{{ $video->favourites_count }}
+        </button>
+    </form>
 
     <div class="block relative" style="max-width:600px; max-height:338px; width:90vw; height:50.85vw; margin: 1rem auto;">
         <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border: none;" src="{{ $video->embed_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

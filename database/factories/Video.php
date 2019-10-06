@@ -2,9 +2,9 @@
 
 /* @var $factory \Illuminate\Database\Eloquent\Factory */
 
-use App\Model;
-use Faker\Generator as Faker;
 use App\Video;
+use Carbon\Carbon;
+use Faker\Generator as Faker;
 
 $factory->define(Video::class, function (Faker $faker) {
     return [

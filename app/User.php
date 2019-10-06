@@ -51,9 +51,9 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         // Get model class name
         $class = get_class($model);
 
-        if (! in_array($class, ['App\Comment', 'App\Post', 'App\Tip'])) {
+        if (! in_array($class, ['App\Comment', 'App\Post', 'App\Tip', 'App\Video'])) {
             throw new Exception(
-                "Model class must be 'App\Comment', 'App\Post' or 'App\Tip'"
+                "Model class must be 'App\Comment', 'App\Post', 'App\Tip' or 'App\Video'"
             );
         }
 

@@ -15,7 +15,7 @@ class CreateVideoAnalyticsTable extends Migration
     {
         Schema::create('video_analytics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('video_id')->unsigned();
+            $table->bigInteger('video_id')->unsigned();
             $table->json('headers')->nullable();
             $table->timestamps();
 

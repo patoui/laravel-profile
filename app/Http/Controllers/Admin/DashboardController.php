@@ -22,7 +22,7 @@ class DashboardController extends Controller
             ->with('tips', Tip::withCount('analytics')->get())
             ->with('tipsCount', Tip::count())
             ->with('tipsPublishedCount', Tip::published()->count())
-            ->with('videos', Video::get())
+            ->with('videos', Video::withCount('analytics')->get())
             ->with('videosCount', Video::count())
             ->with('videosPublishedCount', Video::published()->count());
     }

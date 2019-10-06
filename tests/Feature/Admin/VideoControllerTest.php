@@ -33,7 +33,6 @@ class VideoControllerTest extends TestCase
             'title' => 'My New Video Title',
             'slug' => 'my-new-video-body',
             'external_id' => uniqid(true),
-            'tags' => ['one', 'two', 'three'],
         ]);
 
         // Assert
@@ -74,7 +73,6 @@ class VideoControllerTest extends TestCase
             'title' => 'Second Title',
             'slug' => 'second-title',
             'external_id' => uniqid(true),
-            'tags' => ['one', 'two', 'three'],
         ]);
 
         // Assert

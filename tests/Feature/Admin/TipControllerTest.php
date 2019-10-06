@@ -40,7 +40,6 @@ class TipControllerTest extends TestCase
             'title' => 'My New Tip Title',
             'body' => 'My New Tip Body',
             'slug' => 'my-new-tip-body',
-            'tags' => ['one', 'two', 'three'],
         ]);
 
         // Assert
@@ -95,7 +94,6 @@ class TipControllerTest extends TestCase
             'title' => 'Second Title',
             'body' => 'Second Body',
             'slug' => 'second-title',
-            'tags' => ['one', 'two', 'three'],
         ]);
 
         // Assert

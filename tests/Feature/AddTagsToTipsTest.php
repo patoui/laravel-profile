@@ -13,6 +13,8 @@ class AddTagsToTipsTest extends TestCase
 
     public function testCanAddTagsToATip()
     {
+        $this->markTestSkipped('Need to enable JSON1 extension for tags');
+
         // Arrange
         $tip = factory(Tip::class)->states('published')->create();
 

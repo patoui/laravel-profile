@@ -41,7 +41,6 @@ class MediaControllerTest extends TestCase
 
         // Assert
         $response->assertSuccessful();
-        $response->assertSee('Add Media');
     }
 
     public function testStore()

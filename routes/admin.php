@@ -8,6 +8,10 @@ Route::get('/media/create', 'MediaController@create')
     ->name('admin.media.create')
     ->middleware('can:media.create');
 
+Route::get('/media/{media}', 'MediaController@show')
+    ->name('admin.media.show')
+    ->middleware('can:media.show');
+
 Route::get('/media/{media}/edit', 'MediaController@edit')
     ->name('admin.media.edit')
     ->middleware('can:media.edit');

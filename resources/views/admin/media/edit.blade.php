@@ -1,46 +1,22 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Media')
-
-@section('hero-body')
-<div class="hero-body">
-    <div class="container">
-        <div class="columns">
-            <div class="column has-text-centered">
-                <h1 class="title">Edit Media</h1>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
 @section('content')
-
-<section class="section main">
-    <div class="container">
-        <form method="POST" action="{{ route('admin.media.update', ['media' => $media->id]) }}" enctype="multipart/form-data">
+    <div class="w-full sm:w-4/5 md:w-4/5 lg:w-4/5 xl:w-3/5 mt-4 ml-auto mr-auto">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-4" action="{{ route('admin.media.update', [$media->id]) }}" method="post" enctype="multipart/form-data">
+            @method('PUT')
+            @honeypot
             {{ csrf_field() }}
-            {{ method_field('PUT') }}
-
-            @if ($media->getTypeFromMime() === 'image')
-            <div class="field has-text-centered">
-                <img src="{!! $media->getUrl() !!}" alt="Image preview">
-            </div>
-            @endif
-
-            <div class="field">
-                <input name="name" class="input{{ $errors->has('slug') ? ' is-danger' : '' }}" type="text" placeholder="Name" value="{{ old('name', $media->name) }}">
-
+            <a href="{{ $media->getFullUrl() }}" class="underline font-semibold text-blue-600 text-xl hover:underline block" target="_blank">{{ $media->name }}</a>
+            <div class="mt-4 mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2 {{ $errors->has('name') ? 'border-red-500' : '' }}" for="name">Name</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" type="text" placeholder="Name" value="{{ old('name', $media->name) }}">
                 @if ($errors->has('name'))
-                <p class="help is-danger">{{ $errors->first('name') }}</p>
+                    <p class="text-red-500 text-xs italic">{{ $errors->first('name') }}</p>
                 @endif
             </div>
-
-            <p class="control">
-                <button type="submit" class="button is-primary">Submit</button>
-            </p>
+            <div class="flex items-center justify-center mb-4">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Upload</button>
+            </div>
         </form>
     </div>
-</section>
-
 @endsection

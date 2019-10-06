@@ -1,57 +1,34 @@
 @extends('layouts.app')
 
-@section('title', 'Media Library')
-
-@section('hero-body')
-<div class="hero-body">
-    <div class="container">
-        <div class="columns">
-            <div class="column has-text-centered">
-                <h1 class="title">{{ $files->count() }}</h1>
-                <h2 class="subtitle">Total</h2>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+@section('title', 'Media')
 
 @section('content')
-
-<section class="section main">
-    <div class="container">
-        <div class="columns is-desktop">
-            @foreach($files as $file)
-            <div class="column">
-                <div class="card">
-                    @if ($file->getTypeFromMime() === 'image')
-                    <div class="card-image">
-                        <figure class="image">
-                            <img src="{!! $file->getUrl() !!}" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    @endif
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-content">
-                                <p class="title is-4">{{ $file->name }}</p>
-                                <p class="subtitle is-6">{{ $file->file_name }}</p>
-                                <p class="subtitle is-6">{{ $file->human_readable_size }}</p>
-                            </div>
-                        </div>
-
-                        <div class="content">
-                            <time datetime="{{ $file->created_at->format('Y-n-j') }}">{{ $file->created_at->format('g:i A j M Y') }}<br>11:09 PM - 1 Jan 2016</time>
-                        </div>
-                    </div>
-                    <footer class="card-footer has-text-black">
-                        <a href="{{ route('admin.media.edit', ['media' => $file->id]) }}" class="card-footer-item">Edit</a>
-                        <a href="{{ route('admin.media.delete', ['media' => $file->id]) }}" class="card-footer-item">Delete</a>
-                    </footer>
-                </div>
-            </div>
-            @endforeach
+    <h1 class="w-full text-center text-4xl">Stats</h1>
+    <div class="flex mb-4 w-full">
+        <div class="w-100 text-center text-xl">
+            <p>Files: {{ $files->count() }}</p>
         </div>
     </div>
-</section>
 
+    <div class="flex pt-4 pb-2 w-full items-center border-solid border-t-2">
+        <div class="w-3/5">
+            <h1 class="text-4xl">Media</h1>
+        </div>
+        <div class="w-2/5 text-right">
+            <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{ route('admin.media.create') }}">New +</a>
+        </div>
+    </div>
+    @foreach($files as $file)
+        <div class="flex mb-6 w-full">
+            <div class="w-4/5">
+                <a href="{{ $file->getFullUrl() }}" class="no-underline font-semibold text-black text-xl hover:underline block" target="_blank">{{ $file->name }}</a>
+                <p class="mt-2 mb-2 text-sm text-gray-700">{{ $file->created_at }}</p>
+            </div>
+            <div class="w-1/5 text-right">
+                <a class="mr-2" href="{{ route('admin.media.edit', ['id' => $file->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                <a class="mr-2" href="{{ route('admin.media.delete', ['id' => $file->id]) }}"><i class="fas fa-trash" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    @endforeach
 @endsection
+

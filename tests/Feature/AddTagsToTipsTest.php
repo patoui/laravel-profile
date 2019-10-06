@@ -17,7 +17,7 @@ class AddTagsToTipsTest extends TestCase
         $tip = factory(Tip::class)->states('published')->create();
 
         // Act
-        $tip->addTags(['php', 'laravel', 'collection', 'eloquent', 'learning']);
+        $tip->syncTags(['php', 'laravel', 'collection', 'eloquent', 'learning']);
 
         // Assert
         $this->assertEquals(5, $tip->fresh()->tags()->count());

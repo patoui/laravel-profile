@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tip;
+use App\Video;
 use Illuminate\View\View;
 use function view;
 
@@ -20,6 +21,9 @@ class DashboardController extends Controller
             ->with('postsPublishedCount', Post::published()->count())
             ->with('tips', Tip::withCount('analytics')->get())
             ->with('tipsCount', Tip::count())
-            ->with('tipsPublishedCount', Tip::published()->count());
+            ->with('tipsPublishedCount', Tip::published()->count())
+            ->with('videos', Video::get())
+            ->with('videosCount', Video::count())
+            ->with('videosPublishedCount', Video::published()->count());
     }
 }

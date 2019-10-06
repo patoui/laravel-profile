@@ -44,7 +44,7 @@ class TipController extends Controller
             'slug' => $request->input('slug'),
         ]);
 
-        $tip->addTags($request->input('tags', []));
+        $tip->syncTags($request->input('tags', []));
 
         return redirect()->route('admin.dashboard');
     }
@@ -78,7 +78,7 @@ class TipController extends Controller
 
         $tags = (array) $request->input('tags', []);
 
-        $tip->addTags($tags);
+        $tip->syncTags($tags);
 
         return redirect()->route('admin.dashboard');
     }

@@ -6,46 +6,20 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use function preg_replace;
-use function route;
-use function strip_tags;
-use function strtolower;
-use function substr;
-use function trim;
+use Spatie\Tags\HasTags;
 
 class Tip extends Model
 {
-    use RecordsActivity;
+    use RecordsActivity, HasTags;
 
     /** @var array<string> */
     protected $guarded = [];
 
     /** @var array<string> */
     protected $casts = ['published_at' => 'datetime'];
-
-    public function tags() : BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class);
-    }
-
-    /** @param  array<string> $tags */
-    public function addTags(array $tags) : Collection
-    {
-        $ids = [];
-
-        foreach ($tags as $key => $tag) {
-            $ids[] = Tag::firstOrCreate(['name' => strtolower($tag)])->id;
-        }
-
-        $this->tags()->sync($ids);
-
-        return $this->tags;
-    }
 
     public function analytics() : HasMany
     {

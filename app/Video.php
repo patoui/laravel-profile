@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Spatie\Tags\HasTags;
 
 class Video extends Model
 {
+    use HasTags;
+
     /** @var array<string> */
     protected $guarded = [];
 
@@ -52,6 +56,15 @@ class Video extends Model
             ->published()
             ->latest()
             ->first();
+    }
+
+    public function togglePublish() : void
+    {
+        $this->published_at       = $this->published_at
+            ? $this->published_at = null
+            : Carbon::now();
+
+        $this->save();
     }
 
     public function getShortPublishedAtAttribute() : ?string

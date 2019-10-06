@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,6 +24,18 @@
 </head>
 <body>
     <!-- Header -->
+    @if(Auth::user() && Auth::user()->is_admin)
+    <div class="flex mb-3 mr-5 ml-5 items-center">
+        <ul class="w-full p-3 list-reset flex border-solid border-b border-gray-300">
+            <li class="w-1/2 text-center">
+                <a class="{{ request()->path() === 'admin/dashboard' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="{{ route('admin.dashboard') }}">Dashboard</a>
+            </li>
+            <li class="w-1/2 text-center">
+                <a class="{{ request()->path() === 'admin/media' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="{{ route('admin.media.index') }}">Media</a>
+            </li>
+        </ul>
+    </div>
+    @endif
     <div class="flex mt-3 mb-3 mr-5 ml-5 items-center">
         <div class="flex w-5/6">
             <div class="mt-1 mr-2">
@@ -38,7 +50,6 @@
             </div>
         </div>
         <div class="w-1/6 text-right">
-            <!-- <button class="mt-2 mr-2"><i class="far fa-moon"></i></button> -->
             <a href="{{ auth()->check() ? '/logout' : '/login' }}" class="mt-2 mr-2"><i class="fas {{ auth()->check() ? 'fa-sign-out-alt' : 'fa-sign-in-alt' }}"></i></a>
         </div>
     </div>

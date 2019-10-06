@@ -57,7 +57,6 @@ class TipControllerTest extends TestCase
         $this->assertEquals('My New Tip Title', $tip->fresh()->title);
         $this->assertEquals('My New Tip Body', $tip->fresh()->body);
         $this->assertEquals('my-new-tip-body', $tip->fresh()->slug);
-        $this->assertEquals(3, $tip->tags()->count());
     }
 
     /**
@@ -102,7 +101,6 @@ class TipControllerTest extends TestCase
         $this->assertEquals('Second Title', $tip->fresh()->title);
         $this->assertEquals('Second Body', $tip->fresh()->body);
         $this->assertEquals('second-title', $tip->fresh()->slug);
-        $this->assertEquals(3, $tip->tags()->count());
     }
 
     /**

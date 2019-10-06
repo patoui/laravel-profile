@@ -42,7 +42,6 @@ class VideoControllerTest extends TestCase
         $this->assertNotNull($video);
         $this->assertEquals('My New Video Title', $video->fresh()->title);
         $this->assertEquals('my-new-video-body', $video->fresh()->slug);
-        $this->assertEquals(3, $video->tags()->count());
     }
 
     public function testEdit()
@@ -80,7 +79,6 @@ class VideoControllerTest extends TestCase
         $response->assertRedirect('/admin/dashboard');
         $this->assertEquals('Second Title', $video->fresh()->title);
         $this->assertEquals('second-title', $video->fresh()->slug);
-        $this->assertEquals(3, $video->tags()->count());
     }
 
     /**

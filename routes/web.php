@@ -30,6 +30,12 @@ Route::post('tip/{slug}', 'TipFavouriteController@store')
     ->name('tip.favourite.store')
     ->middleware('auth');
 
+Route::get('video', 'VideoController@index')->name('video.index');
+Route::get('video/{video}', 'VideoController@show')->name('video.show');
+Route::post('video/{video}', 'VideoFavouriteController@store')
+    ->name('video.favourite.store')
+    ->middleware('auth');
+
 // Subscription
 Route::post('subscription', 'SubscriptionController@store')
     ->name('subscription.store');

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Articles')
+@section('title', 'Tips & Tricks')
 
 @section('content')
     <h1 class="text-4xl mb-4">Tips &amp; Tricks</h1>

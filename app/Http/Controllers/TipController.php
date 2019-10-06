@@ -7,8 +7,6 @@ namespace App\Http\Controllers;
 use App\Tip;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use function json_encode;
-use function view;
 
 class TipController extends Controller
 {

@@ -58,14 +58,17 @@
     <div class="mb-4">
         <div class="flex justify-center w-full sm:w-4/5 md:w-4/5 lg:w-4/5 xl:w-3/5 pl-6 sm:pl-8 md:pl-12 lg:pl-20 xl:pl-24 pr-6 sm:pr-8 md:pr-12 lg:pr-20 xl:pr-24 mx-auto">
             <ul class="w-full p-3 list-reset flex border-solid border-b border-t border-gray-300">
-                <li class="w-1/3 text-center">
-                    <a class="{{ request()->path() === '/' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="/">About</a>
+                <li class="w-1/4 text-center">
+                    <a class="{{ request()->path() === '/' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="{{ route('home') }}">About</a>
                 </li>
-                <li class="w-1/3 text-center">
-                    <a class="{{ request()->path() === 'blog' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="/blog">Blog</a>
+                <li class="w-1/4 text-center">
+                    <a class="{{ request()->path() === 'blog' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="{{ route('post.index') }}">Blog</a>
                 </li>
-                <li class="w-1/3 text-center">
-                    <a class="{{ request()->path() === 'tip' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="/tip">Tips</a>
+                <li class="w-1/4 text-center">
+                    <a class="{{ request()->path() === 'tip' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="{{ route('tip.index') }}">Tips</a>
+                </li>
+                <li class="w-1/4 text-center">
+                    <a class="{{ request()->path() === 'video' ? 'text-black' : 'text-blue-500' }} font-semibold no-underline hover:text-black" href="/video">Videos</a>
                 </li>
             </ul>
         </div>

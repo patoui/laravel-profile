@@ -86,8 +86,8 @@
             </div>
         </div>
         <div class="w-1/5 text-right">
-            <a class="mr-2" href="{{ route('admin.video.edit', ['id' => $video->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
-            <a href="{{ route('admin.video.publish', ['id' => $video->id]) }}">
+            <a class="mr-2" href="{{ route('admin.video.edit', ['id' => $video->slug]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+            <a href="{{ route('admin.video.publish', ['id' => $video->slug]) }}">
                 <i class="{{ $video->published_at ? 'fas' : 'far' }} fa-file"></i>
             </a>
         </div>

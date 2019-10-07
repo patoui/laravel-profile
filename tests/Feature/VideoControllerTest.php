@@ -14,7 +14,7 @@ class VideoControllerTest extends TestCase
     public function testIndex() : void
     {
         // Arrange
-        $video = factory(Video::class)->create();
+        $video = factory(Video::class)->state('published')->create();
 
         // Act
         $response = $this->get(route('video.index'));
@@ -27,7 +27,7 @@ class VideoControllerTest extends TestCase
     public function testShow() : void
     {
         // Arrange
-        $video = factory(Video::class)->create();
+        $video = factory(Video::class)->state('published')->create();
 
         // Act
         $response = $this->get(route('video.show', [$video->slug]));

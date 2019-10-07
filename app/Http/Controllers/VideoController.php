@@ -17,6 +17,8 @@ class VideoController extends Controller
 
     public function show(Request $request, Video $video) : View
     {
+        abort_if(! $video->published_at, 404);
+
         $video->analytics()->create([
             'headers' => json_encode($request->headers->all()),
         ]);

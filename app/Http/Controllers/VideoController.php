@@ -12,7 +12,7 @@ class VideoController extends Controller
 {
     public function index() : View
     {
-        return view('video.index')->with('videos', Video::get());
+        return view('video.index')->with('videos', Video::published()->get());
     }
 
     public function show(Request $request, Video $video) : View

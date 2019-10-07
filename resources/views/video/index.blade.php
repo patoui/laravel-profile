@@ -4,7 +4,7 @@
 
 @section('content')
     <h1 class="text-4xl mb-4">Videos</h1>
-    @foreach($videos as $video)
+    @forelse($videos as $video)
         <div class="mb-6 w-full">
             <a href="{{ route('video.show', ['slug' => $video->slug]) }}" class="mb-2 no-underline font-semibold text-black text-xl hover:underline block">{{ $video->title }}</a>
             <p class="mb-2 text-sm text-gray-700">{{ $video->description ?? 'No description available.' }}</p>
@@ -15,6 +15,10 @@
 {{--                @endforeach--}}
 {{--            </div>--}}
         </div>
-    @endforeach
+    @empty
+        <div class="mb-6 w-full">
+            <p>No videos yet :(</p>
+        </div>
+    @endforelse
 @endsection
 

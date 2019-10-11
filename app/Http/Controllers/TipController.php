@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Tip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
 class TipController extends Controller
@@ -15,17 +16,8 @@ class TipController extends Controller
         $tip = Tip::with('tags')
             ->published()
             ->latest()
-            ->when($request->input('tag'), static function ($query) use ($request) {
-                return $query->whereIn('tips.id', static function ($q) use ($request) {
-                    return $q->from('tag_tip')
-                        ->select('tip_id')
-                        ->where('tag_id', static function ($inner) use ($request) {
-                            return $inner->from('tags')
-                                ->select('tags.id')
-                                ->where('tags.name', $request->input('tag'))
-                                ->pluck('tags.id');
-                        });
-                });
+            ->when($request->input('tag'), function ($query) use ($request) {
+                return $query->withAnyTags(Arr::wrap($request->input('tag')));
             })->get();
 
         return view('tip.index')->with('tips', $tip);

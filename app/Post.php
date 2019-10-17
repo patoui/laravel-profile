@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
+use Spatie\Tags\HasTags;
 use function preg_replace;
 use function route;
 use function strip_tags;
@@ -19,7 +20,7 @@ use function trim;
 
 class Post extends Model implements Feedable
 {
-    use RecordsActivity, Publishes;
+    use HasTags, Publishes, RecordsActivity;
 
     /** @var array<string> */
     protected $guarded = [];

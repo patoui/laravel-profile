@@ -1,14 +1,11 @@
 @extends('layouts.app')
 
 @section('meta')
-@if (config('facebook.app_id'))
-<meta property="fb:app_id"      content="{{ config('facebook.app_id') }}" />
-@endif
-<meta property="og:url"         content="{{ Request::url() }}" />
-<meta property="og:type"        content="article" />
-<meta property="og:title"       content="{{ $tip->title }}" />
-<meta property="og:description" content="{{ $tip->short_body }}" />
-<meta property="og:image"       content="{{ data_get($tip, 'image', Request::root() . '/img/black-white-profile.png') }}" />
+    @include('general-meta', ['model' => $tip])
+    <meta property="og:type"        content="article" />
+    <meta property="og:title"       content="{{ $tip->title }}" />
+    <meta property="og:description" content="{{ $tip->short_body }}" />
+    <meta property="og:image"       content="{{ data_get($tip, 'image', Request::root() . '/img/black-white-profile.png') }}" />
 @endsection
 
 @section('title', $tip->title)

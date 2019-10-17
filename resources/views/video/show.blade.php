@@ -1,16 +1,12 @@
 @extends('layouts.app')
 
 @section('meta')
-    @if (config('facebook.app_id'))
-        <meta property="fb:app_id"      content="{{ config('facebook.app_id') }}" />
-    @endif
-    <meta property="og:url"         content="{{ Request::url() }}" />
+    @include('general-meta', ['model' => $video])
     <meta property="og:type"        content="video.other" />
     <meta property="og:title"       content="{{ $video->title }}" />
     <meta property="og:description" content="{{ $video->short_body }}" />
     <meta property="og:image"       content="{{ data_get($video, 'image', Request::root() . '/img/black-white-profile.png') }}" />
     <meta property="og:video"       content="{{ $video->embed_url }}" />
-{{--    <meta property="og:video:tag"   content="{{ $tag->name }}" />--}}
 @endsection
 
 @section('title', $video->title)

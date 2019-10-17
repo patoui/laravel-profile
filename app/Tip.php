@@ -12,7 +12,7 @@ use Spatie\Tags\HasTags;
 
 class Tip extends Model
 {
-    use RecordsActivity, HasTags, Publishes;
+    use HasTags, Publishes, RecordsActivity;
 
     /** @var array<string> */
     protected $guarded = [];

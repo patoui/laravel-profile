@@ -18,7 +18,9 @@ class PostController extends Controller
 {
     public function create() : View
     {
-        return view('admin.post.create')->with('post', new Post());
+        return view('admin.post.create')
+            ->with('post', new Post())
+            ->with('tags', []);
     }
 
     public function store(Request $request) : RedirectResponse
@@ -33,18 +35,22 @@ class PostController extends Controller
             ],
         ]);
 
-        Post::create([
+        $post = Post::create([
             'title' => $request->input('title'),
             'body' => $request->input('body'),
             'slug' => $request->input('slug'),
         ]);
+
+        $post->syncTags($request->input('tags', []));
 
         return redirect()->route('admin.dashboard');
     }
 
     public function edit(Post $post) : View
     {
-        return view('admin.post.edit')->with('post', $post);
+        return view('admin.post.edit')
+            ->with('post', $post)
+            ->with('tags', $post->tags()->pluck('name'));
     }
 
     public function update(Request $request, Post $post) : RedirectResponse
@@ -64,6 +70,10 @@ class PostController extends Controller
             'body' => $request->input('body'),
             'slug' => $request->input('slug'),
         ]);
+
+        $tags = (array) $request->input('tags', []);
+
+        $post->syncTags($tags);
 
         return redirect()->route('admin.dashboard');
     }

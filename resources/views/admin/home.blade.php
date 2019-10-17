@@ -27,6 +27,11 @@
         <a href="{{ route('post.show', ['slug' => $post->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $post->title . ' (' . $post->analytics_count . ')' }}</a>
         <p class="mt-2 mb-2 text-sm text-gray-700">{{ $post->short_body }}</p>
         <p class="text-sm text-gray-600">{{ $post->published_at ? 'Published on ' . $post->short_published_at : 'Not published' }}</p>
+        <div>
+            @foreach($post->tags as $tag)
+                <a href="{{ route('tip.index', ['tag' => $tag->name]) }}" class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 mr-2 hover:text-black hover:underline">{{ '#' . $tag->name }}</a>
+            @endforeach
+        </div>
     </div>
     <div class="w-1/5 text-right">
         <a class="mr-2" href="{{ route('admin.post.edit', ['id' => $post->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>

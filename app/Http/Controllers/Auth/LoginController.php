@@ -53,7 +53,8 @@ class LoginController extends Controller
             redirect()->route('home')->getTargetUrl();
     }
 
-    public function redirectToProvider() : Response
+    /** @return mixed */
+    public function redirectToProvider()
     {
         return Socialite::driver('github')->redirect();
     }

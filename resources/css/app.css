@@ -1,3 +1,11 @@
 @tailwind  base;
 @tailwind  components;
 @tailwind  utilities;
+
+.markdown-body a {
+  color: #0366d6
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}

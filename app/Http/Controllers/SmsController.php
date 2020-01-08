@@ -27,7 +27,7 @@ class SmsController extends Controller
         $client = new Client(config('twilio.account'), config('twilio.token'));
 
         try {
-            $client->messages->create('+19059220633', [
+            $client->messages->create('+16138780633', [
                 'from' => config('twilio.phone'),
                 'body' => $request->input('message'),
             ]);

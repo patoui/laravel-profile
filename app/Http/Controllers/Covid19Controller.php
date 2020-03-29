@@ -10,6 +10,14 @@ use Zttp\Zttp;
 
 class Covid19Controller
 {
+    private $confirmed = [];
+    private $deaths = [];
+    private $recovered = [];
+
+    private $confirmed_filtered = [];
+    private $deaths_filtered = [];
+    private $recovered_filtered = [];
+
     public function index(Request $request)
     {
         if ($request->getClientIp() === '24.53.251.238') {
@@ -18,71 +26,227 @@ class Covid19Controller
         $from = $request->input('from', date('Y-m-d', strtotime('-10 days')));
         $to = $request->input('to', date('Y-m-d'));
 
-        $countries = Cache::get('covid19_countries', static function () {
-            $data = Zttp::get('https://api.covid19api.com/countries')->json();
-            Cache::put('covid19_countries', $data, Carbon::now()->addHour());
-            return $data;
-        });
+        $countries = $this->getCountries();
 
-        $country_slug = $request->input('country_slug', 'canada');
-        $country_index = array_search($country_slug, array_column($countries, 'Slug'), true);
-        $country_label = $countries[$country_index]['Country'] ?? '';
-
-        $country_confirmed_cases = Cache::get('covid19_confirmed_' . $country_slug, static function () use ($country_slug) {
-            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed")->json();
-            Cache::put('covid19_confirmed_' . $country_slug, $data, Carbon::now()->addHour());
-            return $data;
-        });
-        $country_deaths_cases = Cache::get('covid19_deaths_' . $country_slug, static function () use ($country_slug) {
-            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/deaths")->json();
-            Cache::put('covid19_deaths_' . $country_slug, $data, Carbon::now()->addHour());
-            return $data;
-        });
-        $country_recovered_cases = Cache::get('covid19_recovered_' . $country_slug, static function () use ($country_slug) {
-            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/recovered")->json();
-            Cache::put('covid19_recovered_' . $country_slug, $data, Carbon::now()->addHour());
-            return $data;
-        });
+        $country_slugs = $request->input('country_slugs', ['canada']);
+        $country_label = $this->getCountryLabels($country_slugs);
 
         $c_from = Carbon::parse($from);
         $c_to = Carbon::parse($to);
 
-        $country_confirmed_table = array_filter($country_confirmed_cases, static function ($day_data) use ($c_from, $c_to) {
-            $c_day = Carbon::parse($day_data['Date']);
-            return $c_day->gte($c_from) && $c_day->lte($c_to);
-        });
-        $country_confirmed_graph = implode(',', array_column($country_confirmed_table, 'Cases'));
-
-        $country_deaths_table = array_filter($country_deaths_cases, static function ($day_data) use ($c_from, $c_to) {
-            $c_day = Carbon::parse($day_data['Date']);
-            return $c_day->gte($c_from) && $c_day->lte($c_to);
-        });
-        $country_deaths_graph = implode(',', array_column($country_deaths_table, 'Cases'));
-
-        $country_recovered_table = array_filter($country_recovered_cases, static function ($day_data) use ($c_from, $c_to) {
-            $c_day = Carbon::parse($day_data['Date']);
-            return $c_day->gte($c_from) && $c_day->lte($c_to);
-        });
-        $country_recovered_graph = implode(',', array_column($country_recovered_table, 'Cases'));
-
-        $country_graph_labels = '"' . implode('","', array_map(static function ($date) {
-            return Carbon::parse($date, 'UTC')->format('M jS');
-        }, array_column($country_confirmed_table, 'Date'))) . '"';
+        $table_data = $this->getTableData($country_slugs, $c_from, $c_to);
+        $graph_data = $this->getGraphData($country_slugs, $c_from, $c_to);
 
         return view('covid19.index')
-            ->with('country_slug', $country_slug)
+            ->with('country_slugs', $country_slugs)
             ->with('from', $from)
             ->with('to', $to)
             ->with('is_show_table', $request->input('is_show_table', '1'))
             ->with('is_show_graph', $request->input('is_show_graph'))
             ->with('country_label', $country_label)
             ->with('countries', $countries)
-            ->with('country_confirmed_table', $country_confirmed_table)
-            ->with('country_deaths_table', $country_deaths_table)
-            ->with('country_recovered_table', $country_recovered_table)
-            ->with('graph_labels', $country_graph_labels)
-            ->with('country_confirmed_graph', $country_confirmed_graph)
-            ->with('country_deaths_graph', $country_deaths_graph)
-            ->with('country_recovered_graph', $country_recovered_graph);
+            ->with('table_data', $table_data)
+            ->with('graph_labels', $this->getGraphLabels($country_slugs[0], $c_from, $c_to))
+            ->with('graph_data', $graph_data);
+    }
+
+    private function getCountries()
+    {
+        return Cache::get('covid19_countries', static function () {
+            $data = Zttp::get('https://api.covid19api.com/countries')->json();
+            Cache::put('covid19_countries', $data, Carbon::now()->addHour());
+            return $data;
+        });
+    }
+
+    private function getCountryIndex(string $country_slug): int
+    {
+        return array_search($country_slug, array_column($this->getCountries(), 'Slug'), true);
+    }
+
+    private function getCountryLabelBySlug(string $country_slug): string
+    {
+        $countries = $this->getCountries();
+        $country_index = array_search($country_slug, array_column($countries, 'Slug'), true);
+        return array_column($countries, 'Country')[$country_index] ?? '';
+    }
+
+    private function getCountryLabels(array $country_slugs): string
+    {
+        return ltrim(array_reduce($country_slugs, function ($label, $slug) {
+            $label .= ' vs ' . $this->getCountryLabelBySlug($slug);
+            return $label;
+        }, ''), ' vs ');
+    }
+
+    private function getCountryConfirmed(string $country_slug): array
+    {
+        if (isset($this->confirmed[$country_slug])) {
+            return $this->confirmed[$country_slug];
+        }
+
+        $data = Cache::get('covid19_confirmed_' . $country_slug, static function () use ($country_slug) {
+            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed")->json();
+            Cache::put('covid19_confirmed_' . $country_slug, $data, Carbon::now()->addHour());
+            return $data;
+        });
+
+        $this->confirmed[$country_slug] = $data;
+
+        return $data;
+    }
+
+    private function getCountryDeaths(string $country_slug): array
+    {
+        if (isset($this->deaths[$country_slug])) {
+            return $this->deaths[$country_slug];
+        }
+
+        $data = Cache::get('covid19_deaths_' . $country_slug, static function () use ($country_slug) {
+            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/deaths")->json();
+            Cache::put('covid19_deaths_' . $country_slug, $data, Carbon::now()->addHour());
+            return $data;
+        });
+
+        $this->deaths[$country_slug] = $data;
+
+        return $data;
+    }
+
+    private function getCountryRecovered(string $country_slug): array
+    {
+        if (isset($this->recovered[$country_slug])) {
+            return $this->recovered[$country_slug];
+        }
+
+        $data = Cache::get('covid19_recovered_' . $country_slug, static function () use ($country_slug) {
+            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/recovered")->json();
+            Cache::put('covid19_recovered_' . $country_slug, $data, Carbon::now()->addHour());
+            return $data;
+        });
+
+        $this->recovered[$country_slug] = $data;
+
+        return $data;
+    }
+
+    private function getCountryConfirmedFiltered(string $country_slug, Carbon $from, Carbon $to): array
+    {
+        if (isset($this->confirmed_filtered[$country_slug])) {
+            return $this->confirmed_filtered[$country_slug];
+        }
+
+        $data = array_values(
+            array_filter($this->getCountryConfirmed($country_slug), static function ($day_data) use ($from, $to) {
+                $day = Carbon::parse($day_data['Date']);
+                return $day->gte($from) && $day->lte($to);
+            })
+        );
+
+        $this->confirmed_filtered[$country_slug] = $data;
+
+        return $data;
+    }
+
+    private function getCountryDeathsFiltered(string $country_slug, Carbon $from, Carbon $to): array
+    {
+        if (isset($this->deaths_filtered[$country_slug])) {
+            return $this->deaths_filtered[$country_slug];
+        }
+
+        $data = array_values(
+            array_filter($this->getCountryDeaths($country_slug), static function ($day_data) use ($from, $to) {
+                $day = Carbon::parse($day_data['Date']);
+                return $day->gte($from) && $day->lte($to);
+            })
+        );
+
+        $this->deaths_filtered[$country_slug] = $data;
+
+        return $data;
+    }
+
+    private function getCountryRecoveredFiltered(string $country_slug, Carbon $from, Carbon $to): array
+    {
+        if (isset($this->recovered_filtered[$country_slug])) {
+            return $this->recovered_filtered[$country_slug];
+        }
+
+        $data = array_values(
+            array_filter($this->getCountryRecovered($country_slug), static function ($day_data) use ($from, $to) {
+                $day = Carbon::parse($day_data['Date']);
+                return $day->gte($from) && $day->lte($to);
+            })
+        );
+
+        $this->recovered_filtered[$country_slug] = $data;
+
+        return $data;
+    }
+
+    private function getTableData(array $country_slugs, Carbon $from, Carbon $to): array
+    {
+        $data = [];
+
+        foreach ($country_slugs as $country_slug) {
+            $confirmed = $this->getCountryConfirmedFiltered($country_slug, $from, $to);
+            foreach ($confirmed as $key => $c) {
+                $confirm = $c['Cases'] ?? 0;
+                $deaths = $this->getCountryDeathsFiltered($country_slug, $from, $to)[$key]['Cases'] ?? 0;
+                $recovered = $this->getCountryRecoveredFiltered($country_slug, $from, $to)[$key]['Cases'] ?? 0;
+
+                $confirmed = isset($data[$key]['confirmed']) ? $data[$key]['confirmed'] . '/' . $confirm : $confirm;
+                $deaths = isset($data[$key]['deaths']) ? $data[$key]['deaths'] . '/' . $deaths : $deaths;
+                $recovered = isset($data[$key]['recovered']) ? $data[$key]['recovered'] . '/' . $recovered : $recovered;
+
+                $data[$key] = [
+                    'confirmed' => $confirmed,
+                    'deaths' => $deaths,
+                    'recovered' => $recovered,
+                    'date' => Carbon::parse($c['Date'])->format('M jS'),
+                ];
+            }
+        }
+
+        return $data;
+    }
+
+    private function getGraphLabels(string $country_slug, Carbon $from, Carbon $to): array
+    {
+        return array_map(static function ($date) {
+            return Carbon::parse($date, 'UTC')->format('M jS');
+        }, array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Date'));
+    }
+
+    private function getGraphData(array $country_slugs, Carbon $from, Carbon $to): array
+    {
+        $data = [];
+        $is_multiple = count($country_slugs);
+
+        foreach ($country_slugs as $key => $country_slug) {
+            $data[] = [
+                'label' => 'Confirmed' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                'backgroundColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
+                'borderColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
+                'data' => array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Cases'),
+                'fill' => false,
+            ];
+            $data[] = [
+                'label' => 'Deaths' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                'backgroundColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
+                'borderColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
+                'data' => array_column($this->getCountryDeathsFiltered($country_slug, $from, $to), 'Cases'),
+                'fill' => false,
+            ];
+            $data[] = [
+                'label' => 'Recovered' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                'backgroundColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
+                'borderColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
+                'data' => array_column($this->getCountryRecoveredFiltered($country_slug, $from, $to), 'Cases'),
+                'fill' => false,
+            ];
+        }
+
+        return $data;
     }
 }

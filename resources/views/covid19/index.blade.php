@@ -14,24 +14,37 @@
     <div class="flex flex-col w-full">
         <h1 class="block text-4xl mb-4 text-center w-full">COVID-19 Stats: {{ $country_label }}</h1>
         <form action="{{ route('covid19') }}" method="get" class="mb-4">
-            <div class="mb-4">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                    COUNTRY
-                </label>
-                <div class="relative">
-                    <select name="country_slug"
-                            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-state">
-                        @foreach($countries as $country)
-                            <option value="{{ $country['Slug'] }}" {{ $country_slug === $country['Slug'] ? 'selected' : '' }}>{{ $country['Country'] }}</option>
-                        @endforeach
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                        </svg>
+            @foreach($country_slugs as $country_slug)
+            <div class="country-container">
+                <div class="country-item mb-4">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                        COUNTRY
+                    </label>
+                    <div class="relative">
+                        <select name="country_slugs[]"
+                                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                id="grid-state">
+                            @foreach($countries as $country)
+                                <option value="{{ $country['Slug'] }}" {{ $country_slug === $country['Slug'] ? 'selected' : '' }}>{{ $country['Country'] }}</option>
+                            @endforeach
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
+            </div>
+            @endforeach
+
+            <div class="mb-4">
+                <button id="add_comparison" class="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="display: {{ count($country_slugs) === 1 ? 'block' : 'none' }}" type="button">
+                    Compare +
+                </button>
+                <button id="remove_comparison" class="bg-red-500 text-sm hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="display: {{ count($country_slugs) > 1 ? 'block' : 'none' }}" type="button">
+                    Remove -
+                </button>
             </div>
 
             <div class="flex flex-wrap -mx-3 mb-4">
@@ -89,7 +102,7 @@
 
         @if ($is_show_table)
             <table class="w-full text-left table-collapse">
-                <caption class="mt-4 mb-4">Cumulative Cases</caption>
+                <caption class="mt-4 mb-4">Cumulative Cases: {{ $country_label }}</caption>
                 <thead>
                     <tr>
                         <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
@@ -99,12 +112,12 @@
                     </tr>
                 </thead>
                 <tbody class="align-baseline">
-                @foreach($country_confirmed_table as $key => $cases)
+                @foreach($table_data as $row)
                     <tr>
-                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $cases['Cases'] }}</td>
-                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $country_deaths_table[$key]['Cases'] ?? 0 }}</td>
-                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $country_recovered_table[$key]['Cases'] ?? 0 }}</td>
-                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-blue-700 whitespace-pre text-right">{{ \Carbon\Carbon::parse($cases['Date'])->format('M jS') }}</td>
+                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['confirmed'] }}</td>
+                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['deaths'] }}</td>
+                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['recovered'] }}</td>
+                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-blue-700 whitespace-pre text-right">{{ $row['date'] }}</td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -127,30 +140,8 @@
       var config = {
         type: 'line',
         data: {
-          labels: [{!! $graph_labels !!}],
-          datasets: [
-            {
-              label: 'Confirmed',
-              backgroundColor: '#000000',
-              borderColor: '#000000',
-              data: [{{ $country_confirmed_graph }}],
-              fill: false
-            },
-            {
-              label: 'Deaths',
-              backgroundColor: '#FF0000',
-              borderColor: '#FF0000',
-              data: [{{ $country_deaths_graph }}],
-              fill: false
-            },
-            {
-              label: 'Recovered',
-              backgroundColor: '#008000',
-              borderColor: '#008000',
-              data: [{{ $country_recovered_graph }}],
-              fill: false
-            }
-          ]
+          labels: {!! json_encode($graph_labels) !!},
+          datasets: {!! json_encode($graph_data) !!}
         },
         options: {
           responsive: true,
@@ -197,6 +188,18 @@
         });
         document.querySelector('#is_show_graph').addEventListener('click', function () {
           document.querySelector('#is_show_graph_hidden').value = document.querySelector('#is_show_graph').checked ? 1 : 0;
+        });
+        document.querySelector('#add_comparison').addEventListener('click', function () {
+          var country_item = document.querySelector('.country-item').cloneNode(true);
+          document.querySelector('.country-container').append(country_item);
+          document.querySelector('#add_comparison').style.display = 'none';
+          document.querySelector('#remove_comparison').style.display = 'block';
+        });
+        document.querySelector('#remove_comparison').addEventListener('click', function () {
+          var country_items = document.querySelectorAll('.country-item');
+          country_items[country_items.length - 1].remove();
+          document.querySelector('#add_comparison').style.display = 'block';
+          document.querySelector('#remove_comparison').style.display = 'none';
         });
       };
     </script>

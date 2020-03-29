@@ -5,6 +5,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="COVID-19 Statistics and Graph"/>
     <meta property="og:description" content="COVID-19 Statistics and Graph"/>
+    <meta property="og:image" content="{{ Request::root() . '/img/black-white-profile.png' }}"/>
     <meta property="keywords" content="covid-19,covid19,covid,coronavirus"/>
 @endsection
 
@@ -15,34 +16,36 @@
         <h1 class="block text-4xl mb-4 text-center w-full">COVID-19 Stats: {{ $country_label }}</h1>
         <form action="{{ route('covid19') }}" method="get" class="mb-4">
             @foreach($country_slugs as $country_slug)
-            <div class="country-container">
-                <div class="country-item mb-4">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                        COUNTRY
-                    </label>
-                    <div class="relative">
-                        <select name="country_slugs[]"
-                                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-state">
-                            @foreach($countries as $country)
-                                <option value="{{ $country['Slug'] }}" {{ $country_slug === $country['Slug'] ? 'selected' : '' }}>{{ $country['Country'] }}</option>
-                            @endforeach
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                            </svg>
+                <div class="country-container">
+                    <div class="country-item mb-4">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                            COUNTRY
+                        </label>
+                        <div class="relative">
+                            <select name="country_slugs[]"
+                                    class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                                    id="grid-state">
+                                @foreach($countries as $country)
+                                    <option value="{{ $country['Slug'] }}" {{ $country_slug === $country['Slug'] ? 'selected' : '' }}>{{ $country['Country'] }}</option>
+                                @endforeach
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                                </svg>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
             <div class="mb-4">
-                <button id="add_comparison" class="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="display: {{ count($country_slugs) === 1 ? 'block' : 'none' }}" type="button">
+                <button id="add_comparison" class="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        style="display: {{ count($country_slugs) === 1 ? 'block' : 'none' }}" type="button">
                     Compare +
                 </button>
-                <button id="remove_comparison" class="bg-red-500 text-sm hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="display: {{ count($country_slugs) > 1 ? 'block' : 'none' }}" type="button">
+                <button id="remove_comparison" class="bg-red-500 text-sm hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        style="display: {{ count($country_slugs) > 1 ? 'block' : 'none' }}" type="button">
                     Remove -
                 </button>
             </div>
@@ -104,12 +107,12 @@
             <table class="w-full text-left table-collapse">
                 <caption class="mt-4 mb-4">Cumulative Cases: {{ $country_label }}</caption>
                 <thead>
-                    <tr>
-                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
-                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Deaths</th>
-                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Recovered</th>
-                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100 text-right">Date</th>
-                    </tr>
+                <tr>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Deaths</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Recovered</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100 text-right">Date</th>
+                </tr>
                 </thead>
                 <tbody class="align-baseline">
                 @foreach($table_data as $row)

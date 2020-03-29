@@ -13,9 +13,7 @@
 @section('content')
     <div class="flex flex-col w-full">
         <h1 class="block text-4xl mb-4 text-center w-full">COVID-19 Stats: {{ $country_label }}</h1>
-        <form action="{{ route('covid19') }}" method="post" class="mb-4">
-            @csrf
-
+        <form action="{{ route('covid19') }}" method="get" class="mb-4">
             <div class="mb-4">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
                     Country
@@ -68,13 +66,15 @@
             <div class="flex flex-wrap mb-4">
                 <div class="w-1/2">
                     <label class="w-full block text-gray-600 font-bold">
-                        <input class="mr-2 leading-tight" type="checkbox" name="is_show_table" value="1" {{ $is_show_table ? 'checked' : '' }}>
+                        <input class="mr-2 leading-tight" type="checkbox" id="is_show_table" value="1" {{ $is_show_table ? 'checked' : '' }}>
+                        <input type="hidden" id="is_show_table_hidden" name="is_show_table" value="{{ (int) $is_show_table }}">
                         <span class="text-sm">Show Table</span>
                     </label>
                 </div>
                 <div class="w-1/2 px-3">
                     <label class="w-full block text-gray-600 font-bold">
-                        <input class="mr-2 leading-tight" type="checkbox" name="is_show_graph" value="1" {{ $is_show_graph ? 'checked' : '' }}>
+                        <input class="mr-2 leading-tight" type="checkbox" id="is_show_graph" value="1" {{ $is_show_graph ? 'checked' : '' }}>
+                        <input type="hidden" id="is_show_graph_hidden" name="is_show_graph" value="{{ (int) $is_show_graph }}">
                         <span class="text-sm">Show Graph</span>
                     </label>
                 </div>
@@ -188,7 +188,16 @@
       };
 
       window.onload = function () {
-        new Chart(document.getElementById('graph').getContext('2d'), config);
+        let graph_element = document.getElementById('graph');
+        if (graph_element) {
+          new Chart(document.getElementById('graph').getContext('2d'), config);
+        }
+        document.querySelector('#is_show_table').addEventListener('click', function (e) {
+          document.querySelector('#is_show_table_hidden').value = document.querySelector('#is_show_table').checked ? 1 : 0;
+        });
+        document.querySelector('#is_show_graph').addEventListener('click', function (e) {
+          document.querySelector('#is_show_graph_hidden').value = document.querySelector('#is_show_graph').checked ? 1 : 0;
+        });
       };
     </script>
 @endsection

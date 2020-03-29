@@ -3,12 +3,12 @@
 @section('meta')
     <meta property="og:url" content="{{ Request::url() }}"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="COVID-19 Statistics and Graphs by Country"/>
-    <meta property="og:description" content="COVID-19 Statistics and Graphs by Country"/>
-    <meta property="keywords" content="covid19,covid,coronavirus"/>
+    <meta property="og:title" content="COVID-19 Statistics and Graph"/>
+    <meta property="og:description" content="COVID-19 Statistics and Graph"/>
+    <meta property="keywords" content="covid-19,covid19,covid,coronavirus"/>
 @endsection
 
-@section('title', 'Covid 19 Stats')
+@section('title', 'COVID-19 Statistics and Graph')
 
 @section('content')
     <div class="flex flex-col w-full">

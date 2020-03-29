@@ -89,14 +89,13 @@
 
         @if ($is_show_table)
             <table class="w-full text-left table-collapse">
-                <caption class="mt-4 mb-4">Last Week</caption>
                 <thead>
-                <tr>
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Deaths</th>
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Recovered</th>
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100 text-right">Date</th>
-                </tr>
+                    <tr>
+                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
+                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Deaths</th>
+                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Recovered</th>
+                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100 text-right">Date</th>
+                    </tr>
                 </thead>
                 <tbody class="align-baseline">
                 @foreach($country_confirmed_table as $key => $cases)
@@ -192,10 +191,10 @@
         if (graph_element) {
           new Chart(document.getElementById('graph').getContext('2d'), config);
         }
-        document.querySelector('#is_show_table').addEventListener('click', function (e) {
+        document.querySelector('#is_show_table').addEventListener('click', function () {
           document.querySelector('#is_show_table_hidden').value = document.querySelector('#is_show_table').checked ? 1 : 0;
         });
-        document.querySelector('#is_show_graph').addEventListener('click', function (e) {
+        document.querySelector('#is_show_graph').addEventListener('click', function () {
           document.querySelector('#is_show_graph_hidden').value = document.querySelector('#is_show_graph').checked ? 1 : 0;
         });
       };

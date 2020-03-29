@@ -89,6 +89,7 @@
 
         @if ($is_show_table)
             <table class="w-full text-left table-collapse">
+                <caption class="mt-4 mb-4">Cumulative Cases</caption>
                 <thead>
                     <tr>
                         <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
@@ -157,7 +158,7 @@
           maintainAspectRatio: true,
           title: {
             display: true,
-            text: 'Confirmed Cases by Day'
+            text: 'Cumulative Cases by Day'
           },
           tooltips: {
             mode: 'index',

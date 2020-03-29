@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Zttp\Zttp;
 
 class Covid19Controller
 {
     public function index(Request $request)
     {
+        Redis::incr('covid19_views');
         $from = $request->input('from', date('Y-m-d', strtotime('-10 days')));
         $to = $request->input('to', date('Y-m-d'));
 

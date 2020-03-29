@@ -16,7 +16,7 @@
         <form action="{{ route('covid19') }}" method="get" class="mb-4">
             <div class="mb-4">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-                    Country
+                    COUNTRY
                 </label>
                 <div class="relative">
                     <select name="country_slug"
@@ -37,8 +37,8 @@
             <div class="flex flex-wrap -mx-3 mb-4">
                 <div class="w-full md:w-1/2 px-3 md:mb-0">
                     <div class="mb-4 sm:mb-0 md:mb-0 lg:mb-0 xl:mb-0">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="from">
-                            From
+                        <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="from">
+                            FROM
                         </label>
                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                id="from"
@@ -50,8 +50,8 @@
                 </div>
                 <div class="w-full md:w-1/2 px-3 md:mb-0">
                     <div class="mb-4 sm:mb-0 md:mb-0 lg:mb-0 xl:mb-0">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="to">
-                            To
+                        <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="to">
+                            TO
                         </label>
                         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                id="to"
@@ -68,20 +68,20 @@
                     <label class="w-full block text-gray-600 font-bold">
                         <input class="mr-2 leading-tight" type="checkbox" id="is_show_table" value="1" {{ $is_show_table ? 'checked' : '' }}>
                         <input type="hidden" id="is_show_table_hidden" name="is_show_table" value="{{ (int) $is_show_table }}">
-                        <span class="text-sm">Show Table</span>
+                        <span class="text-xs uppercase">SHOW TABLE</span>
                     </label>
                 </div>
                 <div class="w-1/2 px-3">
                     <label class="w-full block text-gray-600 font-bold">
                         <input class="mr-2 leading-tight" type="checkbox" id="is_show_graph" value="1" {{ $is_show_graph ? 'checked' : '' }}>
                         <input type="hidden" id="is_show_graph_hidden" name="is_show_graph" value="{{ (int) $is_show_graph }}">
-                        <span class="text-sm">Show Graph</span>
+                        <span class="text-xs uppercase">SHOW GRAPH</span>
                     </label>
                 </div>
             </div>
 
             <div class="w-full">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                <button class="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     Submit
                 </button>
             </div>

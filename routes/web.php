@@ -66,3 +66,6 @@ Route::post('sms', 'SmsController@store')
     ->middleware('can:sms.store');
 
 Route::feeds();
+
+Route::get('covid19', 'Covid19Controller@index')->name('covid19');
+Route::post('covid19', 'Covid19Controller@index');

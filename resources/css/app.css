@@ -9,3 +9,11 @@
 .markdown-body a:hover {
   text-decoration: underline;
 }
+
+@media (min-width: 640px) {
+  .covid19 {
+    top: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

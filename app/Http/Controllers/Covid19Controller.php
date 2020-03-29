@@ -18,7 +18,7 @@ class Covid19Controller
 
         $countries = Cache::get('covid19_countries', static function () {
             $data = Zttp::get('https://api.covid19api.com/countries')->json();
-            Cache::put('covid19_countries', $data, Carbon::now()->endOfDay());
+            Cache::put('covid19_countries', $data, Carbon::now()->addHour());
             return $data;
         });
 
@@ -28,17 +28,17 @@ class Covid19Controller
 
         $country_confirmed_cases = Cache::get('covid19_confirmed_' . $country_slug, static function () use ($country_slug) {
             $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed")->json();
-            Cache::put('covid19_confirmed_' . $country_slug, $data, Carbon::now()->endOfDay());
+            Cache::put('covid19_confirmed_' . $country_slug, $data, Carbon::now()->addHour());
             return $data;
         });
         $country_deaths_cases = Cache::get('covid19_deaths_' . $country_slug, static function () use ($country_slug) {
             $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/deaths")->json();
-            Cache::put('covid19_deaths_' . $country_slug, $data, Carbon::now()->endOfDay());
+            Cache::put('covid19_deaths_' . $country_slug, $data, Carbon::now()->addHour());
             return $data;
         });
         $country_recovered_cases = Cache::get('covid19_recovered_' . $country_slug, static function () use ($country_slug) {
             $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/recovered")->json();
-            Cache::put('covid19_recovered_' . $country_slug, $data, Carbon::now()->endOfDay());
+            Cache::put('covid19_recovered_' . $country_slug, $data, Carbon::now()->addHour());
             return $data;
         });
 

@@ -221,7 +221,7 @@ class Covid19Controller
     private function getGraphData(array $country_slugs, Carbon $from, Carbon $to): array
     {
         $data = [];
-        $is_multiple = count($country_slugs);
+        $is_multiple = count($country_slugs) > 1;
 
         foreach ($country_slugs as $key => $country_slug) {
             $data[] = [

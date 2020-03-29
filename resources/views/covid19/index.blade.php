@@ -156,6 +156,7 @@
         options: {
           responsive: true,
           maintainAspectRatio: true,
+          aspectRatio: 1.25,
           title: {
             display: true,
             text: 'Cumulative Cases by Day'

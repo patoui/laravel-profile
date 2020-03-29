@@ -115,6 +115,10 @@
             <canvas id="graph" style="display: block;"></canvas>
         @endif
     </div>
+
+    <div class="w-full mt-8 mb-4 text-center">
+        <p class="text-gray-600">Data provided by <a href="https://covid19api.com/" target="_blank" class="text-blue-600">https://covid19api.com/</a></p>
+    </div>
 @endsection
 
 @section('javascript')

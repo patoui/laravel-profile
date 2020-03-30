@@ -299,8 +299,8 @@ class Covid19Controller
             if ($this->is_show_regression) {
                 $data[] = [
                     'label'           => 'Exp. Regression' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
-                    'backgroundColor' => $key === 0 ? '#FCC006' : '#13BBAF',
-                    'borderColor'     => $key === 0 ? '#FCC006' : '#13BBAF',
+                    'backgroundColor' => $key === 0 ? 'rgba(252, 100, 6, 0.5)' : 'rgba(19, 187, 175, 0.5)',
+                    'borderColor'     => $key === 0 ? 'rgba(252, 100, 6, 0.5)' : 'rgba(19, 187, 175, 0.5)',
                     'data'            => $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to),
                     'fill'            => false,
                     'borderDash'      => [5, 5],

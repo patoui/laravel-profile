@@ -203,15 +203,18 @@ class Covid19Controller
                 $confirm = $c['Cases'] ?? 0;
                 $deaths = $this->getCountryDeathsFiltered($country_slug, $from, $to)[$key]['Cases'] ?? 0;
                 $recovered = $this->getCountryRecoveredFiltered($country_slug, $from, $to)[$key]['Cases'] ?? 0;
+                $regression = $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to)[$key] ?? 0;
 
                 $confirmed = isset($data[$key]['confirmed']) ? $data[$key]['confirmed'] . '/' . $confirm : $confirm;
                 $deaths = isset($data[$key]['deaths']) ? $data[$key]['deaths'] . '/' . $deaths : $deaths;
                 $recovered = isset($data[$key]['recovered']) ? $data[$key]['recovered'] . '/' . $recovered : $recovered;
+                $regression = isset($data[$key]['regression']) ? $data[$key]['regression'] . '/' . $regression : $regression;
 
                 $data[$key] = [
                     'confirmed' => $confirmed,
                     'deaths' => $deaths,
                     'recovered' => $recovered,
+                    'regression' => $regression,
                     'date' => Carbon::parse($c['Date'])->format('M jS'),
                 ];
             }

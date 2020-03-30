@@ -111,6 +111,7 @@
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Deaths</th>
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Recovered</th>
+                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Exp. Regression</th>
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100 text-right">Date</th>
                 </tr>
                 </thead>
@@ -120,6 +121,7 @@
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['confirmed'] }}</td>
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['deaths'] }}</td>
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['recovered'] }}</td>
+                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['regression'] }}</td>
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-blue-700 whitespace-pre text-right">{{ $row['date'] }}</td>
                     </tr>
                 @endforeach

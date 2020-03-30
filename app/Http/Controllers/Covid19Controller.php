@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use Regression\RegressionFactory;
 use Zttp\Zttp;
 
 class Covid19Controller
@@ -182,6 +183,16 @@ class Covid19Controller
         return $data;
     }
 
+    private function getCountryExponentialRegressionFiltered(string $country_slug, Carbon $from, Carbon $to): array
+    {
+        $confirmed_cases = array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Cases');
+        $exponential_data = array_map(static function ($key, $value) {
+            return [$key, $value];
+        }, array_keys($confirmed_cases), array_values($confirmed_cases));
+        $exponential_data = array_column(RegressionFactory::exponential($exponential_data)->getResultSequence(), '1');
+        return array_map('round', $exponential_data);
+    }
+
     private function getTableData(array $country_slugs, Carbon $from, Carbon $to): array
     {
         $data = [];
@@ -242,6 +253,14 @@ class Covid19Controller
                 'borderColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
                 'data' => array_column($this->getCountryRecoveredFiltered($country_slug, $from, $to), 'Cases'),
                 'fill' => false,
+            ];
+            $data[] = [
+                'label' => 'Exp. Regression' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                'backgroundColor' => $key === 0 ? '#FCC006' : '#13BBAF',
+                'borderColor' => $key === 0 ? '#FCC006' : '#13BBAF',
+                'data' => $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to),
+                'fill' => false,
+                'borderDash' => [5, 25],
             ];
         }
 

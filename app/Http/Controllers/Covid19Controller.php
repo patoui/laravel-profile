@@ -66,9 +66,7 @@ class Covid19Controller
 
     private function getCountryLabelBySlug(string $country_slug): string
     {
-        $countries = $this->getCountries();
-        $country_index = array_search($country_slug, array_column($countries, 'Slug'), true);
-        return array_column($countries, 'Country')[$country_index] ?? '';
+        return array_column($this->getCountries(), 'Country')[$this->getCountryIndex($country_slug)] ?? '';
     }
 
     private function getCountryLabels(array $country_slugs): string

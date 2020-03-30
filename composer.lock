@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72c349b15725b3c160f97ad55d4cfc2e",
+    "content-hash": "6abe087839f6f3e2e1b64cc9c05a9a77",
     "packages": [
         {
             "name": "calebporzio/gitdown",
@@ -1835,6 +1835,67 @@
                 "side-channel resistant"
             ],
             "time": "2019-05-13T16:04:50+00:00"
+        },
+        {
+            "name": "patoui/regression-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/patoui/regression-php.git",
+                "reference": "d32a2b0eda3a1a5573d23599d1e732b224087b3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/patoui/regression-php/zipball/d32a2b0eda3a1a5573d23599d1e732b224087b3e",
+                "reference": "d32a2b0eda3a1a5573d23599d1e732b224087b3e",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^1.26.3 || ^2.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "2.*",
+                "phpunit/phpunit": "~4.0|~5.0",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Regression\\": "src/Regression"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Test\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "robotomize",
+                    "email": "robotomize@gmail.com"
+                }
+            ],
+            "description": "Calculates regression",
+            "keywords": [
+                "exponential",
+                "forecast",
+                "linear",
+                "linear-regression",
+                "math",
+                "math-library",
+                "power",
+                "power-regression",
+                "regression",
+                "regression-algorithms"
+            ],
+            "support": {
+                "source": "https://github.com/patoui/regression-php/tree/master"
+            },
+            "time": "2020-03-30T00:15:02+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -7563,12 +7624,12 @@
             "version": "0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/psalm/laravel-psalm-plugin.git",
+                "url": "https://github.com/psalm/psalm-plugin-laravel.git",
                 "reference": "c48735631e1478dd4e6d27029bb1e1c7efdd2f91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/laravel-psalm-plugin/zipball/c48735631e1478dd4e6d27029bb1e1c7efdd2f91",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-laravel/zipball/c48735631e1478dd4e6d27029bb1e1c7efdd2f91",
                 "reference": "c48735631e1478dd4e6d27029bb1e1c7efdd2f91",
                 "shasum": ""
             },
@@ -8777,7 +8838,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "patoui/regression-php": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

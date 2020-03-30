@@ -263,7 +263,7 @@ class Covid19Controller
                 'borderColor' => $key === 0 ? '#FCC006' : '#13BBAF',
                 'data' => $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to),
                 'fill' => false,
-                'borderDash' => [5, 25],
+                'borderDash' => [15, 15],
             ];
         }
 

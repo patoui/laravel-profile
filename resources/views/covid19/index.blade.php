@@ -82,16 +82,50 @@
             <div class="flex flex-wrap mb-4">
                 <div class="w-1/2">
                     <label class="w-full block text-gray-600 font-bold">
-                        <input class="mr-2 leading-tight" type="checkbox" id="is_show_table" value="1" {{ $is_show_table ? 'checked' : '' }}>
+                        <input class="mr-2 leading-tight checkbox-toggle" type="checkbox" id="is_show_table" value="1" {{ $is_show_table ? 'checked' : '' }}>
                         <input type="hidden" id="is_show_table_hidden" name="is_show_table" value="{{ (int) $is_show_table }}">
                         <span class="text-xs uppercase">SHOW TABLE</span>
                     </label>
                 </div>
                 <div class="w-1/2 px-3">
                     <label class="w-full block text-gray-600 font-bold">
-                        <input class="mr-2 leading-tight" type="checkbox" id="is_show_graph" value="1" {{ $is_show_graph ? 'checked' : '' }}>
+                        <input class="mr-2 leading-tight checkbox-toggle" type="checkbox" id="is_show_graph" value="1" {{ $is_show_graph ? 'checked' : '' }}>
                         <input type="hidden" id="is_show_graph_hidden" name="is_show_graph" value="{{ (int) $is_show_graph }}">
                         <span class="text-xs uppercase">SHOW GRAPH</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap mb-4">
+                <div class="w-1/2">
+                    <label class="w-full block text-gray-600 font-bold">
+                        <input class="mr-2 leading-tight checkbox-toggle" type="checkbox" id="is_show_confirmed" value="1" {{ $is_show_confirmed ? 'checked' : '' }}>
+                        <input type="hidden" id="is_show_confirmed_hidden" name="is_show_confirmed" value="{{ (int) $is_show_confirmed }}">
+                        <span class="text-xs uppercase">SHOW CONFIRMED</span>
+                    </label>
+                </div>
+                <div class="w-1/2 px-3">
+                    <label class="w-full block text-gray-600 font-bold">
+                        <input class="mr-2 leading-tight checkbox-toggle" type="checkbox" id="is_show_deaths" value="1" {{ $is_show_deaths ? 'checked' : '' }}>
+                        <input type="hidden" id="is_show_deaths_hidden" name="is_show_deaths" value="{{ (int) $is_show_deaths }}">
+                        <span class="text-xs uppercase">SHOW DEATHS</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap mb-4">
+                <div class="w-1/2">
+                    <label class="w-full block text-gray-600 font-bold">
+                        <input class="mr-2 leading-tight checkbox-toggle" type="checkbox" id="is_show_recovered" value="1" {{ $is_show_recovered ? 'checked' : '' }}>
+                        <input type="hidden" id="is_show_recovered_hidden" name="is_show_recovered" value="{{ (int) $is_show_recovered }}">
+                        <span class="text-xs uppercase">SHOW RECOVERED</span>
+                    </label>
+                </div>
+                <div class="w-1/2 px-3">
+                    <label class="w-full block text-gray-600 font-bold">
+                        <input class="mr-2 leading-tight checkbox-toggle" type="checkbox" id="is_show_regression" value="1" {{ $is_show_regression ? 'checked' : '' }}>
+                        <input type="hidden" id="is_show_regression_hidden" name="is_show_regression" value="{{ (int) $is_show_regression }}">
+                        <span class="text-xs uppercase">SHOW REGRESSION</span>
                     </label>
                 </div>
             </div>
@@ -108,20 +142,36 @@
                 <caption class="mt-4 mb-4">Cumulative Cases: {{ $country_label }}</caption>
                 <thead>
                 <tr>
+                    @if ($is_show_confirmed)
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
+                    @endif
+                    @if ($is_show_deaths)
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Deaths</th>
+                    @endif
+                    @if ($is_show_recovered)
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Recovered</th>
+                    @endif
+                    @if ($is_show_regression)
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Exp. Regression</th>
+                    @endif
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100 text-right">Date</th>
                 </tr>
                 </thead>
                 <tbody class="align-baseline">
                 @foreach($table_data as $row)
                     <tr>
+                        @if ($is_show_confirmed)
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['confirmed'] }}</td>
+                        @endif
+                        @if ($is_show_deaths)
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['deaths'] }}</td>
+                        @endif
+                        @if ($is_show_recovered)
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['recovered'] }}</td>
+                        @endif
+                        @if ($is_show_regression)
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['regression'] }}</td>
+                        @endif
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-blue-700 whitespace-pre text-right">{{ $row['date'] }}</td>
                     </tr>
                 @endforeach
@@ -188,11 +238,10 @@
         if (graph_element) {
           new Chart(document.getElementById('graph').getContext('2d'), config);
         }
-        document.querySelector('#is_show_table').addEventListener('click', function () {
-          document.querySelector('#is_show_table_hidden').value = document.querySelector('#is_show_table').checked ? 1 : 0;
-        });
-        document.querySelector('#is_show_graph').addEventListener('click', function () {
-          document.querySelector('#is_show_graph_hidden').value = document.querySelector('#is_show_graph').checked ? 1 : 0;
+        document.querySelectorAll('.checkbox-toggle').forEach(function (element) {
+          element.addEventListener('click', function (e) {
+              document.querySelector('#' + e.target.id + '_hidden').value = e.target.checked ? 1 : 0;
+            });
         });
         document.querySelector('#add_comparison').addEventListener('click', function () {
           var country_item = document.querySelector('.country-item').cloneNode(true);

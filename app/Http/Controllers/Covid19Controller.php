@@ -12,12 +12,17 @@ use Zttp\Zttp;
 class Covid19Controller
 {
     private $confirmed = [];
-    private $deaths = [];
+    private $deaths    = [];
     private $recovered = [];
 
     private $confirmed_filtered = [];
-    private $deaths_filtered = [];
+    private $deaths_filtered    = [];
     private $recovered_filtered = [];
+
+    private $is_show_confirmed;
+    private $is_show_deaths;
+    private $is_show_recovered;
+    private $is_show_regression;
 
     public function index(Request $request)
     {
@@ -26,6 +31,16 @@ class Covid19Controller
         }
         $from = $request->input('from', date('Y-m-d', strtotime('-10 days')));
         $to = $request->input('to', date('Y-m-d'));
+
+        $is_show_confirmed = $request->input('is_show_confirmed', '1');
+        $is_show_deaths = $request->input('is_show_deaths', '1');
+        $is_show_recovered = $request->input('is_show_recovered');
+        $is_show_regression = $request->input('is_show_regression');
+
+        $this->is_show_confirmed = (bool) $is_show_confirmed;
+        $this->is_show_deaths = (bool) $is_show_deaths;
+        $this->is_show_recovered = (bool) $is_show_recovered;
+        $this->is_show_regression = (bool) $is_show_regression;
 
         $countries = $this->getCountries();
 
@@ -44,6 +59,10 @@ class Covid19Controller
             ->with('to', $to)
             ->with('is_show_table', $request->input('is_show_table', '1'))
             ->with('is_show_graph', $request->input('is_show_graph'))
+            ->with('is_show_confirmed', $is_show_confirmed)
+            ->with('is_show_deaths', $is_show_deaths)
+            ->with('is_show_recovered', $is_show_recovered)
+            ->with('is_show_regression', $is_show_regression)
             ->with('country_label', $country_label)
             ->with('countries', $countries)
             ->with('table_data', $table_data)
@@ -210,13 +229,27 @@ class Covid19Controller
                 $recovered = isset($data[$key]['recovered']) ? $data[$key]['recovered'] . '/' . $recovered : $recovered;
                 $regression = isset($data[$key]['regression']) ? $data[$key]['regression'] . '/' . $regression : $regression;
 
-                $data[$key] = [
-                    'confirmed' => $confirmed,
-                    'deaths' => $deaths,
-                    'recovered' => $recovered,
-                    'regression' => $regression,
-                    'date' => Carbon::parse($c['Date'])->format('M jS'),
-                ];
+                if (!isset($data[$key])) {
+                    $data[$key] = [];
+                }
+
+                if ($this->is_show_confirmed) {
+                    $data[$key]['confirmed'] = $confirmed;
+                }
+
+                if ($this->is_show_deaths) {
+                    $data[$key]['deaths'] = $deaths;
+                }
+
+                if ($this->is_show_recovered) {
+                    $data[$key]['recovered'] = $recovered;
+                }
+
+                if ($this->is_show_regression) {
+                    $data[$key]['regression'] = $regression;
+                }
+
+                $data[$key]['date'] = Carbon::parse($c['Date'])->format('M jS');
             }
         }
 
@@ -236,35 +269,43 @@ class Covid19Controller
         $is_multiple = count($country_slugs) > 1;
 
         foreach ($country_slugs as $key => $country_slug) {
-            $data[] = [
-                'label' => 'Confirmed' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
-                'backgroundColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
-                'borderColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
-                'data' => array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Cases'),
-                'fill' => false,
-            ];
-            $data[] = [
-                'label' => 'Deaths' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
-                'backgroundColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
-                'borderColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
-                'data' => array_column($this->getCountryDeathsFiltered($country_slug, $from, $to), 'Cases'),
-                'fill' => false,
-            ];
-            $data[] = [
-                'label' => 'Recovered' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
-                'backgroundColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
-                'borderColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
-                'data' => array_column($this->getCountryRecoveredFiltered($country_slug, $from, $to), 'Cases'),
-                'fill' => false,
-            ];
-            $data[] = [
-                'label' => 'Exp. Regression' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
-                'backgroundColor' => $key === 0 ? '#FCC006' : '#13BBAF',
-                'borderColor' => $key === 0 ? '#FCC006' : '#13BBAF',
-                'data' => $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to),
-                'fill' => false,
-                'borderDash' => [5, 5],
-            ];
+            if ($this->is_show_confirmed) {
+                $data[] = [
+                    'label'           => 'Confirmed' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                    'backgroundColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
+                    'borderColor'     => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
+                    'data'            => array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Cases'),
+                    'fill'            => false,
+                ];
+            }
+            if ($this->is_show_deaths) {
+                $data[] = [
+                    'label'           => 'Deaths' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                    'backgroundColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
+                    'borderColor'     => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
+                    'data'            => array_column($this->getCountryDeathsFiltered($country_slug, $from, $to), 'Cases'),
+                    'fill'            => false,
+                ];
+            }
+            if ($this->is_show_recovered) {
+                $data[] = [
+                    'label'           => 'Recovered' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                    'backgroundColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
+                    'borderColor'     => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
+                    'data'            => array_column($this->getCountryRecoveredFiltered($country_slug, $from, $to), 'Cases'),
+                    'fill'            => false,
+                ];
+            }
+            if ($this->is_show_regression) {
+                $data[] = [
+                    'label'           => 'Exp. Regression' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                    'backgroundColor' => $key === 0 ? '#FCC006' : '#13BBAF',
+                    'borderColor'     => $key === 0 ? '#FCC006' : '#13BBAF',
+                    'data'            => $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to),
+                    'fill'            => false,
+                    'borderDash'      => [5, 5],
+                ];
+            }
         }
 
         return $data;

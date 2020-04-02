@@ -1,3 +1,13 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
 parameters:
-	ignoreErrors:
-		- '#Call to an undefined static method Illuminate\Support\Facades\Redis::incr()#'
+    paths:
+        - app
+
+    level: 8
+
+    ignoreErrors:
+        - '#Internal error: Function ReflectionType::__toString()#'
+        - '#Call to an undefined static method Illuminate\Support\Facades\Redis::incr()#'
+
+    checkMissingIterableValueType: false

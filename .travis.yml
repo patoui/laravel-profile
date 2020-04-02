@@ -17,4 +17,4 @@ before_script:
 script:
   - vendor/bin/phpunit
   - vendor/bin/phpcs --standard=PSR2 app
-  - php artisan code:analyse --level=max
+  - php artisan code:analyse

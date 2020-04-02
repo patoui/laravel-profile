@@ -227,7 +227,9 @@ class Covid19Controller
                 $confirmed = isset($data[$key]['confirmed']) ? $data[$key]['confirmed'] . '/' . $confirm : $confirm;
                 $deaths = isset($data[$key]['deaths']) ? $data[$key]['deaths'] . '/' . $deaths : $deaths;
                 $recovered = isset($data[$key]['recovered']) ? $data[$key]['recovered'] . '/' . $recovered : $recovered;
-                $regression = isset($data[$key]['regression']) ? $data[$key]['regression'] . '/' . $regression : $regression;
+                $regression = isset($data[$key]['regression']) ?
+                    $data[$key]['regression'] . '/' . $regression
+                    : $regression;
 
                 if (!isset($data[$key])) {
                     $data[$key] = [];
@@ -271,34 +273,51 @@ class Covid19Controller
         foreach ($country_slugs as $key => $country_slug) {
             if ($this->is_show_confirmed) {
                 $data[] = [
-                    'label'           => 'Confirmed' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                    'label'           => 'Confirmed' . (
+                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                    ),
                     'backgroundColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
-                    'data'            => array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Cases'),
+                    'data'            => array_column(
+                        $this->getCountryConfirmedFiltered($country_slug, $from, $to),
+                        'Cases'
+                    ),
                     'fill'            => false,
                 ];
             }
             if ($this->is_show_deaths) {
                 $data[] = [
-                    'label'           => 'Deaths' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                    'label'           => 'Deaths' . (
+                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                    ),
                     'backgroundColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
-                    'data'            => array_column($this->getCountryDeathsFiltered($country_slug, $from, $to), 'Cases'),
+                    'data'            => array_column(
+                        $this->getCountryDeathsFiltered($country_slug, $from, $to),
+                        'Cases'
+                    ),
                     'fill'            => false,
                 ];
             }
             if ($this->is_show_recovered) {
                 $data[] = [
-                    'label'           => 'Recovered' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                    'label'           => 'Recovered' . (
+                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                    ),
                     'backgroundColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
-                    'data'            => array_column($this->getCountryRecoveredFiltered($country_slug, $from, $to), 'Cases'),
+                    'data'            => array_column(
+                        $this->getCountryRecoveredFiltered($country_slug, $from, $to),
+                        'Cases'
+                    ),
                     'fill'            => false,
                 ];
             }
             if ($this->is_show_regression) {
                 $data[] = [
-                    'label'           => 'Exp. Regression' . ($is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''),
+                    'label'           => 'Exp. Regression' . (
+                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                    ),
                     'backgroundColor' => $key === 0 ? 'rgba(252, 100, 6, 0.5)' : 'rgba(19, 150, 175, 0.5)',
                     'borderColor'     => $key === 0 ? 'rgba(252, 100, 6, 0.5)' : 'rgba(19, 150, 175, 0.5)',
                     'data'            => $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to),

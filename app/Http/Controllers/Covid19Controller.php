@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
@@ -27,6 +28,7 @@ class Covid19Controller
     public function index(Request $request)
     {
         if ($request->getClientIp() !== '24.53.251.238') {
+            /* @method int incr($key)  */
             Redis::incr('covid19_views');
         }
         $from = $request->input('from', date('Y-m-d', strtotime('-10 days')));
@@ -148,7 +150,7 @@ class Covid19Controller
         return $data;
     }
 
-    private function getCountryConfirmedFiltered(string $country_slug, Carbon $from, Carbon $to): array
+    private function getCountryConfirmedFiltered(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
     {
         if (isset($this->confirmed_filtered[$country_slug])) {
             return $this->confirmed_filtered[$country_slug];
@@ -166,7 +168,7 @@ class Covid19Controller
         return $data;
     }
 
-    private function getCountryDeathsFiltered(string $country_slug, Carbon $from, Carbon $to): array
+    private function getCountryDeathsFiltered(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
     {
         if (isset($this->deaths_filtered[$country_slug])) {
             return $this->deaths_filtered[$country_slug];
@@ -184,7 +186,7 @@ class Covid19Controller
         return $data;
     }
 
-    private function getCountryRecoveredFiltered(string $country_slug, Carbon $from, Carbon $to): array
+    private function getCountryRecoveredFiltered(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
     {
         if (isset($this->recovered_filtered[$country_slug])) {
             return $this->recovered_filtered[$country_slug];
@@ -202,7 +204,7 @@ class Covid19Controller
         return $data;
     }
 
-    private function getCountryExponentialRegressionFiltered(string $country_slug, Carbon $from, Carbon $to): array
+    private function getCountryExponentialRegressionFiltered(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
     {
         $confirmed_cases = array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Cases');
         $exponential_data = array_map(static function ($key, $value) {
@@ -212,7 +214,7 @@ class Covid19Controller
         return array_map('round', $exponential_data);
     }
 
-    private function getTableData(array $country_slugs, Carbon $from, Carbon $to): array
+    private function getTableData(array $country_slugs, CarbonInterface $from, CarbonInterface $to): array
     {
         $data = [];
 
@@ -258,14 +260,14 @@ class Covid19Controller
         return $data;
     }
 
-    private function getGraphLabels(string $country_slug, Carbon $from, Carbon $to): array
+    private function getGraphLabels(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
     {
         return array_map(static function ($date) {
             return Carbon::parse($date, 'UTC')->format('M jS');
         }, array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Date'));
     }
 
-    private function getGraphData(array $country_slugs, Carbon $from, Carbon $to): array
+    private function getGraphData(array $country_slugs, CarbonInterface $from, CarbonInterface $to): array
     {
         $data = [];
         $is_multiple = count($country_slugs) > 1;

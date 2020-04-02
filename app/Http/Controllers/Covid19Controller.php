@@ -26,7 +26,7 @@ class Covid19Controller
 
     public function index(Request $request)
     {
-        if ($request->getClientIp() === '24.53.251.238') {
+        if ($request->getClientIp() !== '24.53.251.238') {
             Redis::incr('covid19_views');
         }
         $from = $request->input('from', date('Y-m-d', strtotime('-10 days')));

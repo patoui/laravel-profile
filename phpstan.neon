@@ -8,6 +8,7 @@ parameters:
 
     ignoreErrors:
         - '#Internal error: Function ReflectionType::__toString()#'
-        - '#Call to an undefined static method Illuminate\Support\Facades\Redis::incr()#'
+        - '#Call to an undefined static method Illuminate\\Support\\Facades\\Redis::incr\(\)#'
+        - '#Call to an undefined static method Zttp\\Zttp::get\(\)\.#'
 
     checkMissingIterableValueType: false

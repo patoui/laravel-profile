@@ -28,7 +28,6 @@ class Covid19Controller
     public function index(Request $request)
     {
         if ($request->getClientIp() !== '24.53.251.238') {
-            /* @method int incr($key)  */
             Redis::incr('covid19_views');
         }
         $from = $request->input('from', date('Y-m-d', strtotime('-10 days')));
@@ -150,8 +149,11 @@ class Covid19Controller
         return $data;
     }
 
-    private function getCountryConfirmedFiltered(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
-    {
+    private function getCountryConfirmedFiltered(
+        string $country_slug,
+        CarbonInterface $from,
+        CarbonInterface $to
+    ): array {
         if (isset($this->confirmed_filtered[$country_slug])) {
             return $this->confirmed_filtered[$country_slug];
         }
@@ -168,8 +170,11 @@ class Covid19Controller
         return $data;
     }
 
-    private function getCountryDeathsFiltered(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
-    {
+    private function getCountryDeathsFiltered(
+        string $country_slug,
+        CarbonInterface $from,
+        CarbonInterface $to
+    ): array {
         if (isset($this->deaths_filtered[$country_slug])) {
             return $this->deaths_filtered[$country_slug];
         }
@@ -186,8 +191,11 @@ class Covid19Controller
         return $data;
     }
 
-    private function getCountryRecoveredFiltered(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
-    {
+    private function getCountryRecoveredFiltered(
+        string $country_slug,
+        CarbonInterface $from,
+        CarbonInterface $to
+    ): array {
         if (isset($this->recovered_filtered[$country_slug])) {
             return $this->recovered_filtered[$country_slug];
         }
@@ -204,8 +212,11 @@ class Covid19Controller
         return $data;
     }
 
-    private function getCountryExponentialRegressionFiltered(string $country_slug, CarbonInterface $from, CarbonInterface $to): array
-    {
+    private function getCountryExponentialRegressionFiltered(
+        string $country_slug,
+        CarbonInterface $from,
+        CarbonInterface $to
+    ): array {
         $confirmed_cases = array_column($this->getCountryConfirmedFiltered($country_slug, $from, $to), 'Cases');
         $exponential_data = array_map(static function ($key, $value) {
             return [$key, $value];
@@ -277,7 +288,7 @@ class Covid19Controller
                 $data[] = [
                     'label'           => 'Confirmed' . (
                         $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
-                    ),
+                        ),
                     'backgroundColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
                     'data'            => array_column(
@@ -291,7 +302,7 @@ class Covid19Controller
                 $data[] = [
                     'label'           => 'Deaths' . (
                         $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
-                    ),
+                        ),
                     'backgroundColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
                     'data'            => array_column(
@@ -305,7 +316,7 @@ class Covid19Controller
                 $data[] = [
                     'label'           => 'Recovered' . (
                         $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
-                    ),
+                        ),
                     'backgroundColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
                     'data'            => array_column(
@@ -319,7 +330,7 @@ class Covid19Controller
                 $data[] = [
                     'label'           => 'Exp. Regression' . (
                         $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
-                    ),
+                        ),
                     'backgroundColor' => $key === 0 ? 'rgba(252, 100, 6, 0.5)' : 'rgba(19, 150, 175, 0.5)',
                     'borderColor'     => $key === 0 ? 'rgba(252, 100, 6, 0.5)' : 'rgba(19, 150, 175, 0.5)',
                     'data'            => $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to),

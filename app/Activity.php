@@ -17,12 +17,12 @@ class Activity extends Model
     /** @var array<string> */
     protected $guarded = [];
 
-    public function subject() : MorphTo
+    public function subject(): MorphTo
     {
         return $this->morphTo();
     }
 
-    public function getHumanTypeAttribute() : string
+    public function getHumanTypeAttribute(): string
     {
         $type = str_replace('_', ' ', $this->type);
         $type = is_array($type) ? implode(' ', $type) : $type;
@@ -30,22 +30,22 @@ class Activity extends Model
         return ucwords($type);
     }
 
-    public function getShortContentAttribute() : string
+    public function getShortContentAttribute(): string
     {
         return Str::limit(data_get($this, 'subject.body', ''), 50);
     }
 
-    public function getShortCreatedAtAttribute() : ?string
+    public function getShortCreatedAtAttribute(): ?string
     {
         return $this->created_at
             ? $this->created_at
-            ->setTimezone('America/Toronto')
-            ->toDayDateTimeString()
+                ->setTimezone('America/Toronto')
+                ->toDayDateTimeString()
             : null;
     }
 
-    public function getSubjectUrlAttribute() : string
+    public function getSubjectUrlAttribute(): string
     {
-        return $this->subject->path;
+        return (string) optional($this->subject)->path;
     }
 }

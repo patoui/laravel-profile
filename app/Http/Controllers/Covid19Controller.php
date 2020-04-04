@@ -7,25 +7,26 @@ use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\View\View;
 use Regression\RegressionFactory;
 use Zttp\Zttp;
 
 class Covid19Controller
 {
-    private $confirmed = [];
-    private $deaths    = [];
-    private $recovered = [];
+    private array $confirmed = [];
+    private array $deaths    = [];
+    private array $recovered = [];
 
-    private $confirmed_filtered = [];
-    private $deaths_filtered    = [];
-    private $recovered_filtered = [];
+    private array $confirmed_filtered = [];
+    private array $deaths_filtered    = [];
+    private array $recovered_filtered = [];
 
-    private $is_show_confirmed;
-    private $is_show_deaths;
-    private $is_show_recovered;
-    private $is_show_regression;
+    private bool $is_show_confirmed;
+    private bool $is_show_deaths;
+    private bool $is_show_recovered;
+    private bool $is_show_regression;
 
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         if (strpos($request->getClientIp(), '24.53.251.') === false) {
             Redis::incr('covid19_views');
@@ -71,7 +72,7 @@ class Covid19Controller
             ->with('graph_data', $graph_data);
     }
 
-    private function getCountries()
+    private function getCountries(): array
     {
         return Cache::get('covid19_countries', static function () {
             $data = Zttp::get('https://api.covid19api.com/countries')->json();

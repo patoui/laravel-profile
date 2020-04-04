@@ -84,7 +84,7 @@ class Post extends Model implements Feedable
 
     public function getPathAttribute() : string
     {
-        return route('post.show', ['slug' => $this->slug]);
+        return route('post.show', ['post' => $this->slug]);
     }
 
     public function toFeedItem() : FeedItem
@@ -94,7 +94,7 @@ class Post extends Model implements Feedable
             ->title($this->title)
             ->summary($this->short_body)
             ->updated($this->updated_at)
-            ->link(route('post.show', ['slug' => $this->slug]))
+            ->link(route('post.show', ['post' => $this->slug]))
             ->author('Patrique Ouimet');
     }
 

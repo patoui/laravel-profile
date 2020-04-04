@@ -62,6 +62,6 @@ class Tip extends Model
 
     public function getPathAttribute() : string
     {
-        return route('tip.show', ['slug' => $this->slug]);
+        return route('tip.show', ['tip' => $this->slug]);
     }
 }

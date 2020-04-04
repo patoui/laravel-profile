@@ -17,6 +17,6 @@ class TipFavouriteController extends Controller
 
         $request->user()->toggleFavourite($tip);
 
-        return redirect()->route('tip.show', ['slug' => $slug]);
+        return redirect()->route('tip.show', ['tip' => $slug]);
     }
 }

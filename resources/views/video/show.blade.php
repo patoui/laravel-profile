@@ -29,12 +29,12 @@
         <div class="flex w-full mt-4 mb-4">
             <div class="w-1/2">
                 @if ($previousVideo)
-                    <a class="underline" href="{{ route('video.show', ['slug' => $previousVideo->slug]) }}">&#8678; {{ $previousVideo->title }}</a>
+                    <a class="underline" href="{{ route('video.show', ['video' => $previousVideo->slug]) }}">&#8678; {{ $previousVideo->title }}</a>
                 @endif
             </div>
             <div class="w-1/2 text-right">
                 @if ($nextVideo)
-                    <a class="underline" href="{{ route('video.show', ['slug' => $nextVideo->slug]) }}">{{ $nextVideo->title }} &#8680;</a>
+                    <a class="underline" href="{{ route('video.show', ['video' => $nextVideo->slug]) }}">{{ $nextVideo->title }} &#8680;</a>
                 @endif
             </div>
         </div>

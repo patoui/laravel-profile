@@ -12,6 +12,6 @@ class VideoFavouriteController extends Controller
     {
         $request->user()->toggleFavourite($video);
 
-        return redirect()->route('video.show', ['slug' => $video->slug]);
+        return redirect()->route('video.show', ['video' => $video->slug]);
     }
 }

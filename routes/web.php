@@ -9,13 +9,13 @@ Route::post('contact', 'ContactController@store')
 
 // Post
 Route::get('blog', 'PostController@index')->name('post.index');
-Route::get('post/{slug}', 'PostController@show')->name('post.show');
-Route::post('post/{slug}', 'PostFavouriteController@store')
+Route::get('post/{post}', 'PostController@show')->name('post.show');
+Route::post('post/{post}', 'PostFavouriteController@store')
     ->name('post.favourite.store')
     ->middleware('auth');
 
 // Comment
-Route::post('post/{slug}/comment', 'PostCommentController@store')
+Route::post('post/{post}/comment', 'PostCommentController@store')
     ->name('post.comment.store')
     ->middleware('auth', ProtectAgainstSpam::class);
 
@@ -25,8 +25,8 @@ Route::post('comment/{comment}', 'CommentFavouriteController@store')
 
 // Tip
 Route::get('tip', 'TipController@index')->name('tip.index');
-Route::get('tip/{slug}', 'TipController@show')->name('tip.show');
-Route::post('tip/{slug}', 'TipFavouriteController@store')
+Route::get('tip/{tip}', 'TipController@show')->name('tip.show');
+Route::post('tip/{tip}', 'TipFavouriteController@store')
     ->name('tip.favourite.store')
     ->middleware('auth');
 

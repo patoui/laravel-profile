@@ -22,9 +22,9 @@ class Enemy {
   }
 
   shot() {
-    this.health -= (this.health > 0 ? 1 : 0);
+    this.health = Math.max(this.health - 1, 0);
 
-    if (this.health === 0) {
+    if (this.isDead()) {
       this.stop();
     }
   }
@@ -64,8 +64,8 @@ function create() {
     .setFill('#000000')
     .setShadow(1, 1, '#333333', 1);
 
-  this.input.on('gameobjectup', function (pointer, gameobject) {
-    if (gameobject === enemyOne.physics) {
+  this.input.on('gameobjectdown', function (pointer, gameobject) {
+    if (!enemyOne.isDead() && gameobject === enemyOne.physics) {
       enemyOne.shot();
       this.kill_count += (enemyOne.isDead() ? 1 : 0);
     }

@@ -1,13 +1,16 @@
 includes:
     - ./vendor/nunomaduro/larastan/extension.neon
+
 parameters:
     paths:
         - app
 
-    level: 8
+    level: 5
 
     ignoreErrors:
-        - '#Internal error: Function ReflectionType::__toString()#'
+        - '#Unsafe usage of new static#'
+        - '#Call to function is_array\(\) with string will always evaluate to false.#'
+        - '#Internal error: Function ReflectionType::__toString\(\)#'
         - '#Call to an undefined static method Illuminate\\Support\\Facades\\Redis::incr\(\)#'
         - '#Call to an undefined static method Zttp\\Zttp::get\(\)\.#'
 

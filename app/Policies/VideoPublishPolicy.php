@@ -9,8 +9,8 @@ class VideoPublishPolicy
 {
     use HandlesAuthorization;
 
-    public function publish(User $user)
+    public function publish(User $user): bool
     {
-        return $user->is_admin;
+        return (bool) $user->is_admin;
     }
 }

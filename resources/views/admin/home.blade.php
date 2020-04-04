@@ -63,8 +63,8 @@
         </div>
     </div>
     <div class="w-1/5 text-right">
-        <a class="mr-2" href="{{ route('admin.tip.edit', ['id' => $tip->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
-        <a href="{{ route('admin.tip.publish', ['id' => $tip->id]) }}">
+        <a class="mr-2" href="{{ route('admin.tip.edit', ['tip' => $tip->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+        <a href="{{ route('admin.tip.publish', ['tip' => $tip->id]) }}">
             <i class="{{ $tip->published_at ? 'fas' : 'far' }} fa-file"></i>
         </a>
     </div>

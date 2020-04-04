@@ -19,11 +19,8 @@ class PostController extends Controller
         return view('post.index')->with('posts', $posts);
     }
 
-    public function show(Request $request, string $slug) : View
+    public function show(Request $request, Post $post) : View
     {
-        /** @var Post $post */
-        $post = Post::with('comments.owner')->slug($slug)->firstOrFail();
-
         $post->analytics()->create([
             'headers' => json_encode($request->headers->all()),
         ]);

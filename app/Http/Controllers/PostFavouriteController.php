@@ -11,12 +11,10 @@ use function redirect;
 
 class PostFavouriteController extends Controller
 {
-    public function store(Request $request, string $slug) : RedirectResponse
+    public function store(Request $request, Post $post) : RedirectResponse
     {
-        $post = Post::slug($slug)->firstOrFail();
-
         $request->user()->toggleFavourite($post);
 
-        return redirect()->route('post.show', ['post' => $slug]);
+        return redirect()->route('post.show', ['post' => $post->slug]);
     }
 }

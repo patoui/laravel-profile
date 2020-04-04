@@ -23,11 +23,8 @@ class TipController extends Controller
         return view('tip.index')->with('tips', $tip);
     }
 
-    public function show(Request $request, string $slug) : View
+    public function show(Request $request, Tip $tip) : View
     {
-        /** @var Tip $tip */
-        $tip = Tip::slug($slug)->firstOrFail();
-
         $tip->analytics()->create([
             'headers' => json_encode($request->headers->all()),
         ]);

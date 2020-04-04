@@ -64,4 +64,9 @@ class Tip extends Model
     {
         return route('tip.show', ['tip' => $this->slug]);
     }
+
+    public static function findBySlug(string $slug): ?self
+    {
+        return self::where('slug', $slug)->first();
+    }
 }

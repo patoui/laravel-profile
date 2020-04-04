@@ -62,13 +62,13 @@ class RouteServiceProvider extends ServiceProvider
             'namespace' => $this->namespace . '\Admin',
             'prefix' => 'admin',
         ], static function (Router $router) : void {
-            $router->bind('post', static function (int $id) {
-                $post = Post::find($id);
+            $router->bind('post', static function (string $slug) {
+                $post = Post::findBySlug($slug);
                 abort_if(! $post, 404);
                 return  $post;
             });
-            $router->bind('tip', static function (int $id) {
-                $tip = Tip::find($id);
+            $router->bind('tip', static function (string $slug) {
+                $tip = Tip::findBySlug($slug);
                 abort_if(! $tip, 404);
                 return $tip;
             });

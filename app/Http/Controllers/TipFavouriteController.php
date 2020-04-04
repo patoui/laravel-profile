@@ -11,12 +11,10 @@ use function redirect;
 
 class TipFavouriteController extends Controller
 {
-    public function store(Request $request, string $slug) : RedirectResponse
+    public function store(Request $request, Tip $tip) : RedirectResponse
     {
-        $tip = Tip::slug($slug)->firstOrFail();
-
         $request->user()->toggleFavourite($tip);
 
-        return redirect()->route('tip.show', ['tip' => $slug]);
+        return redirect()->route('tip.show', ['tip' => $tip->slug]);
     }
 }

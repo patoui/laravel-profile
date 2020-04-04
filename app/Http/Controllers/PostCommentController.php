@@ -15,15 +15,14 @@ use function response;
 class PostCommentController extends Controller
 {
     /**
+     * @param Request $request
+     * @param Post    $post
      * @return JsonResponse|RedirectResponse
      *
      * @throws ValidationException
      */
-    public function store(Request $request, string $slug)
+    public function store(Request $request, Post $post)
     {
-        /** @var Post $post */
-        $post = Post::slug($slug)->firstOrFail();
-
         $this->validate(
             $request,
             ['body' => 'required|string'],

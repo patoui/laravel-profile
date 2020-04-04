@@ -103,4 +103,9 @@ class Post extends Model implements Feedable
     {
         return self::published()->latest()->get()->all();
     }
+
+    public static function findBySlug(string $slug): ?self
+    {
+        return self::where('slug', $slug)->first();
+    }
 }

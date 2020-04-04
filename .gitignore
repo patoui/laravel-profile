@@ -12,3 +12,4 @@ Homestead.json
 Homestead.yaml
 .env
 package-lock.json
+.phpunit.result.cache

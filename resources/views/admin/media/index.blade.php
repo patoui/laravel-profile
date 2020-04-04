@@ -25,8 +25,8 @@
                 <p class="mt-2 mb-2 text-sm text-gray-700">{{ $file->created_at }}</p>
             </div>
             <div class="w-1/5 text-right">
-                <a class="mr-2" href="{{ route('admin.media.edit', ['id' => $file->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
-                <a class="mr-2" href="{{ route('admin.media.delete', ['id' => $file->id]) }}"><i class="fas fa-trash" aria-hidden="true"></i></a>
+                <a class="mr-2" href="{{ route('admin.media.edit', ['media' => $file->id]) }}"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                <a class="mr-2" href="{{ route('admin.media.delete', ['media' => $file->id]) }}"><i class="fas fa-trash" aria-hidden="true"></i></a>
             </div>
         </div>
     @endforeach

@@ -13,7 +13,7 @@ class UserMentioned extends Notification
     use Queueable;
 
     /** @var Comment */
-    protected $comment;
+    protected Comment $comment;
 
     public function __construct(Comment $comment)
     {
@@ -26,11 +26,11 @@ class UserMentioned extends Notification
         return ['database'];
     }
 
-    /** @return array<string> */
+    /** @return array<string, string|null> */
     public function toArray() : array
     {
         return [
-            'message' => $this->comment->owner->name . ' mentioned you in ' . $this->comment->post->title,
+            'message' => ($this->comment->owner->name ?? '') . ' mentioned you in ' . ($this->comment->post->title ?? ''),
             'link' => $this->comment->path,
         ];
     }

@@ -31,12 +31,13 @@ class UserCommented extends Notification
 
     public function toMail() : MailMessage
     {
+        $title = $this->comment->post->title ?? '';
         return (new MailMessage())
-            ->subject('Someone commented on \'' . $this->comment->post->title . '\'!')
-            ->greeting('Someone commented on \'' . $this->comment->post->title . '\'!')
+            ->subject('Someone commented on \'' . $title . '\'!')
+            ->greeting('Someone commented on \'' . $title . '\'!')
             ->action(
                 'Click here to view it',
-                app(UrlGenerator::class)->to($this->comment->path)
+                app(UrlGenerator::class)->to(($this->comment->path ?? ''))
             )
             ->line('Comment contents:')
             ->line($this->comment->body);

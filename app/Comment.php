@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use function preg_match_all;
 
+/**
+ * Class Comment
+ * @package App
+ * @property Post $post
+ */
 class Comment extends Model
 {
     use RecordsActivity;
@@ -44,7 +49,7 @@ class Comment extends Model
 
     public function getPathAttribute() : ?string
     {
-        return $this->post->path . '#comment' . $this->id;
+        return ($this->post->path ?? '') . '#comment' . $this->id;
     }
 
     public function favourites() : MorphMany

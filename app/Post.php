@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Carbon;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
@@ -18,6 +18,17 @@ use function strip_tags;
 use function substr;
 use function trim;
 
+/**
+ * Class Post
+ * @package App
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string $body
+ * @property Carbon $published_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ */
 class Post extends Model implements Feedable
 {
     use HasTags, Publishes, RecordsActivity;

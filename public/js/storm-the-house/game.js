@@ -25,6 +25,7 @@ class Enemy {
     this.health = Math.max(this.health - 1, 0);
 
     if (this.isDead()) {
+      this.physics.removeInteractive();
       this.stop();
     }
   }

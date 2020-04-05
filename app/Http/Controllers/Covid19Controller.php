@@ -45,6 +45,7 @@ class Covid19Controller
         $this->is_show_regression = (bool) $is_show_regression;
 
         $countries = $this->getCountries();
+        usort($countries, fn ($a, $b) => strcmp($a['Slug'], $b['Slug']));
 
         $country_slugs = $request->input('country_slugs', ['canada']);
         $country_label = $this->getCountryLabels($country_slugs);

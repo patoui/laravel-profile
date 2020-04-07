@@ -38,6 +38,15 @@ class Covid19Controller
         $is_show_deaths = $request->input('is_show_deaths', '1');
         $is_show_recovered = $request->input('is_show_recovered');
         $is_show_regression = $request->input('is_show_regression');
+        $not_enough_data = false;
+
+        $c_from = Carbon::parse($from);
+        $c_to = Carbon::parse($to);
+
+        if ($is_show_regression && $c_from->diffInDays($c_to) < 7) {
+            $is_show_regression = false;
+            $not_enough_data = true;
+        }
 
         $this->is_show_confirmed = (bool) $is_show_confirmed;
         $this->is_show_deaths = (bool) $is_show_deaths;
@@ -49,9 +58,6 @@ class Covid19Controller
 
         $country_slugs = $request->input('country_slugs', ['canada']);
         $country_label = $this->getCountryLabels($country_slugs);
-
-        $c_from = Carbon::parse($from);
-        $c_to = Carbon::parse($to);
 
         $table_data = $this->getTableData($country_slugs, $c_from, $c_to);
         $graph_data = $this->getGraphData($country_slugs, $c_from, $c_to);
@@ -68,6 +74,7 @@ class Covid19Controller
             ->with('is_show_deaths', $is_show_deaths)
             ->with('is_show_recovered', $is_show_recovered)
             ->with('is_show_regression', $is_show_regression)
+            ->with('not_enough_data', $not_enough_data)
             ->with('country_label', $country_label)
             ->with('countries', $countries)
             ->with('table_data', $table_data)
@@ -241,7 +248,11 @@ class Covid19Controller
         $exponential_data = array_map(static function ($key, $value) {
             return [$key, $value];
         }, array_keys($confirmed_cases), array_values($confirmed_cases));
-        $exponential_data = array_column(RegressionFactory::exponential($exponential_data)->getResultSequence(), '1');
+        if (count($exponential_data) >= 6) {
+            $exponential_data = array_column(RegressionFactory::exponential($exponential_data)->getResultSequence(), '1');
+        } else {
+            $exponential_data = array_fill(0, count($exponential_data), 0);
+        }
         return array_map('round', $exponential_data);
     }
 

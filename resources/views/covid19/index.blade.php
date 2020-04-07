@@ -207,6 +207,9 @@
     </div>
 @endsection
 
+@if ($not_enough_data)
+    <script>alert('Regression requires at least 7 days worth of data')</script>
+@endif
 @section('javascript')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script>

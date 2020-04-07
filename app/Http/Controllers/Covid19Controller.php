@@ -249,7 +249,10 @@ class Covid19Controller
             return [$key, $value];
         }, array_keys($confirmed_cases), array_values($confirmed_cases));
         if (count($exponential_data) >= 6) {
-            $exponential_data = array_column(RegressionFactory::exponential($exponential_data)->getResultSequence(), '1');
+            $exponential_data = array_column(
+                RegressionFactory::exponential($exponential_data)->getResultSequence(),
+                '1'
+            );
         } else {
             $exponential_data = array_fill(0, count($exponential_data), 0);
         }

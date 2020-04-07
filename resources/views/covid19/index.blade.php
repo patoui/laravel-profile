@@ -213,7 +213,7 @@
 @section('javascript')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script>
-      var options = {
+      let options = {
         responsive: true,
         maintainAspectRatio: true,
         aspectRatio: 1.25,
@@ -247,7 +247,7 @@
         }
       };
 
-      var config = {
+      let config = {
         type: 'line',
         data: {
           labels: {!! json_encode($graph_labels) !!},
@@ -256,14 +256,15 @@
         options: options
       };
 
-      options.title.text = 'New Cases by Day'
-      var bar_config = {
+      let bar_options = JSON.parse(JSON.stringify(options));
+      bar_options.title.text = 'New Cases by Day';
+      let bar_config = {
         type: 'bar',
         data: {
           labels: {!! json_encode($graph_labels) !!},
           datasets: {!! json_encode($bar_data) !!}
         },
-        options: options
+        options: bar_options
       };
 
       window.onload = function () {

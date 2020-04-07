@@ -91,9 +91,23 @@
                     <label class="w-full block text-gray-600 font-bold">
                         <input class="mr-2 leading-tight checkbox-toggle" type="checkbox" id="is_show_graph" value="1" {{ $is_show_graph ? 'checked' : '' }}>
                         <input type="hidden" id="is_show_graph_hidden" name="is_show_graph" value="{{ (int) $is_show_graph }}">
-                        <span class="text-xs uppercase">SHOW GRAPH</span>
+                        <span class="text-xs uppercase">SHOW CUMULATIVE</span>
                     </label>
                 </div>
+            </div>
+
+            <div class="flex flex-wrap mb-4">
+                <div class="w-1/2">
+                    <label class="w-full block text-gray-600 font-bold">
+                        <input class="mr-2 leading-tight checkbox-toggle" type="checkbox" id="is_show_bar" value="1" {{ $is_show_bar ? 'checked' : '' }}>
+                        <input type="hidden" id="is_show_bar_hidden" name="is_show_bar" value="{{ (int) $is_show_bar }}">
+                        <span class="text-xs uppercase">SHOW NEW</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap pt-4 mb-4 text-center border-t-2">
+                <h1 class="w-full text-gray-600">FILTER VALUES</h1>
             </div>
 
             <div class="flex flex-wrap mb-4">
@@ -143,16 +157,16 @@
                 <thead>
                 <tr>
                     @if ($is_show_confirmed)
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
+                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Confirmed</th>
                     @endif
                     @if ($is_show_deaths)
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Deaths</th>
+                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Deaths</th>
                     @endif
                     @if ($is_show_recovered)
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Recovered</th>
+                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Recovered</th>
                     @endif
                     @if ($is_show_regression)
-                    <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Exp. Regression</th>
+                        <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100">Exp. Regression</th>
                     @endif
                     <th class="text-sm font-semibold text-gray-700 p-2 bg-gray-100 text-right">Date</th>
                 </tr>
@@ -161,16 +175,16 @@
                 @foreach($table_data as $row)
                     <tr>
                         @if ($is_show_confirmed)
-                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['confirmed'] }}</td>
+                            <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['confirmed'] }}</td>
                         @endif
                         @if ($is_show_deaths)
-                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['deaths'] }}</td>
+                            <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['deaths'] }}</td>
                         @endif
                         @if ($is_show_recovered)
-                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['recovered'] }}</td>
+                            <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['recovered'] }}</td>
                         @endif
                         @if ($is_show_regression)
-                        <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['regression'] }}</td>
+                            <td class="p-2 border-t border-gray-300 font-mono text-xs text-purple-700 whitespace-no-wrap">{{ $row['regression'] }}</td>
                         @endif
                         <td class="p-2 border-t border-gray-300 font-mono text-xs text-blue-700 whitespace-pre text-right">{{ $row['date'] }}</td>
                     </tr>
@@ -182,6 +196,10 @@
         @if ($is_show_graph)
             <canvas id="graph" style="display: block;"></canvas>
         @endif
+
+        @if ($is_show_bar)
+            <canvas id="bar" style="display: block;"></canvas>
+        @endif
     </div>
 
     <div class="w-full mt-8 mb-4 text-center">
@@ -192,45 +210,57 @@
 @section('javascript')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script>
+      var options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 1.25,
+        title: {
+          display: true,
+          text: 'Cumulative Cases by Day'
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: false,
+              labelString: 'Day'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: false,
+              labelString: 'Value'
+            }
+          }]
+        }
+      };
+
       var config = {
         type: 'line',
         data: {
           labels: {!! json_encode($graph_labels) !!},
           datasets: {!! json_encode($graph_data) !!}
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          aspectRatio: 1.25,
-          title: {
-            display: true,
-            text: 'Cumulative Cases by Day'
-          },
-          tooltips: {
-            mode: 'index',
-            intersect: false,
-          },
-          hover: {
-            mode: 'nearest',
-            intersect: true
-          },
-          scales: {
-            xAxes: [{
-              display: true,
-              scaleLabel: {
-                display: false,
-                labelString: 'Day'
-              }
-            }],
-            yAxes: [{
-              display: true,
-              scaleLabel: {
-                display: false,
-                labelString: 'Value'
-              }
-            }]
-          }
-        }
+        options: options
+      };
+
+      options.title.text = 'New Cases by Day'
+      var bar_config = {
+        type: 'bar',
+        data: {
+          labels: {!! json_encode($graph_labels) !!},
+          datasets: {!! json_encode($bar_data) !!}
+        },
+        options: options
       };
 
       window.onload = function () {
@@ -238,10 +268,14 @@
         if (graph_element) {
           new Chart(document.getElementById('graph').getContext('2d'), config);
         }
+        let bar_element = document.getElementById('bar');
+        if (bar_element) {
+          new Chart(document.getElementById('bar').getContext('2d'), bar_config);
+        }
         document.querySelectorAll('.checkbox-toggle').forEach(function (element) {
           element.addEventListener('click', function (e) {
-              document.querySelector('#' + e.target.id + '_hidden').value = e.target.checked ? 1 : 0;
-            });
+            document.querySelector('#' + e.target.id + '_hidden').value = e.target.checked ? 1 : 0;
+          });
         });
         document.querySelector('#add_comparison').addEventListener('click', function () {
           var country_item = document.querySelector('.country-item').cloneNode(true);

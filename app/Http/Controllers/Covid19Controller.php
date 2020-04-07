@@ -45,7 +45,7 @@ class Covid19Controller
         $this->is_show_regression = (bool) $is_show_regression;
 
         $countries = $this->getCountries();
-        usort($countries, fn ($a, $b) => strcmp($a['Slug'], $b['Slug']));
+        usort($countries, fn($a, $b) => strcmp($a['Slug'], $b['Slug']));
 
         $country_slugs = $request->input('country_slugs', ['canada']);
         $country_label = $this->getCountryLabels($country_slugs);
@@ -55,6 +55,7 @@ class Covid19Controller
 
         $table_data = $this->getTableData($country_slugs, $c_from, $c_to);
         $graph_data = $this->getGraphData($country_slugs, $c_from, $c_to);
+        $bar_data = $this->getBarData($country_slugs, $c_from, $c_to);
 
         return view('covid19.index')
             ->with('country_slugs', $country_slugs)
@@ -62,6 +63,7 @@ class Covid19Controller
             ->with('to', $to)
             ->with('is_show_table', $request->input('is_show_table'))
             ->with('is_show_graph', $request->input('is_show_graph', '1'))
+            ->with('is_show_bar', $request->input('is_show_bar', '1'))
             ->with('is_show_confirmed', $is_show_confirmed)
             ->with('is_show_deaths', $is_show_deaths)
             ->with('is_show_recovered', $is_show_recovered)
@@ -70,7 +72,8 @@ class Covid19Controller
             ->with('countries', $countries)
             ->with('table_data', $table_data)
             ->with('graph_labels', $this->getGraphLabels($country_slugs[0], $c_from, $c_to))
-            ->with('graph_data', $graph_data);
+            ->with('graph_data', $graph_data)
+            ->with('bar_data', $bar_data);
     }
 
     private function getCountries(): array
@@ -108,6 +111,11 @@ class Covid19Controller
 
         $data = Cache::get('covid19_confirmed_' . $country_slug, static function () use ($country_slug) {
             $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed")->json();
+            foreach ($data as $key => $set) {
+                $prev_cases = $data[$key - 1]['Cases'] ?? 0;
+                $current_cases = $set['Cases'] ?? 0;
+                $data[$key]['Difference'] = $current_cases - $prev_cases;
+            }
             Cache::put('covid19_confirmed_' . $country_slug, $data, Carbon::now()->addHour());
             return $data;
         });
@@ -125,6 +133,11 @@ class Covid19Controller
 
         $data = Cache::get('covid19_deaths_' . $country_slug, static function () use ($country_slug) {
             $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/deaths")->json();
+            foreach ($data as $key => $set) {
+                $prev_cases = $data[$key - 1]['Cases'] ?? 0;
+                $current_cases = $set['Cases'] ?? 0;
+                $data[$key]['Difference'] = $current_cases - $prev_cases;
+            }
             Cache::put('covid19_deaths_' . $country_slug, $data, Carbon::now()->addHour());
             return $data;
         });
@@ -142,6 +155,11 @@ class Covid19Controller
 
         $data = Cache::get('covid19_recovered_' . $country_slug, static function () use ($country_slug) {
             $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/recovered")->json();
+            foreach ($data as $key => $set) {
+                $prev_cases = $data[$key - 1]['Cases'] ?? 0;
+                $current_cases = $set['Cases'] ?? 0;
+                $data[$key]['Difference'] = $current_cases - $prev_cases;
+            }
             Cache::put('covid19_recovered_' . $country_slug, $data, Carbon::now()->addHour());
             return $data;
         });
@@ -338,6 +356,59 @@ class Covid19Controller
                     'data'            => $this->getCountryExponentialRegressionFiltered($country_slug, $from, $to),
                     'fill'            => false,
                     'borderDash'      => [5, 5],
+                ];
+            }
+        }
+
+        return $data;
+    }
+
+    private function getBarData(array $country_slugs, CarbonInterface $from, CarbonInterface $to): array
+    {
+        $data = [];
+        $is_multiple = count($country_slugs) > 1;
+
+        foreach ($country_slugs as $key => $country_slug) {
+            if ($this->is_show_confirmed) {
+                $data[] = [
+                    'label'           => 'Confirmed' . (
+                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        ),
+                    'backgroundColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
+                    'borderColor'     => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
+                    'data'            => array_column(
+                        $this->getCountryConfirmedFiltered($country_slug, $from, $to),
+                        'Difference'
+                    ),
+                    'fill'            => false,
+                ];
+            }
+            if ($this->is_show_deaths) {
+                $data[] = [
+                    'label'           => 'Deaths' . (
+                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        ),
+                    'backgroundColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
+                    'borderColor'     => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
+                    'data'            => array_column(
+                        $this->getCountryDeathsFiltered($country_slug, $from, $to),
+                        'Difference'
+                    ),
+                    'fill'            => false,
+                ];
+            }
+            if ($this->is_show_recovered) {
+                $data[] = [
+                    'label'           => 'Recovered' . (
+                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        ),
+                    'backgroundColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
+                    'borderColor'     => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
+                    'data'            => array_column(
+                        $this->getCountryRecoveredFiltered($country_slug, $from, $to),
+                        'Difference'
+                    ),
+                    'fill'            => false,
                 ];
             }
         }

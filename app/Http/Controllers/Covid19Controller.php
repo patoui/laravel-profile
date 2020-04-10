@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Covid19;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
@@ -25,6 +26,13 @@ class Covid19Controller
     private bool $is_show_deaths;
     private bool $is_show_recovered;
     private bool $is_show_regression;
+
+    private Covid19 $covid_19;
+
+    public function __construct(Covid19 $covid_19)
+    {
+        $this->covid_19 = $covid_19;
+    }
 
     public function index(Request $request): View
     {
@@ -116,16 +124,7 @@ class Covid19Controller
             return $this->confirmed[$country_slug];
         }
 
-        $data = Cache::get('covid19_confirmed_' . $country_slug, static function () use ($country_slug) {
-            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed")->json();
-            foreach ($data as $key => $set) {
-                $prev_cases = $data[$key - 1]['Cases'] ?? 0;
-                $current_cases = $set['Cases'] ?? 0;
-                $data[$key]['Difference'] = $current_cases - $prev_cases;
-            }
-            Cache::put('covid19_confirmed_' . $country_slug, $data, Carbon::now()->addHour());
-            return $data;
-        });
+        $data = $this->covid_19->getCountryConfirmed($country_slug);
 
         $this->confirmed[$country_slug] = $data;
 
@@ -138,16 +137,7 @@ class Covid19Controller
             return $this->deaths[$country_slug];
         }
 
-        $data = Cache::get('covid19_deaths_' . $country_slug, static function () use ($country_slug) {
-            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/deaths")->json();
-            foreach ($data as $key => $set) {
-                $prev_cases = $data[$key - 1]['Cases'] ?? 0;
-                $current_cases = $set['Cases'] ?? 0;
-                $data[$key]['Difference'] = $current_cases - $prev_cases;
-            }
-            Cache::put('covid19_deaths_' . $country_slug, $data, Carbon::now()->addHour());
-            return $data;
-        });
+        $data = $this->covid_19->getCountryDeaths($country_slug);
 
         $this->deaths[$country_slug] = $data;
 
@@ -160,16 +150,7 @@ class Covid19Controller
             return $this->recovered[$country_slug];
         }
 
-        $data = Cache::get('covid19_recovered_' . $country_slug, static function () use ($country_slug) {
-            $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/recovered")->json();
-            foreach ($data as $key => $set) {
-                $prev_cases = $data[$key - 1]['Cases'] ?? 0;
-                $current_cases = $set['Cases'] ?? 0;
-                $data[$key]['Difference'] = $current_cases - $prev_cases;
-            }
-            Cache::put('covid19_recovered_' . $country_slug, $data, Carbon::now()->addHour());
-            return $data;
-        });
+        $data = $this->covid_19->getCountryRecovered($country_slug);
 
         $this->recovered[$country_slug] = $data;
 

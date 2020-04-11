@@ -19,13 +19,13 @@ class ProcessCovid19 implements ShouldQueue
 
     public function handle(): void
     {
-        set_time_limit(500);
+        set_time_limit(1800);
         (new Covid19())->process(true);
     }
 
     public function failed(Exception $exception): void
     {
-        set_time_limit(500);
+        set_time_limit(1800);
         (new Covid19())->process(false);
     }
 }

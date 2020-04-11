@@ -21,7 +21,7 @@ class ProcessCovid19 implements ShouldQueue
     public function handle(): void
     {
         set_time_limit(1800);
-        (new Covid19())->process(true);
+        (new Covid19())->process();
     }
 
     public function failed(Exception $exception): void
@@ -29,7 +29,7 @@ class ProcessCovid19 implements ShouldQueue
         $last_slug = Cache::get('covid19_last_country_slug');
         if ($last_slug) {
             set_time_limit(1800);
-            (new Covid19())->process(true, $last_slug);
+            (new Covid19())->process($last_slug);
         }
     }
 }

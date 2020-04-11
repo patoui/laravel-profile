@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Cache;
 
 class ProcessCovid19 implements ShouldQueue
 {
@@ -25,7 +26,10 @@ class ProcessCovid19 implements ShouldQueue
 
     public function failed(Exception $exception): void
     {
-        set_time_limit(1800);
-        (new Covid19())->process(false);
+        $last_slug = Cache::get('covid19_last_country_slug');
+        if ($last_slug) {
+            set_time_limit(1800);
+            (new Covid19())->process(true, $last_slug);
+        }
     }
 }

@@ -9,9 +9,19 @@ use Zttp\Zttp;
 
 class Covid19
 {
-    public function process(bool $update_cache = false): void
+    public function process(bool $update_cache = false, string $last_slug = null): void
     {
-        foreach ($this->getCountries(true) as $country) {
+        $countries = $this->getCountries(true);
+
+        if ($last_slug) {
+            $last_index = array_search($last_slug, array_column($countries, 'Slug'), true);
+            if ($last_index) {
+                $countries = array_slice($countries, $last_index);
+            }
+        }
+
+        foreach ($countries as $country) {
+            Cache::put('covid19_last_country_slug', $country['Slug']);
             $this->getCountryConfirmed($country['Slug'], $update_cache);
             $this->getCountryDeaths($country['Slug'], $update_cache);
             $this->getCountryRecovered($country['Slug'], $update_cache);

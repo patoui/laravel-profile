@@ -21,7 +21,7 @@ class ProcessCovid19 implements ShouldQueue
     public function handle(): void
     {
         set_time_limit(1800);
-        (new Covid19())->process(Cache::has('covid19_last_country_slug'));
+        (new Covid19())->process(Cache::get('covid19_last_country_slug'));
         Cache::forget('covid19_last_country_slug');
     }
 

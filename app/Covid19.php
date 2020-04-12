@@ -47,6 +47,16 @@ class Covid19
         return Cache::get('covid19_countries', fn() => $this->setCountries());
     }
 
+    public function getCountryIndex(string $country_slug): int
+    {
+        return array_search($country_slug, array_column($this->getCountries(), 'Slug'), true);
+    }
+
+    public function getCountryLabelBySlug(string $country_slug): string
+    {
+        return array_column($this->getCountries(), 'Country')[$this->getCountryIndex($country_slug)] ?? '';
+    }
+
     public function setCountryConfirmed(string $country_slug): array
     {
         $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed")->json();

@@ -6,11 +6,9 @@ use App\Covid19;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\View\View;
 use Regression\RegressionFactory;
-use Zttp\Zttp;
 
 class Covid19Controller
 {
@@ -61,7 +59,7 @@ class Covid19Controller
         $this->is_show_recovered = (bool) $is_show_recovered;
         $this->is_show_regression = (bool) $is_show_regression;
 
-        $countries = $this->getCountries();
+        $countries = $this->covid_19->getCountries();
         usort($countries, fn($a, $b) => strcmp($a['Slug'], $b['Slug']));
 
         $country_slugs = $request->input('country_slugs', ['canada']);
@@ -91,29 +89,10 @@ class Covid19Controller
             ->with('bar_data', $bar_data);
     }
 
-    private function getCountries(): array
-    {
-        return Cache::get('covid19_countries', static function () {
-            $data = Zttp::get('https://api.covid19api.com/countries')->json();
-            Cache::put('covid19_countries', $data, Carbon::now()->addHour());
-            return $data;
-        });
-    }
-
-    private function getCountryIndex(string $country_slug): int
-    {
-        return array_search($country_slug, array_column($this->getCountries(), 'Slug'), true);
-    }
-
-    private function getCountryLabelBySlug(string $country_slug): string
-    {
-        return array_column($this->getCountries(), 'Country')[$this->getCountryIndex($country_slug)] ?? '';
-    }
-
     private function getCountryLabels(array $country_slugs): string
     {
         return ltrim(array_reduce($country_slugs, function ($label, $slug) {
-            $label .= ' vs ' . $this->getCountryLabelBySlug($slug);
+            $label .= ' vs ' . $this->covid_19->getCountryLabelBySlug($slug);
             return $label;
         }, ''), ' vs ');
     }
@@ -302,7 +281,7 @@ class Covid19Controller
             if ($this->is_show_confirmed) {
                 $data[] = [
                     'label'           => 'Confirmed' . (
-                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        $is_multiple ? ' (' . $this->covid_19->getCountryLabelBySlug($country_slug) . ')' : ''
                         ),
                     'backgroundColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
@@ -316,7 +295,7 @@ class Covid19Controller
             if ($this->is_show_deaths) {
                 $data[] = [
                     'label'           => 'Deaths' . (
-                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        $is_multiple ? ' (' . $this->covid_19->getCountryLabelBySlug($country_slug) . ')' : ''
                         ),
                     'backgroundColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
@@ -330,7 +309,7 @@ class Covid19Controller
             if ($this->is_show_recovered) {
                 $data[] = [
                     'label'           => 'Recovered' . (
-                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        $is_multiple ? ' (' . $this->covid_19->getCountryLabelBySlug($country_slug) . ')' : ''
                         ),
                     'backgroundColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
@@ -344,7 +323,7 @@ class Covid19Controller
             if ($this->is_show_regression) {
                 $data[] = [
                     'label'           => 'Exp. Regression' . (
-                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        $is_multiple ? ' (' . $this->covid_19->getCountryLabelBySlug($country_slug) . ')' : ''
                         ),
                     'backgroundColor' => $key === 0 ? 'rgba(252, 100, 6, 0.5)' : 'rgba(19, 150, 175, 0.5)',
                     'borderColor'     => $key === 0 ? 'rgba(252, 100, 6, 0.5)' : 'rgba(19, 150, 175, 0.5)',
@@ -367,7 +346,7 @@ class Covid19Controller
             if ($this->is_show_confirmed) {
                 $data[] = [
                     'label'           => 'Confirmed' . (
-                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        $is_multiple ? ' (' . $this->covid_19->getCountryLabelBySlug($country_slug) . ')' : ''
                         ),
                     'backgroundColor' => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(0, 0, 0, 1)' : 'rgba(150, 150, 150, 1)',
@@ -381,7 +360,7 @@ class Covid19Controller
             if ($this->is_show_deaths) {
                 $data[] = [
                     'label'           => 'Deaths' . (
-                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        $is_multiple ? ' (' . $this->covid_19->getCountryLabelBySlug($country_slug) . ')' : ''
                         ),
                     'backgroundColor' => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(255, 0, 0, 1)' : 'rgba(255, 127, 0, 1)',
@@ -395,7 +374,7 @@ class Covid19Controller
             if ($this->is_show_recovered) {
                 $data[] = [
                     'label'           => 'Recovered' . (
-                        $is_multiple ? ' (' . $this->getCountryLabelBySlug($country_slug) . ')' : ''
+                        $is_multiple ? ' (' . $this->covid_19->getCountryLabelBySlug($country_slug) . ')' : ''
                         ),
                     'backgroundColor' => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',
                     'borderColor'     => $key === 0 ? 'rgba(0, 255, 0, 1)' : 'rgba(0, 0, 255, 1)',

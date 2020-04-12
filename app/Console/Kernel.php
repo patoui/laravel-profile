@@ -20,7 +20,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule) : void
     {
-         $schedule->job(new ProcessCovid19)->twiceDaily(1, 13);
+         $schedule->job(new ProcessCovid19)->twiceDaily(0, 6);
+         $schedule->job(new ProcessCovid19)->twiceDaily(12, 18);
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -21,7 +22,7 @@ use function trim;
 /**
  * Class Post
  * @package App
- * @property int $id
+ * @property int    $id
  * @property string $title
  * @property string $slug
  * @property string $body
@@ -42,43 +43,43 @@ class Post extends Model implements Feedable
     /** @var array<string> */
     protected $casts = ['published_at' => 'datetime'];
 
-    public function analytics() : HasMany
+    public function analytics(): HasMany
     {
         return $this->hasMany(PostAnalytics::class);
     }
 
-    public function comments() : HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class)->whereNull('comment_id');
     }
 
     /** @param array<mixed> $data */
-    public function createComment(array $data) : Model
+    public function createComment(array $data): Model
     {
         return $this->comments()->create($data);
     }
 
-    public function favourites() : MorphMany
+    public function favourites(): MorphMany
     {
         return $this->morphMany(Favourite::class, 'favouritable');
     }
 
-    public function getFavouritesCountAttribute() : int
+    public function getFavouritesCountAttribute(): int
     {
         return $this->favourites()->count();
     }
 
-    public function scopeSlug(Builder $builder, string $slug) : Builder
+    public function scopeSlug(Builder $builder, string $slug): Builder
     {
         return $builder->where('slug', $slug);
     }
 
-    public function getShortTitleAttribute() : string
+    public function getShortTitleAttribute(): string
     {
         return substr($this->title, 0, 50);
     }
 
-    public function getShortBodyAttribute() : string
+    public function getShortBodyAttribute(): string
     {
         return substr( // get first 100 characters
             trim( // remove trailing whitespace
@@ -93,15 +94,15 @@ class Post extends Model implements Feedable
         );
     }
 
-    public function getPathAttribute() : string
+    public function getPathAttribute(): string
     {
         return route('post.show', ['post' => $this->slug]);
     }
 
-    public function toFeedItem() : FeedItem
+    public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
-            ->id($this->id)
+            ->id((string) $this->id)
             ->title($this->title)
             ->summary($this->short_body)
             ->updated($this->updated_at)
@@ -109,10 +110,9 @@ class Post extends Model implements Feedable
             ->author('Patrique Ouimet');
     }
 
-    /** @return array<mixed> */
-    public static function getFeedItems() : array
+    public static function getFeedItems(): Collection
     {
-        return self::published()->latest()->get()->all();
+        return self::published()->latest()->get();
     }
 
     public static function findBySlug(string $slug): ?self

@@ -137,7 +137,7 @@ class Covid19
         if (!$response->isOk()) {
             $status = $response->status();
             $body = $response->body();
-            throw new RuntimeException("Error occurred while fetching data ({$status}): {$body}");
+            throw new RuntimeException("Error occurred while fetching data {$url} ({$status}): {$body}");
         }
 
         $data = $response->json();
@@ -145,7 +145,7 @@ class Covid19
         if (!$data) {
             $status = $response->status();
             $body = $response->body();
-            throw new RuntimeException("No data returned ({$status}): {$body}");
+            throw new RuntimeException("No data returned {$url} ({$status}): {$body}");
         }
 
         return $data;

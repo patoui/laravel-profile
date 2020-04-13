@@ -13,5 +13,6 @@ parameters:
         - '#Internal error: Function ReflectionType::__toString\(\)#'
         - '#Call to an undefined static method Illuminate\\Support\\Facades\\Redis::[a-zA-Z0-9\\_]+\(\)#'
         - '#Call to an undefined static method Zttp\\Zttp::get\(\)\.#'
+        - '#Binary operation "-" between int|string and 1 results in an error#'
 
     checkMissingIterableValueType: false

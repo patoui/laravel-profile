@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Cache;
+use Throwable;
 
 class ProcessCovid19 implements ShouldQueue
 {
@@ -25,7 +26,7 @@ class ProcessCovid19 implements ShouldQueue
         Cache::forget('covid19_last_country_slug');
     }
 
-    public function failed(Exception $exception): void
+    public function failed(Throwable $exception): void
     {
         $last_slug = Cache::get('covid19_last_country_slug');
         if ($last_slug) {

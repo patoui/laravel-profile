@@ -6,6 +6,7 @@ namespace App;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use RuntimeException;
 use Zttp\Zttp;
 
 class Covid19
@@ -33,7 +34,7 @@ class Covid19
 
     public function setCountries(): array
     {
-        $data = Zttp::get('https://api.covid19api.com/countries')->json();
+        $data = $this->makeRequest('https://api.covid19api.com/countries');
         Cache::put('covid19_countries', $data);
         return $data;
     }
@@ -59,7 +60,7 @@ class Covid19
 
     public function setCountryConfirmed(string $country_slug): array
     {
-        $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed")->json();
+        $data = $this->makeRequest("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed");
         foreach ($data as $key => $set) {
             $prev_cases = $data[$key - 1]['Cases'] ?? 0;
             $current_cases = $set['Cases'] ?? 0;
@@ -83,7 +84,7 @@ class Covid19
 
     public function setCountryDeaths(string $country_slug): array
     {
-        $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/deaths")->json();
+        $data = $this->makeRequest("https://api.covid19api.com/total/country/{$country_slug}/status/deaths");
         foreach ($data as $key => $set) {
             $prev_cases = $data[$key - 1]['Cases'] ?? 0;
             $current_cases = $set['Cases'] ?? 0;
@@ -107,7 +108,7 @@ class Covid19
 
     public function setCountryRecovered(string $country_slug): array
     {
-        $data = Zttp::get("https://api.covid19api.com/total/country/{$country_slug}/status/recovered")->json();
+        $data = $this->makeRequest("https://api.covid19api.com/total/country/{$country_slug}/status/recovered");
         foreach ($data as $key => $set) {
             $prev_cases = $data[$key - 1]['Cases'] ?? 0;
             $current_cases = $set['Cases'] ?? 0;
@@ -127,5 +128,26 @@ class Covid19
             'covid19_recovered_' . $country_slug,
             fn() => $this->setCountryRecovered($country_slug)
         );
+    }
+
+    private function makeRequest(string $url): array
+    {
+        $response = Zttp::get($url);
+
+        if (!$response->isOk()) {
+            $status = $response->status();
+            $body = $response->body();
+            throw new RuntimeException("Error occurred while fetching data ({$status}): {$body}");
+        }
+
+        $data = $response->json();
+
+        if (!$data) {
+            $status = $response->status();
+            $body = $response->body();
+            throw new RuntimeException("No data returned ({$status}): {$body}");
+        }
+
+        return $data;
     }
 }

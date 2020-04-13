@@ -142,7 +142,7 @@ class Covid19
 
         $data = $response->json();
 
-        if (!$data) {
+        if (!is_array($data)) {
             $status = $response->status();
             $body = $response->body();
             throw new RuntimeException("No data returned {$url} ({$status}): {$body}");

@@ -69,7 +69,6 @@ Route::post('sms', 'SmsController@store')
 Route::feeds();
 
 Route::get('covid19', 'Covid19Controller@index')->name('covid19');
-Route::post('covid19', 'Covid19Controller@index');
 
 if (app()->environment('development')) {
     Route::view('storm-the-house', 'games/storm-the-house/index');

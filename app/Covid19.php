@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use RuntimeException;
@@ -117,6 +118,56 @@ class Covid19
             'covid19_recovered_' . $country_slug,
             fn() => $this->setCountryRecovered($country_slug)
         );
+    }
+
+    public function getLiveCountryData(string $country_slug): array
+    {
+        $query = http_build_query([
+            'from' => Carbon::yesterday()->toISOString(),
+            'to'   => Carbon::today()->toISOString(),
+        ]);
+
+        $today_slug = Carbon::today()->format('Y_m_d_H_i_s');
+        $confirmed_key = "live_country_{$country_slug}_confirmed_{$today_slug}";
+        $deaths_key = "live_country_{$country_slug}_deaths_{$today_slug}";
+        $recovered_key = "live_country_{$country_slug}_recovered_{$today_slug}";
+
+        $confirmed = Cache::get($confirmed_key, function () use ($confirmed_key, $country_slug, $query) {
+            $data = $this->makeRequest(
+                "https://api.covid19api.com/country/{$country_slug}/status/confirmed/live?" . $query
+            );
+            Cache::put($confirmed_key, $data, Carbon::now()->addHour());
+            return $data;
+        });
+        $deaths = Cache::get($deaths_key, function () use ($deaths_key, $country_slug, $query) {
+            $data = $this->makeRequest(
+                "https://api.covid19api.com/country/{$country_slug}/status/deaths/live?" . $query
+            );
+            Cache::put($deaths_key, $data, Carbon::now()->addHour());
+            return $data;
+        });
+        $recovered = Cache::get($recovered_key, function () use ($recovered_key, $country_slug, $query) {
+            $data = $this->makeRequest(
+                "https://api.covid19api.com/country/{$country_slug}/status/recovered/live?" . $query
+            );
+            Cache::put($recovered_key, $data, Carbon::now()->addHour());
+            return $data;
+        });
+
+        $data = [];
+        foreach ($confirmed as $key => $confirm) {
+            if (!empty($confirm['Province'])) {
+                $data[$confirm['Province']] = [
+                    'label'     => $confirm['Province'],
+                    'confirmed' => $confirm['Cases'] ?? 0,
+                    'deaths'    => $deaths[$key]['Cases'] ?? 0,
+                    'recovered' => $recovered[$key]['Cases'] ?? 0,
+                    'date'      => Carbon::parse($confirm['Date'])->format('M jS'),
+                ];
+            }
+        }
+
+        return $data;
     }
 
     public function setCountries(): array

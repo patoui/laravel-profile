@@ -64,6 +64,7 @@ class Covid19Controller
 
         $country_slugs = $request->input('country_slugs', ['canada']);
         $country_label = $this->getCountryLabels($country_slugs);
+        $country_details = $this->covid_19->getCountryDetails($country_slugs);
 
         $table_data = $this->getTableData($country_slugs, $c_from, $c_to);
         $graph_data = $this->getGraphData($country_slugs, $c_from, $c_to);
@@ -71,6 +72,7 @@ class Covid19Controller
 
         return view('covid19.index')
             ->with('country_slugs', $country_slugs)
+            ->with('country_details', $country_details)
             ->with('from', $from)
             ->with('to', $to)
             ->with('is_show_table', $request->input('is_show_table'))
@@ -87,6 +89,13 @@ class Covid19Controller
             ->with('graph_labels', $this->getGraphLabels($country_slugs[0], $c_from, $c_to))
             ->with('graph_data', $graph_data)
             ->with('bar_data', $bar_data);
+    }
+
+    public function show(string $country_slug): View
+    {
+        return view('covid19.show')
+            ->with('country_label', $this->covid_19->getCountryLabelBySlug($country_slug))
+            ->with('provinces', $this->covid_19->getLiveCountryData($country_slug));
     }
 
     private function getCountryLabels(array $country_slugs): string

@@ -14,6 +14,11 @@
 @section('content')
     <div class="flex flex-col w-full">
         <h1 class="block text-4xl mb-4 text-center w-full">COVID-19 Stats: {{ $country_label }}</h1>
+        <div class="mb-4 text-center">
+            @foreach($country_details as $slug => $label)
+            <a href="{{ route('covid19.show', ['country_slug' => $slug]) }}" class="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ "{$label} Stats" }}</a>
+            @endforeach
+        </div>
         <form action="{{ route('covid19.index') }}" method="get" class="mb-4">
             @foreach($country_slugs as $country_slug)
                 <div class="country-container">

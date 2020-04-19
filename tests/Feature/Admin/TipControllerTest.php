@@ -69,7 +69,7 @@ class TipControllerTest extends TestCase
         $tip = factory(Tip::class)->create();
 
         // Act
-        $response = $this->get('admin/tip/' . $tip->slug . '/edit');
+        $response = $this->get('admin/tip/' . $tip->id . '/edit');
 
         // Assert
         $response->assertStatus(200);
@@ -89,7 +89,7 @@ class TipControllerTest extends TestCase
         ]);
 
         // Act
-        $response = $this->put("admin/tip/{$tip->slug}", [
+        $response = $this->put("admin/tip/{$tip->id}", [
             'title' => 'Second Title',
             'body' => 'Second Body',
             'slug' => 'second-title',

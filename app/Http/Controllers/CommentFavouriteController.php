@@ -15,6 +15,6 @@ class CommentFavouriteController extends Controller
     {
         $request->user()->toggleFavourite($comment);
 
-        return redirect()->route('post.show', ['post' => ($comment->post->slug ?? '')]);
+        return redirect()->route('post.show', ['post_slug' => ($comment->post->slug ?? '')]);
     }
 }

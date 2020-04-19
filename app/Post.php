@@ -96,7 +96,7 @@ class Post extends Model implements Feedable
 
     public function getPathAttribute(): string
     {
-        return route('post.show', ['post' => $this->slug]);
+        return route('post.show', ['post_slug' => $this->slug]);
     }
 
     public function toFeedItem(): FeedItem

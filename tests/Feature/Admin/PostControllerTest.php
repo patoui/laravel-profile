@@ -70,7 +70,7 @@ class PostControllerTest extends TestCase
         $post = factory(Post::class)->create();
 
         // Act
-        $response = $this->get(route('admin.post.edit', ['post' => $post->slug]));
+        $response = $this->get(route('admin.post.edit', ['post' => $post->id]));
 
         // Assert
         $response->assertStatus(200);
@@ -90,7 +90,7 @@ class PostControllerTest extends TestCase
         ]);
 
         // Act
-        $response = $this->put("admin/post/{$post->slug}", [
+        $response = $this->put("admin/post/{$post->id}", [
             'title' => 'Second Title',
             'body' => 'Second Body',
             'slug' => 'second-title',

@@ -37,6 +37,6 @@ class PostCommentController extends Controller
 
         return $request->expectsJson() ?
             response()->json(['success' => 'Successfully saved comment']) :
-            redirect()->route('post.show', ['post' => $post->slug]);
+            redirect()->route('post.show', ['post_slug' => $post->slug]);
     }
 }

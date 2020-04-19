@@ -30,7 +30,7 @@ class CommentFavouriteControllerTest extends TestCase
 
         // Act
         $response = $this->post('comment/' . $comment->id, [
-            'slug' => $post->slug,
+            'post_slug' => $post->slug,
             'comment' => $comment->id,
         ]);
 

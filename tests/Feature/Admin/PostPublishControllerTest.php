@@ -23,7 +23,7 @@ class PostPublishControllerTest extends TestCase
 
         // Act
         $response = $this->actingAs($user)
-            ->get('admin/post/' . $post->slug . '/publish');
+            ->get('admin/post/' . $post->id . '/publish');
 
         // Assert
         $response->assertStatus(302);

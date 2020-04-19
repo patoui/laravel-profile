@@ -13,10 +13,26 @@
 
 @section('content')
     <div class="flex flex-col w-full">
+        <h2 class="text-center text-2xl mb-4">World Stats</h2>
+        <div class="flex justify-center">
+            <div class="mr-6">
+                <p class="text-gray-500 text-sm">Confirmed</p>
+                <p class="font-bold text-2xl tracking-wide text-orange-700">{{ number_format($world_stats['TotalConfirmed'] ?? 0, 0) }}</p>
+            </div>
+            <div class="mr-6">
+                <p class="text-gray-500 text-sm">Deaths</p>
+                <p class="font-bold text-2xl tracking-wide text-red-700">{{ number_format($world_stats['TotalDeaths'] ?? 0, 0) }}</p>
+            </div>
+            <div>
+                <p class="text-gray-500 text-sm">Recovered</p>
+                <p class="font-bold text-2xl tracking-wide text-green-700">{{ number_format($world_stats['TotalRecovered'] ?? 0, 0) }}</p>
+            </div>
+        </div>
+        <hr class="mt-4 mb-4">
         <h1 class="block text-4xl mb-4 text-center w-full">COVID-19 Stats: {{ $country_label }}</h1>
         <div class="mb-4 text-center">
             @foreach($country_details as $slug => $label)
-            <a href="{{ route('covid19.show', ['country_slug' => $slug]) }}" class="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ "{$label} Stats" }}</a>
+            <a href="{{ route('covid19.show', ['country_slug' => $slug]) }}" class="text-sm underline text-blue-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ "{$label} Province Stats" }}</a>
             @endforeach
         </div>
         <form action="{{ route('covid19.index') }}" method="get" class="mb-4">

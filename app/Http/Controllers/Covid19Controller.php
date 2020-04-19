@@ -71,6 +71,7 @@ class Covid19Controller
         $bar_data = $this->getBarData($country_slugs, $c_from, $c_to);
 
         return view('covid19.index')
+            ->with('world_stats', $this->covid_19->getWorldStats())
             ->with('country_slugs', $country_slugs)
             ->with('country_details', $country_details)
             ->with('from', $from)

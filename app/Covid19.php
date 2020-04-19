@@ -128,9 +128,9 @@ class Covid19
         ]);
 
         $today_slug = Carbon::today()->format('Y_m_d_H_i_s');
-        $confirmed_key = "live_country_{$country_slug}_confirmed_{$today_slug}";
-        $deaths_key = "live_country_{$country_slug}_deaths_{$today_slug}";
-        $recovered_key = "live_country_{$country_slug}_recovered_{$today_slug}";
+        $confirmed_key = "covid19_confirmed_live_country_{$country_slug}_{$today_slug}";
+        $deaths_key = "covid19_deaths_live_country_{$country_slug}_{$today_slug}";
+        $recovered_key = "covid19_recovered_live_country_{$country_slug}_{$today_slug}";
 
         $confirmed = Cache::get($confirmed_key, function () use ($confirmed_key, $country_slug, $query) {
             $data = $this->makeRequest(
@@ -168,6 +168,15 @@ class Covid19
         }
 
         return $data;
+    }
+
+    public function getWorldStats()
+    {
+        return Cache::get('covid19_world_stats', function () {
+            $data = $this->makeRequest('https://api.covid19api.com/world/total');
+            Cache::put('covid19_world_stats', $data, Carbon::now()->addHour());
+            return $data;
+        });
     }
 
     public function setCountries(): array

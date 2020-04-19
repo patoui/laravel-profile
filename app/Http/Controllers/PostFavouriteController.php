@@ -15,6 +15,6 @@ class PostFavouriteController extends Controller
     {
         $request->user()->toggleFavourite($post);
 
-        return redirect()->route('post.show', ['post' => $post->slug]);
+        return redirect()->route('post.show', ['post_slug' => $post->slug]);
     }
 }

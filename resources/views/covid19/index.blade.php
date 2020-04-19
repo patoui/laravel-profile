@@ -17,15 +17,15 @@
         <div class="flex justify-center">
             <div class="mr-6">
                 <p class="text-gray-500 text-sm">Confirmed</p>
-                <p class="font-bold text-2xl tracking-wide text-orange-700">{{ number_format($world_stats['TotalConfirmed'] ?? 0, 0) }}</p>
+                <p class="font-bold text-2xl tracking-wide text-orange-700">{{ $world_stats['TotalConfirmed'] }}</p>
             </div>
             <div class="mr-6">
                 <p class="text-gray-500 text-sm">Deaths</p>
-                <p class="font-bold text-2xl tracking-wide text-red-700">{{ number_format($world_stats['TotalDeaths'] ?? 0, 0) }}</p>
+                <p class="font-bold text-2xl tracking-wide text-red-700">{{ $world_stats['TotalDeaths'] }}</p>
             </div>
             <div>
                 <p class="text-gray-500 text-sm">Recovered</p>
-                <p class="font-bold text-2xl tracking-wide text-green-700">{{ number_format($world_stats['TotalRecovered'] ?? 0, 0) }}</p>
+                <p class="font-bold text-2xl tracking-wide text-green-700">{{ $world_stats['TotalRecovered'] }}</p>
             </div>
         </div>
         <hr class="mt-4 mb-4">

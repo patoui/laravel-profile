@@ -170,10 +170,13 @@ class Covid19
         return $data;
     }
 
-    public function getWorldStats()
+    public function getWorldStats(): array
     {
         return Cache::get('covid19_world_stats', function () {
             $data = $this->makeRequest('https://api.covid19api.com/world/total');
+            $data['TotalConfirmed'] = number_format($data['TotalConfirmed'] ?? 0, 0);
+            $data['TotalDeaths'] = number_format($data['TotalDeaths'] ?? 0, 0);
+            $data['TotalRecovered'] = number_format($data['TotalRecovered'] ?? 0, 0);
             Cache::put('covid19_world_stats', $data, Carbon::now()->addHour());
             return $data;
         });

@@ -30,12 +30,12 @@
 <div class="flex w-full mt-4 mb-4">
     <div class="w-1/2">
         @if ($previousTip)
-            <a class="underline" href="{{ route('tip.show', ['tip' => $previousTip->slug]) }}">&#8678; {{ $previousTip->short_title }}</a>
+            <a class="underline" href="{{ route('tip.show', ['tip_slug' => $previousTip->slug]) }}">&#8678; {{ $previousTip->short_title }}</a>
         @endif
     </div>
     <div class="w-1/2 text-right">
         @if ($nextTip)
-            <a class="underline" href="{{ route('tip.show', ['tip' => $nextTip->slug]) }}">{{ $nextTip->short_title }} &#8680;</a>
+            <a class="underline" href="{{ route('tip.show', ['tip_slug' => $nextTip->slug]) }}">{{ $nextTip->short_title }} &#8680;</a>
         @endif
     </div>
 </div>

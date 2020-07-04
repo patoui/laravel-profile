@@ -4,9 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('contact', 'ContactController@store')
-    ->name('contact.store')
-    ->middleware(ProtectAgainstSpam::class);
 
 // Post
 Route::get('blog', 'PostController@index')->name('post.index');

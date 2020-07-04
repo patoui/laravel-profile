@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
-use Laravel\Socialite\Contracts\User as UserContract;
+use Laravel\Socialite\Contracts\User as SocialiteUser;
 
 class LoginController extends Controller
 {
@@ -73,26 +73,26 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
-    public function findOrCreateUser(UserContract $user, string $provider) : User
+    public function findOrCreateUser(SocialiteUser $user, string $provider) : User
     {
         $authUser = User::where(static function ($query) use ($user) : void {
-            $query->where('provider_id', $user->id)
-                ->orWhere('email', $user->email);
+            $query->where('provider_id', $user->getId())
+                ->orWhere('email', $user->getEmail());
         })->first();
 
         if ($authUser) {
             if (! $authUser->provider_id) {
-                $authUser->update(['provider' => $provider, 'provider_id' => $user->id]);
+                $authUser->update(['provider' => $provider, 'provider_id' => $user->getId()]);
             }
 
             return $authUser;
         }
 
         return User::create([
-            'name'     => $user->name,
-            'email'    => $user->email,
+            'name'     => $user->getName(),
+            'email'    => $user->getEmail(),
             'provider' => $provider,
-            'provider_id' => $user->id,
+            'provider_id' => $user->getId(),
         ]);
     }
 }

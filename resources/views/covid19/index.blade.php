@@ -233,7 +233,7 @@
 @endif
 @section('javascript')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script>
+    <script nonce="{{ csp_nonce() }}">
       let options = {
         responsive: true,
         maintainAspectRatio: true,

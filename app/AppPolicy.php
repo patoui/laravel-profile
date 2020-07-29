@@ -16,11 +16,12 @@ class AppPolicy extends Basic
 
         $this->addDirective(Directive::STYLE, [
             Keyword::SELF,
+             Keyword::UNSAFE_INLINE,
             'use.fontawesome.com',
         ])->addDirective(Directive::SCRIPT, [
              Keyword::SELF,
+             Keyword::UNSAFE_INLINE,
              'cdn.jsdelivr.net',
-             'unsafe-inline',
          ])->addDirective(Directive::FONT, [
              Keyword::SELF,
              'use.fontawesome.com',

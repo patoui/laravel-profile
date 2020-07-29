@@ -16,10 +16,13 @@ class AppPolicy extends Basic
 
         $this->addDirective(Directive::STYLE, [
             Keyword::SELF,
-            'https://use.fontawesome.com/releases/v5.8.1/css/all.css',
+            'use.fontawesome.com',
         ])->addDirective(Directive::SCRIPT, [
              Keyword::SELF,
-             'https://cdn.jsdelivr.net',
-         ]);
+             'cdn.jsdelivr.net',
+         ])->addDirective(Directive::FONT, [
+             Keyword::SELF,
+             'use.fontawesome.com',
+        ]);
     }
 }

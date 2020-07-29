@@ -20,6 +20,7 @@ class AppPolicy extends Basic
         ])->addDirective(Directive::SCRIPT, [
              Keyword::SELF,
              'cdn.jsdelivr.net',
+             'unsafe-inline',
          ])->addDirective(Directive::FONT, [
              Keyword::SELF,
              'use.fontawesome.com',

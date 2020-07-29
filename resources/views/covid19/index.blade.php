@@ -61,12 +61,12 @@
             @endforeach
 
             <div class="mb-4">
-                <button id="add_comparison" class="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        style="display: {{ count($country_slugs) === 1 ? 'block' : 'none' }}" type="button">
+                <button id="add_comparison" class="bg-blue-500 text-sm hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline {{ count($country_slugs) === 1 ? '' : 'hidden' }}"
+                        type="button">
                     Compare +
                 </button>
                 <button id="remove_comparison" class="bg-red-500 text-sm hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        style="display: {{ count($country_slugs) > 1 ? 'block' : 'none' }}" type="button">
+                        type="button">
                     Remove -
                 </button>
             </div>
@@ -305,14 +305,14 @@
         document.querySelector('#add_comparison').addEventListener('click', function () {
           var country_item = document.querySelector('.country-item').cloneNode(true);
           document.querySelector('.country-container').append(country_item);
-          document.querySelector('#add_comparison').style.display = 'none';
-          document.querySelector('#remove_comparison').style.display = 'block';
+          document.querySelector('#add_comparison').classList.add('hidden');
+          document.querySelector('#remove_comparison').classList.remove('hidden');
         });
         document.querySelector('#remove_comparison').addEventListener('click', function () {
           var country_items = document.querySelectorAll('.country-item');
           country_items[country_items.length - 1].remove();
-          document.querySelector('#add_comparison').style.display = 'block';
-          document.querySelector('#remove_comparison').style.display = 'none';
+          document.querySelector('#add_comparison').classList.remove('hidden');
+          document.querySelector('#remove_comparison').classList.add('hidden');
         });
       };
     </script>

@@ -22,6 +22,7 @@ class AppPolicy extends Basic
              Keyword::SELF,
              Keyword::UNSAFE_INLINE,
              'cdn.jsdelivr.net',
+            'use.fontawesome.com',
          ])->addDirective(Directive::FONT, [
              Keyword::SELF,
              'use.fontawesome.com',

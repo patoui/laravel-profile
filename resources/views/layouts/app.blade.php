@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <a href="{{ route('covid19.index') }}" class="covid19 block relative md:fixed lg:fixed xl:fixed text-center bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 mx-auto mb-3 border border-blue-500 hover:border-transparent rounded-full" style="max-width: 145px;">COVID-19 Stats</a>
+    <a href="/covid19" class="covid19 block relative md:fixed lg:fixed xl:fixed text-center bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 mx-auto mb-3 border border-blue-500 hover:border-transparent rounded-full" style="max-width: 145px;">COVID-19 Stats</a>
 
     <!-- Navigation -->
     <div class="mb-4">

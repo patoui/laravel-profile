@@ -88,9 +88,5 @@
 
     <!-- Additional JS -->
     @yield('javascript')
-
-    @if (! app()->environment('local', 'development', 'testing', 'dusk'))
-        @include('google.analytics')
-    @endif
 </body>
 </html>

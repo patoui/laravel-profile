@@ -215,11 +215,11 @@
         @endif
 
         @if ($is_show_graph)
-            <canvas id="graph" style="display: block;"></canvas>
+            <canvas id="graph"></canvas>
         @endif
 
         @if ($is_show_bar)
-            <canvas id="bar" style="display: block;"></canvas>
+            <canvas id="bar"></canvas>
         @endif
     </div>
 

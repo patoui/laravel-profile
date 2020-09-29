@@ -43,9 +43,9 @@ class Post extends Model implements Feedable
     /** @var array<string> */
     protected $casts = ['published_at' => 'datetime'];
 
-    public function analytics(): HasMany
+    public function analytics(): MorphMany
     {
-        return $this->hasMany(PostAnalytics::class);
+        return $this->morphMany(Analytic::class, 'analytical');
     }
 
     public function comments(): HasMany

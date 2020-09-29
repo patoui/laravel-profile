@@ -6,7 +6,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Tags\HasTags;
 
@@ -20,9 +19,9 @@ class Tip extends Model
     /** @var array<string> */
     protected $casts = ['published_at' => 'datetime'];
 
-    public function analytics() : HasMany
+    public function analytics() : MorphMany
     {
-        return $this->hasMany(TipAnalytics::class);
+        return $this->morphMany(Analytic::class, 'analytical');
     }
 
     public function favourites() : MorphMany

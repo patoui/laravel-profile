@@ -16,16 +16,18 @@ class AppPolicy extends Basic
 
         $this->addDirective(Directive::STYLE, [
             Keyword::SELF,
-             Keyword::UNSAFE_INLINE,
+            Keyword::UNSAFE_INLINE,
             'use.fontawesome.com',
         ])->addDirective(Directive::SCRIPT, [
-             Keyword::SELF,
-             Keyword::UNSAFE_INLINE,
-             'cdn.jsdelivr.net',
+            Keyword::SELF,
+            Keyword::UNSAFE_INLINE,
+            'cdn.jsdelivr.net',
             'use.fontawesome.com',
-         ])->addDirective(Directive::FONT, [
-             Keyword::SELF,
-             'use.fontawesome.com',
-        ]);
+        ])->addDirective(Directive::FONT, [
+            Keyword::SELF,
+            'use.fontawesome.com',
+        ])
+        ->addNonceForDirective(Directive::SCRIPT)
+        ->addNonceForDirective(Directive::STYLE);
     }
 }

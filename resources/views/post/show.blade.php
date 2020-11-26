@@ -11,7 +11,7 @@
 @section('title', $post->title)
 
 @section('css')
-@gitdown
+<style nonce="{{ csp_nonce() }}"><?= GitDown::styles() ?></style>
 @endsection
 
 @section('content')

@@ -22,6 +22,7 @@ return [
     'allowed_origins' => [
         'https://covid19api.com',
         'https://api.covid19api.com',
+        'https://fonts.googleapis.com/',
         'https://patriqueouimet.ca',
     ],
 

@@ -12,8 +12,6 @@ class AppPolicy extends Basic
 {
     public function configure()
     {
-        parent::configure();
-
         $this->addDirective(Directive::STYLE, [
             Keyword::SELF,
             Keyword::UNSAFE_INLINE,

@@ -27,6 +27,10 @@ class AppPolicy extends Basic
             Keyword::SELF,
             'use.fontawesome.com',
         ])
+        ->addDirective(Directive::FRAME, [
+            Keyword::SELF,
+            '*.youtube.com',
+        ])
         ->addNonceForDirective(Directive::SCRIPT)
         ->addNonceForDirective(Directive::STYLE);
     }

@@ -6,6 +6,10 @@
   color: #0366d6
 }
 
+.markdown-body pre {
+  overflow-y: auto;
+}
+
 .markdown-body a:hover {
   text-decoration: underline;
 }

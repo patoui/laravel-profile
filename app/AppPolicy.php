@@ -30,8 +30,6 @@ class AppPolicy extends Basic
         ->addDirective(Directive::FRAME, [
             Keyword::SELF,
             '*.youtube.com',
-        ])
-        ->addNonceForDirective(Directive::SCRIPT)
-        ->addNonceForDirective(Directive::STYLE);
+        ]);
     }
 }

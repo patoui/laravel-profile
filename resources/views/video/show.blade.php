@@ -22,7 +22,7 @@
     </form>
 
     <div class="block relative" style="max-width:600px; max-height:338px; width:90vw; height:50.85vw; margin: 1rem auto;">
-        <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border: none;" src="{{ $video->embed_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe nonce="{{ csp_nonce() }}" style="position:absolute; top:0; left:0; width:100%; height:100%; border: none;" src="{{ $video->embed_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     @if ($previousVideo || $nextVideo)

@@ -38,7 +38,7 @@ class Covid19
         $countries = $this->getCountries(true);
 
         if ($last_slug) {
-            $last_index = array_search($last_slug, array_column($countries, 'Slug'), true);
+            $last_index = (int) array_search($last_slug, array_column($countries, 'Slug'), true);
             if ($last_index) {
                 $countries = array_slice($countries, $last_index);
             }
@@ -65,7 +65,7 @@ class Covid19
 
     public function getCountryIndex(string $country_slug): int
     {
-        return array_search($country_slug, array_column($this->getCountries(), 'Slug'), true);
+        return (int) array_search($country_slug, array_column($this->getCountries(), 'Slug'), true);
     }
 
     public function getCountryConfirmed(string $country_slug, bool $update_cache = false): array

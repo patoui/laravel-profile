@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use RuntimeException;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -32,7 +33,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     /** @var array<string> */
     protected $appends = ['is_admin'];
 
-    public function favourites() : HasMany
+    public function favourites(): HasMany
     {
         return $this->hasMany(Favourite::class);
     }
@@ -41,27 +42,27 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
      * @param Comment|Post|Tip $model
      * @throws Exception
      */
-    public function toggleFavourite($model) : void
+    public function toggleFavourite($model): void
     {
         // Verify argument is an object
-        if (! is_object($model)) {
-            throw new Exception('Model must be passed');
+        if (!is_object($model)) {
+            throw new RuntimeException('Model must be passed');
         }
 
         // Get model class name
         $class = get_class($model);
 
-        if (! in_array($class, ['App\Comment', 'App\Post', 'App\Tip', 'App\Video'])) {
-            throw new Exception(
+        if (!in_array($class, [Comment::class, Post::class, Tip::class, Video::class], true)) {
+            throw new RuntimeException(
                 "Model class must be 'App\Comment', 'App\Post', 'App\Tip' or 'App\Video'"
             );
         }
 
         $favourite = $this->favourites()
-            ->getQuery()
-            ->where('favouritable_id', $model->id)
-            ->where('favouritable_type', $class)
-            ->first();
+                          ->getQuery()
+                          ->where('favouritable_id', $model->id)
+                          ->where('favouritable_type', $class)
+                          ->first();
 
         if ($favourite) {
             $favourite->delete();
@@ -70,12 +71,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         }
 
         $this->favourites()->create([
-            'favouritable_id' => $model->id,
+            'favouritable_id'   => $model->id,
             'favouritable_type' => $class,
         ]);
     }
 
-    public function getIsAdminAttribute() : bool
+    public function getIsAdminAttribute(): bool
     {
         return (bool) in_array($this->email, [
             'patrique.ouimet@gmail.com',
@@ -83,12 +84,12 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         ]);
     }
 
-    public function activities() : HasMany
+    public function activities(): HasMany
     {
         return $this->hasMany(Activity::class);
     }
 
-    public function getRouteKeyName() : string
+    public function getRouteKeyName(): string
     {
         return 'email';
     }

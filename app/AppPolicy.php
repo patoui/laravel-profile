@@ -10,7 +10,7 @@ use Spatie\Csp\Policies\Basic;
 
 class AppPolicy extends Basic
 {
-    public function configure()
+    public function configure(): void
     {
         $this->addDirective(Directive::STYLE, [
             Keyword::SELF,

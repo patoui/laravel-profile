@@ -8,10 +8,8 @@ parameters:
     level: 8
 
     ignoreErrors:
-        - '#Unsafe usage of new static#'
+        - '#Parameter \#1 \$view of function view expects view-string\|null, string given\.#'
         - '#Call to function is_array\(\) with string will always evaluate to false.#'
-        - '#Internal error: Function ReflectionType::__toString\(\)#'
-        - '#Call to an undefined static method Illuminate\\Support\\Facades\\Redis::[a-zA-Z0-9\\_]+\(\)#'
         - '#Call to an undefined static method Zttp\\Zttp::get\(\)\.#'
         - '#Binary operation "-" between int|string and 1 results in an error#'
 

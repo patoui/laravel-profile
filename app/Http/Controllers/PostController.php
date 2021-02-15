@@ -12,14 +12,14 @@ use function view;
 
 class PostController extends Controller
 {
-    public function index() : View
+    public function index(): View
     {
         $posts = Post::published()->latest()->get();
 
         return view('post.index')->with('posts', $posts);
     }
 
-    public function show(Request $request, Post $post) : View
+    public function show(Request $request, Post $post): View
     {
         $post->analytics()->create([
             'headers' => json_encode($request->headers->all()),

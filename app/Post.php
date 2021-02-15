@@ -26,7 +26,7 @@ use function trim;
  * @property string $title
  * @property string $slug
  * @property string $body
- * @property Carbon $published_at
+ * @property null|Carbon $published_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */

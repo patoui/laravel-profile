@@ -10,7 +10,7 @@ use function view;
 
 class ProfileController extends Controller
 {
-    public function show(User $profile) : View
+    public function show(User $profile): View
     {
         return view('profile.show')
             ->with('user', $profile)

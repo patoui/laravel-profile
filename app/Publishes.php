@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 trait Publishes
 {
@@ -18,7 +18,7 @@ trait Publishes
         return $query->whereNotNull('published_at');
     }
 
-    public function previousPublished() : ?self
+    public function previousPublished(): ?self
     {
         return (new self())
             ->where('id', '<>', $this->id)
@@ -30,7 +30,7 @@ trait Publishes
             ->first();
     }
 
-    public function nextPublished() : ?self
+    public function nextPublished(): ?self
     {
         return (new self())
             ->where('id', '<>', $this->id)
@@ -42,16 +42,13 @@ trait Publishes
             ->first();
     }
 
-    public function togglePublish() : void
+    public function togglePublish(): void
     {
-        $this->published_at       = $this->published_at
-            ? $this->published_at = null
-            : Carbon::now();
-
+        $this->published_at = $this->published_at ? null : Carbon::now();
         $this->save();
     }
 
-    public function getShortPublishedAtAttribute() : ?string
+    public function getShortPublishedAtAttribute(): ?string
     {
         return $this->published_at
             ? $this->published_at

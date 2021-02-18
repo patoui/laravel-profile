@@ -27,6 +27,7 @@
         "patoui/regression-php": "dev-master",
         "predis/predis": "^1.1",
         "pusher/pusher-php-server": "^3.0",
+        "smi2/phpclickhouse": "^1.4",
         "spatie/laravel-csp": "^2.6",
         "spatie/laravel-feed": "^2.2",
         "spatie/laravel-honeypot": "^1.3",

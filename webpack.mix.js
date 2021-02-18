@@ -15,5 +15,4 @@ require('laravel-mix-purgecss');
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [ require('tailwindcss') ])
     .purgeCss()
-    .version()
-    .copy('resources/js/google-analytics.js', 'public/js/google-analytics.js');
+    .version();

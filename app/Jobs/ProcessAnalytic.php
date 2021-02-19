@@ -2,12 +2,14 @@
 
 namespace App\Jobs;
 
+use ClickHouseDB\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
 
 class ProcessAnalytic implements ShouldQueue
 {
@@ -39,9 +41,20 @@ class ProcessAnalytic implements ShouldQueue
     public function handle(): void
     {
         if (method_exists($this->model, 'analytics')) {
+            $headers = $this->getHeaders();
+            $now     = Carbon::now();
             $this->model->analytics()->create([
-                'headers' => $this->getHeaders(),
+                'headers'    => $headers,
+                'created_at' => $now,
+                'updated_at' => $now,
             ]);
+            /** @var Client $clickhouse */
+            $clickhouse = resolve(Client::class);
+            $clickhouse->insert(
+                'analytics',
+                [[$now->timestamp, $this->model->id, get_class($this->model), $headers]],
+                ['ts', 'analytical_id', 'analytical_type', 'headers']
+            );
         }
     }
 

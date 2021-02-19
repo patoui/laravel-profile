@@ -6,6 +6,7 @@ use App\Jobs\ProcessAnalytic;
 use App\Post;
 use App\Tip;
 use App\Video;
+use ClickHouseDB\Client;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -19,6 +20,9 @@ class ProcessAnalyticTest extends TestCase
         // Arrange
         /** @var Post $post */
         $post = factory(Post::class)->create();
+        $this->mock(Client::class, function ($mock) {
+            $mock->shouldReceive('insert')->once();
+        });
 
         // Act
         (new ProcessAnalytic([], $post))->handle();
@@ -37,6 +41,9 @@ class ProcessAnalyticTest extends TestCase
         // Arrange
         /** @var Tip $tip */
         $tip = factory(Tip::class)->create();
+        $this->mock(Client::class, function ($mock) {
+            $mock->shouldReceive('insert')->once();
+        });
 
         // Act
         (new ProcessAnalytic([], $tip))->handle();
@@ -55,6 +62,9 @@ class ProcessAnalyticTest extends TestCase
         // Arrange
         /** @var Video $video */
         $video = factory(Video::class)->create();
+        $this->mock(Client::class, function ($mock) {
+            $mock->shouldReceive('insert')->once();
+        });
 
         // Act
         (new ProcessAnalytic([], $video))->handle();

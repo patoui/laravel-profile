@@ -8,12 +8,20 @@ use App\Events\CommentSaved;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Carbon;
 use function preg_match_all;
 
 /**
  * Class Comment
  * @package App
- * @property Post $post
+ * @property int    $id
+ * @property int    $post_id
+ * @property string $body
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property int    $comment_id
+ * @property int    $user_id
+ * @property Post   $post
  */
 class Comment extends Model
 {
@@ -28,42 +36,40 @@ class Comment extends Model
     /** @var array<string> */
     protected $dispatchesEvents = ['saved' => CommentSaved::class];
 
-    public function owner() : BelongsTo
+    public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function post() : BelongsTo
+    public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class);
     }
 
-    public function getShortCreatedAtAttribute() : ?string
+    public function getShortCreatedAtAttribute(): string
     {
         return $this->created_at
-            ? $this->created_at
-                ->setTimezone('America/Toronto')
-                ->toFormattedDateString()
-            : null;
+            ->setTimezone('America/Toronto')
+            ->toFormattedDateString();
     }
 
-    public function getPathAttribute() : ?string
+    public function getPathAttribute(): ?string
     {
         return ($this->post->path ?? '') . '#comment' . $this->id;
     }
 
-    public function favourites() : MorphMany
+    public function favourites(): MorphMany
     {
         return $this->morphMany(Favourite::class, 'favouritable');
     }
 
-    public function getFavouritesCountAttribute() : int
+    public function getFavouritesCountAttribute(): int
     {
         return $this->favourites()->count();
     }
 
     /** @return array<string> */
-    public function mentionedUsers() : array
+    public function mentionedUsers(): array
     {
         preg_match_all('/@([\w\-]+)/', $this->body, $matches);
 

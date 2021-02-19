@@ -4,24 +4,23 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Analytic;
 use App\Video;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class VideoController extends Controller
 {
-    public function index() : View
+    public function index(): View
     {
         return view('video.index')->with('videos', Video::published()->get());
     }
 
-    public function show(Request $request, Video $video) : View
+    public function show(Request $request, Video $video): View
     {
-        abort_if(! $video->published_at, 404);
+        abort_if(!$video->published_at, 404);
 
-        $video->analytics()->create([
-            'headers' => json_encode($request->headers->all()),
-        ]);
+        Analytic::process($request, $video);
 
         return view('video.show')
             ->with('video', $video)

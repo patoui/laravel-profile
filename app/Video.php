@@ -6,8 +6,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Carbon;
 use Spatie\Tags\HasTags;
 
+/**
+ * Class Video
+ * @package App
+ * @property int    $id
+ * @property string $title
+ * @property string $slug
+ * @property string $description
+ * @property null|Carbon $published_at
+ * @property string $external_id
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ */
 class Video extends Model
 {
     use HasTags, Publishes, RecordsActivity;

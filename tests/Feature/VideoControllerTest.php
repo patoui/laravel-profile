@@ -2,16 +2,17 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\ProcessAnalytic;
 use App\Video;
+use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class VideoControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex() : void
+    public function testIndex(): void
     {
         // Arrange
         $video = factory(Video::class)->state('published')->create();
@@ -24,9 +25,11 @@ class VideoControllerTest extends TestCase
         $response->assertSee($video->title);
     }
 
-    public function testShow() : void
+    public function testShow(): void
     {
         // Arrange
+        Bus::fake();
+        /** @var Video $video */
         $video = factory(Video::class)->state('published')->create();
 
         // Act
@@ -35,6 +38,7 @@ class VideoControllerTest extends TestCase
         // Assert
         $response->assertStatus(200);
         $response->assertSee($video->title);
-        $response->assertSee('https://www.youtube.com/embed/'.$video->external_id);
+        $response->assertSee('https://www.youtube.com/embed/' . $video->external_id);
+        Bus::assertDispatched(ProcessAnalytic::class);
     }
 }

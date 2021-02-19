@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Analytic;
 use App\Tip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -25,9 +26,7 @@ class TipController extends Controller
 
     public function show(Request $request, Tip $tip) : View
     {
-        $tip->analytics()->create([
-            'headers' => json_encode($request->headers->all()),
-        ]);
+        Analytic::process($request, $tip);
 
         return view('tip.show')
             ->with('tip', $tip)

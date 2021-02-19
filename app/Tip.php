@@ -7,8 +7,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Carbon;
 use Spatie\Tags\HasTags;
 
+/**
+ * Class Tip
+ * @package App
+ * @property int    $id
+ * @property string $title
+ * @property string $slug
+ * @property string $body
+ * @property null|Carbon $published_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ */
 class Tip extends Model
 {
     use HasTags, Publishes, RecordsActivity;

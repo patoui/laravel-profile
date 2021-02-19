@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Analytic;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use function json_encode;
 use function view;
 
 class PostController extends Controller
@@ -21,9 +21,7 @@ class PostController extends Controller
 
     public function show(Request $request, Post $post): View
     {
-        $post->analytics()->create([
-            'headers' => json_encode($request->headers->all()),
-        ]);
+        Analytic::process($request, $post);
 
         return view('post.show')
             ->with('post', $post)

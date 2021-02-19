@@ -2,18 +2,19 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\ProcessAnalytic;
 use App\Tip;
 use Carbon\Carbon;
 use GitDown\Facades\GitDown;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
 class TipControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex()
+    public function testIndex(): void
     {
         // Arrange
         factory(Tip::class)->create([
@@ -31,9 +32,10 @@ class TipControllerTest extends TestCase
         $response->assertSee('Eloquent vs Collection Count');
     }
 
-    public function testShow()
+    public function testShow(): void
     {
         // Arrange
+        Bus::fake();
         $tip = factory(Tip::class)->create([
             'title' => 'Eloquent vs Collection Count',
             'slug' => 'eloquent-vs-collection-count',
@@ -50,5 +52,6 @@ class TipControllerTest extends TestCase
         $response->assertSuccessful();
         $response->assertSee('Eloquent vs Collection Count');
         $response->assertSee($tip->parsed_body);
+        Bus::assertDispatched(ProcessAnalytic::class);
     }
 }

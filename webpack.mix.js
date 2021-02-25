@@ -12,7 +12,5 @@ require('laravel-mix-purgecss');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [ require('tailwindcss') ])
-    .purgeCss()
-    .version();
+mix.js('resources/js/app.js', 'public/js').vue()
+    .postCss('resources/css/app.css', 'public/css', [require('tailwindcss')]);

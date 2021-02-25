@@ -52,7 +52,7 @@ class ProcessAnalytic implements ShouldQueue
             $clickhouse = resolve(Client::class);
             $clickhouse->insert(
                 'analytics',
-                [[$now->timestamp, $this->model->id, get_class($this->model), $headers]],
+                [[$now->timestamp, $this->model->getKey(), get_class($this->model), $headers]],
                 ['ts', 'analytical_id', 'analytical_type', 'headers']
             );
         }

@@ -33,8 +33,7 @@ class MigrateAnalytics extends Command
     public function handle(): void
     {
         $last_id = $this->argument('last_id');
-        $chunk_size = 50;
-        $iteration = 1;
+        $processed_count = 0;
         DB::table('analytics')
             ->select(
                 'id',
@@ -47,17 +46,17 @@ class MigrateAnalytics extends Command
                 $q->where('id', '>', $last_id);
             })
             ->oldest('id')
-            ->chunk($chunk_size, function (Collection $rows) use ($chunk_size, &$iteration) {
+            ->chunk(50, function (Collection $rows) use (&$processed_count) {
                 $data = $rows->map(static function ($v) {
                     $v = (array) $v;
                     unset($v['id']);
                     return $v;
                 })->toArray();
                 $this->clickhouse->insertAssocBulk('analytics', $data);
-                $this->info("{$iteration} | SUCCESSFULLY MIGRATED: " . ($chunk_size * $iteration) . ' RECORDS');
+                $processed_count += $rows->count();
+                $this->info('SUCCESSFULLY MIGRATED: ' . ($processed_count) . ' RECORDS');
                 // should clickhouse fail we can restart at the last id
                 file_put_contents(base_path('last_id.txt'), $rows->last()->id, FILE_APPEND);
-                $iteration++;
             });
 
         // successfully migrated, delete log

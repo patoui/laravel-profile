@@ -12,6 +12,10 @@ class ChCreateAnalyticsTable extends Migration
      */
     public function up(): void
     {
+        if (app()->environment('testing')) {
+            return;
+        }
+
         /** @var Client $client */
         $client = resolve(Client::class);
         $client->write('
@@ -32,6 +36,10 @@ class ChCreateAnalyticsTable extends Migration
      */
     public function down(): void
     {
+        if (app()->environment('testing')) {
+            return;
+        }
+
         /** @var Client $client */
         $client = resolve(Client::class);
         $client->write('DROP TABLE IF EXISTS analytics');

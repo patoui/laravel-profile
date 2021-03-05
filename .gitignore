@@ -13,4 +13,6 @@ Homestead.yaml
 .env
 package-lock.json
 .phpunit.result.cache
+public/css
+public/js/app.js
 public/js/app.js.LICENSE.txt

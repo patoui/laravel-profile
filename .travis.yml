@@ -9,8 +9,7 @@ cache:
 before_script:
   - yes | pecl install imagick
   - cp .env.travis .env
-  - composer install --no-interaction
-  - composer outdated --no-interaction
+  - composer install
   - php artisan key:generate
 
 script:

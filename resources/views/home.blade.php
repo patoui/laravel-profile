@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('meta')
+    <meta name="description"        content="A small blog by humble developer Patrique Ouimet primarily working with PHP and JavaScript" />
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Patrique Ouimet" />
+    <meta property="og:description" content="A small blog by humble developer Patrique Ouimet primarily working with PHP and JavaScript" />
+    <meta property="og:image"       content="{{ Request::root() . '/img/black-white-profile.png' }}" />
+@endsection
+
 @section('title', 'Patrique Ouimet')
 
 @section('content')

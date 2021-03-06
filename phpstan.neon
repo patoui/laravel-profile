@@ -8,6 +8,7 @@ parameters:
     level: 8
 
     ignoreErrors:
+        - '#Access to an undefined property mixed::\$path.#'
         - '#Parameter \#1 \$view of function view expects view-string\|null, string given\.#'
         - '#Call to function is_array\(\) with string will always evaluate to false.#'
         - '#Call to an undefined static method Zttp\\Zttp::get\(\)\.#'

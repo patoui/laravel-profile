@@ -22,6 +22,8 @@ use function preg_match_all;
  * @property int    $comment_id
  * @property int    $user_id
  * @property Post   $post
+ *
+ * @property-read null|string $path
  */
 class Comment extends Model
 {

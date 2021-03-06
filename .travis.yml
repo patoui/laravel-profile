@@ -16,3 +16,4 @@ script:
   - vendor/bin/phpunit
   - vendor/bin/phpcs --standard=PSR2 app
   - vendor/bin/phpstan analyse
+  - vendor/bin/psalm

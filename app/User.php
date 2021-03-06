@@ -9,10 +9,27 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use RuntimeException;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
+/**
+ * Class User
+ * @package App
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $provider
+ * @property int $provider_id
+ * @property string $password
+ * @property string $remember_token
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $email_verified_at
+ *
+ * @property-read bool $is_admin
+ */
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use Notifiable;
@@ -78,7 +95,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
 
     public function getIsAdminAttribute(): bool
     {
-        return (bool) in_array($this->email, [
+        return in_array($this->email, [
             'patrique.ouimet@gmail.com',
             'taylorjdunphy@gmail.com',
         ]);

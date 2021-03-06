@@ -40,18 +40,18 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into a response.
      *
-     * @param Request $request
-     * @param Throwable               $exception
+     * @param Request   $request
+     * @param Throwable $e
      * @return Response|\Symfony\Component\HttpFoundation\Response
      * @throws Throwable
      */
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e)
     {
         if (app()->environment() === 'testing') {
-            throw $exception;
+            throw $e;
         }
 
-        return parent::render($request, $exception);
+        return parent::render($request, $e);
     }
 
     /**

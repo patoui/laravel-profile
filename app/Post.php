@@ -29,6 +29,8 @@ use function trim;
  * @property null|Carbon $published_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @property-read string $short_body
  */
 class Post extends Model implements Feedable
 {

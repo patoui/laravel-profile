@@ -35,13 +35,13 @@ class MigrateAnalytics extends Command
         $last_id = $this->argument('last_id');
         $processed_count = 0;
         DB::table('analytics')
-            ->select(
+            ->select([
                 'id',
                 'analytical_id',
                 'analytical_type',
                 'headers',
                 DB::raw('UNIX_TIMESTAMP(created_at) as ts')
-            )
+            ])
             ->when($last_id, static function ($q) use ($last_id) {
                 $q->where('id', '>', $last_id);
             })

@@ -193,7 +193,7 @@ class Covid19
     {
         $data = $this->makeRequest("https://api.covid19api.com/total/country/{$country_slug}/status/confirmed");
         foreach ($data as $key => $set) {
-            $prev_cases = $data[$key - 1]['Cases'] ?? 0;
+            $prev_cases = $data[(int) $key - 1]['Cases'] ?? 0;
             $current_cases = $set['Cases'] ?? 0;
             $data[$key]['Difference'] = $current_cases - $prev_cases;
         }
@@ -205,7 +205,7 @@ class Covid19
     {
         $data = $this->makeRequest("https://api.covid19api.com/total/country/{$country_slug}/status/deaths");
         foreach ($data as $key => $set) {
-            $prev_cases = $data[$key - 1]['Cases'] ?? 0;
+            $prev_cases = $data[(int) $key - 1]['Cases'] ?? 0;
             $current_cases = $set['Cases'] ?? 0;
             $data[$key]['Difference'] = $current_cases - $prev_cases;
         }
@@ -217,7 +217,7 @@ class Covid19
     {
         $data = $this->makeRequest("https://api.covid19api.com/total/country/{$country_slug}/status/recovered");
         foreach ($data as $key => $set) {
-            $prev_cases = $data[$key - 1]['Cases'] ?? 0;
+            $prev_cases = $data[(int) $key - 1]['Cases'] ?? 0;
             $current_cases = $set['Cases'] ?? 0;
             $data[$key]['Difference'] = $current_cases - $prev_cases;
         }

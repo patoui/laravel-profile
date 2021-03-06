@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -15,12 +17,15 @@ use function view;
 
 class SmsController extends Controller
 {
-    public function index() : View
+    /**
+     * @return Application|Factory|View
+     */
+    public function index()
     {
         return view('sms.index');
     }
 
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $this->validate($request, ['message' => 'required|string|max:140']);
 
@@ -33,10 +38,10 @@ class SmsController extends Controller
             ]);
 
             return redirect()->route('sms.index')
-                ->with('success', 'Your message was sent successfully!');
+                             ->with('success', 'Your message was sent successfully!');
         } catch (Throwable $e) {
             return redirect()->route('sms.index')
-                ->with('error', $e->getMessage());
+                             ->with('error', $e->getMessage());
         }
     }
 }

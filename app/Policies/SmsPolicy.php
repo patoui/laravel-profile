@@ -14,6 +14,7 @@ class SmsPolicy
     /**
      * Determine whether the user can view sms index.
      *
+     * @param User $user
      * @return mixed
      */
     public function index(User $user)
@@ -24,6 +25,7 @@ class SmsPolicy
     /**
      * Determine whether the user can store posts.
      *
+     * @param User $user
      * @return mixed
      */
     public function store(User $user)

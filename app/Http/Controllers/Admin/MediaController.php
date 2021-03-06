@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -14,35 +16,38 @@ use function view;
 
 class MediaController extends Controller
 {
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
         return view('admin.media.index')
             ->with('files', $request->user()->getMedia());
     }
 
-    public function create() : View
+    /**
+     * @return Application|Factory|View
+     */
+    public function create()
     {
         return view('admin.media.create');
     }
 
-    public function edit(Media $media) : View
+    public function edit(Media $media): View
     {
         return view('admin.media.edit')->with('media', $media);
     }
 
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $this->validate($request, ['media' => 'required|file']);
 
         $request->user()
-            ->addMedia($request->file('media'))
-            ->preservingOriginal()
-            ->toMediaCollection();
+                ->addMedia($request->file('media'))
+                ->preservingOriginal()
+                ->toMediaCollection();
 
         return redirect()->route('admin.media.index');
     }
 
-    public function update(Request $request, Media $media) : RedirectResponse
+    public function update(Request $request, Media $media): RedirectResponse
     {
         $this->validate($request, ['name' => 'required|string']);
 
@@ -51,7 +56,7 @@ class MediaController extends Controller
         return redirect()->route('admin.media.index');
     }
 
-    public function delete(Media $media) : RedirectResponse
+    public function delete(Media $media): RedirectResponse
     {
         $media->delete();
 

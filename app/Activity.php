@@ -6,12 +6,24 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use function data_get;
 use function is_string;
 use function str_replace;
 use function ucwords;
 
+/**
+ * Class Activity
+ * @package App
+ * @property int    $id
+ * @property int    $user_id
+ * @property int    $subject_id
+ * @property string $subject_type
+ * @property string $type
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ */
 class Activity extends Model
 {
     /** @var array<string> */
@@ -24,10 +36,7 @@ class Activity extends Model
 
     public function getHumanTypeAttribute(): string
     {
-        $type = str_replace('_', ' ', $this->type);
-        $type = is_array($type) ? implode(' ', $type) : $type;
-
-        return ucwords($type);
+        return ucwords(str_replace('_', ' ', $this->type));
     }
 
     public function getShortContentAttribute(): string
@@ -38,14 +47,12 @@ class Activity extends Model
     public function getShortCreatedAtAttribute(): ?string
     {
         return $this->created_at
-            ? $this->created_at
                 ->setTimezone('America/Toronto')
-                ->toDayDateTimeString()
-            : null;
+                ->toDayDateTimeString();
     }
 
     public function getSubjectUrlAttribute(): string
     {
-        return (string) optional($this->subject)->path;
+        return $this->subject->path ?? '';
     }
 }

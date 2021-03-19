@@ -15,7 +15,7 @@ Route::post('post/{post_slug}', 'PostFavouriteController@store')
 // Comment
 Route::post('post/{post_slug}/comment', 'PostCommentController@store')
     ->name('post.comment.store')
-    ->middleware('auth', ProtectAgainstSpam::class);
+    ->middleware(['auth', ProtectAgainstSpam::class]);
 
 Route::post('comment/{comment}', 'CommentFavouriteController@store')
     ->name('comment.favourite.store')
@@ -55,13 +55,6 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 // Socialite (Github)
 Route::get('auth/github', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/github/callback', 'Auth\LoginController@handleProviderCallback');
-
-Route::get('sms', 'SmsController@index')
-    ->name('sms.index')
-    ->middleware('can:sms.index');
-Route::post('sms', 'SmsController@store')
-    ->name('sms.store')
-    ->middleware('can:sms.store');
 
 Route::feeds();
 

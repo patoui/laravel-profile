@@ -7,10 +7,9 @@ Serves as a portfolio of myself, and a place where I can post articles/tips/vide
 
 ## Requirements
 
-- PHP ^7.4
-- Clickhouse
+- PHP ^8.0
+- Clickhouse (latest)
 - MySQL ^5.7 | 8.x
-- [Laravel 7 Requirements](https://laravel.com/docs/7.x#server-requirements)
 
 ## Installation
 

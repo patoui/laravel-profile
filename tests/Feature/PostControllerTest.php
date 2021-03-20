@@ -22,36 +22,36 @@ class PostControllerTest extends TestCase
     {
         // Arrange
         Bus::fake();
-        factory(User::class)->states('me')->create();
+        User::factory()->me()->create();
         Mail::fake();
-        factory(Post::class)->create([
+        Post::factory()->create([
             'title'        => 'First Title',
             'body'         => 'First Body',
             'slug'         => 'first-title',
             'published_at' => Carbon::now()->subDays(2),
         ]);
         /** @var Post $post */
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title'        => 'Second Title',
             'body'         => 'Second Body',
             'slug'         => 'second-title',
             'published_at' => Carbon::now()->subDay(),
         ]);
-        factory(Post::class)->create([
+        Post::factory()->create([
             'title'        => 'Third Title',
             'body'         => 'Third Body',
             'slug'         => 'third-title',
             'published_at' => Carbon::now(),
         ]);
         /** @var Comment $comment */
-        $comment = factory(Comment::class)->create([
+        $comment = Comment::factory()->create([
             'post_id' => $post->id,
             'body'    => 'This is a sweet post!',
         ]);
-        factory(Favourite::class)->create([
+        Favourite::factory()->create([
             'favouritable_id'   => $comment->id,
             'favouritable_type' => get_class($comment),
-            'user_id'           => factory(User::class)->create()->id,
+            'user_id'           => User::factory()->create()->id,
         ]);
         GitDown::shouldReceive('parseAndCache')->andReturn($post->body);
         GitDown::shouldReceive('styles')->andReturn(null);

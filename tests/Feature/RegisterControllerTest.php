@@ -10,15 +10,10 @@ class RegisterControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testRegister()
+    public function testRegister(): void
     {
         // Act
-        $response = $this->post(
+        $this->post(
             'register',
             [
                 'name' => 'John Doe',
@@ -29,7 +24,7 @@ class RegisterControllerTest extends TestCase
         );
 
         // Assert
-        $this->assertNotNull(
+        self::assertNotNull(
             User::where('email', 'john.doe@gmail.com')->first()
         );
     }

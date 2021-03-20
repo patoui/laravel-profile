@@ -11,7 +11,7 @@ class VideoControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCreate()
+    public function testCreate(): void
     {
         // Arrange
         $this->auth();
@@ -23,7 +23,7 @@ class VideoControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testStore()
+    public function testStore(): void
     {
         // Arrange
         $this->auth();
@@ -32,7 +32,7 @@ class VideoControllerTest extends TestCase
         $response = $this->post(route('admin.video.store'), [
             'title' => 'My New Video Title',
             'slug' => 'my-new-video-body',
-            'external_id' => uniqid(true),
+            'external_id' => uniqid('foo', true),
         ]);
 
         // Assert
@@ -44,11 +44,11 @@ class VideoControllerTest extends TestCase
         $this->assertEquals('my-new-video-body', $video->fresh()->slug);
     }
 
-    public function testEdit()
+    public function testEdit(): void
     {
         // Arrange
         $this->auth();
-        $video = factory(Video::class)->create();
+        $video = Video::factory()->create();
 
         // Act
         $response = $this->get(route('admin.video.edit', [$video->slug]));
@@ -57,11 +57,11 @@ class VideoControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         // Arrange
         $this->auth();
-        $video = factory(Video::class)->create([
+        $video = Video::factory()->create([
             'title' => 'First Title',
             'slug' => 'first-title',
             'external_id' => uniqid(true),
@@ -71,7 +71,7 @@ class VideoControllerTest extends TestCase
         $response = $this->put(route('admin.video.update', [$video->slug]), [
             'title' => 'Second Title',
             'slug' => 'second-title',
-            'external_id' => uniqid(true),
+            'external_id' => uniqid('foo', true),
         ]);
 
         // Assert
@@ -84,9 +84,9 @@ class VideoControllerTest extends TestCase
     /**
      * Helper method to setup authenticated user
      */
-    private function auth()
+    private function auth(): void
     {
-        $user = factory(User::class)->states('admin')->create();
+        $user = User::factory()->admin()->create();
 
         $this->actingAs($user);
     }

@@ -13,17 +13,15 @@ class LoginControllerTest extends TestCase
     /**
      * Test to display the login form
      */
-    public function testShowLoginForm()
+    public function testShowLoginForm(): void
     {
-        $response = $this->get('login');
-
-        $response->assertStatus(200);
+        $this->get('login')->assertStatus(200);
     }
 
-    public function testLogin()
+    public function testLogin(): void
     {
         // Arrange
-        $user = factory(User::class)->create([
+        User::factory()->create([
             'email' => 'patrique.ouimet@gmail.com',
             'password' => bcrypt('testpass'),
         ]);
@@ -42,10 +40,10 @@ class LoginControllerTest extends TestCase
             ->assertRedirect('admin/dashboard');
     }
 
-    public function testLoginNotAdmin()
+    public function testLoginNotAdmin(): void
     {
         // Arrange
-        $user = factory(User::class)->create([
+        User::factory()->create([
             'email' => 'john.doe@gmail.com',
             'password' => bcrypt('testpass'),
         ]);
@@ -64,10 +62,10 @@ class LoginControllerTest extends TestCase
             ->assertRedirect('/');
     }
 
-    public function testLogout()
+    public function testLogout(): void
     {
         // Arrange
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'email' => 'patrique.ouimet@gmail.com',
             'password' => bcrypt('testpass'),
         ]);
@@ -76,7 +74,6 @@ class LoginControllerTest extends TestCase
         $response = $this->actingAs($user)->get('logout');
 
         // Assert
-        $response->assertStatus(302)
-            ->assertRedirect('/');
+        $response->assertStatus(302)->assertRedirect('/');
     }
 }

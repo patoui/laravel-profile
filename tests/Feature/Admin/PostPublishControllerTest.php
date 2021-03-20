@@ -14,12 +14,12 @@ class PostPublishControllerTest extends TestCase
     /**
      * Test to publish a post
      */
-    public function testShow()
+    public function testShow(): void
     {
         // Arrange
-        $user = factory(User::class)->states('admin')->create();
+        $user = User::factory()->admin()->create();
 
-        $post = factory(Post::class)->create(['published_at' => null]);
+        $post = Post::factory()->create(['published_at' => null]);
 
         // Act
         $response = $this->actingAs($user)

@@ -10,20 +10,14 @@ class HomeControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex()
+    public function testIndex(): void
     {
-        $response = $this->get('/');
-
-        $response->assertSuccessful();
+        $this->get('/')->assertSuccessful();
     }
 
-    public function testIndexAuthenticatedUserCanSeeEmail()
+    public function testIndexAuthenticatedUserCanSeeEmail(): void
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
-
-        $response = $this->get('/');
-
-        $response->assertSuccessful();
+        $this->actingAs(User::factory()->create());
+        $this->get('/')->assertSuccessful();
     }
 }

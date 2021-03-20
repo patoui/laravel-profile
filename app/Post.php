@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
+use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -31,10 +33,15 @@ use function trim;
  * @property Carbon $updated_at
  *
  * @property-read string $short_body
+ *
+ * @method static PostFactory factory(...$parameters)
  */
 class Post extends Model implements Feedable
 {
-    use HasTags, Publishes, RecordsActivity;
+    use HasTags;
+    use Publishes;
+    use RecordsActivity;
+    use HasFactory;
 
     /** @var array<string> */
     protected $guarded = [];

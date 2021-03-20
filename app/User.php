@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace App;
 
+use Database\Factories\UserFactory;
 use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use RuntimeException;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class User
@@ -29,11 +31,14 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @property Carbon $email_verified_at
  *
  * @property-read bool $is_admin
+ *
+ * @method static UserFactory factory(...$parameters)
  */
 class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     use Notifiable;
-    use HasMediaTrait;
+    use InteractsWithMedia;
+    use HasFactory;
 
     /** @var array<string> */
     protected $fillable = [

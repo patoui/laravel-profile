@@ -17,7 +17,7 @@ class TipControllerTest extends TestCase
     public function testIndex(): void
     {
         // Arrange
-        factory(Tip::class)->create([
+        Tip::factory()->create([
             'title' => 'Eloquent vs Collection Count',
             'slug' => 'eloquent-vs-collection-count',
             'body' => 'Use $model->relationship()->count() instead of $model->relationship->count()',
@@ -36,7 +36,7 @@ class TipControllerTest extends TestCase
     {
         // Arrange
         Bus::fake();
-        $tip = factory(Tip::class)->create([
+        $tip = Tip::factory()->create([
             'title' => 'Eloquent vs Collection Count',
             'slug' => 'eloquent-vs-collection-count',
             'body' => 'Use $model->relationship()->count() instead of $model->relationship->count()',

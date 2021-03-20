@@ -14,14 +14,14 @@ class CommentTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testOwner()
+    public function testOwner(): void
     {
         // Arrange
-        factory(User::class)->states('me')->create();
+        User::factory()->me()->create();
         Mail::fake();
-        $user = factory(User::class)->create();
-        $post = factory(Post::class)->create();
-        $comment = factory(Comment::class)->create([
+        $user = User::factory()->create();
+        $post = Post::factory()->create();
+        $comment = Comment::factory()->create([
             'post_id' => $post->id,
             'user_id' => $user->id,
         ]);
@@ -33,12 +33,12 @@ class CommentTest extends TestCase
         $this->assertEquals($user->id, $owner->id);
     }
 
-    public function testGetShortCreatedAtAttribute()
+    public function testGetShortCreatedAtAttribute(): void
     {
         $timestamp = Carbon::parse('April 4th, 2019 11:11 AM');
-        $comment = factory(Comment::class)->make(['created_at' => $timestamp]);
+        $comment = Comment::factory()->make(['created_at' => $timestamp]);
 
-        $this->assertEquals(
+        self::assertEquals(
             'Apr 4, 2019',
             $comment->short_created_at
         );

@@ -17,10 +17,10 @@ class TipFavouriteControllerTest extends TestCase
      *
      * @return void
      */
-    public function testStore()
+    public function testStore(): void
     {
-        $tip = factory(Tip::class)->states(['published'])->create();
-        $user = factory(User::class)->create();
+        $tip = Tip::factory()->published()->create();
+        $user = User::factory()->create();
         $this->actingAs($user);
 
         $response = $this->post('tip/' . $tip->slug);

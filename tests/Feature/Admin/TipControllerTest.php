@@ -15,7 +15,7 @@ class TipControllerTest extends TestCase
     /**
      * Test to view the tip create page as an authenticated user
      */
-    public function testCreate()
+    public function testCreate(): void
     {
         // Arrange
         $this->auth();
@@ -30,7 +30,7 @@ class TipControllerTest extends TestCase
     /**
      * Test to store a tip as an authenticated user
      */
-    public function testStore()
+    public function testStore(): void
     {
         // Arrange
         $this->auth();
@@ -46,27 +46,27 @@ class TipControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('/admin/dashboard');
         $tip = app(Tip::class)->where('title', 'My New Tip Title')->first();
-        $this->assertNotNull($tip);
-        $this->assertNotNull(
+        self::assertNotNull($tip);
+        self::assertNotNull(
             app(Activity::class)->where([
                 'type' => 'created_tip',
                 'subject_id' => $tip->id,
                 'subject_type' => get_class($tip),
             ])->first()
         );
-        $this->assertEquals('My New Tip Title', $tip->fresh()->title);
-        $this->assertEquals('My New Tip Body', $tip->fresh()->body);
-        $this->assertEquals('my-new-tip-body', $tip->fresh()->slug);
+        self::assertEquals('My New Tip Title', $tip->fresh()->title);
+        self::assertEquals('My New Tip Body', $tip->fresh()->body);
+        self::assertEquals('my-new-tip-body', $tip->fresh()->slug);
     }
 
     /**
      * Test to view the tip edit page as an authenticated user
      */
-    public function testEdit()
+    public function testEdit(): void
     {
         // Arrange
         $this->auth();
-        $tip = factory(Tip::class)->create();
+        $tip = Tip::factory()->create();
 
         // Act
         $response = $this->get('admin/tip/' . $tip->id . '/edit');
@@ -78,11 +78,11 @@ class TipControllerTest extends TestCase
     /**
      * Test to update a tip as an authenticated user
      */
-    public function testUpdate()
+    public function testUpdate(): void
     {
         // Arrange
         $this->auth();
-        $tip = factory(Tip::class)->create([
+        $tip = Tip::factory()->create([
             'title' => 'First Title',
             'body' => 'First Body',
             'slug' => 'first-title',
@@ -98,17 +98,17 @@ class TipControllerTest extends TestCase
         // Assert
         $response->assertStatus(302);
         $response->assertRedirect('/admin/dashboard');
-        $this->assertEquals('Second Title', $tip->fresh()->title);
-        $this->assertEquals('Second Body', $tip->fresh()->body);
-        $this->assertEquals('second-title', $tip->fresh()->slug);
+        self::assertEquals('Second Title', $tip->fresh()->title);
+        self::assertEquals('Second Body', $tip->fresh()->body);
+        self::assertEquals('second-title', $tip->fresh()->slug);
     }
 
     /**
      * Helper method to setup authenticated user
      */
-    private function auth()
+    private function auth(): void
     {
-        $user = factory(User::class)->states('admin')->create();
+        $user = User::factory()->admin()->create();
 
         $this->actingAs($user);
     }

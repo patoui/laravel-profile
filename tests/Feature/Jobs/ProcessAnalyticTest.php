@@ -19,7 +19,7 @@ class ProcessAnalyticTest extends TestCase
     {
         // Arrange
         /** @var Post $post */
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
         $this->mock(Client::class, function ($mock) {
             $mock->shouldReceive('insert')->once();
         });
@@ -40,7 +40,7 @@ class ProcessAnalyticTest extends TestCase
     {
         // Arrange
         /** @var Tip $tip */
-        $tip = factory(Tip::class)->create();
+        $tip = Tip::factory()->create();
         $this->mock(Client::class, function ($mock) {
             $mock->shouldReceive('insert')->once();
         });
@@ -61,7 +61,7 @@ class ProcessAnalyticTest extends TestCase
     {
         // Arrange
         /** @var Video $video */
-        $video = factory(Video::class)->create();
+        $video = Video::factory()->create();
         $this->mock(Client::class, function ($mock) {
             $mock->shouldReceive('insert')->once();
         });

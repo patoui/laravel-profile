@@ -11,12 +11,12 @@ class VideoPublishControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testShow()
+    public function testShow(): void
     {
         // Arrange
-        $user = factory(User::class)->states('admin')->create();
+        $user = User::factory()->admin()->create();
         $this->actingAs($user);
-        $video = factory(Video::class)->create();
+        $video = Video::factory()->create();
 
         // Act
         $response = $this->get(route('admin.video.publish', [$video->slug]));

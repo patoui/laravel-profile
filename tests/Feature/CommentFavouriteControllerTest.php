@@ -13,20 +13,20 @@ class CommentFavouriteControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testStore()
+    public function testStore(): void
     {
         // Arrange
-        factory(User::class)->states('me')->create();
+        User::factory()->me()->create();
         Mail::fake();
-        $this->be($user = factory(User::class)->create());
+        $this->be($user = User::factory()->create());
 
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title' => 'First Title',
             'body' => 'First Body',
             'slug' => 'first-title',
         ]);
 
-        $comment = factory(Comment::class)->create(['post_id' => $post->id]);
+        $comment = Comment::factory()->create(['post_id' => $post->id]);
 
         // Act
         $response = $this->post('comment/' . $comment->id, [
@@ -38,6 +38,6 @@ class CommentFavouriteControllerTest extends TestCase
         $response->assertStatus(302)->assertRedirect('post/' . $post->slug);
 
         // Assert comment was saved to the user
-        $this->assertNotNull($user->fresh()->favourites()->first());
+        self::assertNotNull($user->fresh()->favourites()->first());
     }
 }

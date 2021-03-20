@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use Database\Factories\VideoFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
@@ -20,10 +22,15 @@ use Spatie\Tags\HasTags;
  * @property string $external_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @method static VideoFactory factory(...$parameters)
  */
 class Video extends Model
 {
-    use HasTags, Publishes, RecordsActivity;
+    use HasTags;
+    use Publishes;
+    use RecordsActivity;
+    use HasFactory;
 
     /** @var array<string> */
     protected $guarded = [];

@@ -10,22 +10,23 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Auth\AuthenticationException;
 
 class PostCommentControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testStore()
+    public function testStore(): void
     {
         // Arrange
-        factory(User::class)->states('me')->create();
+        User::factory()->me()->create();
         Mail::fake();
-        $this->actingAs($user = factory(User::class)->create());
+        $this->actingAs($user = User::factory()->create());
 
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title' => 'First Title',
-            'body' => 'First Body',
-            'slug' => 'first-title',
+            'body'  => 'First Body',
+            'slug'  => 'first-title',
         ]);
 
         // Act
@@ -38,11 +39,12 @@ class PostCommentControllerTest extends TestCase
         $response->assertRedirect('post/' . $post->slug);
 
         // Assert activity was recorded
-        $comment = app(Comment::class)->where('post_id', $post->id)->first();
-        $this->assertNotNull(
-            app(Activity::class)->where([
-                'type' => 'created_comment',
-                'subject_id' => $comment->id,
+        $comment = Comment::where('post_id', $post->id)->first();
+        self::assertNotNull($comment);
+        self::assertNotNull(
+            Activity::where([
+                'type'         => 'created_comment',
+                'subject_id'   => $comment->id,
                 'subject_type' => get_class($comment),
             ])->first()
         );
@@ -51,34 +53,34 @@ class PostCommentControllerTest extends TestCase
     /**
      * Test storing a post comment failure when unauthenticated
      */
-    public function testStoreUnauthenticated()
+    public function testStoreUnauthenticated(): void
     {
         // Arrange
-        $this->expectException('Illuminate\Auth\AuthenticationException');
+        $this->expectException(AuthenticationException::class);
 
         // Act
-        $response = $this->post(
+        $this->post(
             'post/slug-here/comment',
             ['body' => 'Awesome post!']
         );
 
         // Assert activity was not recorded
-        $this->assertNotNull(app(Activity::class)->first());
+        self::assertNotNull(app(Activity::class)->first());
     }
 
     /**
      * Test storing a post comment failure when the post does not exists
      */
-    public function testStorePostNotFound()
+    public function testStorePostNotFound(): void
     {
         // Arrange
-        factory(User::class)->states('me')->create();
+        User::factory()->me()->create();
         Mail::fake();
-        $this->be($user = factory(User::class)->create());
+        $this->be($user = User::factory()->create());
         $this->expectException(NotFoundHttpException::class);
 
         // Act
-        $response = $this->post(
+        $this->post(
             'post/slug-here/comment',
             ['body' => 'Awesome post!']
         );
@@ -87,22 +89,22 @@ class PostCommentControllerTest extends TestCase
     /**
      * Test storing a post comment on a comment
      */
-    public function testStoreOnComment()
+    public function testStoreOnComment(): void
     {
         // Arrange
-        factory(User::class)->states('me')->create();
+        User::factory()->me()->create();
         Mail::fake();
-        $this->be($user = factory(User::class)->create());
+        $this->be($user = User::factory()->create());
 
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title' => 'First Title',
-            'body' => 'First Body',
-            'slug' => 'first-title',
+            'body'  => 'First Body',
+            'slug'  => 'first-title',
         ]);
 
-        $comment = factory(Comment::class)->create([
+        $comment = Comment::factory()->create([
             'post_id' => $post->id,
-            'body' => 'Awesome post!',
+            'body'    => 'Awesome post!',
         ]);
 
         // Act
@@ -110,43 +112,43 @@ class PostCommentControllerTest extends TestCase
             'post/' . $post->slug . '/comment',
             [
                 'comment_id' => $comment->id,
-                'body' => 'Sure was!'
+                'body'       => 'Sure was!',
             ]
         );
 
         // Assert
         $response->assertStatus(302)
-            ->assertRedirect('post/' . $post->slug);
+                 ->assertRedirect('post/' . $post->slug);
 
         $this->assertNotNull(
             Comment::where('post_id', $post->id)
-                ->where('comment_id', $comment->id)
-                ->where('body', 'Sure was!')
-                ->first()
+                   ->where('comment_id', $comment->id)
+                   ->where('body', 'Sure was!')
+                   ->first()
         );
     }
 
     /**
      * Test storing a post comment and `@` a user and triggers a notification
      */
-    public function testStoreNotifyMentionedUser()
+    public function testStoreNotifyMentionedUser(): void
     {
         // Arrange
-        factory(User::class)->states('me')->create();
+        User::factory()->me()->create();
         Mail::fake();
-        $john = factory(User::class)->create(['name' => 'johndoe']);
-        $user = factory(User::class)->create();
+        $john = User::factory()->create(['name' => 'johndoe']);
+        $user = User::factory()->create();
         $this->actingAs($user);
 
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title' => 'First Title',
-            'body' => 'First Body',
-            'slug' => 'first-title',
+            'body'  => 'First Body',
+            'slug'  => 'first-title',
         ]);
 
         // Act
         $response = $this->post('post/' . $post->slug . '/comment', [
-            'body' => 'Great post @johndoe!'
+            'body' => 'Great post @johndoe!',
         ]);
 
         // Assert
@@ -154,8 +156,8 @@ class PostCommentControllerTest extends TestCase
 
         $this->assertNotNull(
             Comment::where('post_id', $post->id)
-                ->where('body', 'Great post @johndoe!')
-                ->first()
+                   ->where('body', 'Great post @johndoe!')
+                   ->first()
         );
 
         $this->assertCount(1, $john->notifications);

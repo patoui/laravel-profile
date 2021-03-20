@@ -2,6 +2,7 @@
 
 @section('meta')
     @include('general-meta', ['model' => $post])
+    <meta name="description"        content="{{ $post->short_body }}" />
     <meta property="og:type"        content="article" />
     <meta property="og:title"       content="{{ $post->title }}" />
     <meta property="og:description" content="{{ $post->short_body }}" />

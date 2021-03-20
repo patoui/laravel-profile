@@ -2,6 +2,7 @@
 
 @section('meta')
     @include('general-meta', ['model' => $tip])
+    <meta name="description"        content="{{ $tip->short_body }}" />
     <meta property="og:type"        content="article" />
     <meta property="og:title"       content="{{ $tip->title }}" />
     <meta property="og:description" content="{{ $tip->short_body }}" />

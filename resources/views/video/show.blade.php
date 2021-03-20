@@ -2,6 +2,7 @@
 
 @section('meta')
     @include('general-meta', ['model' => $video])
+    <meta name="description"        content="{{ $video->short_body }}" />
     <meta property="og:type"        content="video.other" />
     <meta property="og:title"       content="{{ $video->title }}" />
     <meta property="og:description" content="{{ $video->short_body }}" />

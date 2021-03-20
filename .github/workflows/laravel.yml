@@ -34,3 +34,9 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+    - name: Run Code Sniffer Syntax Checker
+      run: vendor/bin/phpcs --standard=PSR2 app
+    - name: PHPStan Static Analysis
+      run: vendor/bin/phpstan analyse
+    - name: PHP Psalm Static Analysis
+      run: vendor/bin/psalm

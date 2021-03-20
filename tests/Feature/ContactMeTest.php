@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ContactMeTest extends TestCase
 {
-    public function testBuild()
+    public function testBuild(): void
     {
         $contactMeMailable = new ContactMe(
             'John Doe',
@@ -20,6 +20,6 @@ class ContactMeTest extends TestCase
 
         $result = $contactMeMailable->build();
 
-        $this->assertTrue($result instanceof Mailable);
+        self::assertInstanceOf(Mailable::class, $result);
     }
 }

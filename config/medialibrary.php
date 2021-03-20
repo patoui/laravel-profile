@@ -23,7 +23,7 @@ return [
     /*
      * The class name of the media model that should be used.
      */
-    'media_model' => Spatie\MediaLibrary\Models\Media::class,
+    'media_model' => Spatie\MediaLibrary\MediaCollections\Models\Media::class,
 
     /*
      * The engine that should perform the image conversions.
@@ -67,10 +67,11 @@ return [
      * These generators will be used to create an image of media files.
      */
     'image_generators' => [
-        Spatie\MediaLibrary\ImageGenerators\FileTypes\Image::class,
-        Spatie\MediaLibrary\ImageGenerators\FileTypes\Pdf::class,
-        Spatie\MediaLibrary\ImageGenerators\FileTypes\Svg::class,
-        Spatie\MediaLibrary\ImageGenerators\FileTypes\Video::class,
+        Spatie\MediaLibrary\Conversions\ImageGenerators\Image::class,
+        Spatie\MediaLibrary\Conversions\ImageGenerators\Webp::class,
+        Spatie\MediaLibrary\Conversions\ImageGenerators\Pdf::class,
+        Spatie\MediaLibrary\Conversions\ImageGenerators\Svg::class,
+        Spatie\MediaLibrary\Conversions\ImageGenerators\Video::class,
     ],
 
     /*

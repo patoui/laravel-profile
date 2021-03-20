@@ -10,11 +10,11 @@ class BlogControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex()
+    public function testIndex(): void
     {
         // Arrange
-        $post = factory(Post::class)->states('published')->create();
-        $unpublished = factory(Post::class)->create();
+        $post = Post::factory()->published()->create();
+        $unpublished = Post::factory()->create();
 
         // Act
         $response = $this->get('blog');

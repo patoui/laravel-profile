@@ -13,8 +13,8 @@ class VideoFavouriteControllerTest extends TestCase
 
     public function testStore() : void
     {
-        $video = factory(Video::class)->states(['published'])->create();
-        $user = factory(User::class)->create();
+        $video = Video::factory()->published()->create();
+        $user = User::factory()->create();
         $this->actingAs($user);
 
         $response = $this->post(route('video.favourite.store', [$video->slug]));
@@ -22,6 +22,6 @@ class VideoFavouriteControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route('video.show', [$video->slug]));
 
-        $this->assertCount(1, $user->fresh()->favourites);
+        self::assertCount(1, $user->fresh()->favourites);
     }
 }

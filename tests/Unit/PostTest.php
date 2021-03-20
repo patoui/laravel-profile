@@ -14,11 +14,11 @@ class PostTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCreateComment()
+    public function testCreateComment(): void
     {
-        factory(User::class)->states('me')->create();
+        User::factory()->me()->create();
         Mail::fake();
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title' => 'My Article\'s Title',
             'body' => 'My Article\'s Body',
             'slug' => 'my-articles-title',
@@ -26,15 +26,15 @@ class PostTest extends TestCase
 
         $post->createComment(['body' => 'Awesome article!']);
 
-        $this->assertEquals(
+        self::assertEquals(
             'Awesome article!',
             $post->fresh()->comments()->latest()->first()->body
         );
     }
 
-    public function testScopeSlug()
+    public function testScopeSlug(): void
     {
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title' => 'My Article\'s Title',
             'body' => 'My Article\'s Body',
             'slug' => 'my-articles-title',
@@ -42,12 +42,12 @@ class PostTest extends TestCase
 
         $exists = app(Post::class)->slug($post->slug)->exists();
 
-        $this->assertNotNull($exists);
+        self::assertNotNull($exists);
     }
 
-    public function testGetShortBodyAttribute()
+    public function testGetShortBodyAttribute(): void
     {
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title' => 'My Article\'s Title',
             'body' => '1111111111'
                 . '1111111111'
@@ -63,7 +63,7 @@ class PostTest extends TestCase
             'slug' => 'my-articles-title',
         ]);
 
-        $this->assertEquals(
+        self::assertEquals(
             '1111111111'
                 . '1111111111'
                 . '1111111111'
@@ -78,63 +78,63 @@ class PostTest extends TestCase
         );
     }
 
-    public function testGetShortPublishedAtAttribute()
+    public function testGetShortPublishedAtAttribute(): void
     {
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'published_at' => '2017-02-02 06:06:06'
         ]);
 
-        $this->assertEquals(
+        self::assertEquals(
             'Thu, Feb 2, 2017 1:06 AM',
             $post->short_published_at
         );
     }
 
-    public function testTogglePublish()
+    public function testTogglePublish(): void
     {
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
 
         $post->togglePublish();
 
-        $this->assertNotNull($post->fresh()->published_at);
+        self::assertNotNull($post->fresh()->published_at);
     }
 
-    public function testScopePublished()
+    public function testScopePublished(): void
     {
-        factory(Post::class, 2)->create();
-        factory(Post::class)->states(['published'])->create();
+        Post::factory(2)->create();
+        Post::factory()->published()->create();
 
-        $this->assertEquals(
+        self::assertEquals(
             1,
             app(Post::class)->published()->count()
         );
     }
 
-    public function testPreviousPublished()
+    public function testPreviousPublished(): void
     {
-        $previousPost = factory(Post::class)->create([
+        $previousPost = Post::factory()->create([
             'published_at' => Carbon::now()->subDay(),
         ]);
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'published_at' => Carbon::now(),
         ]);
 
         $previousPostFound = $post->previousPublished();
 
-        $this->assertEquals($previousPost->title, $previousPostFound->title);
+        self::assertEquals($previousPost->title, $previousPostFound->title);
     }
 
-    public function testNextPublished()
+    public function testNextPublished(): void
     {
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'published_at' => Carbon::now()->subDay(),
         ]);
-        $nextPost = factory(Post::class)->create([
+        $nextPost = Post::factory()->create([
             'published_at' => Carbon::now(),
         ]);
 
         $nextPostFound = $post->nextPublished();
 
-        $this->assertEquals($nextPost->title, $nextPostFound->title);
+        self::assertEquals($nextPost->title, $nextPostFound->title);
     }
 }

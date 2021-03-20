@@ -6,6 +6,7 @@
 /coverage
 /tags
 /storage/app/media/*
+/storage/app/public/*
 /storage/framework/*
 /storage/debugbar
 Homestead.json

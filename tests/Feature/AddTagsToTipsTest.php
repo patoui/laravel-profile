@@ -11,17 +11,17 @@ class AddTagsToTipsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCanAddTagsToATip()
+    public function testCanAddTagsToATip(): void
     {
-        $this->markTestSkipped('Need to enable JSON1 extension for tags');
+        self::markTestSkipped('Need to enable JSON1 extension for tags');
 
         // Arrange
-        $tip = factory(Tip::class)->states('published')->create();
+        $tip = Tip::factory()->published()->create();
 
         // Act
         $tip->syncTags(['php', 'laravel', 'collection', 'eloquent', 'learning']);
 
         // Assert
-        $this->assertEquals(5, $tip->fresh()->tags()->count());
+        self::assertEquals(5, $tip->fresh()->tags()->count());
     }
 }

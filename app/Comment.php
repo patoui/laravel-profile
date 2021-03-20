@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App;
 
 use App\Events\CommentSaved;
+use Database\Factories\CommentFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -24,10 +26,13 @@ use function preg_match_all;
  * @property Post   $post
  *
  * @property-read null|string $path
+ *
+ * @method static CommentFactory factory(...$parameters)
  */
 class Comment extends Model
 {
     use RecordsActivity;
+    use HasFactory;
 
     /** @var array<string> */
     protected $guarded = [];

@@ -17,10 +17,10 @@ class PostFavouriteControllerTest extends TestCase
      *
      * @return void
      */
-    public function testStore()
+    public function testStore(): void
     {
-        $post = factory(Post::class)->states(['published'])->create();
-        $user = factory(User::class)->create();
+        $post = Post::factory()->published()->create();
+        $user = User::factory()->create();
         $this->actingAs($user);
 
         $response = $this->post('post/' . $post->slug);
@@ -28,6 +28,6 @@ class PostFavouriteControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('post/' . $post->slug);
 
-        $this->assertCount(1, $user->fresh()->favourites);
+        self::assertCount(1, $user->fresh()->favourites);
     }
 }

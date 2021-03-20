@@ -13,7 +13,7 @@ class SubscriptionControllerTest extends TestCase
     /**
      * Test to store a subscription
      */
-    public function testStore()
+    public function testStore(): void
     {
         // Act
         $response = $this->post(
@@ -22,10 +22,9 @@ class SubscriptionControllerTest extends TestCase
         );
 
         // Assert
-        $response->assertStatus(302)
-            ->assertRedirect('/');
+        $response->assertStatus(302)->assertRedirect('/');
 
-        $this->assertNotNull(
+        self::assertNotNull(
             Subscription::where('email', 'patrique.ouimet@gmail.com')->first()
         );
     }

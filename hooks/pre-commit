@@ -23,7 +23,7 @@ function __run() #(step, name, cmd)
     fi
 }
 
-modified="git diff --diff-filter=M --name-only --cached  | grep \".php$\""
+modified="git diff --diff-filter=M --name-only --cached | grep -v '^tests/'  | grep \".php$\""
 ignore="resources/lang,resources/views,bootstrap/helpers,database/migrations,bin"
 phpcs="vendor/bin/phpcs --standard=PSR2 --ignore=${ignore} app"
 

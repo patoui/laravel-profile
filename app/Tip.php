@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
+use Database\Factories\TipFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
@@ -20,10 +22,15 @@ use Spatie\Tags\HasTags;
  * @property null|Carbon $published_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @method static TipFactory factory(...$parameters)
  */
 class Tip extends Model
 {
-    use HasTags, Publishes, RecordsActivity;
+    use HasTags;
+    use Publishes;
+    use RecordsActivity;
+    use HasFactory;
 
     /** @var array<string> */
     protected $guarded = [];

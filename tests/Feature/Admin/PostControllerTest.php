@@ -15,7 +15,7 @@ class PostControllerTest extends TestCase
     /**
      * Test to view the post create page as an authenticated user
      */
-    public function testCreate()
+    public function testCreate(): void
     {
         // Arrange
         $this->auth();
@@ -30,7 +30,7 @@ class PostControllerTest extends TestCase
     /**
      * Test to store a post as an authenticated user
      */
-    public function testStore()
+    public function testStore(): void
     {
         // Arrange
         $this->auth();
@@ -47,12 +47,13 @@ class PostControllerTest extends TestCase
         $response->assertRedirect('admin/dashboard');
 
         // Assert model was created
-        $post = app(Post::class)->where('title', 'My New Post Title')->first();
-        $this->assertNotNull($post);
+        /** @var Post $post */
+        $post = Post::where('title', 'My New Post Title')->first();
+        self::assertNotNull($post);
 
         // Assert activity was recorded
-        $this->assertNotNull(
-            app(Activity::class)->where([
+        self::assertNotNull(
+            Activity::where([
                 'type' => 'created_post',
                 'subject_id' => $post->id,
                 'subject_type' => get_class($post),
@@ -63,11 +64,11 @@ class PostControllerTest extends TestCase
     /**
      * Test to view the post edit page as an authenticated user
      */
-    public function testEdit()
+    public function testEdit(): void
     {
         // Arrange
         $this->auth();
-        $post = factory(Post::class)->create();
+        $post = Post::factory()->create();
 
         // Act
         $response = $this->get(route('admin.post.edit', ['post' => $post->id]));
@@ -79,11 +80,11 @@ class PostControllerTest extends TestCase
     /**
      * Test to update a post as an authenticated user
      */
-    public function testUpdate()
+    public function testUpdate(): void
     {
         // Arrange
         $this->auth();
-        $post = factory(Post::class)->create([
+        $post = Post::factory()->create([
             'title' => 'First Title',
             'body' => 'First Body',
             'slug' => 'first-title',
@@ -121,9 +122,9 @@ class PostControllerTest extends TestCase
     /**
      * Helper method to setup authenticated user
      */
-    private function auth()
+    private function auth(): void
     {
-        $user = factory(User::class)->states('admin')->create();
+        $user = User::factory()->admin()->create();
 
         $this->actingAs($user);
     }

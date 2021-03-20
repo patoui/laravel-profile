@@ -8,11 +8,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SlugTest extends TestCase
 {
-    public function testMessage()
+    public function testMessage(): void
     {
         $slugRule = app(Slug::class);
 
-        $this->assertEquals(
+        self::assertEquals(
             'The :attribute must be a valid slug.',
             $slugRule->message()
         );

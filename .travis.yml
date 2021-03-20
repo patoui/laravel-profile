@@ -7,7 +7,7 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - yes | pecl install imagick
+  - sudo apt -y install php8.0-gd
   - cp .env.travis .env
   - composer install
   - php artisan key:generate

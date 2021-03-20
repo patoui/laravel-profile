@@ -7,9 +7,11 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+before_install:
+  - sudo apt update
+  - sudo apt -y install php8.0-gd
+
 before_script:
-  - sudo apt-get update
-  - sudo apt-get -y install php8.0-gd
   - cp .env.travis .env
   - composer install
   - php artisan key:generate

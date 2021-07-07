@@ -15,11 +15,6 @@ use Illuminate\Support\Carbon;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
-use function preg_replace;
-use function route;
-use function strip_tags;
-use function substr;
-use function trim;
 
 /**
  * Class Post

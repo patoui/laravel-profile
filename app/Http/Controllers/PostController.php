@@ -8,7 +8,6 @@ use App\Analytic;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use function view;
 
 class PostController extends Controller
 {

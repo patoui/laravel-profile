@@ -110,7 +110,7 @@ class Post extends Model implements Feedable
             ->title($this->title)
             ->summary($this->short_body)
             ->updated($this->updated_at)
-            ->link(route('post.show', ['post' => $this->slug]))
+            ->link(route('post.show', ['post_slug' => $this->slug]))
             ->author('Patrique Ouimet');
     }
 

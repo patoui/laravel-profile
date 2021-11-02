@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use ClickHouseDB\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
@@ -48,13 +47,6 @@ class ProcessAnalytic implements ShouldQueue
                 'created_at' => $now,
                 'updated_at' => $now,
             ]);
-            /** @var Client $clickhouse */
-            $clickhouse = resolve(Client::class);
-            $clickhouse->insert(
-                'analytics',
-                [[$now->timestamp, $this->model->getKey(), get_class($this->model), $headers]],
-                ['ts', 'analytical_id', 'analytical_type', 'headers']
-            );
         }
     }
 

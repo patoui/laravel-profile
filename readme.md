@@ -8,7 +8,6 @@ Serves as a portfolio of myself, and a place where I can post articles/tips/vide
 ## Requirements
 
 - PHP ^8.0
-- Clickhouse (latest)
 - MySQL ^5.7 | 8.x
 
 ## Installation

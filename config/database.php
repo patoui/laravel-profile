@@ -59,14 +59,6 @@ return [
             'engine' => null,
         ],
 
-        'clickhouse' => [
-            'host' => env('DB_CH_HOST', '127.0.0.1'),
-            'port' => env('DB_CH_PORT', '8123'), // HTTP PORT
-            'database' => env('DB_CH_DATABASE', 'profile'),
-            'username' => env('DB_CH_USERNAME', 'default'),
-            'password' => env('DB_CH_PASSWORD', ''),
-        ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),

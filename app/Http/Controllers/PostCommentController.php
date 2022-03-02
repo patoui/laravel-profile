@@ -31,7 +31,7 @@ class PostCommentController extends Controller
         );
 
         // TODO: add better logic for black listing users.
-        if (Str::endsWith($request->user()->email, 'mailnator.com')) {
+        if (Str::endsWith($request->user()->email, 'mailinator.com')) {
             return redirect()->route('post.show', ['post_slug' => $post->slug]);
         }
 

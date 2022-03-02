@@ -8,6 +8,7 @@ use App\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use function redirect;
 use function response;
@@ -28,6 +29,11 @@ class PostCommentController extends Controller
             ['body' => 'required|string'],
             ['required' => 'A comment usually has something in it xD']
         );
+
+        // TODO: add better logic for black listing users.
+        if (Str::endsWith($request->user()->email, 'mailnator.com')) {
+            return redirect()->route('post.show', ['post_slug' => $post->slug]);
+        }
 
         $post->createComment([
             'body' => $request->input('body'),

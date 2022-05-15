@@ -6,6 +6,10 @@
   color: #0366d6
 }
 
+.markdown-body ul {
+  list-style: disc;
+}
+
 .markdown-body pre {
   overflow-y: auto;
 }

@@ -66,7 +66,7 @@ if (app()->environment('development')) {
 }
 
 Route::prefix('/webhooks')->group(function () {
-    Route::prefix('/webhooks')->group(function () {
+    Route::prefix('/slack')->group(function () {
         Route::get('/test', function () {
             $r = request()->all();
 

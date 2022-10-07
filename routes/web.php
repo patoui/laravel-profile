@@ -67,7 +67,7 @@ if (app()->environment('development')) {
 
 Route::prefix('/webhooks')->group(function () {
     Route::prefix('/slack')->group(function () {
-        Route::get('/test', function () {
+        Route::match(['get', 'post'], '/test', function () {
             $r = request()->all();
 
             return response()->json('Hello there!');

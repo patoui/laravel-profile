@@ -72,9 +72,16 @@ Route::prefix('/webhooks')->group(function () {
                 'payload' => $request->toArray(),
                 'headers' => $request->headers->all(),
             ]);
+            $sig = hash_hmac(
+                'sha256',
+                sprintf("v0:%s:%s", $request->headers->get('x-slack-request-timestamp'), $request->getContent()),
+                config('slack.signing_key')
+            );
 
-            // trivial security measure
-            abort_if(stripos($request->headers->get('User-Agent'), 'Slackbot') === false, 404);
+            abort_if(!hash_equals($sig, $request->headers->get('x-slack-signature')), 404);
+
+//            // trivial security measure
+//            abort_if(stripos($request->headers->get('User-Agent'), 'Slackbot') === false, 404);
 
             return response()->json([
                 "replace_original" => "true",

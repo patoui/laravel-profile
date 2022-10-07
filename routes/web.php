@@ -69,7 +69,8 @@ Route::prefix('/webhooks')->group(function () {
     Route::prefix('/slack')->group(function () {
         Route::match(['get', 'post'], '/test', function (\Illuminate\Http\Request $request) {
             logger()->info('REQUEST DETAILS', [
-                'url' => $request->toArray(),
+                'payload' => $request->toArray(),
+                'headers' => $request->headers->all(),
             ]);
 
             // trivial security measure

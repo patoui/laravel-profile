@@ -64,3 +64,13 @@ Route::feeds();
 if (app()->environment('development')) {
     Route::view('storm-the-house', 'games/storm-the-house/index');
 }
+
+Route::prefix('/webhooks')->group(function () {
+    Route::prefix('/webhooks')->group(function () {
+        Route::get('/test', function () {
+            $r = request()->all();
+
+            return response()->json('Hello there!');
+        });
+    });
+});

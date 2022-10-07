@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
@@ -67,21 +68,15 @@ if (app()->environment('development')) {
 
 Route::prefix('/webhooks')->group(function () {
     Route::prefix('/slack')->group(function () {
-        Route::match(['get', 'post'], '/test', function (\Illuminate\Http\Request $request) {
-            logger()->info('REQUEST DETAILS', [
-                'payload' => $request->toArray(),
-                'headers' => $request->headers->all(),
-            ]);
-            $sig = hash_hmac(
+        Route::match(['get', 'post'], '/test', function (Request $request) {
+            $sig = 'v0=' . hash_hmac(
                 'sha256',
                 sprintf("v0:%s:%s", $request->headers->get('x-slack-request-timestamp'), $request->getContent()),
                 config('slack.signing_key')
             );
 
+            // Abort if request cannot be verified
             abort_if(!hash_equals($sig, $request->headers->get('x-slack-signature')), 404);
-
-//            // trivial security measure
-//            abort_if(stripos($request->headers->get('User-Agent'), 'Slackbot') === false, 404);
 
             return response()->json([
                 "replace_original" => "true",

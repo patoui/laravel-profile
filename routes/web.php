@@ -68,10 +68,12 @@ if (app()->environment('development')) {
 Route::prefix('/webhooks')->group(function () {
     Route::prefix('/slack')->group(function () {
         Route::match(['get', 'post'], '/test', function (\Illuminate\Http\Request $request) {
-            logger()->info('REQUEST HEADERS', [
-                'headers' => $request->headers->get('User-Agent'),
-                'url' => $request->getBaseUrl(),
+            logger()->info('REQUEST DETAILS', [
+                'url' => $request->toArray(),
             ]);
+
+            // trivial security measure
+            abort_if(stripos($request->headers->get('User-Agent'), 'Slackbot') === false, 404);
 
             return response()->json([
                 "replace_original" => "true",

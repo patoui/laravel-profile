@@ -71,6 +71,7 @@ Route::prefix('/webhooks')->group(function () {
             $r = request()->all();
 
             return response()->json([
+                "replace_original" => "true",
                 "response_type" => "in_channel",
                 "blocks" => [
                     [

@@ -59,24 +59,21 @@ Route::get('auth/github/callback', 'Auth\LoginController@handleProviderCallback'
 
 Route::feeds();
 
-//Route::get('covid19', 'Covid19Controller@index')->name('covid19.index');
-//Route::get('covid19/{country_slug}', 'Covid19Controller@show')->name('covid19.show');
-
-if (app()->environment('development')) {
-    Route::view('storm-the-house', 'games/storm-the-house/index');
-}
-
 Route::prefix('/webhooks')->group(function () {
     Route::prefix('/slack')->group(function () {
         Route::match(['get', 'post'], '/test', function (Request $request) {
+            /** @var string $content */
+            $content = $request->getContent(false);
             $sig = 'v0=' . hash_hmac(
                 'sha256',
-                sprintf("v0:%s:%s", $request->headers->get('x-slack-request-timestamp'), $request->getContent()),
+                sprintf("v0:%s:%s", $request->headers->get('x-slack-request-timestamp'), $content),
                 config('slack.signing_key')
             );
 
+            $slackSignature = $request->headers->get('x-slack-signature');
+
             // Abort if request cannot be verified
-            abort_if(!hash_equals($sig, $request->headers->get('x-slack-signature')), 404);
+            abort_if(!$slackSignature || !hash_equals($sig, $slackSignature), 404);
 
             return response()->json([
                 "replace_original" => "true",

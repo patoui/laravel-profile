@@ -13,3 +13,4 @@ parameters:
         - '#Call to an undefined static method Zttp\\Zttp::get\(\)\.#'
 
     checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false

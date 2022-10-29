@@ -41,4 +41,14 @@ return [
 
     'allowIframes' => false,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Syntax Highlight Theme
+    |--------------------------------------------------------------------------
+    |
+    | Available options are `light` and `dark`.
+    |
+    */
+
+    'syntaxTheme' => 'light',
 ];

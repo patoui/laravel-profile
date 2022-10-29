@@ -44,7 +44,7 @@ class Post extends Model implements Feedable
     /** @var array<string> */
     protected $appends = ['favourites_count'];
 
-    /** @var array<string> */
+    /** @var array<string, string>*/
     protected $casts = ['published_at' => 'datetime'];
 
     public function analytics(): MorphMany
@@ -111,7 +111,8 @@ class Post extends Model implements Feedable
             ->summary($this->short_body)
             ->updated($this->updated_at)
             ->link(route('post.show', ['post_slug' => $this->slug]))
-            ->author('Patrique Ouimet');
+            ->authorName('Patrique Ouimet')
+            ->authorEmail('patrique.ouimet@gmail.com');
     }
 
     public static function getFeedItems(): Collection

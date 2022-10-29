@@ -54,8 +54,6 @@
         </div>
     </div>
 
-{{--    <a href="/covid19" class="covid19 block relative md:fixed lg:fixed xl:fixed text-center bg-white hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-2 mx-auto mb-3 border border-blue-500 hover:border-transparent rounded-full">COVID-19 Stats</a>--}}
-
     <!-- Navigation -->
     <div class="mb-4">
         <div class="flex justify-center w-full sm:w-4/5 md:w-4/5 lg:w-4/5 xl:w-3/5 pl-6 sm:pl-8 md:pl-12 lg:pl-20 xl:pl-24 pr-6 sm:pr-8 md:pr-12 lg:pr-20 xl:pr-24 mx-auto">

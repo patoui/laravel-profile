@@ -35,7 +35,7 @@ class PostCommentController extends Controller
 
         // TODO: add better logic for black listing users.
         if (Str::endsWith($user->email, 'mailinator.com')) {
-            return redirect()->route('post.show', ['post_slug' => $post->slug]);
+            return redirect()->route('post.show', ['post' => $post]);
         }
 
         $post->createComment([
@@ -46,6 +46,6 @@ class PostCommentController extends Controller
 
         return $request->expectsJson() ?
             response()->json(['success' => 'Successfully saved comment']) :
-            redirect()->route('post.show', ['post_slug' => $post->slug]);
+            redirect()->route('post.show', ['post' => $post]);
     }
 }

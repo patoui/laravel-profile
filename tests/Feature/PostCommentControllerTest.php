@@ -9,8 +9,8 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PostCommentControllerTest extends TestCase
 {
@@ -77,7 +77,7 @@ class PostCommentControllerTest extends TestCase
         User::factory()->me()->create();
         Mail::fake();
         $this->be($user = User::factory()->create());
-        $this->expectException(NotFoundHttpException::class);
+        $this->expectException(ModelNotFoundException::class);
 
         // Act
         $this->post(

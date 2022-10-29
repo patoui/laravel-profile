@@ -101,7 +101,7 @@ class Post extends Model implements Feedable, HasFavourites
 
     public function getPathAttribute(): string
     {
-        return route('post.show', ['post_slug' => $this->slug]);
+        return route('post.show', ['post' => $this]);
     }
 
     public function toFeedItem(): FeedItem
@@ -111,7 +111,7 @@ class Post extends Model implements Feedable, HasFavourites
             ->title($this->title)
             ->summary($this->short_body)
             ->updated($this->updated_at)
-            ->link(route('post.show', ['post_slug' => $this->slug]))
+            ->link(route('post.show', ['post' => $this]))
             ->authorName('Patrique Ouimet')
             ->authorEmail('patrique.ouimet@gmail.com');
     }

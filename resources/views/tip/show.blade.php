@@ -18,7 +18,7 @@
 @section('content')
 <h1 class="w-full text-4xl text-center font-bold">{{ $tip->title }}</h1>
 <p class="w-full text-sm text-center text-gray-600">{{ $tip->short_published_at }}</p>
-<form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('tip.favourite.store', ['tip_slug' => $tip->slug]) }}">
+<form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('tip.favourite.store', ['tip' => $tip]) }}">
     {{ csrf_field() }}
     <button type="submit">
         <i class="fas fa-thumbs-up mr-2"></i>{{ $tip->favourites_count }}
@@ -31,12 +31,12 @@
 <div class="flex w-full mt-4 mb-4">
     <div class="w-1/2">
         @if ($previousTip)
-            <a class="underline" href="{{ route('tip.show', ['tip_slug' => $previousTip->slug]) }}">&#8678; {{ $previousTip->short_title }}</a>
+            <a class="underline" href="{{ route('tip.show', ['tip' => $previousTip]) }}">&#8678; {{ $previousTip->short_title }}</a>
         @endif
     </div>
     <div class="w-1/2 text-right">
         @if ($nextTip)
-            <a class="underline" href="{{ route('tip.show', ['tip_slug' => $nextTip->slug]) }}">{{ $nextTip->short_title }} &#8680;</a>
+            <a class="underline" href="{{ route('tip.show', ['tip' => $nextTip]) }}">{{ $nextTip->short_title }} &#8680;</a>
         @endif
     </div>
 </div>

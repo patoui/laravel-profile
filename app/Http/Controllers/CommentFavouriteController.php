@@ -14,11 +14,10 @@ class CommentFavouriteController extends Controller
     public function store(Request $request, Comment $comment) : RedirectResponse
     {
         $user = $request->user();
-
         abort_if(!$user, 401);
 
         $user->toggleFavourite($comment);
 
-        return redirect()->route('post.show', ['post_slug' => ($comment->post->slug ?? '')]);
+        return redirect()->route('post.show', ['post' => ($comment->post ?? '')]);
     }
 }

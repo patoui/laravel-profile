@@ -8,13 +8,13 @@ Route::get('/', 'HomeController@index')->name('home');
 
 // Post
 Route::get('blog', 'PostController@index')->name('post.index');
-Route::get('post/{post_slug}', 'PostController@show')->name('post.show');
-Route::post('post/{post_slug}', 'PostFavouriteController@store')
+Route::get('post/{post:slug}', 'PostController@show')->name('post.show');
+Route::post('post/{post:slug}', 'PostFavouriteController@store')
     ->name('post.favourite.store')
     ->middleware('auth');
 
 // Comment
-Route::post('post/{post_slug}/comment', 'PostCommentController@store')
+Route::post('post/{post:slug}/comment', 'PostCommentController@store')
     ->name('post.comment.store')
     ->middleware(['auth', ProtectAgainstSpam::class]);
 
@@ -24,8 +24,8 @@ Route::post('comment/{comment}', 'CommentFavouriteController@store')
 
 // Tip
 Route::get('tip', 'TipController@index')->name('tip.index');
-Route::get('tip/{tip_slug}', 'TipController@show')->name('tip.show');
-Route::post('tip/{tip_slug}', 'TipFavouriteController@store')
+Route::get('tip/{tip:slug}', 'TipController@show')->name('tip.show');
+Route::post('tip/{tip:slug}', 'TipFavouriteController@store')
     ->name('tip.favourite.store')
     ->middleware('auth');
 

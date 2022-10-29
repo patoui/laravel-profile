@@ -46,16 +46,6 @@ class RouteServiceProvider extends ServiceProvider
             'middleware' => 'web',
             'namespace' => $this->namespace,
         ], static function ($router) : void {
-            $router->bind('post_slug', static function (string $slug) {
-                $post = Post::findBySlug($slug);
-                abort_if(! $post, 404);
-                return  $post;
-            });
-            $router->bind('tip_slug', static function (string $slug) {
-                $tip = Tip::findBySlug($slug);
-                abort_if(! $tip, 404);
-                return $tip;
-            });
             require base_path('routes/web.php');
         });
     }

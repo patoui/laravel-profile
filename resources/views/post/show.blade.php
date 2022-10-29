@@ -12,13 +12,13 @@
 @section('title', $post->title)
 
 @section('css')
-<style nonce="{{ csp_nonce() }}"><?= GitDown::styles() ?></style>
+@gitdown
 @endsection
 
 @section('content')
 <h1 class="w-full text-4xl text-center font-bold">{{ $post->title }}</h1>
 <p class="w-full text-sm text-center text-gray-600">{{ $post->short_published_at }}</p>
-<form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('post.favourite.store', ['post_slug' => $post->slug]) }}">
+<form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('post.favourite.store', ['post' => $post]) }}">
     {{ csrf_field() }}
     <button type="submit">
         <i class="fas fa-thumbs-up mr-2"></i>{{ $post->favourites_count }}
@@ -43,7 +43,7 @@
     @endforeach
 </div>
 
-<form class="w-full pl-4 pr-4 pb-4" action="{{ route('post.comment.store', ['post_slug' => $post->slug]) }}" method="post">
+<form class="w-full pl-4 pr-4 pb-4" action="{{ route('post.comment.store', ['post' => $post]) }}" method="post">
     @honeypot
     {{ csrf_field() }}
     <div class="mb-4">
@@ -62,12 +62,12 @@
 <div class="flex w-full mt-4 mb-4">
     <div class="w-1/2">
         @if ($previousPost)
-            <a class="underline" href="{{ route('post.show', ['post_slug' => $previousPost->slug]) }}">&#8678; {{ $previousPost->short_title }}</a>
+            <a class="underline" href="{{ route('post.show', ['post' => $previousPost]) }}">&#8678; {{ $previousPost->short_title }}</a>
         @endif
     </div>
     <div class="w-1/2 text-right">
         @if ($nextPost)
-            <a class="underline" href="{{ route('post.show', ['post_slug' => $nextPost->slug]) }}">{{ $nextPost->short_title }} &#8680;</a>
+            <a class="underline" href="{{ route('post.show', ['post' => $nextPost]) }}">{{ $nextPost->short_title }} &#8680;</a>
         @endif
     </div>
 </div>

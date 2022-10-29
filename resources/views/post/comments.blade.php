@@ -32,7 +32,7 @@
             action="{{ route(
                 'post.comment.store',
                 [
-                    'post_slug' => $post->slug,
+                    'post' => $post,
                     'comment_id' => $comment->id
                 ]
             ) }}"

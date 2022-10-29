@@ -44,7 +44,11 @@ class LoginController extends Controller
 
     public function redirectTo() : string
     {
-        if ($this->request->user()->is_admin) {
+        $user = $this->request->user();
+
+        abort_if(!$user, 401);
+
+        if ($user->is_admin) {
             return redirect()->route('admin.dashboard')->getTargetUrl();
         }
 

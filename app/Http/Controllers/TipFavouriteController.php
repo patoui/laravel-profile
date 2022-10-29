@@ -13,7 +13,10 @@ class TipFavouriteController extends Controller
 {
     public function store(Request $request, Tip $tip) : RedirectResponse
     {
-        $request->user()->toggleFavourite($tip);
+        $user = $request->user();
+        abort_if(!$user, 401);
+
+        $user->toggleFavourite($tip);
 
         return redirect()->route('tip.show', ['tip_slug' => $tip->slug]);
     }

@@ -10,7 +10,10 @@ class VideoFavouriteController extends Controller
 {
     public function store(Request $request, Video $video) : RedirectResponse
     {
-        $request->user()->toggleFavourite($video);
+        $user = $request->user();
+        abort_if(!$user, 401);
+
+        $user->toggleFavourite($video);
 
         return redirect()->route('video.show', ['video' => $video->slug]);
     }

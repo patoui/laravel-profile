@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Contracts\HasFavourites;
 use Database\Factories\VideoFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,7 +26,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static VideoFactory factory(...$parameters)
  */
-class Video extends Model
+class Video extends Model implements HasFavourites
 {
     use HasTags;
     use Publishes;
@@ -35,7 +36,7 @@ class Video extends Model
     /** @var array<string> */
     protected $guarded = [];
 
-    /** @var array<string> */
+    /** @var array<string, string> */
     protected $casts = ['published_at' => 'datetime'];
 
     public function analytics() : MorphMany

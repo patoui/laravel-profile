@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Contracts\HasFavourites;
 use Database\Factories\TipFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static TipFactory factory(...$parameters)
  */
-class Tip extends Model
+class Tip extends Model implements HasFavourites
 {
     use HasTags;
     use Publishes;
@@ -35,7 +36,7 @@ class Tip extends Model
     /** @var array<string> */
     protected $guarded = [];
 
-    /** @var array<string> */
+    /** @var array<string, string> */
     protected $casts = ['published_at' => 'datetime'];
 
     public function analytics() : MorphMany

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Contracts\HasFavourites;
 use App\Events\CommentSaved;
 use Database\Factories\CommentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,7 +30,7 @@ use function preg_match_all;
  *
  * @method static CommentFactory factory(...$parameters)
  */
-class Comment extends Model
+class Comment extends Model implements HasFavourites
 {
     use RecordsActivity;
     use HasFactory;

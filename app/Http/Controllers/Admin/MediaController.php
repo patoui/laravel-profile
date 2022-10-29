@@ -20,8 +20,11 @@ class MediaController extends Controller
 {
     public function index(Request $request): Application|Factory|View
     {
+        $user = $request->user();
+        abort_if(!$user, 401);
+
         return view('admin.media.index')
-            ->with('files', $request->user()->getMedia());
+            ->with('files', $user->getMedia());
     }
 
     public function create(): Application|Factory|View
@@ -41,10 +44,15 @@ class MediaController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $user = $request->user();
+        abort_if(!$user, 401);
+
         $this->validate($request, ['media' => 'required|file']);
 
-        $request->user()
-                ->addMedia($request->file('media'))
+        /** @var \Illuminate\Http\UploadedFile $media */
+        $media = $request->file('media');
+
+        $user->addMedia($media)
                 ->preservingOriginal()
                 ->toMediaCollection();
 

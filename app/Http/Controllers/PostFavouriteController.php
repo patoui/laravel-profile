@@ -13,7 +13,10 @@ class PostFavouriteController extends Controller
 {
     public function store(Request $request, Post $post) : RedirectResponse
     {
-        $request->user()->toggleFavourite($post);
+        $user = $request->user();
+        abort_if(!$user, 401);
+
+        $user->toggleFavourite($post);
 
         return redirect()->route('post.show', ['post_slug' => $post->slug]);
     }

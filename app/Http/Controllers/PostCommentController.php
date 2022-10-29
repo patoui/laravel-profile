@@ -24,6 +24,9 @@ class PostCommentController extends Controller
      */
     public function store(Request $request, Post $post)
     {
+        $user = $request->user();
+        abort_if(!$user, 401);
+
         $this->validate(
             $request,
             ['body' => 'required|string'],
@@ -31,14 +34,14 @@ class PostCommentController extends Controller
         );
 
         // TODO: add better logic for black listing users.
-        if (Str::endsWith($request->user()->email, 'mailinator.com')) {
+        if (Str::endsWith($user->email, 'mailinator.com')) {
             return redirect()->route('post.show', ['post_slug' => $post->slug]);
         }
 
         $post->createComment([
             'body' => $request->input('body'),
             'comment_id' => $request->input('comment_id'),
-            'user_id' => $request->user()->id,
+            'user_id' => $user->id,
         ]);
 
         return $request->expectsJson() ?

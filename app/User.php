@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Contracts\HasFavourites;
 use Database\Factories\UserFactory;
 use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -49,7 +50,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'provider_id',
     ];
 
-    /** @var array<string> */
+    /** @var array<int, string> */
     protected $hidden = ['password', 'remember_token'];
 
     /** @var array<string> */
@@ -61,41 +62,19 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     }
 
     /**
-     * @param Comment|Post|Tip $model
+     * @param HasFavourites $model
      * @throws Exception
      */
-    public function toggleFavourite($model): void
+    public function toggleFavourite(HasFavourites $model): void
     {
-        // Verify argument is an object
-        if (!is_object($model)) {
-            throw new RuntimeException('Model must be passed');
-        }
-
-        // Get model class name
-        $class = get_class($model);
-
-        if (!in_array($class, [Comment::class, Post::class, Tip::class, Video::class], true)) {
-            throw new RuntimeException(
-                "Model class must be 'App\Comment', 'App\Post', 'App\Tip' or 'App\Video'"
-            );
-        }
-
-        $favourite = $this->favourites()
-                          ->getQuery()
-                          ->where('favouritable_id', $model->id)
-                          ->where('favouritable_type', $class)
-                          ->first();
+        $favourite = $model->favourites()->where('user_id', $this->id)->first();
 
         if ($favourite) {
             $favourite->delete();
-
             return;
         }
 
-        $this->favourites()->create([
-            'favouritable_id'   => $model->id,
-            'favouritable_type' => $class,
-        ]);
+        $model->favourites()->create(['user_id' => $this->id]);
     }
 
     public function getIsAdminAttribute(): bool

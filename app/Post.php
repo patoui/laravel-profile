@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Contracts\HasFavourites;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -31,7 +32,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static PostFactory factory(...$parameters)
  */
-class Post extends Model implements Feedable
+class Post extends Model implements Feedable, HasFavourites
 {
     use HasTags;
     use Publishes;

@@ -3,11 +3,11 @@
 [![Build Status](https://travis-ci.org/patoui/laravel-profile.svg?branch=master)](https://travis-ci.org/patoui/laravel-profile)
 
 
-Serves as a portfolio of myself, and a place where I can post articles/tips/videos about content relevant to me.
+Serves as a portfolio website of myself, and a place where I can post articles/tips/videos about content relevant to me.
 
 ## Requirements
 
-- PHP ^8.0
+- PHP ^8.1
 - MySQL ^5.7 | 8.x
 
 ## Installation

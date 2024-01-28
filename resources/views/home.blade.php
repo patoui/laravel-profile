@@ -20,6 +20,9 @@
         <p class="block mb-2 leading-relaxed">🔭 I’m currently working on a variety of PHP projects utilizing some great open source projects! <a class="text-blue-600 visited:text-purple-600" href="https://laravel.com/" title="Laravel">Laravel</a>, <a class="text-blue-600 visited:text-purple-600" href="https://www.slimframework.com/" title="Slim">Slim</a>, <a class="text-blue-600 visited:text-purple-600" href="https://docs.guzzlephp.org/en/stable/" title="Guzzle">Guzzle</a></p>
     </li>
     <li>
+        <p class="block mb-2 leading-relaxed">⚛ I’m currently using <a class="text-blue-600 visited:text-purple-600" href="https://reactjs.org/">React</a> and <a class="text-blue-600 visited:text-purple-600" href="https://reactnative.dev/">React Native</a> to make a mobile app!</p>
+    </li>
+    <li>
         <p class="block mb-2 leading-relaxed">🌱 I’m currently learning <a class="text-blue-600 visited:text-purple-600" href="https://golang.org/">Go lang</a>! Big thanks to <a class="text-blue-600 visited:text-purple-600" href="https://twitter.com/GoTimeFM" title="GoTime">GoTime</a> and <a class="text-blue-600 visited:text-purple-600" href="https://threedots.tech/go-with-the-domain/">Go With Domain</a></p>
     </li>
     <li>

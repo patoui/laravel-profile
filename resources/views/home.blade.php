@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('meta')
-    <meta name="description"        content="A small blog by humble developer Patrique Ouimet primarily working with PHP and JavaScript" />
-    <meta property="og:type"        content="website" />
-    <meta property="og:title"       content="Patrique Ouimet" />
-    <meta property="og:description" content="A small blog by humble developer Patrique Ouimet primarily working with PHP and JavaScript" />
-    <meta property="og:image"       content="{{ Request::root() . '/img/black-white-profile.png' }}" />
+<meta name="description" content="A small blog by humble developer Patrique Ouimet primarily working with PHP and JavaScript" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Patrique Ouimet" />
+<meta property="og:description" content="A small blog by humble developer Patrique Ouimet primarily working with PHP and JavaScript" />
+<meta property="og:image" content="{{ Request::root() . '/img/black-white-profile.png' }}" />
 @endsection
 
 @section('title', 'Patrique Ouimet')
@@ -52,10 +52,10 @@
 <p class="w-full block mb-2">Not listed in any particular order and likely missing a few 😅️</p>
 
 <ul class="w-full block list-disc ml-5">
-    <li class="mb-2">💻 &nbsp; PHP | Laravel | JavaScript | Vue | React</li>
+    <li class="mb-2">💻 &nbsp; PHP | Go | Laravel | JavaScript | Vue | React | React Native</li>
     <li class="mb-2">🌐 &nbsp; HTML | CSS | SASS | Bootstrap | Tailwind</li>
-    <li class="mb-2">🛢 &nbsp; MySQL | Redis | Clickhouse | SQLite</li>
-    <li class="mb-2">🔧 &nbsp; PHPStorm | Sublime Text | Visual Studio Code | Git</li>
+    <li class="mb-2">🛢 &nbsp; MySQL | Redis | Typescript | Clickhouse | SQLite | Mongo</li>
+    <li class="mb-2">🔧 &nbsp; PHPStorm | Sublime Text | Visual Studio Code | Zed | Neovim | Git</li>
     <li class="mb-2">🖥 &nbsp; Nginx | Apache | Caddy | Docker | Vagrant</li>
     <li class="mb-2">🛸️ &nbsp; Linux | Bash | AWS | Digital Ocean</li>
 </ul>

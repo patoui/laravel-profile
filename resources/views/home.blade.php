@@ -52,7 +52,7 @@
 <p class="w-full block mb-2">Not listed in any particular order and likely missing a few 😅️</p>
 
 <ul class="w-full block list-disc ml-5">
-    <li class="mb-2">💻 &nbsp; PHP | Go | Laravel | JavaScript | Vue | React | React Native</li>
+    <li class="mb-2">💻 &nbsp; PHP | Go | Laravel | JavaScript | Vue | React | React Native | Java</li>
     <li class="mb-2">🌐 &nbsp; HTML | CSS | SASS | Bootstrap | Tailwind</li>
     <li class="mb-2">🛢 &nbsp; MySQL | Redis | Typescript | Clickhouse | SQLite | Mongo</li>
     <li class="mb-2">🔧 &nbsp; PHPStorm | Sublime Text | Visual Studio Code | Zed | Neovim | Git</li>

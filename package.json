@@ -10,24 +10,14 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
     "@fullhuman/postcss-purgecss": "^1.1.0",
-    "ajv": "^6.5.3",
-    "ajv-keywords": "^3.2.0",
     "cross-env": "^5.1",
     "font-awesome": "^4.7.0",
-    "github-markdown-css": "^2.8.0",
-    "imagemin": "^5.3.1",
-    "img-loader": "^3.0.0",
     "laravel-mix": "^6.0.13",
-    "laravel-mix-purgecss": "^4.1.0",
+    "laravel-mix-purgecss": "^6.0.0",
     "postcss": "^8.1",
-    "purify-css": "^1.1.9",
-    "purifycss-webpack": "^0.1.1",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
-    "tailwindcss": "^2.0",
-    "vue": "^2.5.7",
-    "vue-loader": "^15.9.6",
-    "vue-template-compiler": "^2.6.12"
+    "tailwindcss": "^2.0"
   }
 }

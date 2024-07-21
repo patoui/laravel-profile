@@ -7,13 +7,20 @@ namespace App\Http\Controllers;
 use App\Analytic;
 use App\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
 class VideoController extends Controller
 {
-    public function index(): View
+    public function index(Request $request) : View
     {
-        return view('video.index')->with('videos', Video::published()->get());
+        $videos = Video::published()
+            ->latest()
+            ->when($request->input('tag'), function ($query) use ($request) {
+                return $query->withAnyTags(Arr::wrap($request->input('tag')));
+            })->get();
+
+        return view('video.index')->with('videos', $videos);
     }
 
     public function show(Request $request, Video $video): View

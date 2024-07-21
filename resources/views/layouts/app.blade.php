@@ -86,5 +86,6 @@
 
     <!-- Additional JS -->
     @yield('javascript')
+    @stack('scripts')
 </body>
 </html>

@@ -17,6 +17,11 @@
         <a href="{{ route('post.show', ['post' => $post]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $post->title }}</a>
         <p class="mt-2 mb-2 text-sm text-gray-700">{{ $post->short_body }}</p>
         <p class="text-sm text-gray-600">Published on {{ $post->short_published_at }}</p>
+        <div>
+            @foreach($post->tags as $tag)
+            <a href="{{ route('post.index', ['tag' => $tag->name]) }}" class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 mr-2 hover:text-black hover:underline">{{ '#' . $tag->name }}</a>
+            @endforeach
+        </div>
     </div>
     @endforeach
 @endsection

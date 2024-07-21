@@ -10,7 +10,3 @@
     </form>
 @endsection
 
-@section('javascript')
-    <script src="{{ mix('/js/app.js') }}"></script>
-@endsection
-

@@ -7,13 +7,18 @@ namespace App\Http\Controllers;
 use App\Analytic;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    public function index(): View
+    public function index(Request $request) : View
     {
-        $posts = Post::published()->latest()->get();
+        $posts = Post::published()
+            ->latest()
+            ->when($request->input('tag'), function ($query) use ($request) {
+                return $query->withAnyTags(Arr::wrap($request->input('tag')));
+            })->get();
 
         return view('post.index')->with('posts', $posts);
     }

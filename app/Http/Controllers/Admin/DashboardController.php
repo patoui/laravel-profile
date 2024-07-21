@@ -16,13 +16,13 @@ class DashboardController extends Controller
     public function index() : View
     {
         return view('admin.home')
-            ->with('posts', Post::withCount('analytics')->get())
+            ->with('posts', Post::with('tags')->withCount('analytics')->get())
             ->with('postsCount', Post::count())
             ->with('postsPublishedCount', Post::published()->count())
-            ->with('tips', Tip::withCount('analytics')->get())
+            ->with('tips', Tip::with('tags')->withCount('analytics')->get())
             ->with('tipsCount', Tip::count())
             ->with('tipsPublishedCount', Tip::published()->count())
-            ->with('videos', Video::withCount('analytics')->get())
+            ->with('videos', Video::with('tags')->withCount('analytics')->get())
             ->with('videosCount', Video::count())
             ->with('videosPublishedCount', Video::published()->count());
     }

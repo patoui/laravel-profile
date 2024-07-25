@@ -18,12 +18,12 @@
 @section('content')
 <h1 class="w-full text-4xl text-center font-bold">{{ $tip->title }}</h1>
 <p class="w-full text-sm text-center text-gray-600">{{ $tip->short_published_at }}</p>
-<form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('tip.favourite.store', ['tip' => $tip]) }}">
+{{-- <form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('tip.favourite.store', ['tip' => $tip]) }}">
     {{ csrf_field() }}
     <button type="submit">
         <i class="fas fa-thumbs-up mr-2"></i>{{ $tip->favourites_count }}
     </button>
-</form>
+</form> --}}
 
 <div class="w-full pt-4 pb-4 markdown-body">{!! GitDown::parseAndCache($tip->body) !!}</div>
 

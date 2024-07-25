@@ -24,8 +24,8 @@
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Sign In</button>
         </div>
         <div class="flex items-center justify-center">
-            <a class="text-dark py-2 px-4 focus:outline-none" href="{{ url('/auth/github') }}"><i class="fab fa-github mr-2"></i>Github</a>
-            <a class="text-dark py-2 px-4 focus:outline-none" href="{{ url('/register') }}">Sign Up</a>
+            {{-- <a class="text-dark py-2 px-4 focus:outline-none" href="{{ url('/auth/github') }}"><i class="fab fa-github mr-2"></i>Github</a> --}}
+            {{-- <a class="text-dark py-2 px-4 focus:outline-none" href="{{ url('/register') }}">Sign Up</a> --}}
         </div>
     </form>
 </div>

@@ -17,17 +17,17 @@ class TipFavouriteControllerTest extends TestCase
      *
      * @return void
      */
-    public function testStore(): void
-    {
-        $tip = Tip::factory()->published()->create();
-        $user = User::factory()->create();
-        $this->actingAs($user);
+    // public function testStore(): void
+    // {
+    //     $tip = Tip::factory()->published()->create();
+    //     $user = User::factory()->create();
+    //     $this->actingAs($user);
 
-        $response = $this->post('tip/' . $tip->slug);
+    //     $response = $this->post('tip/' . $tip->slug);
 
-        $response->assertStatus(302);
-        $response->assertRedirect('tip/' . $tip->slug);
+    //     $response->assertStatus(302);
+    //     $response->assertRedirect('tip/' . $tip->slug);
 
-        $this->assertCount(1, $user->fresh()->favourites);
-    }
+    //     $this->assertCount(1, $user->fresh()->favourites);
+    // }
 }

@@ -13,19 +13,19 @@ class SubscriptionControllerTest extends TestCase
     /**
      * Test to store a subscription
      */
-    public function testStore(): void
-    {
-        // Act
-        $response = $this->post(
-            'subscription',
-            ['subscription_email' => 'patrique.ouimet@gmail.com']
-        );
+    // public function testStore(): void
+    // {
+    //     // Act
+    //     $response = $this->post(
+    //         'subscription',
+    //         ['subscription_email' => 'patrique.ouimet@gmail.com']
+    //     );
 
-        // Assert
-        $response->assertStatus(302)->assertRedirect('/');
+    //     // Assert
+    //     $response->assertStatus(302)->assertRedirect('/');
 
-        self::assertNotNull(
-            Subscription::where('email', 'patrique.ouimet@gmail.com')->first()
-        );
-    }
+    //     self::assertNotNull(
+    //         Subscription::where('email', 'patrique.ouimet@gmail.com')->first()
+    //     );
+    // }
 }

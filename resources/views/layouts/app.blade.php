@@ -46,12 +46,12 @@
             </div>
             <div>
                 <p class="block text-2xl">Patrique Ouimet</p>
-                <p class="block text-xs italic">Developer</p>
+                <p class="block text-xs italic">Senior Product Engineer</p>
             </div>
         </div>
-        <div class="w-1/6 text-right">
+        {{-- <div class="w-1/6 text-right">
             <a href="{{ auth()->check() ? '/logout' : '/login' }}" class="mt-2 mr-2" title="{{ __(auth()->check() ? 'Logout' : 'Login') }}"><i class="fas {{ auth()->check() ? 'fa-sign-out-alt' : 'fa-sign-in-alt' }}"></i></a>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Navigation -->

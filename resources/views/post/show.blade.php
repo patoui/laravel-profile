@@ -18,16 +18,16 @@
 @section('content')
 <h1 class="w-full text-4xl text-center font-bold">{{ $post->title }}</h1>
 <p class="w-full text-sm text-center text-gray-600">{{ $post->short_published_at }}</p>
-<form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('post.favourite.store', ['post' => $post]) }}">
+{{-- <form class="w-full text-sm text-center text-gray-500" method="post" action="{{ route('post.favourite.store', ['post' => $post]) }}">
     {{ csrf_field() }}
     <button type="submit">
         <i class="fas fa-thumbs-up mr-2"></i>{{ $post->favourites_count }}
     </button>
-</form>
+</form> --}}
 
 <div class="w-full pt-4 pb-4 markdown-body">{!! GitDown::parseAndCache($post->body) !!}</div>
 
-<div class="w-full p-4">
+{{-- <div class="w-full p-4">
     <h2 class="text-xl mb-4">Comments</h2>
     @foreach($post->comments as $comment)
     <div class="mb-4 w-full border-b-2">
@@ -41,9 +41,9 @@
         <p class="mb-4 text-sm text-gray-700">{{ $comment->body }}</p>
     </div>
     @endforeach
-</div>
+</div> --}}
 
-<form class="w-full pl-4 pr-4 pb-4" action="{{ route('post.comment.store', ['post' => $post]) }}" method="post">
+{{-- <form class="w-full pl-4 pr-4 pb-4" action="{{ route('post.comment.store', ['post' => $post]) }}" method="post">
     @honeypot
     {{ csrf_field() }}
     <div class="mb-4">
@@ -56,7 +56,7 @@
     <div class="flex justify-end mb-4">
         <button class="bg-white hover:bg-gray-100 text-gray-700 font-semibold py-1 px-2 border border-gray-400 rounded shadow" type="submit">Submit</button>
     </div>
-</form>
+</form> --}}
 
 @if ($previousPost || $nextPost)
 <div class="flex w-full mt-4 mb-4">

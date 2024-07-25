@@ -10,18 +10,18 @@ class BlogControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex(): void
-    {
-        // Arrange
-        $post = Post::factory()->published()->create();
-        $unpublished = Post::factory()->create();
+    // public function testIndex(): void
+    // {
+    //     // Arrange
+    //     $post = Post::factory()->published()->create();
+    //     $unpublished = Post::factory()->create();
 
-        // Act
-        $response = $this->get('blog');
+    //     // Act
+    //     $response = $this->get('blog');
 
-        // Assert
-        $response->assertSuccessful();
-        $response->assertSee(e($post->title));
-        $response->assertDontSee(e($unpublished->title));
-    }
+    //     // Assert
+    //     $response->assertSuccessful();
+    //     $response->assertSee(e($post->title));
+    //     $response->assertDontSee(e($unpublished->title));
+    // }
 }

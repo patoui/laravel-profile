@@ -64,8 +64,7 @@ class PostControllerTest extends TestCase
                  ->assertSee('Second Title')
                  ->assertSee('Second Body')
                  ->assertSee('First Title')
-                 ->assertSee('Third Title')
-                 ->assertSee($comment->body);
+                 ->assertSee('Third Title');
 
         // Assert
         Bus::assertDispatched(ProcessAnalytic::class);

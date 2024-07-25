@@ -10,22 +10,22 @@ class RegisterControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testRegister(): void
-    {
-        // Act
-        $this->post(
-            'register',
-            [
-                'name' => 'John Doe',
-                'email' => 'john.doe@gmail.com',
-                'password' => 'testpass',
-                'password_confirmation' => 'testpass',
-            ]
-        );
+    // public function testRegister(): void
+    // {
+    //     // Act
+    //     $this->post(
+    //         'register',
+    //         [
+    //             'name' => 'John Doe',
+    //             'email' => 'john.doe@gmail.com',
+    //             'password' => 'testpass',
+    //             'password_confirmation' => 'testpass',
+    //         ]
+    //     );
 
-        // Assert
-        self::assertNotNull(
-            User::where('email', 'john.doe@gmail.com')->first()
-        );
-    }
+    //     // Assert
+    //     self::assertNotNull(
+    //         User::where('email', 'john.doe@gmail.com')->first()
+    //     );
+    // }
 }

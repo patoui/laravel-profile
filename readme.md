@@ -10,6 +10,7 @@ Serves as a portfolio website of myself, and a place where I can post articles/t
 - PHP ^8.1
 - MySQL ^5.7 | 8.x
 
+
 ## Installation
 
 After cloning the repository, run these commands

@@ -1,7 +1,5 @@
 # Profile Website/Blog
 
-[![Build Status](https://travis-ci.org/patoui/laravel-profile.svg?branch=master)](https://travis-ci.org/patoui/laravel-profile)
-
 
 Serves as a portfolio website of myself, and a place where I can post articles/tips/videos about content relevant to me.
 
@@ -24,4 +22,11 @@ php artisan migrate
 
 ```
 composer test
+```
+
+## Production asset builds
+
+```
+npm i --legacy-peer-deps
+NODE_OPTIONS="--openssl-legacy-provider" npm run production
 ```

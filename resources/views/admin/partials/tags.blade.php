@@ -5,13 +5,9 @@
         <button id="add_tag" class="flex-shrink-0 bg-blue-400 hover:bg-blue-600 border-blue-400 hover:border-blue-600 text-sm border-4 text-white px-2 rounded outline-none" type="button" @click="add">Add</button>
     </div>
 
-    <div id="tags" class="mt-4">
-        {{-- <span class="mr-2 bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 mr-2 hover:text-black hover:underline">{{ '#' + tag }}</span> --}}
-    </div>
+    <div id="tags" class="mt-4"></div>
 
-    <div id="hidden_tags">
-        {{-- <input type="hidden" name="tags[]"> --}}
-    </div>
+    <div id="hidden_tags"></div>
 
     <p id="tags_error" style="display: none" class="text-red-500 text-xs italic"></p>
 </div>

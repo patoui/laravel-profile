@@ -5,10 +5,10 @@
             "url": "git@github.com:patoui/gitdown.git"
         }
     ],
-    "name": "laravel/laravel",
+    "name": "patoui/laravel-profile",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Personal website",
+    "keywords": ["patoui", "laravel"],
     "license": "MIT",
     "require": {
         "php": "^8.2",

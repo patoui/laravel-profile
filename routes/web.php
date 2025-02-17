@@ -2,24 +2,29 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\TipController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Post
-Route::get('blog', 'PostController@index')->name('post.index');
-Route::get('post/{post:slug}', 'PostController@show')->name('post.show');
+Route::get('blog', [PostController::class, 'index'])->name('post.index');
+Route::get('post/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
 // Tip
-Route::get('tip', 'TipController@index')->name('tip.index');
-Route::get('tip/{tip:slug}', 'TipController@show')->name('tip.show');
+Route::get('tip', [TipController::class, 'index'])->name('tip.index');
+Route::get('tip/{tip:slug}', [TipController::class, 'show'])->name('tip.show');
 
-Route::get('video', 'VideoController@index')->name('video.index');
-Route::get('video/{video}', 'VideoController@show')->name('video.show');
+Route::get('video', [VideoController::class, 'index'])->name('video.index');
+Route::get('video/{video}', [VideoController::class, 'show'])->name('video.show');
 
 // Authentication
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
-Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::feeds();

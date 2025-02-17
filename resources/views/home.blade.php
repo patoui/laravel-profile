@@ -41,7 +41,6 @@
 <ul class="w-full block list-disc ml-5">
     <li class="mb-2">🐙️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://github.com/patoui" title="GitHub">GitHub</a></li>
     <li class="mb-2">🐦️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://twitter.com/patoui2" title="Twitter">Twitter</a></li>
-    <li class="mb-2">◻️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://polywork.com/patoui" title="Polywork">Polywork</a></li>
     <li class="mb-2">📸️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://instagram.com/patoui2" title="Instagram">Instagram</a></li>
     <li class="mb-2">👨‍💻&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://linkedin.com/in/patrique-ouimet-8b2aa969" title="LinkedIn">LinkedIn</a></li>
     <li class="mb-2">🐘️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://phpc.social/web/accounts/106705262503935129" title="PHP Social">PHP Social</a></li>

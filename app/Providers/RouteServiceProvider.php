@@ -7,6 +7,7 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+
 use function base_path;
 
 class RouteServiceProvider extends ServiceProvider
@@ -20,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'App\Http\Controllers';
 
-    public function map() : void
+    public function map(): void
     {
         $this->mapWebRoutes();
         $this->mapAdminRoutes();
@@ -31,12 +32,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * These routes all receive session state, CSRF protection, etc.
      */
-    protected function mapWebRoutes() : void
+    protected function mapWebRoutes(): void
     {
         Route::group([
             'middleware' => 'web',
             'namespace' => $this->namespace,
-        ], static function ($router) : void {
+        ], static function ($router): void {
             require base_path('routes/web.php');
         });
     }
@@ -46,13 +47,13 @@ class RouteServiceProvider extends ServiceProvider
      *
      * These routes all receive session state, CSRF protection, etc.
      */
-    protected function mapAdminRoutes() : void
+    protected function mapAdminRoutes(): void
     {
         Route::group([
             'middleware' => 'admin',
             'namespace' => $this->namespace . '\Admin',
             'prefix' => 'admin',
-        ], static function (Router $router) : void {
+        ], static function (Router $router): void {
             require base_path('routes/admin.php');
         });
     }

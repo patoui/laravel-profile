@@ -16,6 +16,7 @@ use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
+
 use function app;
 use function redirect;
 
@@ -38,9 +39,9 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into a response.
      *
-     * @param Request   $request
-     * @param Throwable $e
+     * @param  Request  $request
      * @return Response|\Symfony\Component\HttpFoundation\Response
+     *
      * @throws Throwable
      */
     public function render($request, Throwable $e)
@@ -53,8 +54,7 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * @param mixed $request
-     *
+     * @param  mixed  $request
      * @return RedirectResponse|JsonResponse
      */
     protected function unauthenticated($request, AuthenticationException $exception)

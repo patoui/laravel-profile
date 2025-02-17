@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 use Spatie\Feed\Feedable;
@@ -19,25 +18,24 @@ use Spatie\Tags\HasTags;
 
 /**
  * Class Post
- * @package App
- * @property int    $id
+ *
+ * @property int $id
  * @property string $title
  * @property string $slug
  * @property string $body
  * @property null|Carbon $published_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
  * @property-read string $short_body
  *
  * @method static PostFactory factory(...$parameters)
  */
 class Post extends Model implements Feedable, HasFavourites
 {
+    use HasFactory;
     use HasTags;
     use Publishes;
     use RecordsActivity;
-    use HasFactory;
 
     /** @var list<string> */
     protected $guarded = [];
@@ -45,8 +43,18 @@ class Post extends Model implements Feedable, HasFavourites
     /** @var list<string> */
     protected $appends = ['favourites_count'];
 
-    /** @var array<string, string>*/
+    /** @var array<string, string> */
     protected $casts = ['published_at' => 'datetime'];
+
+    public static function getFeedItems(): Collection
+    {
+        return self::published()->latest()->get();
+    }
+
+    public static function findBySlug(string $slug): ?self
+    {
+        return self::where('slug', $slug)->first();
+    }
 
     public function analytics(): MorphMany
     {
@@ -103,15 +111,5 @@ class Post extends Model implements Feedable, HasFavourites
             ->link(route('post.show', ['post' => $this]))
             ->authorName('Patrique Ouimet')
             ->authorEmail('patrique.ouimet@gmail.com');
-    }
-
-    public static function getFeedItems(): Collection
-    {
-        return self::published()->latest()->get();
-    }
-
-    public static function findBySlug(string $slug): ?self
-    {
-        return self::where('slug', $slug)->first();
     }
 }

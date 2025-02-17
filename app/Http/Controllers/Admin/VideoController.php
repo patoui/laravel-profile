@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Rules\Slug;
 use App\Video;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,20 +12,18 @@ use Illuminate\View\View;
 
 class VideoController extends Controller
 {
-    public function create() : View
+    public function create(): View
     {
-        return view('admin.video.create')
-            ->with('video', new Video())
-            ->with('tags', []);
+        return view('admin.video.create', ['video' => new Video, 'tags' => []]);
     }
 
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
             'slug' => [
                 'required',
-                new Slug(),
+                new Slug,
                 Rule::unique('videos', 'slug'),
             ],
             'external_id' => 'required|string|unique:videos,external_id',
@@ -46,20 +44,18 @@ class VideoController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function edit(Video $video) : View
+    public function edit(Video $video): View
     {
-        return view('admin.video.edit')
-            ->with('video', $video)
-            ->with('tags', $video->tags()->pluck('name'));
+        return view('admin.video.edit', ['video' => $video, 'tags' => $video->tags()->pluck('name')]);
     }
 
-    public function update(Request $request, Video $video) : RedirectResponse
+    public function update(Request $request, Video $video): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
             'slug' => [
                 'required',
-                new Slug(),
+                new Slug,
                 Rule::unique('videos', 'slug'),
             ],
             'external_id' => 'required|string|unique:videos,external_id',

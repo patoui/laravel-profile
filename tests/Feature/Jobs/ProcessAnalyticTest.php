@@ -14,7 +14,10 @@ class ProcessAnalyticTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testHandlePost(): void
+    /**
+     * @test
+     */
+    public function handle_post(): void
     {
         // Arrange
         /** @var Post $post */
@@ -26,13 +29,16 @@ class ProcessAnalyticTest extends TestCase
         // Assert
         self::assertTrue(
             DB::table('analytics')->where([
-                'analytical_id'   => $post->id,
+                'analytical_id' => $post->id,
                 'analytical_type' => get_class($post),
             ])->exists()
         );
     }
 
-    public function testHandleTip(): void
+    /**
+     * @test
+     */
+    public function handle_tip(): void
     {
         // Arrange
         /** @var Tip $tip */
@@ -44,13 +50,16 @@ class ProcessAnalyticTest extends TestCase
         // Assert
         self::assertTrue(
             DB::table('analytics')->where([
-                'analytical_id'   => $tip->id,
+                'analytical_id' => $tip->id,
                 'analytical_type' => get_class($tip),
             ])->exists()
         );
     }
 
-    public function testHandleVideo(): void
+    /**
+     * @test
+     */
+    public function handle_video(): void
     {
         // Arrange
         /** @var Video $video */
@@ -62,7 +71,7 @@ class ProcessAnalyticTest extends TestCase
         // Assert
         self::assertTrue(
             DB::table('analytics')->where([
-                'analytical_id'   => $video->id,
+                'analytical_id' => $video->id,
                 'analytical_type' => get_class($video),
             ])->exists()
         );

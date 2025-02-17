@@ -4,14 +4,17 @@ namespace Tests\Feature\Admin;
 
 use App\User;
 use App\Video;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class VideoPublishControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testShow(): void
+    /**
+     * @test
+     */
+    public function show(): void
     {
         // Arrange
         $user = User::factory()->admin()->create();

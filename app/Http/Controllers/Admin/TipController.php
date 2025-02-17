@@ -11,27 +11,26 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+
 use function redirect;
 use function request;
 use function view;
 
 class TipController extends Controller
 {
-    public function create() : View
+    public function create(): View
     {
-        return view('admin.tip.create')
-            ->with('tip', new Tip())
-            ->with('tags', []);
+        return view('admin.tip.create', ['tip' => new Tip, 'tags' => []]);
     }
 
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
             'body' => 'required|string',
             'slug' => [
                 'required',
-                new Slug(),
+                new Slug,
                 Rule::unique('tips', 'slug'),
             ],
             'tags' => 'nullable|array',
@@ -49,21 +48,19 @@ class TipController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function edit(Tip $tip) : View
+    public function edit(Tip $tip): View
     {
-        return view('admin.tip.edit')
-            ->with('tip', $tip)
-            ->with('tags', $tip->tags()->pluck('name'));
+        return view('admin.tip.edit', ['tip' => $tip, 'tags' => $tip->tags()->pluck('name')]);
     }
 
-    public function update(Request $request, Tip $tip) : RedirectResponse
+    public function update(Request $request, Tip $tip): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
             'body' => 'required|string',
             'slug' => [
                 'required',
-                new Slug(),
+                new Slug,
                 Rule::unique('tips', 'slug')->ignore($tip->id),
             ],
             'tags' => 'nullable|array',

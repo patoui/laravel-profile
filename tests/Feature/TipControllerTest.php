@@ -14,7 +14,10 @@ class TipControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex(): void
+    /**
+     * @test
+     */
+    public function index(): void
     {
         // Arrange
         Tip::factory()->create([
@@ -32,7 +35,10 @@ class TipControllerTest extends TestCase
         $response->assertSee('Eloquent vs Collection Count');
     }
 
-    public function testShow(): void
+    /**
+     * @test
+     */
+    public function show(): void
     {
         // Arrange
         Bus::fake();

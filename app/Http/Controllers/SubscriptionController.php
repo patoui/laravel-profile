@@ -7,14 +7,15 @@ namespace App\Http\Controllers;
 use App\Subscription;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+
 use function flash;
 use function redirect;
 
 class SubscriptionController extends Controller
 {
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $this->validate($request, ['subscription_email' => 'required|email']);
+        request()->validate($request, ['subscription_email' => 'required|email']);
 
         Subscription::firstOrCreate([
             'email' => $request->input('subscription_email'),

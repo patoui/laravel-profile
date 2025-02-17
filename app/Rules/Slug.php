@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+
 use function preg_replace;
 use function str_replace;
 use function strtolower;
@@ -14,10 +15,10 @@ class Slug implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  mixed $attribute
-     * @param  mixed $value
+     * @param  mixed  $attribute
+     * @param  mixed  $value
      */
-    public function passes($attribute, $value) : bool
+    public function passes($attribute, $value): bool
     {
         // Remove all non-alphanumeric excluding hyphens
         $slug = (string) preg_replace(
@@ -35,7 +36,7 @@ class Slug implements Rule
     /**
      * Get the validation error message.
      */
-    public function message() : string
+    public function message(): string
     {
         return 'The :attribute must be a valid slug.';
     }

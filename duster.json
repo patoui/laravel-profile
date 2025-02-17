@@ -1,0 +1,5 @@
+{
+    "exclude": [
+        "resources/views/admin/partials/tags.blade.php"
+    ]
+}

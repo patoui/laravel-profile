@@ -32,13 +32,14 @@
       "barryvdh/laravel-debugbar": "^3.2",
       "fakerphp/faker": "^1.1",
       "filp/whoops": "^2.0",
+      "larastan/larastan": "^3.0",
       "mockery/mockery": "^1.0",
       "nunomaduro/collision": "^8.1",
-      "larastan/larastan": "^3.0",
       "phpunit/phpunit": "10.*",
       "psalm/plugin-laravel": "^3.0",
       "roave/security-advisories": "dev-latest",
       "squizlabs/php_codesniffer": "*",
+      "tightenco/duster": "^3.1",
       "vimeo/psalm": "^6.0",
       "wnx/laravel-stats": "^2.1"
    },
@@ -68,12 +69,6 @@
     "prefer-stable": true,
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "post-install-cmd": [
-            "@php hooks/setup.php"
-        ],
-        "post-update-cmd": [
-            "@php hooks/setup.php"
-        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

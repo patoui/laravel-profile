@@ -11,26 +11,25 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+
 use function redirect;
 use function view;
 
 class PostController extends Controller
 {
-    public function create() : View
+    public function create(): View
     {
-        return view('admin.post.create')
-            ->with('post', new Post())
-            ->with('tags', []);
+        return view('admin.post.create', ['post' => new Post, 'tags' => []]);
     }
 
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
             'body' => 'required|string',
             'slug' => [
                 'required',
-                new Slug(),
+                new Slug,
                 Rule::unique('posts', 'slug'),
             ],
         ]);
@@ -46,21 +45,19 @@ class PostController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
-    public function edit(Post $post) : View
+    public function edit(Post $post): View
     {
-        return view('admin.post.edit')
-            ->with('post', $post)
-            ->with('tags', $post->tags()->pluck('name'));
+        return view('admin.post.edit', ['post' => $post, 'tags' => $post->tags()->pluck('name')]);
     }
 
-    public function update(Request $request, Post $post) : RedirectResponse
+    public function update(Request $request, Post $post): RedirectResponse
     {
-        $this->validate($request, [
+        request()->validate($request, [
             'title' => 'required|string',
             'body' => 'required|string',
             'slug' => [
                 'required',
-                new Slug(),
+                new Slug,
                 Rule::unique('posts', 'slug')->ignore($post->id),
             ],
         ]);

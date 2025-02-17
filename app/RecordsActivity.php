@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use ReflectionClass;
-use function request;
+
 use function sprintf;
 use function strtolower;
 
@@ -33,23 +32,23 @@ trait RecordsActivity
         return ['created'];
     }
 
+    public function activity(): MorphMany
+    {
+        return $this->morphMany(Activity::class, 'subject');
+    }
+
     protected function recordActivity(string $event): void
     {
         $user = Auth::user();
 
-        if (!$user) {
+        if (! $user) {
             return;
         }
 
         $this->activity()->create([
             'user_id' => $user->getAuthIdentifier(),
-            'type'    => $this->getActivityType($event),
+            'type' => $this->getActivityType($event),
         ]);
-    }
-
-    public function activity(): MorphMany
-    {
-        return $this->morphMany(Activity::class, 'subject');
     }
 
     protected function getActivityType(string $event): string

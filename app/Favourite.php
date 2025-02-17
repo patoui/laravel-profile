@@ -7,11 +7,9 @@ namespace App;
 use Database\Factories\FavouriteFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * Class Favourite
- * @package App
  *
  * @method static FavouriteFactory factory(...$parameters)
  */

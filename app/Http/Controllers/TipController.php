@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class TipController extends Controller
 {
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
         $tip = Tip::with('tags')
             ->published()
@@ -21,16 +21,13 @@ class TipController extends Controller
                 return $query->withAnyTags(Arr::wrap($request->input('tag')));
             })->get();
 
-        return view('tip.index')->with('tips', $tip);
+        return view('tip.index', ['tips' => $tip]);
     }
 
-    public function show(Request $request, Tip $tip) : View
+    public function show(Request $request, Tip $tip): View
     {
         Analytic::process($request, $tip);
 
-        return view('tip.show')
-            ->with('tip', $tip)
-            ->with('previousTip', $tip->previousPublished())
-            ->with('nextTip', $tip->nextPublished());
+        return view('tip.show', ['tip' => $tip, 'previousTip' => $tip->previousPublished(), 'nextTip' => $tip->nextPublished()]);
     }
 }

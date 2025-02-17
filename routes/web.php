@@ -23,8 +23,8 @@ Route::get('video', [VideoController::class, 'index'])->name('video.index');
 Route::get('video/{video}', [VideoController::class, 'show'])->name('video.show');
 
 // Authentication
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login']);
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
+Route::post('login', [LoginController::class, 'login'])->middleware('guest');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::feeds();

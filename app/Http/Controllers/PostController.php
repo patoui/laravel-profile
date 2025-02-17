@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
         $posts = Post::published()
             ->latest()
@@ -20,16 +20,13 @@ class PostController extends Controller
                 return $query->withAnyTags(Arr::wrap($request->input('tag')));
             })->get();
 
-        return view('post.index')->with('posts', $posts);
+        return view('post.index', ['posts' => $posts]);
     }
 
     public function show(Request $request, Post $post): View
     {
         Analytic::process($request, $post);
 
-        return view('post.show')
-            ->with('post', $post)
-            ->with('previousPost', $post->previousPublished())
-            ->with('nextPost', $post->nextPublished());
+        return view('post.show', ['post' => $post, 'previousPost' => $post->previousPublished(), 'nextPost' => $post->nextPublished()]);
     }
 }

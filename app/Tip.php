@@ -15,8 +15,8 @@ use Spatie\Tags\HasTags;
 
 /**
  * Class Tip
- * @package App
- * @property int    $id
+ *
+ * @property int $id
  * @property string $title
  * @property string $slug
  * @property string $body
@@ -28,10 +28,10 @@ use Spatie\Tags\HasTags;
  */
 class Tip extends Model implements HasFavourites
 {
+    use HasFactory;
     use HasTags;
     use Publishes;
     use RecordsActivity;
-    use HasFactory;
 
     /** @var list<string> */
     protected $guarded = [];
@@ -39,32 +39,37 @@ class Tip extends Model implements HasFavourites
     /** @var array<string, string> */
     protected $casts = ['published_at' => 'datetime'];
 
-    public function analytics() : MorphMany
+    public static function findBySlug(string $slug): ?self
+    {
+        return self::where('slug', $slug)->first();
+    }
+
+    public function analytics(): MorphMany
     {
         return $this->morphMany(Analytic::class, 'analytical');
     }
 
-    public function favourites() : MorphMany
+    public function favourites(): MorphMany
     {
         return $this->morphMany(Favourite::class, 'favouritable');
     }
 
-    public function getFavouritesCountAttribute() : int
+    public function getFavouritesCountAttribute(): int
     {
         return $this->favourites()->count();
     }
 
-    public function scopeSlug(Builder $query, string $slug) : Builder
+    public function scopeSlug(Builder $query, string $slug): Builder
     {
         return $query->where('slug', $slug);
     }
 
-    public function getShortTitleAttribute() : string
+    public function getShortTitleAttribute(): string
     {
         return substr($this->title, 0, 100);
     }
 
-    public function getShortBodyAttribute() : string
+    public function getShortBodyAttribute(): string
     {
         return substr( // get first 100 characters
             trim( // remove trailing whitespace
@@ -79,13 +84,8 @@ class Tip extends Model implements HasFavourites
         );
     }
 
-    public function getPathAttribute() : string
+    public function getPathAttribute(): string
     {
         return route('tip.show', ['tip' => $this->slug]);
-    }
-
-    public static function findBySlug(string $slug): ?self
-    {
-        return self::where('slug', $slug)->first();
     }
 }

@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class LoginControllerTest extends TestCase
 {
@@ -12,13 +12,18 @@ class LoginControllerTest extends TestCase
 
     /**
      * Test to display the login form
+     *
+     * @test
      */
-    public function testShowLoginForm(): void
+    public function show_login_form(): void
     {
         $this->get('login')->assertStatus(200);
     }
 
-    public function testLogin(): void
+    /**
+     * @test
+     */
+    public function login(): void
     {
         // Arrange
         User::factory()->create([
@@ -40,7 +45,10 @@ class LoginControllerTest extends TestCase
             ->assertRedirect('admin/dashboard');
     }
 
-    public function testLoginNotAdmin(): void
+    /**
+     * @test
+     */
+    public function login_not_admin(): void
     {
         // Arrange
         User::factory()->create([
@@ -62,7 +70,10 @@ class LoginControllerTest extends TestCase
             ->assertRedirect('/');
     }
 
-    public function testLogout(): void
+    /**
+     * @test
+     */
+    public function logout(): void
     {
         // Arrange
         $user = User::factory()->create([

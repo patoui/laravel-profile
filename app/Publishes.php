@@ -10,8 +10,7 @@ use Illuminate\Support\Carbon;
 trait Publishes
 {
     /**
-     * @param mixed $query
-     *
+     * @param  mixed  $query
      * @return mixed
      */
     public function scopePublished($query)
@@ -22,7 +21,8 @@ trait Publishes
     public function previousPublished(): ?self
     {
         /** @var Model $model */
-        $model = new self();
+        $model = new self;
+
         return $model
             ->where('id', '<>', $this->id)
             ->when($this->published_at, function ($q) {
@@ -36,7 +36,8 @@ trait Publishes
     public function nextPublished(): ?self
     {
         /** @var Model $model */
-        $model = new self();
+        $model = new self;
+
         return $model
             ->where('id', '<>', $this->id)
             ->when($this->published_at, function ($q) {

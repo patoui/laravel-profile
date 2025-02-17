@@ -4,8 +4,8 @@ namespace Tests\Feature\Admin;
 
 use App\Post;
 use App\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PostPublishControllerTest extends TestCase
 {
@@ -13,8 +13,10 @@ class PostPublishControllerTest extends TestCase
 
     /**
      * Test to publish a post
+     *
+     * @test
      */
-    public function testShow(): void
+    public function show(): void
     {
         // Arrange
         $user = User::factory()->admin()->create();

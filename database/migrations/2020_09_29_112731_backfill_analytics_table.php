@@ -10,11 +10,30 @@ use Illuminate\Support\Facades\Schema;
 
 class BackfillAnalyticsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    public static function hasRecord(int $model_id, string $created_at, string $model_type): bool
+    {
+        return DB::table('analytics')
+            ->where('analytical_id', $model_id)
+            ->where('analytical_type', $model_type)
+            ->where('created_at', $created_at)
+            ->exists();
+    }
+
+    public static function createRecordIfNotExist(stdClass $model, string $class_name): void
+    {
+        $parts = explode('\\', $class_name);
+        $col_name = strtolower(end($parts)) . '_id';
+        if (! self::hasRecord($model->$col_name, $model->created_at, $class_name)) {
+            Analytic::create([
+                'analytical_id' => $model->$col_name,
+                'analytical_type' => $class_name,
+                'headers' => $model->headers,
+                'created_at' => $model->created_at,
+                'updated_at' => $model->updated_at,
+            ]);
+        }
+    }
+
     public function up()
     {
         if (Schema::hasTable('tip_analytics')) {
@@ -36,42 +55,8 @@ class BackfillAnalyticsTable extends Migration
         }
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         //
-    }
-
-    /**
-     * @param int    $model_id
-     * @param string $model_type
-     * @return bool
-     */
-    public static function hasRecord(int $model_id, string $created_at, string $model_type): bool
-    {
-        return DB::table('analytics')
-                 ->where('analytical_id', $model_id)
-                 ->where('analytical_type', $model_type)
-                 ->where('created_at', $created_at)
-                 ->exists();
-    }
-
-    public static function createRecordIfNotExist(stdClass $model, string $class_name): void
-    {
-        $parts    = explode('\\', $class_name);
-        $col_name = strtolower(end($parts)) . '_id';
-        if (!self::hasRecord($model->$col_name, $model->created_at, $class_name)) {
-            Analytic::create([
-                'analytical_id'   => $model->$col_name,
-                'analytical_type' => $class_name,
-                'headers'         => $model->headers,
-                'created_at'      => $model->created_at,
-                'updated_at'      => $model->updated_at,
-            ]);
-        }
     }
 }

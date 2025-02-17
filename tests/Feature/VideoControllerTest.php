@@ -4,15 +4,18 @@ namespace Tests\Feature;
 
 use App\Jobs\ProcessAnalytic;
 use App\Video;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class VideoControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex(): void
+    /**
+     * @test
+     */
+    public function index(): void
     {
         // Arrange
         $video = Video::factory()->published()->create();
@@ -25,7 +28,10 @@ class VideoControllerTest extends TestCase
         $response->assertSee($video->title);
     }
 
-    public function testShow(): void
+    /**
+     * @test
+     */
+    public function show(): void
     {
         // Arrange
         Bus::fake();

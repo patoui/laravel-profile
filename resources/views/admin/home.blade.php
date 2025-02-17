@@ -21,14 +21,14 @@
         <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="/admin/post/create">New +</a>
     </div>
 </div>
-@foreach($posts as $post)
+@foreach ($posts as $post)
 <div class="flex mb-6 w-full">
     <div class="w-4/5">
         <a href="{{ route('post.show', ['post' => $post]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $post->title . ' (' . $post->analytics_count . ')' }}</a>
         <p class="mt-2 mb-2 text-sm text-gray-700">{{ $post->short_body }}</p>
         <p class="text-sm text-gray-600">{{ $post->published_at ? 'Published on ' . $post->short_published_at : 'Not published' }}</p>
         <div>
-            @foreach($post->tags as $tag)
+            @foreach ($post->tags as $tag)
                 <a href="{{ route('tip.index', ['tag' => $tag->name]) }}" class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 mr-2 hover:text-black hover:underline">{{ '#' . $tag->name }}</a>
             @endforeach
         </div>
@@ -50,14 +50,14 @@
         <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="/admin/tip/create">New +</a>
     </div>
 </div>
-@foreach($tips as $tip)
+@foreach ($tips as $tip)
 <div class="flex mb-6 w-full">
     <div class="w-4/5">
         <a href="{{ route('tip.show', ['tip' => $tip]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $tip->title . ' (' . $tip->analytics_count . ')' }}</a>
         <p class="mt-2 mb-2 text-sm text-gray-700">{{ $tip->short_body }}</p>
         <p class="text-sm text-gray-600">{{ $tip->published_at ? 'Published on ' . $tip->short_published_at : 'Not published' }}</p>
         <div>
-            @foreach($tip->tags as $tag)
+            @foreach ($tip->tags as $tag)
             <a href="{{ route('tip.index', ['tag' => $tag->name]) }}" class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 mr-2 hover:text-black hover:underline">{{ '#' . $tag->name }}</a>
             @endforeach
         </div>
@@ -79,13 +79,13 @@
         <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{ route('admin.video.create') }}">New +</a>
     </div>
 </div>
-@foreach($videos as $video)
+@foreach ($videos as $video)
     <div class="flex mb-6 w-full">
         <div class="w-4/5">
             <a href="{{ route('video.show', ['video' => $video->slug]) }}" class="no-underline font-semibold text-black text-xl hover:underline block">{{ $video->title . ' (' . $video->analytics_count . ')' }}</a>
             <p class="text-sm text-gray-600 mb-2">{{ $video->published_at ? 'Published on ' . $video->short_published_at : 'Not published' }}</p>
             <div>
-                @foreach($video->tags as $tag)
+                @foreach ($video->tags as $tag)
                     <a href="{{ route('tip.index', ['tag' => $tag->name]) }}" class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs text-gray-600 mr-2 hover:text-black hover:underline">{{ '#' . $tag->name }}</a>
                 @endforeach
             </div>

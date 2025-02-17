@@ -3,18 +3,18 @@
 namespace Tests\Unit;
 
 use App\Post;
-use App\User;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class PostTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testScopeSlug(): void
+    /**
+     * @test
+     */
+    public function scope_slug(): void
     {
         $post = Post::factory()->create([
             'title' => 'My Article\'s Title',
@@ -27,7 +27,10 @@ class PostTest extends TestCase
         self::assertNotNull($exists);
     }
 
-    public function testGetShortBodyAttribute(): void
+    /**
+     * @test
+     */
+    public function get_short_body_attribute(): void
     {
         $post = Post::factory()->create([
             'title' => 'My Article\'s Title',
@@ -60,10 +63,13 @@ class PostTest extends TestCase
         );
     }
 
-    public function testGetShortPublishedAtAttribute(): void
+    /**
+     * @test
+     */
+    public function get_short_published_at_attribute(): void
     {
         $post = Post::factory()->create([
-            'published_at' => '2017-02-02 06:06:06'
+            'published_at' => '2017-02-02 06:06:06',
         ]);
 
         self::assertEquals(
@@ -72,7 +78,10 @@ class PostTest extends TestCase
         );
     }
 
-    public function testTogglePublish(): void
+    /**
+     * @test
+     */
+    public function toggle_publish(): void
     {
         $post = Post::factory()->create();
 
@@ -81,7 +90,10 @@ class PostTest extends TestCase
         self::assertNotNull($post->fresh()->published_at);
     }
 
-    public function testScopePublished(): void
+    /**
+     * @test
+     */
+    public function scope_published(): void
     {
         Post::factory(2)->create();
         Post::factory()->published()->create();
@@ -92,7 +104,10 @@ class PostTest extends TestCase
         );
     }
 
-    public function testPreviousPublished(): void
+    /**
+     * @test
+     */
+    public function previous_published(): void
     {
         $previousPost = Post::factory()->create([
             'published_at' => Carbon::now()->subDay(),
@@ -106,7 +121,10 @@ class PostTest extends TestCase
         self::assertEquals($previousPost->title, $previousPostFound->title);
     }
 
-    public function testNextPublished(): void
+    /**
+     * @test
+     */
+    public function next_published(): void
     {
         $post = Post::factory()->create([
             'published_at' => Carbon::now()->subDay(),

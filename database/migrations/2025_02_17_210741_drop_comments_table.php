@@ -10,7 +10,5 @@ return new class extends Migration
         Schema::dropIfExists('comments');
     }
 
-    public function down(): void
-    {
-    }
+    public function down(): void {}
 };

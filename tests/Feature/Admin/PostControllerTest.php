@@ -14,8 +14,10 @@ class PostControllerTest extends TestCase
 
     /**
      * Test to view the post create page as an authenticated user
+     *
+     * @test
      */
-    public function testCreate(): void
+    public function create(): void
     {
         // Arrange
         $this->auth();
@@ -29,8 +31,10 @@ class PostControllerTest extends TestCase
 
     /**
      * Test to store a post as an authenticated user
+     *
+     * @test
      */
-    public function testStore(): void
+    public function store(): void
     {
         // Arrange
         $this->auth();
@@ -63,8 +67,10 @@ class PostControllerTest extends TestCase
 
     /**
      * Test to view the post edit page as an authenticated user
+     *
+     * @test
      */
-    public function testEdit(): void
+    public function edit(): void
     {
         // Arrange
         $this->auth();
@@ -79,8 +85,10 @@ class PostControllerTest extends TestCase
 
     /**
      * Test to update a post as an authenticated user
+     *
+     * @test
      */
-    public function testUpdate(): void
+    public function update(): void
     {
         // Arrange
         $this->auth();

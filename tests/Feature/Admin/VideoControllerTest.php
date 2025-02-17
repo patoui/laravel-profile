@@ -4,14 +4,17 @@ namespace Tests\Feature\Admin;
 
 use App\User;
 use App\Video;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class VideoControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCreate(): void
+    /**
+     * @test
+     */
+    public function create(): void
     {
         // Arrange
         $this->auth();
@@ -23,7 +26,10 @@ class VideoControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testStore(): void
+    /**
+     * @test
+     */
+    public function store(): void
     {
         // Arrange
         $this->auth();
@@ -44,7 +50,10 @@ class VideoControllerTest extends TestCase
         $this->assertEquals('my-new-video-body', $video->fresh()->slug);
     }
 
-    public function testEdit(): void
+    /**
+     * @test
+     */
+    public function edit(): void
     {
         // Arrange
         $this->auth();
@@ -57,7 +66,10 @@ class VideoControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testUpdate(): void
+    /**
+     * @test
+     */
+    public function update(): void
     {
         // Arrange
         $this->auth();

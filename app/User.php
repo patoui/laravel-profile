@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * Class User
- * @package App
+ *
  * @property int $id
  * @property string $name
  * @property string $email
@@ -27,15 +27,14 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Carbon $email_verified_at
- *
  * @property-read bool $is_admin
  *
  * @method static UserFactory factory(...$parameters)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
     use HasFactory;
+    use Notifiable;
 
     /** @var list<string> */
     protected $fillable = [
@@ -58,7 +57,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @param HasFavourites $model
      * @throws Exception
      */
     public function toggleFavourite(HasFavourites $model): void
@@ -67,6 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         if ($favourite) {
             $favourite->delete();
+
             return;
         }
 

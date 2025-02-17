@@ -24,7 +24,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 class Kernel extends HttpKernel
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $middleware = [
         CheckForMaintenanceMode::class,
@@ -32,7 +32,7 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $middlewareGroups = [
         'web' => [
@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $middlewareAliases = [
         'auth' => Authenticate::class,

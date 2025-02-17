@@ -16,29 +16,32 @@ class PostControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testShow(): void
+    /**
+     * @test
+     */
+    public function show(): void
     {
         // Arrange
         Bus::fake();
         User::factory()->me()->create();
         Mail::fake();
         Post::factory()->create([
-            'title'        => 'First Title',
-            'body'         => 'First Body',
-            'slug'         => 'first-title',
+            'title' => 'First Title',
+            'body' => 'First Body',
+            'slug' => 'first-title',
             'published_at' => Carbon::now()->subDays(2),
         ]);
         /** @var Post $post */
         $post = Post::factory()->create([
-            'title'        => 'Second Title',
-            'body'         => 'Second Body',
-            'slug'         => 'second-title',
+            'title' => 'Second Title',
+            'body' => 'Second Body',
+            'slug' => 'second-title',
             'published_at' => Carbon::now()->subDay(),
         ]);
         Post::factory()->create([
-            'title'        => 'Third Title',
-            'body'         => 'Third Body',
-            'slug'         => 'third-title',
+            'title' => 'Third Title',
+            'body' => 'Third Body',
+            'slug' => 'third-title',
             'published_at' => Carbon::now(),
         ]);
         GitDown::shouldReceive('parseAndCache')->andReturn($post->body);
@@ -49,10 +52,10 @@ class PostControllerTest extends TestCase
 
         // Assert
         $response->assertSuccessful()
-                 ->assertSee('Second Title')
-                 ->assertSee('Second Body')
-                 ->assertSee('First Title')
-                 ->assertSee('Third Title');
+            ->assertSee('Second Title')
+            ->assertSee('Second Body')
+            ->assertSee('First Title')
+            ->assertSee('Third Title');
 
         // Assert
         Bus::assertDispatched(ProcessAnalytic::class);

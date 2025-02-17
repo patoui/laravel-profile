@@ -11,8 +11,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
-use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -34,19 +34,18 @@ class LoginController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function showLoginForm() : View
+    public function showLoginForm(): View
     {
-        return view('auth.login')->with('intended', $this->request->input('intended'));
+        return view('auth.login', ['intended' => $this->request->input('intended')]);
     }
 
-    public function redirectTo() : string
+    public function redirectTo(): string
     {
         $user = $this->request->user();
 
-        abort_if(!$user, 401);
+        abort_if(! $user, 401);
 
         if ($user->is_admin) {
             return redirect()->route('admin.dashboard')->getTargetUrl();
@@ -63,7 +62,7 @@ class LoginController extends Controller
         return Socialite::driver('github')->redirect();
     }
 
-    public function handleProviderCallback() : RedirectResponse
+    public function handleProviderCallback(): RedirectResponse
     {
         $user = Socialite::driver('github')->user();
 
@@ -77,9 +76,9 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
-    public function findOrCreateUser(SocialiteUser $user, string $provider) : User
+    public function findOrCreateUser(SocialiteUser $user, string $provider): User
     {
-        $authUser = User::where(static function ($query) use ($user) : void {
+        $authUser = User::where(static function ($query) use ($user): void {
             $query->where('provider_id', $user->getId())
                 ->orWhere('email', $user->getEmail());
         })->first();
@@ -93,8 +92,8 @@ class LoginController extends Controller
         }
 
         return User::create([
-            'name'     => $user->getName(),
-            'email'    => $user->getEmail(),
+            'name' => $user->getName(),
+            'email' => $user->getEmail(),
             'provider' => $provider,
             'provider_id' => $user->getId(),
         ]);

@@ -14,10 +14,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         static $password;
+
         return [
-            'name'           => $this->faker->name,
-            'email'          => $this->faker->unique()->safeEmail,
-            'password'       => $password ?: $password = bcrypt('secret'),
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'password' => $password ?: $password = bcrypt('secret'),
             'remember_token' => uniqid('', true),
         ];
     }

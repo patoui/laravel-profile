@@ -3,8 +3,8 @@
 namespace Tests\Feature\Admin;
 
 use App\User;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DashboardControllerTest extends TestCase
 {
@@ -13,9 +13,10 @@ class DashboardControllerTest extends TestCase
     /**
      * Test to view the dashboard as an authenticated user
      *
-     * @return void
+     *
+     * @test
      */
-    public function testIndex(): void
+    public function index(): void
     {
         $user = User::factory()->admin()->create();
 

@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class VideoController extends Controller
 {
-    public function index(Request $request) : View
+    public function index(Request $request): View
     {
         $videos = Video::published()
             ->latest()
@@ -20,18 +20,15 @@ class VideoController extends Controller
                 return $query->withAnyTags(Arr::wrap($request->input('tag')));
             })->get();
 
-        return view('video.index')->with('videos', $videos);
+        return view('video.index', ['videos' => $videos]);
     }
 
     public function show(Request $request, Video $video): View
     {
-        abort_if(!$video->published_at, 404);
+        abort_if(! $video->published_at, 404);
 
         Analytic::process($request, $video);
 
-        return view('video.show')
-            ->with('video', $video)
-            ->with('previousVideo', $video->previousPublished())
-            ->with('nextVideo', $video->nextPublished());
+        return view('video.show', ['video' => $video, 'previousVideo' => $video->previousPublished(), 'nextVideo' => $video->nextPublished()]);
     }
 }

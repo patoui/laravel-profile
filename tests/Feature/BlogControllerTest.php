@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Post;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class BlogControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testIndex(): void
+    /**
+     * @test
+     */
+    public function index(): void
     {
         // Arrange
         $post = Post::factory()->published()->create();

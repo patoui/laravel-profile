@@ -11,7 +11,7 @@ class ProfilePolicy
 {
     use HandlesAuthorization;
 
-    public function show(User $auth, User $user) : bool
+    public function show(User $auth, User $user): bool
     {
         return $user->id === $auth->id;
     }

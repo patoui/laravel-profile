@@ -14,8 +14,8 @@ use Spatie\Tags\HasTags;
 
 /**
  * Class Video
- * @package App
- * @property int    $id
+ *
+ * @property int $id
  * @property string $title
  * @property string $slug
  * @property string $description
@@ -28,10 +28,10 @@ use Spatie\Tags\HasTags;
  */
 class Video extends Model implements HasFavourites
 {
+    use HasFactory;
     use HasTags;
     use Publishes;
     use RecordsActivity;
-    use HasFactory;
 
     /** @var array<string> */
     protected $guarded = [];
@@ -39,17 +39,17 @@ class Video extends Model implements HasFavourites
     /** @var array<string, string> */
     protected $casts = ['published_at' => 'datetime'];
 
-    public function analytics() : MorphMany
+    public function analytics(): MorphMany
     {
         return $this->morphMany(Analytic::class, 'analytical');
     }
 
-    public function getRouteKeyName() : string
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
 
-    public function getEmbedUrlAttribute() : ?string
+    public function getEmbedUrlAttribute(): ?string
     {
         return sprintf(
             'https://www.youtube.com/embed/%s?rel=0&amp;showinfo=0',
@@ -57,12 +57,12 @@ class Video extends Model implements HasFavourites
         );
     }
 
-    public function favourites() : MorphMany
+    public function favourites(): MorphMany
     {
         return $this->morphMany(Favourite::class, 'favouritable');
     }
 
-    public function getFavouritesCountAttribute() : int
+    public function getFavouritesCountAttribute(): int
     {
         return $this->favourites()->count();
     }

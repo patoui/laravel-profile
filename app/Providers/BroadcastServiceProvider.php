@@ -12,15 +12,15 @@ class BroadcastServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot() : void
+    public function boot(): void
     {
-//        Broadcast::routes();
+        //        Broadcast::routes();
 
         /*
          * Authenticate the user's personal channel...
          */
-//        Broadcast::channel('App.User.*', static function ($user, $userId) {
-//            return (int) $user->id === (int) $userId;
-//        });
+        //        Broadcast::channel('App.User.*', static function ($user, $userId) {
+        //            return (int) $user->id === (int) $userId;
+        //        });
     }
 }

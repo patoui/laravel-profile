@@ -11,7 +11,7 @@ class SecurityHeaders
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -38,7 +38,7 @@ class SecurityHeaders
                 "img-src 'self' https://via.placeholder.com data:",
                 "script-src 'self' 'unsafe-eval'" . $extras,
                 "style-src 'self' 'unsafe-inline' https://use.fontawesome.com" . $extras,
-                "frame-src https://youtube.com https://www.youtube.com"
+                'frame-src https://youtube.com https://www.youtube.com',
             ])
         );
 

@@ -4,14 +4,16 @@ namespace Tests\Feature;
 
 use App\Tip;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AddTagsToTipsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCanAddTagsToATip(): void
+    /**
+     * @test
+     */
+    public function can_add_tags_to_a_tip(): void
     {
         self::markTestSkipped('Need to enable JSON1 extension for tags');
 

@@ -14,8 +14,10 @@ class TipControllerTest extends TestCase
 
     /**
      * Test to view the tip create page as an authenticated user
+     *
+     * @test
      */
-    public function testCreate(): void
+    public function create(): void
     {
         // Arrange
         $this->auth();
@@ -29,8 +31,10 @@ class TipControllerTest extends TestCase
 
     /**
      * Test to store a tip as an authenticated user
+     *
+     * @test
      */
-    public function testStore(): void
+    public function store(): void
     {
         // Arrange
         $this->auth();
@@ -61,8 +65,10 @@ class TipControllerTest extends TestCase
 
     /**
      * Test to view the tip edit page as an authenticated user
+     *
+     * @test
      */
-    public function testEdit(): void
+    public function edit(): void
     {
         // Arrange
         $this->auth();
@@ -77,8 +83,10 @@ class TipControllerTest extends TestCase
 
     /**
      * Test to update a tip as an authenticated user
+     *
+     * @test
      */
-    public function testUpdate(): void
+    public function update(): void
     {
         // Arrange
         $this->auth();

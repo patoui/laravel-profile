@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Video;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Controllers\Controller;
 
 class VideoPublishController extends Controller
 {
-    public function show(Video $video) : RedirectResponse
+    public function show(Video $video): RedirectResponse
     {
         $video->togglePublish();
 

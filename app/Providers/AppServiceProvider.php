@@ -8,12 +8,12 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function boot() : void
+    public function boot(): void
     {
         // intentionally left empty
     }
 
-    public function register() : void
+    public function register(): void
     {
         // intentionally left empty
     }

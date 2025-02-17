@@ -18,7 +18,6 @@ class SecurityHeaders
 
         $response = $next($request);
 
-        $nonce = config('csp.nonce');
         $extras = '';
 
         if (app()->isLocal()) {

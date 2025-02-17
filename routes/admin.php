@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\PostPublishController;
 use App\Http\Controllers\Admin\TipController;
+use App\Http\Controllers\Admin\TipPublishController;
 use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\Admin\VideoPublishController;
 use Illuminate\Support\Facades\Route;
 
 // Post
@@ -15,7 +18,7 @@ Route::get('post/create', [PostController::class, 'create'])
 Route::post('post', [PostController::class, 'store'])
     ->name('admin.post.store')
     ->middleware('can:post.store');
-Route::get('post/{post}/publish', [PostController::class, 'show'])
+Route::get('post/{post}/publish', [PostPublishController::class, 'show'])
     ->name('admin.post.publish')
     ->middleware('can:post.publish');
 Route::get('post/{post}/edit', [PostController::class, 'edit'])
@@ -32,7 +35,7 @@ Route::get('tip/create', [TipController::class, 'create'])
 Route::post('tip', [TipController::class, 'store'])
     ->name('admin.tip.store')
     ->middleware('can:tip.store');
-Route::get('tip/{tip}/publish', [TipController::class, 'show'])
+Route::get('tip/{tip}/publish', [TipPublishController::class, 'show'])
     ->name('admin.tip.publish')
     ->middleware('can:tip.publish');
 Route::get('tip/{tip}/edit', [TipController::class, 'edit'])
@@ -55,7 +58,7 @@ Route::get('video/{video}/edit', [VideoController::class, 'edit'])
 Route::put('video/{video}', [VideoController::class, 'update'])
     ->name('admin.video.update')
     ->middleware('can:video.update');
-Route::get('video/{video}/publish', [VideoController::class, 'show'])
+Route::get('video/{video}/publish', [VideoPublishController::class, 'show'])
     ->name('admin.video.publish')
     ->middleware('can:video.publish');
 

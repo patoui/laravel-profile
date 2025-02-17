@@ -19,7 +19,7 @@ class Favourite extends Model
 {
     use HasFactory;
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $fillable = [
         'favouritable_id',
         'favouritable_type',

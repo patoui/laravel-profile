@@ -39,10 +39,10 @@ class Post extends Model implements Feedable, HasFavourites
     use RecordsActivity;
     use HasFactory;
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $guarded = [];
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $appends = ['favourites_count'];
 
     /** @var array<string, string>*/

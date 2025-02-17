@@ -41,7 +41,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     use InteractsWithMedia;
     use HasFactory;
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $fillable = [
         'name',
         'email',
@@ -50,10 +50,10 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'provider_id',
     ];
 
-    /** @var array<int, string> */
+    /** @var list<string> */
     protected $hidden = ['password', 'remember_token'];
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $appends = ['is_admin'];
 
     public function favourites(): HasMany

@@ -11,6 +11,6 @@ class Subscription extends Model
 {
     use SoftDeletes;
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $fillable = ['email'];
 }

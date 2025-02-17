@@ -33,7 +33,7 @@ class Tip extends Model implements HasFavourites
     use RecordsActivity;
     use HasFactory;
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $guarded = [];
 
     /** @var array<string, string> */

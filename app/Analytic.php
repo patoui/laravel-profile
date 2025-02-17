@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class Analytic extends Model
 {
-    /** @var array<string> */
+    /** @var list<string> */
     protected $guarded = [];
 
     public function analytical(): MorphTo

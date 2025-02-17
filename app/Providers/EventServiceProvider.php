@@ -10,7 +10,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
-    /** @var mixed[] */
+    /** @var array<string, array<int, string>> */
     protected $listen = [
         'App\Events\CommentSaved' => [
             'App\Listeners\NotifyMe',

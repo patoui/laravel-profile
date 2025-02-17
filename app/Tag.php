@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    /** @var array<string> */
+    /** @var list<string> */
     protected $guarded = [];
 }

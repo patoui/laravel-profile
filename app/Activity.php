@@ -26,7 +26,7 @@ use function ucwords;
  */
 class Activity extends Model
 {
-    /** @var array<string> */
+    /** @var list<string> */
     protected $guarded = [];
 
     public function subject(): MorphTo

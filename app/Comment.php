@@ -35,13 +35,13 @@ class Comment extends Model implements HasFavourites
     use RecordsActivity;
     use HasFactory;
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $guarded = [];
 
-    /** @var array<string> */
+    /** @var list<string> */
     protected $appends = ['favourites_count'];
 
-    /** @var array<string> */
+    /** @var array<string, string> */
     protected $dispatchesEvents = ['saved' => CommentSaved::class];
 
     public function owner(): BelongsTo

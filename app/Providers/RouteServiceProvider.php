@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Post;
-use App\Tip;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use function abort;
 use function base_path;
 
 class RouteServiceProvider extends ServiceProvider
@@ -23,16 +20,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'App\Http\Controllers';
 
-    /**
-     * Define the routes for the application.
-     */
     public function map() : void
     {
         $this->mapWebRoutes();
-
         $this->mapAdminRoutes();
-
-        $this->mapApiRoutes();
     }
 
     /**
@@ -63,22 +54,6 @@ class RouteServiceProvider extends ServiceProvider
             'prefix' => 'admin',
         ], static function (Router $router) : void {
             require base_path('routes/admin.php');
-        });
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     */
-    protected function mapApiRoutes() : void
-    {
-        Route::group([
-            'middleware' => 'api',
-            'namespace' => $this->namespace,
-            'prefix' => 'api',
-        ], static function ($router) : void {
-            require base_path('routes/api.php');
         });
     }
 }

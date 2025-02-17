@@ -25,9 +25,4 @@ class Favourite extends Model
         'favouritable_type',
         'user_id',
     ];
-
-    public function comments() : MorphToMany
-    {
-        return $this->morphedByMany(Comment::class, 'favouritable');
-    }
 }

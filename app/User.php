@@ -13,9 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
-use RuntimeException;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class User
@@ -35,10 +32,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  *
  * @method static UserFactory factory(...$parameters)
  */
-class User extends Authenticatable implements HasMedia, MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-    use InteractsWithMedia;
     use HasFactory;
 
     /** @var list<string> */

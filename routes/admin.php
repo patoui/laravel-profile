@@ -1,33 +1,6 @@
 <?php
 
-// Media
-Route::get('/media', 'MediaController@index')
-    ->name('admin.media.index')
-    ->middleware('can:media.index');
-
-Route::get('/media/create', 'MediaController@create')
-    ->name('admin.media.create')
-    ->middleware('can:media.create');
-
-Route::get('/media/{media}', 'MediaController@show')
-    ->name('admin.media.show')
-    ->middleware('can:media.show');
-
-Route::get('/media/{media}/edit', 'MediaController@edit')
-    ->name('admin.media.edit')
-    ->middleware('can:media.edit');
-
-Route::post('/media', 'MediaController@store')
-    ->name('admin.media.store')
-    ->middleware('can:media.store');
-
-Route::put('/media/{media}/update', 'MediaController@update')
-    ->name('admin.media.update')
-    ->middleware('can:media.update');
-
-Route::get('/media/{media}/delete', 'MediaController@delete')
-    ->name('admin.media.delete')
-    ->middleware('can:media.delete');
+use Illuminate\Support\Facades\Route;
 
 // Post
 Route::get('/post/create', 'PostController@create')

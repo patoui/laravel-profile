@@ -14,24 +14,6 @@ class PostTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCreateComment(): void
-    {
-        User::factory()->me()->create();
-        Mail::fake();
-        $post = Post::factory()->create([
-            'title' => 'My Article\'s Title',
-            'body' => 'My Article\'s Body',
-            'slug' => 'my-articles-title',
-        ]);
-
-        $post->createComment(['body' => 'Awesome article!']);
-
-        self::assertEquals(
-            'Awesome article!',
-            $post->fresh()->comments()->latest()->first()->body
-        );
-    }
-
     public function testScopeSlug(): void
     {
         $post = Post::factory()->create([

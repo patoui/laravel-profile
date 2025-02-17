@@ -53,17 +53,6 @@ class Post extends Model implements Feedable, HasFavourites
         return $this->morphMany(Analytic::class, 'analytical');
     }
 
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class)->whereNull('comment_id');
-    }
-
-    /** @param array<mixed> $data */
-    public function createComment(array $data): Model
-    {
-        return $this->comments()->create($data);
-    }
-
     public function favourites(): MorphMany
     {
         return $this->morphMany(Favourite::class, 'favouritable');

@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Comment;
-use App\Favourite;
 use App\Jobs\ProcessAnalytic;
 use App\Post;
 use App\User;
@@ -42,16 +40,6 @@ class PostControllerTest extends TestCase
             'body'         => 'Third Body',
             'slug'         => 'third-title',
             'published_at' => Carbon::now(),
-        ]);
-        /** @var Comment $comment */
-        $comment = Comment::factory()->create([
-            'post_id' => $post->id,
-            'body'    => 'This is a sweet post!',
-        ]);
-        Favourite::factory()->create([
-            'favouritable_id'   => $comment->id,
-            'favouritable_type' => get_class($comment),
-            'user_id'           => User::factory()->create()->id,
         ]);
         GitDown::shouldReceive('parseAndCache')->andReturn($post->body);
         GitDown::shouldReceive('styles')->andReturn(null);

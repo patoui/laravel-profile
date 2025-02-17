@@ -164,7 +164,6 @@ return [
         /*
          * Vendor Service Providers...
          */
-        Laracasts\Flash\FlashServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
     ],
 

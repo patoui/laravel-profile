@@ -52,7 +52,7 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post): RedirectResponse
     {
-        request()->validate($request, [
+        $request->validate([
             'title' => 'required|string',
             'body' => 'required|string',
             'slug' => [

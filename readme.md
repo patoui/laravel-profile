@@ -5,9 +5,8 @@ Serves as a portfolio website of myself, and a place where I can post articles/t
 
 ## Requirements
 
-- PHP ^8.1
+- PHP ^8.2
 - MySQL ^5.7 | 8.x
-
 
 ## Installation
 

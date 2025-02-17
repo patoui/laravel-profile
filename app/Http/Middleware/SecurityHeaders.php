@@ -39,6 +39,7 @@ class SecurityHeaders
                 "img-src 'self' https://via.placeholder.com data:",
                 "script-src 'self' 'unsafe-eval'" . $extras,
                 "style-src 'self' 'unsafe-inline' https://use.fontawesome.com" . $extras,
+                "frame-src https://youtube.com https://www.youtube.com"
             ])
         );
 

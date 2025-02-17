@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -19,7 +18,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 use function app;
 use function redirect;
-use function response;
 
 class Handler extends ExceptionHandler
 {

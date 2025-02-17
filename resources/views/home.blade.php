@@ -44,6 +44,7 @@
     <li class="mb-2">📸️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://instagram.com/patoui2" title="Instagram">Instagram</a></li>
     <li class="mb-2">👨‍💻&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://linkedin.com/in/patrique-ouimet-8b2aa969" title="LinkedIn">LinkedIn</a></li>
     <li class="mb-2">🐘️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://phpc.social/web/accounts/106705262503935129" title="PHP Social">PHP Social</a></li>
+    <li class="mb-2">🦋&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://bsky.app/profile/patoui.bsky.social" title="Bluesky">Bluesky</a></li>
 </ul>
 
 <h2 class="w-full block mt-5 mb-2 font-bold text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl">🔭️ Technologies</h2>

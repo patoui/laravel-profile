@@ -150,7 +150,6 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -212,12 +211,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        /*
-         * Vendor Service Providers...
-         */
-        'Image' => Intervention\Image\Facades\Image::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 
-class Analytic extends Model
+final class Analytic extends Model
 {
     /** @var list<string> */
     protected $guarded = [];

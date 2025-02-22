@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
-class VideoController
+final class VideoController
 {
     public function index(Request $request): View
     {

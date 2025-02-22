@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class VideoPolicy
+final class VideoPolicy
 {
     use HandlesAuthorization;
 

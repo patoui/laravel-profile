@@ -29,7 +29,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static PostFactory factory(...$parameters)
  */
-class Post extends Model implements Feedable
+final class Post extends Model implements Feedable
 {
     use HasFactory;
     use HasTags;

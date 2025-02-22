@@ -10,7 +10,7 @@ use function preg_replace;
 use function str_replace;
 use function strtolower;
 
-class Slug implements Rule
+final class Slug implements Rule
 {
     /**
      * Determine if the validation rule passes.

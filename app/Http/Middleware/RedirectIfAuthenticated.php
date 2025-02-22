@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 use function redirect;
 
-class RedirectIfAuthenticated
+final class RedirectIfAuthenticated
 {
     /**
      * Handle an incoming request.

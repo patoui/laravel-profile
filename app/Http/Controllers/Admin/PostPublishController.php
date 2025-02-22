@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 
 use function redirect;
 
-class PostPublishController
+final class PostPublishController
 {
     public function show(Post $post): RedirectResponse
     {

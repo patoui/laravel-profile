@@ -6,7 +6,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+final class Tag extends Model
 {
     /** @var list<string> */
     protected $guarded = [];

@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 use function view;
 
-class DashboardController
+final class DashboardController
 {
     public function index(): View
     {

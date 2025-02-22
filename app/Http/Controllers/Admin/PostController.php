@@ -14,7 +14,7 @@ use Illuminate\View\View;
 use function redirect;
 use function view;
 
-class PostController
+final class PostController
 {
     public function create(): View
     {

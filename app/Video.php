@@ -25,7 +25,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static VideoFactory factory(...$parameters)
  */
-class Video extends Model
+final class Video extends Model
 {
     use HasFactory;
     use HasTags;

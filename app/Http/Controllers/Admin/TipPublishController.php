@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 
 use function redirect;
 
-class TipPublishController
+final class TipPublishController
 {
     public function show(Tip $tip): RedirectResponse
     {

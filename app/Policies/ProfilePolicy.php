@@ -7,7 +7,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProfilePolicy
+final class ProfilePolicy
 {
     use HandlesAuthorization;
 

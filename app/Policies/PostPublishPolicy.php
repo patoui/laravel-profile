@@ -7,7 +7,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PostPublishPolicy
+final class PostPublishPolicy
 {
     use HandlesAuthorization;
 

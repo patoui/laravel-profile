@@ -25,7 +25,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static TipFactory factory(...$parameters)
  */
-class Tip extends Model
+final class Tip extends Model
 {
     use HasFactory;
     use HasTags;

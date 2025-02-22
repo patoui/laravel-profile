@@ -15,7 +15,7 @@ use function redirect;
 use function request;
 use function view;
 
-class TipController
+final class TipController
 {
     public function create(): View
     {

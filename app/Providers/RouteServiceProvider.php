@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 use function base_path;
 
-class RouteServiceProvider extends ServiceProvider
+final class RouteServiceProvider extends ServiceProvider
 {
     /**
      * This namespace is applied to your controller routes.

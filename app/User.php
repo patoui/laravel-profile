@@ -28,7 +28,7 @@ use Illuminate\Support\Carbon;
  *
  * @method static UserFactory factory(...$parameters)
  */
-class User extends Authenticatable implements MustVerifyEmail
+final class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
     use Notifiable;

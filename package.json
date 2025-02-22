@@ -16,8 +16,6 @@
     "laravel-mix-purgecss": "^6.0.0",
     "postcss": "^8.1",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.15.2",
-    "sass-loader": "^7.1.0",
     "tailwindcss": "^2.0",
     "husky": "^8.0.0"
   }

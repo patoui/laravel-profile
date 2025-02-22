@@ -31,7 +31,6 @@ class Tip extends Model implements HasFavourites
     use HasFactory;
     use HasTags;
     use Publishes;
-    use RecordsActivity;
 
     /** @var list<string> */
     protected $guarded = [];

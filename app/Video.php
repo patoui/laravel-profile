@@ -31,7 +31,6 @@ class Video extends Model implements HasFavourites
     use HasFactory;
     use HasTags;
     use Publishes;
-    use RecordsActivity;
 
     /** @var array<string> */
     protected $guarded = [];

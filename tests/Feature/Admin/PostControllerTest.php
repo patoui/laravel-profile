@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Activity;
 use App\Post;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -54,15 +53,6 @@ class PostControllerTest extends TestCase
         /** @var Post $post */
         $post = Post::where('title', 'My New Post Title')->first();
         self::assertNotNull($post);
-
-        // Assert activity was recorded
-        self::assertNotNull(
-            Activity::where([
-                'type' => 'created_post',
-                'subject_id' => $post->id,
-                'subject_type' => get_class($post),
-            ])->first()
-        );
     }
 
     /**

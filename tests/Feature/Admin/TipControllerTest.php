@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Activity;
 use App\Tip;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -51,13 +50,6 @@ class TipControllerTest extends TestCase
         $response->assertRedirect('/admin/dashboard');
         $tip = app(Tip::class)->where('title', 'My New Tip Title')->first();
         self::assertNotNull($tip);
-        self::assertNotNull(
-            app(Activity::class)->where([
-                'type' => 'created_tip',
-                'subject_id' => $tip->id,
-                'subject_type' => get_class($tip),
-            ])->first()
-        );
         self::assertEquals('My New Tip Title', $tip->fresh()->title);
         self::assertEquals('My New Tip Body', $tip->fresh()->body);
         self::assertEquals('my-new-tip-body', $tip->fresh()->slug);

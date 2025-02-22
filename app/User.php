@@ -80,11 +80,6 @@ class User extends Authenticatable implements MustVerifyEmail
         ]);
     }
 
-    public function activities(): HasMany
-    {
-        return $this->hasMany(Activity::class);
-    }
-
     public function getRouteKeyName(): string
     {
         return 'email';

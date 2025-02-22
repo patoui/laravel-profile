@@ -35,7 +35,6 @@ class Post extends Model implements Feedable, HasFavourites
     use HasFactory;
     use HasTags;
     use Publishes;
-    use RecordsActivity;
 
     /** @var list<string> */
     protected $guarded = [];

@@ -1,5 +1,4 @@
-# 👋🏻 Profile
-
+# 👋🏻 Overview
 
 Serves as a portfolio website of myself, and a place where I can post articles/tips/videos about content relevant to me.
 

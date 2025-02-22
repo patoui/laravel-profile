@@ -12,7 +12,7 @@
 
 @section('content')
 <h1 class="w-full block mt-3 mb-2 font-bold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">Hi there 👋, I'm Pat! 😄</h1>
-<p class="block mb-5 leading-relaxed">I'm a Senior Product Engineer primarily working in/with PHP but love discovering/trying new technologies! I've been a software engineer for over a decade and have built systems for a variety of products and industries, such as: marketing, contesting, lead acquisition, automotive, and healthcare</p>
+<p class="block mb-5 leading-relaxed">I'm a Senior Product Engineer primarily working in/with PHP but love discovering/trying new technologies! I've been a software engineer for over a decade and have built systems for a variety of products and industries, such as: marketing, contesting, lead acquisition, automotive, and healthcare.</p>
 
 <h2 class="w-full block mt-3 mb-2 font-bold text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl">About me</h2>
 <ul class="w-full block list-disc ml-5">

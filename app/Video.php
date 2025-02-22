@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * Class Video
@@ -37,9 +38,6 @@ final class Video extends Model implements Feedable
     /** @var array<string> */
     protected $guarded = [];
 
-    /** @var array<string, string> */
-    protected $casts = ['published_at' => 'datetime'];
-
     public static function getFeedItems(): Collection
     {
         return self::published()->latest()->get();
@@ -55,12 +53,14 @@ final class Video extends Model implements Feedable
         return 'slug';
     }
 
-    public function getEmbedUrlAttribute(): string
+    protected function embedUrl(): Attribute
     {
-        return sprintf(
-            'https://www.youtube.com/embed/%s?rel=0&amp;showinfo=0',
-            $this->external_id
-        );
+        return Attribute::make(get: function () {
+            return sprintf(
+                'https://www.youtube.com/embed/%s?rel=0&amp;showinfo=0',
+                $this->external_id
+            );
+        });
     }
 
     public function toFeedItem(): FeedItem
@@ -73,5 +73,11 @@ final class Video extends Model implements Feedable
             ->link(route('video.show', [$this]))
             ->authorName('Patrique Ouimet')
             ->authorEmail('patrique.ouimet@gmail.com');
+    }
+    /**
+     * @return array<string, string> */
+    protected function casts(): array
+    {
+        return ['published_at' => 'datetime'];
     }
 }

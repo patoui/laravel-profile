@@ -14,6 +14,7 @@ use Illuminate\Support\Carbon;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * Class Tip
@@ -37,9 +38,6 @@ final class Tip extends Model implements Feedable
     /** @var list<string> */
     protected $guarded = [];
 
-    /** @var array<string, string> */
-    protected $casts = ['published_at' => 'datetime'];
-
     public static function getFeedItems(): Collection
     {
         return self::published()->latest()->get();
@@ -60,29 +58,35 @@ final class Tip extends Model implements Feedable
         return $query->where('slug', $slug);
     }
 
-    public function getShortTitleAttribute(): string
+    protected function shortTitle(): Attribute
     {
-        return substr($this->title, 0, 100);
+        return Attribute::make(get: function () {
+            return substr($this->title, 0, 100);
+        });
     }
 
-    public function getShortBodyAttribute(): string
+    protected function shortBody(): Attribute
     {
-        return substr( // get first 100 characters
-            trim( // remove trailing whitespace
-                (string) preg_replace(
-                    '/[^\da-z ]/i', // remove all non alphanumeric
-                    '',
-                    (string) preg_replace("/(\r?\n){2,}/", ' ', strip_tags($this->body))
-                )
-            ),
-            0,
-            100
-        );
+        return Attribute::make(get: function () {
+            return substr( // get first 100 characters
+                trim( // remove trailing whitespace
+                    (string) preg_replace(
+                        '/[^\da-z ]/i', // remove all non alphanumeric
+                        '',
+                        (string) preg_replace("/(\r?\n){2,}/", ' ', strip_tags($this->body))
+                    )
+                ),
+                0,
+                100
+            );
+        });
     }
 
-    public function getPathAttribute(): string
+    protected function path(): Attribute
     {
-        return route('tip.show', ['tip' => $this->slug]);
+        return Attribute::make(get: function () {
+            return route('tip.show', ['tip' => $this->slug]);
+        });
     }
 
     public function toFeedItem(): FeedItem
@@ -95,5 +99,11 @@ final class Tip extends Model implements Feedable
             ->link($this->path)
             ->authorName('Patrique Ouimet')
             ->authorEmail('patrique.ouimet@gmail.com');
+    }
+    /**
+     * @return array<string, string> */
+    protected function casts(): array
+    {
+        return ['published_at' => 'datetime'];
     }
 }

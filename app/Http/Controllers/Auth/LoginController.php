@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Auth\Events\Login;
 
 final class LoginController
 {
@@ -32,7 +33,7 @@ final class LoginController
 
     public function showLoginForm(): View
     {
-        return view('auth.login', ['intended' => $this->request->input('intended')]);
+        return view(Login::class, ['intended' => $this->request->input('intended')]);
     }
 
     public function redirectTo(): string

@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App;
 
 use Database\Factories\VideoFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
 
 /**
@@ -25,7 +28,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static VideoFactory factory(...$parameters)
  */
-final class Video extends Model
+final class Video extends Model implements Feedable
 {
     use HasFactory;
     use HasTags;
@@ -36,6 +39,11 @@ final class Video extends Model
 
     /** @var array<string, string> */
     protected $casts = ['published_at' => 'datetime'];
+
+    public static function getFeedItems(): Collection
+    {
+        return self::published()->latest()->get();
+    }
 
     public function analytics(): MorphMany
     {
@@ -53,5 +61,17 @@ final class Video extends Model
             'https://www.youtube.com/embed/%s?rel=0&amp;showinfo=0',
             $this->external_id
         );
+    }
+
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create()
+            ->id((string) $this->id)
+            ->title($this->title)
+            ->summary($this->description ?: 'Tech video')
+            ->updated($this->updated_at)
+            ->link(route('video.show', [$this]))
+            ->authorName('Patrique Ouimet')
+            ->authorEmail('patrique.ouimet@gmail.com');
     }
 }

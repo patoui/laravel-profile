@@ -6,10 +6,13 @@ namespace App;
 
 use Database\Factories\TipFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
 
 /**
@@ -25,7 +28,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static TipFactory factory(...$parameters)
  */
-final class Tip extends Model
+final class Tip extends Model implements Feedable
 {
     use HasFactory;
     use HasTags;
@@ -36,6 +39,11 @@ final class Tip extends Model
 
     /** @var array<string, string> */
     protected $casts = ['published_at' => 'datetime'];
+
+    public static function getFeedItems(): Collection
+    {
+        return self::published()->latest()->get();
+    }
 
     public static function findBySlug(string $slug): ?self
     {
@@ -75,5 +83,17 @@ final class Tip extends Model
     public function getPathAttribute(): string
     {
         return route('tip.show', ['tip' => $this->slug]);
+    }
+
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create()
+            ->id((string) $this->id)
+            ->title($this->title)
+            ->summary($this->short_body)
+            ->updated($this->updated_at)
+            ->link($this->path)
+            ->authorName('Patrique Ouimet')
+            ->authorEmail('patrique.ouimet@gmail.com');
     }
 }

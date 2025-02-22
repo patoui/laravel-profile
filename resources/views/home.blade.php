@@ -23,7 +23,7 @@
         <p class="block mb-2 leading-relaxed">⚛ I’m currently using <a class="text-blue-600 visited:text-purple-600" href="https://reactjs.org/">React</a> and <a class="text-blue-600 visited:text-purple-600" href="https://reactnative.dev/">React Native</a> to make a mobile app!</p>
     </li>
     <li>
-        <p class="block mb-2 leading-relaxed">🌱 I’m currently learning <a class="text-blue-600 visited:text-purple-600" href="https://golang.org/">Go lang</a>! Big thanks to <a class="text-blue-600 visited:text-purple-600" href="https://twitter.com/GoTimeFM" title="GoTime">GoTime</a> and <a class="text-blue-600 visited:text-purple-600" href="https://threedots.tech/go-with-the-domain/">Go With Domain</a></p>
+        <p class="block mb-2 leading-relaxed">🌱 I’m currently learning <a class="text-blue-600 visited:text-purple-600" href="https://golang.org/">Go lang</a>! Big thanks to <a class="text-blue-600 visited:text-purple-600" href="https://x.com/GoTimeFM" title="GoTime">GoTime</a> and <a class="text-blue-600 visited:text-purple-600" href="https://threedots.tech/go-with-the-domain/">Go With Domain</a></p>
     </li>
     <li>
         <p class="block mb-2 leading-relaxed">🦕 I'm also currently learning <a class="text-blue-600 visited:text-purple-600" href="https://www.typescriptlang.org/" title="TypeScript">TypeScript</a> with <a class="text-blue-600 visited:text-purple-600" href="https://deno.land" title="Deno">Deno</a></p>
@@ -40,7 +40,7 @@
 
 <ul class="w-full block list-disc ml-5">
     <li class="mb-2">🐙️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://github.com/patoui" title="GitHub">GitHub</a></li>
-    <li class="mb-2">🐦️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://twitter.com/patoui2" title="Twitter">Twitter</a></li>
+    <li class="mb-2">🐦️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://x.com/patoui2" title="Twitter">Twitter</a></li>
     <li class="mb-2">📸️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://instagram.com/patoui2" title="Instagram">Instagram</a></li>
     <li class="mb-2">👨‍💻&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://linkedin.com/in/patrique-ouimet-8b2aa969" title="LinkedIn">LinkedIn</a></li>
     <li class="mb-2">🐘️&nbsp;<a class="text-blue-600 visited:text-purple-600" href="https://phpc.social/web/accounts/106705262503935129" title="PHP Social">PHP Social</a></li>

@@ -47,7 +47,7 @@ final class Video extends Model
         return 'slug';
     }
 
-    public function getEmbedUrlAttribute(): ?string
+    public function getEmbedUrlAttribute(): string
     {
         return sprintf(
             'https://www.youtube.com/embed/%s?rel=0&amp;showinfo=0',

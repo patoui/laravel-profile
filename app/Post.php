@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
@@ -80,19 +81,7 @@ final class Post extends Model implements Feedable
 
     protected function shortBody(): Attribute
     {
-        return Attribute::make(get: function () {
-            return substr( // get first 100 characters
-                trim( // remove trailing whitespace
-                    (string) preg_replace(
-                        '/[^\da-z ]/i', // remove all non alphanumeric
-                        '',
-                        (string) preg_replace("/(\r?\n){2,}/", ' ', strip_tags($this->body))
-                    )
-                ),
-                0,
-                100
-            );
-        });
+        return Attribute::make(get: fn () => Str::short($this->body));
     }
 
     protected function path(): Attribute

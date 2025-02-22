@@ -1,14 +1,14 @@
-# Profile Website/Blog
+# 👋🏻 Profile
 
 
 Serves as a portfolio website of myself, and a place where I can post articles/tips/videos about content relevant to me.
 
-## Requirements
+## 📋 Requirements
 
 - PHP ^8.2
-- MySQL ^5.7 | 8.x
+- SQLite
 
-## Installation
+## 📥 Installation
 
 After cloning the repository, run these commands
 ```php
@@ -17,13 +17,13 @@ php artisan key:generate
 php artisan migrate
 ```
 
-## Testing
+## 🧪 Testing
 
 ```
 composer test
 ```
 
-## Production asset builds
+## 👷 Build production assets
 
 ```
 npm i --legacy-peer-deps

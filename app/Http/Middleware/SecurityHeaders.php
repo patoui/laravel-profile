@@ -34,10 +34,10 @@ class SecurityHeaders
             implode(';', [
                 "default-src 'self'",
                 "connect-src 'self'",
-                "font-src 'self' data: https://use.fontawesome.com",
+                "font-src 'self' data:",
                 "img-src 'self' https://via.placeholder.com data:",
                 "script-src 'self' 'unsafe-eval'" . $extras,
-                "style-src 'self' 'unsafe-inline' https://use.fontawesome.com" . $extras,
+                "style-src 'self' 'unsafe-inline'" . $extras,
                 'frame-src https://youtube.com https://www.youtube.com',
             ])
         );

@@ -6,11 +6,11 @@ namespace App;
 
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * Class User
@@ -49,6 +49,11 @@ final class User extends Authenticatable implements MustVerifyEmail
     /** @var list<string> */
     protected $appends = ['is_admin'];
 
+    public function getRouteKeyName(): string
+    {
+        return 'email';
+    }
+
     protected function isAdmin(): Attribute
     {
         return Attribute::make(get: function () {
@@ -57,10 +62,5 @@ final class User extends Authenticatable implements MustVerifyEmail
                 'taylorjdunphy@gmail.com',
             ]);
         });
-    }
-
-    public function getRouteKeyName(): string
-    {
-        return 'email';
     }
 }

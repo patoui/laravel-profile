@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use Database\Factories\VideoFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,6 @@ use Illuminate\Support\Carbon;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * Class Video
@@ -53,16 +53,6 @@ final class Video extends Model implements Feedable
         return 'slug';
     }
 
-    protected function embedUrl(): Attribute
-    {
-        return Attribute::make(get: function () {
-            return sprintf(
-                'https://www.youtube.com/embed/%s?rel=0&amp;showinfo=0',
-                $this->external_id
-            );
-        });
-    }
-
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
@@ -74,6 +64,17 @@ final class Video extends Model implements Feedable
             ->authorName('Patrique Ouimet')
             ->authorEmail('patrique.ouimet@gmail.com');
     }
+
+    protected function embedUrl(): Attribute
+    {
+        return Attribute::make(get: function () {
+            return sprintf(
+                'https://www.youtube.com/embed/%s?rel=0&amp;showinfo=0',
+                $this->external_id
+            );
+        });
+    }
+
     /**
      * @return array<string, string> */
     protected function casts(): array

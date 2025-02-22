@@ -6,6 +6,7 @@ namespace App;
 
 use Database\Factories\TipFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,6 @@ use Illuminate\Support\Carbon;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * Class Tip
@@ -58,6 +58,18 @@ final class Tip extends Model implements Feedable
         return $query->where('slug', $slug);
     }
 
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create()
+            ->id((string) $this->id)
+            ->title($this->title)
+            ->summary($this->short_body)
+            ->updated($this->updated_at)
+            ->link($this->path)
+            ->authorName('Patrique Ouimet')
+            ->authorEmail('patrique.ouimet@gmail.com');
+    }
+
     protected function shortTitle(): Attribute
     {
         return Attribute::make(get: function () {
@@ -89,17 +101,6 @@ final class Tip extends Model implements Feedable
         });
     }
 
-    public function toFeedItem(): FeedItem
-    {
-        return FeedItem::create()
-            ->id((string) $this->id)
-            ->title($this->title)
-            ->summary($this->short_body)
-            ->updated($this->updated_at)
-            ->link($this->path)
-            ->authorName('Patrique Ouimet')
-            ->authorEmail('patrique.ouimet@gmail.com');
-    }
     /**
      * @return array<string, string> */
     protected function casts(): array

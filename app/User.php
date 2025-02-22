@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Contracts\HasFavourites;
 use Database\Factories\UserFactory;
-use Exception;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -50,27 +48,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /** @var list<string> */
     protected $appends = ['is_admin'];
-
-    public function favourites(): HasMany
-    {
-        return $this->hasMany(Favourite::class);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function toggleFavourite(HasFavourites $model): void
-    {
-        $favourite = $model->favourites()->where('user_id', $this->id)->first();
-
-        if ($favourite) {
-            $favourite->delete();
-
-            return;
-        }
-
-        $model->favourites()->create(['user_id' => $this->id]);
-    }
 
     public function getIsAdminAttribute(): bool
     {

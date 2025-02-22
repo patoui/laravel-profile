@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Contracts\HasFavourites;
 use Database\Factories\TipFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,7 +25,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static TipFactory factory(...$parameters)
  */
-class Tip extends Model implements HasFavourites
+class Tip extends Model
 {
     use HasFactory;
     use HasTags;
@@ -46,16 +45,6 @@ class Tip extends Model implements HasFavourites
     public function analytics(): MorphMany
     {
         return $this->morphMany(Analytic::class, 'analytical');
-    }
-
-    public function favourites(): MorphMany
-    {
-        return $this->morphMany(Favourite::class, 'favouritable');
-    }
-
-    public function getFavouritesCountAttribute(): int
-    {
-        return $this->favourites()->count();
     }
 
     public function scopeSlug(Builder $query, string $slug): Builder

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Contracts\HasFavourites;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -30,7 +29,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static PostFactory factory(...$parameters)
  */
-class Post extends Model implements Feedable, HasFavourites
+class Post extends Model implements Feedable
 {
     use HasFactory;
     use HasTags;
@@ -38,9 +37,6 @@ class Post extends Model implements Feedable, HasFavourites
 
     /** @var list<string> */
     protected $guarded = [];
-
-    /** @var list<string> */
-    protected $appends = ['favourites_count'];
 
     /** @var array<string, string> */
     protected $casts = ['published_at' => 'datetime'];
@@ -58,16 +54,6 @@ class Post extends Model implements Feedable, HasFavourites
     public function analytics(): MorphMany
     {
         return $this->morphMany(Analytic::class, 'analytical');
-    }
-
-    public function favourites(): MorphMany
-    {
-        return $this->morphMany(Favourite::class, 'favouritable');
-    }
-
-    public function getFavouritesCountAttribute(): int
-    {
-        return $this->favourites()->count();
     }
 
     public function scopeSlug(Builder $builder, string $slug): Builder

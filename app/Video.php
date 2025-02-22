@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Contracts\HasFavourites;
 use Database\Factories\VideoFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +25,7 @@ use Spatie\Tags\HasTags;
  *
  * @method static VideoFactory factory(...$parameters)
  */
-class Video extends Model implements HasFavourites
+class Video extends Model
 {
     use HasFactory;
     use HasTags;
@@ -54,15 +53,5 @@ class Video extends Model implements HasFavourites
             'https://www.youtube.com/embed/%s?rel=0&amp;showinfo=0',
             $this->external_id
         );
-    }
-
-    public function favourites(): MorphMany
-    {
-        return $this->morphMany(Favourite::class, 'favouritable');
-    }
-
-    public function getFavouritesCountAttribute(): int
-    {
-        return $this->favourites()->count();
     }
 }

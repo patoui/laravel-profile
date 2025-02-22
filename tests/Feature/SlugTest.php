@@ -13,7 +13,7 @@ class SlugTest extends TestCase
      */
     public function it_passes_validation(): void
     {
-        $slugRule = new Slug();
+        $slugRule = new Slug;
         $fail = function () {
             $this->fail('Test should have succeeded.');
         };
@@ -31,7 +31,7 @@ class SlugTest extends TestCase
      */
     public function it_fails_validation(): void
     {
-        $slugRule = new Slug();
+        $slugRule = new Slug;
         $fail = function () {
             throw new Exception('Validation failure');
         };

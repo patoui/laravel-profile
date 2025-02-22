@@ -1,43 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-use function preg_replace;
-use function str_replace;
-use function strtolower;
-
-final class Slug implements Rule
+class Slug implements ValidationRule
 {
     /**
-     * Determine if the validation rule passes.
-     *
-     * @param  mixed  $attribute
-     * @param  mixed  $value
+     * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // Remove all non-alphanumeric excluding hyphens
         $slug = (string) preg_replace(
-            '/[^a-zA-Z0-9\-]/',
+            '/[^a-z0-9\-]/',
             '',
-            strtolower($value)
+            $value
         );
 
         // Replace spaces with hyphens
         $slug = str_replace(' ', '-', $slug);
 
-        return $value === $slug;
-    }
-
-    /**
-     * Get the validation error message.
-     */
-    public function message(): string
-    {
-        return 'The :attribute must be a valid slug.';
+        if ($value !== $slug) {
+            $fail('The :attribute must be a valid slug.');
+        }
     }
 }

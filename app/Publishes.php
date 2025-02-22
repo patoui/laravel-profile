@@ -20,10 +20,7 @@ trait Publishes
 
     public function previousPublished(): ?self
     {
-        /** @var Model $model */
-        $model = new self;
-
-        return $model
+        return $this->newQuery()
             ->where('id', '<>', $this->id)
             ->when($this->published_at, function ($q) {
                 return $q->where('published_at', '<', $this->published_at);
@@ -35,10 +32,7 @@ trait Publishes
 
     public function nextPublished(): ?self
     {
-        /** @var Model $model */
-        $model = new self;
-
-        return $model
+        return $this->newQuery()
             ->where('id', '<>', $this->id)
             ->when($this->published_at, function ($q) {
                 return $q->where('published_at', '>', $this->published_at);

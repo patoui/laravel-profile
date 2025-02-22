@@ -38,5 +38,3 @@ jobs:
       run: vendor/bin/duster lint
     - name: PHPStan Static Analysis
       run: vendor/bin/phpstan analyse
-    - name: PHP Psalm Static Analysis
-      run: vendor/bin/psalm

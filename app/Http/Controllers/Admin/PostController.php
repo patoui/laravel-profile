@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Post;
 use App\Rules\Slug;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +14,7 @@ use Illuminate\View\View;
 use function redirect;
 use function view;
 
-class PostController extends Controller
+class PostController
 {
     public function create(): View
     {

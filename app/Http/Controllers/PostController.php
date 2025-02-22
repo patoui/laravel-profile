@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
-class PostController extends Controller
+class PostController
 {
     public function index(Request $request): View
     {

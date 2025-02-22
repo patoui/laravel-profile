@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\RedirectResponse;
 
 use function redirect;
 
-class PostPublishController extends Controller
+class PostPublishController
 {
     public function show(Post $post): RedirectResponse
     {

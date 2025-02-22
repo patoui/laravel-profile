@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Rules\Slug;
 use App\Tip;
 use Illuminate\Http\RedirectResponse;
@@ -16,7 +15,7 @@ use function redirect;
 use function request;
 use function view;
 
-class TipController extends Controller
+class TipController
 {
     public function create(): View
     {

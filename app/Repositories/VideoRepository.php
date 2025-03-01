@@ -20,7 +20,7 @@ final class VideoRepository
         string $externalId,
         array $tags = [],
     ) {
-        $video = new Video();
+        $video = new Video;
 
         $video->title = $title;
         $video->external_id = $externalId;

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Builders\Traits;
 
-use App\Interfaces\CanPublish;
 use App\Builders\PostBuilder;
 use App\Builders\TipBuilder;
 use App\Builders\VideoBuilder;
+use App\Interfaces\CanPublish;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 

@@ -20,7 +20,7 @@ final class PostRepository
         string $slug,
         array $tags = [],
     ) {
-        $post = new Post();
+        $post = new Post;
 
         $post->title = $title;
         $post->body = $body;

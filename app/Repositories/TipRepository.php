@@ -20,7 +20,7 @@ final class TipRepository
         string $slug,
         array $tags = [],
     ) {
-        $tip = new Tip();
+        $tip = new Tip;
 
         $tip->title = $title;
         $tip->body = $body;

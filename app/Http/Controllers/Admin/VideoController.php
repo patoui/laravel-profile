@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\VideoRepository;
 use App\Rules\Slug;
 use App\Video;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +19,7 @@ final class VideoController
         return view('admin.video.create', ['video' => new Video, 'tags' => []]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, VideoRepository $videoRepository): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
@@ -32,15 +33,12 @@ final class VideoController
             'tags.*' => 'nullable|string|alpha_num',
         ]);
 
-        $video = Video::create([
-            'title' => $request->input('title'),
-            'slug' => $request->input('slug'),
-            'external_id' => $request->input('external_id'),
-        ]);
-
-        if ($request->has('tags')) {
-            $video->syncTags($request->input('tags', []));
-        }
+        $videoRepository->create(
+            title: $request->input('title'),
+            slug: $request->input('slug'),
+            externalId: $request->input('external_id'),
+            tags: $request->input('tags', []),
+        );
 
         return redirect()->route('admin.dashboard');
     }
@@ -50,7 +48,7 @@ final class VideoController
         return view('admin.video.edit', ['video' => $video, 'tags' => $video->tags()->pluck('name')]);
     }
 
-    public function update(Request $request, Video $video): RedirectResponse
+    public function update(Request $request, Video $video, VideoRepository $videoRepository): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
@@ -64,15 +62,13 @@ final class VideoController
             'tags.*' => 'nullable|string|alpha_num',
         ]);
 
-        $video->update([
-            'title' => $request->input('title'),
-            'slug' => $request->input('slug'),
-            'external_id' => $request->input('external_id'),
-        ]);
-
-        if ($request->has('tags')) {
-            $video->syncTags($request->input('tags', []));
-        }
+        $videoRepository->update(
+            video: $video,
+            title: $request->input('title'),
+            slug: $request->input('slug'),
+            externalId: $request->input('external_id'),
+            tags: $request->input('tags', []),
+        );
 
         return redirect()->route('admin.dashboard');
     }

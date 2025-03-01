@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Builders\TipBuilder;
+use App\Interfaces\CanPublish;
+use App\Traits\Publishes;
+use Carbon\CarbonInterface;
 use Database\Factories\TipFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -18,19 +22,18 @@ use Spatie\Feed\FeedItem;
 use Spatie\Tags\HasTags;
 
 /**
- * Class Tip
- *
  * @property int $id
  * @property string $title
  * @property string $slug
  * @property string $body
- * @property null|Carbon $published_at
+ * @property null|CarbonInterface $published_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
+ * @method static TipBuilder&Builder query()
  * @method static TipFactory factory(...$parameters)
  */
-final class Tip extends Model implements Feedable
+final class Tip extends Model implements CanPublish, Feedable
 {
     use HasFactory;
     use HasTags;
@@ -41,12 +44,12 @@ final class Tip extends Model implements Feedable
 
     public static function getFeedItems(): Collection
     {
-        return self::published()->latest()->get();
+        return self::query()->published()->latest()->get();
     }
 
-    public static function findBySlug(string $slug): ?self
+    public function newEloquentBuilder($query): Builder
     {
-        return self::where('slug', $slug)->first();
+        return new TipBuilder($query);
     }
 
     public function analytics(): MorphMany

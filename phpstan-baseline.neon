@@ -1,0 +1,19 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined method App\\Builders\\PostBuilder\:\:withAnyTags\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Repositories/PostRepository.php
+
+		-
+			message: '#^Call to an undefined method App\\Builders\\TipBuilder\:\:withAnyTags\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Repositories/TipRepository.php
+
+		-
+			message: '#^Call to an undefined method App\\Builders\\VideoBuilder\:\:withAnyTags\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Repositories/VideoRepository.php

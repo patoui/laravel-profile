@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\TipRepository;
 use App\Rules\Slug;
 use App\Tip;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +23,7 @@ final class TipController
         return view('admin.tip.create', ['tip' => new Tip, 'tags' => []]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, TipRepository $tipRepository): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
@@ -36,13 +37,12 @@ final class TipController
             'tags.*' => 'nullable|string|alpha_num',
         ]);
 
-        $tip = Tip::create([
-            'title' => $request->input('title'),
-            'body' => $request->input('body'),
-            'slug' => $request->input('slug'),
-        ]);
-
-        $tip->syncTags($request->input('tags', []));
+        $tipRepository->create(
+            title: $request->input('title'),
+            body: $request->input('body'),
+            slug: $request->input('slug'),
+            tags: $request->input('tags', []),
+        );
 
         return redirect()->route('admin.dashboard');
     }

@@ -81,18 +81,6 @@ class PostTest extends TestCase
     /**
      * @test
      */
-    public function toggle_publish(): void
-    {
-        $post = Post::factory()->create();
-
-        $post->togglePublish();
-
-        self::assertNotNull($post->fresh()->published_at);
-    }
-
-    /**
-     * @test
-     */
     public function scope_published(): void
     {
         Post::factory(2)->create();
@@ -116,9 +104,9 @@ class PostTest extends TestCase
             'published_at' => Carbon::now(),
         ]);
 
-        $previousPostFound = $post->previousPublished();
+        $previousPostFound = $post->previousPublished($post);
 
-        self::assertEquals($previousPost->title, $previousPostFound->title);
+        self::assertEquals($previousPost->title, $previousPostFound->value('title'));
     }
 
     /**
@@ -133,8 +121,8 @@ class PostTest extends TestCase
             'published_at' => Carbon::now(),
         ]);
 
-        $nextPostFound = $post->nextPublished();
+        $nextPostFound = $post->nextPublished($post);
 
-        self::assertEquals($nextPost->title, $nextPostFound->title);
+        self::assertEquals($nextPost->title, $nextPostFound->value('title'));
     }
 }

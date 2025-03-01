@@ -60,7 +60,7 @@ class VideoControllerTest extends TestCase
         $video = Video::factory()->create();
 
         // Act
-        $response = $this->get(route('admin.video.edit', [$video->slug]));
+        $response = $this->get(route('admin.video.edit', [$video]));
 
         // Assert
         $response->assertStatus(200);

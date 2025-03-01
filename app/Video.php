@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Builders\VideoBuilder;
+use App\Interfaces\CanPublish;
+use App\Traits\Publishes;
+use Carbon\CarbonInterface;
 use Database\Factories\VideoFactory;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,14 +27,15 @@ use Spatie\Tags\HasTags;
  * @property string $title
  * @property string $slug
  * @property string $description
- * @property null|Carbon $published_at
+ * @property null|CarbonInterface $published_at
  * @property string $external_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
+ * @method static VideoBuilder&Builder query()
  * @method static VideoFactory factory(...$parameters)
  */
-final class Video extends Model implements Feedable
+final class Video extends Model implements CanPublish, Feedable
 {
     use HasFactory;
     use HasTags;
@@ -40,7 +46,12 @@ final class Video extends Model implements Feedable
 
     public static function getFeedItems(): Collection
     {
-        return self::published()->latest()->get();
+        return self::query()->published()->latest()->get();
+    }
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return new VideoBuilder($query);
     }
 
     public function analytics(): MorphMany

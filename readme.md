@@ -28,3 +28,11 @@ composer test
 npm i --legacy-peer-deps
 NODE_OPTIONS="--openssl-legacy-provider" npm run production
 ```
+
+## 🔀 Worflow testing with act
+
+To use the workflow using [act](https://github.com/nektos/act), use the following command
+
+```bash
+act --container-architecture linux/amd64 -P ubuntu-latest=shivammathur/node:latest
+```

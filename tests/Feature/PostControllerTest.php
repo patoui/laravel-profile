@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Jobs\ProcessAnalytic;
 use App\Post;
 use App\User;
-use Carbon\Carbon;
 use GitDown\Facades\GitDown;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
@@ -22,6 +21,7 @@ class PostControllerTest extends TestCase
     public function show(): void
     {
         // Arrange
+        $this->freezeSecond();
         Bus::fake();
         User::factory()->me()->create();
         Mail::fake();
@@ -29,20 +29,23 @@ class PostControllerTest extends TestCase
             'title' => 'First Title',
             'body' => 'First Body',
             'slug' => 'first-title',
-            'published_at' => Carbon::now()->subDays(2),
+            'published_at' => $p = now()->subDays(2),
+            'created_at' => $p,
         ]);
         /** @var Post $post */
         $post = Post::factory()->create([
             'title' => 'Second Title',
             'body' => 'Second Body',
             'slug' => 'second-title',
-            'published_at' => Carbon::now()->subDay(),
+            'published_at' => $p = now()->subDay(),
+            'created_at' => $p,
         ]);
         Post::factory()->create([
             'title' => 'Third Title',
             'body' => 'Third Body',
             'slug' => 'third-title',
-            'published_at' => Carbon::now(),
+            'published_at' => $p = now(),
+            'created_at' => $p,
         ]);
         GitDown::shouldReceive('parseAndCache')->andReturn($post->body);
         GitDown::shouldReceive('styles')->andReturn(null);

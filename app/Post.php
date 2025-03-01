@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Builders\PostBuilder;
+use App\Interfaces\CanPublish;
+use App\Traits\Publishes;
+use Carbon\CarbonInterface;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -24,14 +28,15 @@ use Spatie\Tags\HasTags;
  * @property string $title
  * @property string $slug
  * @property string $body
- * @property null|Carbon $published_at
+ * @property null|CarbonInterface $published_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property-read string $short_body
  *
+ * @method static PostBuilder&Builder query()
  * @method static PostFactory factory(...$parameters)
  */
-final class Post extends Model implements Feedable
+final class Post extends Model implements CanPublish, Feedable
 {
     use HasFactory;
     use HasTags;
@@ -42,12 +47,12 @@ final class Post extends Model implements Feedable
 
     public static function getFeedItems(): Collection
     {
-        return self::published()->latest()->get();
+        return self::query()->published()->latest()->get();
     }
 
-    public static function findBySlug(string $slug): ?self
+    public function newEloquentBuilder($query): PostBuilder
     {
-        return self::where('slug', $slug)->first();
+        return new PostBuilder($query);
     }
 
     public function analytics(): MorphMany
@@ -70,6 +75,21 @@ final class Post extends Model implements Feedable
             ->link(route('post.show', ['post' => $this]))
             ->authorName('Patrique Ouimet')
             ->authorEmail('patrique.ouimet@gmail.com');
+    }
+
+    public function shortPublishedAt(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (! $this->published_at) {
+                    return null;
+                }
+
+                return $this->published_at
+                    ->setTimezone('America/Toronto')
+                    ->toDayDateTimeString();
+            }
+        );
     }
 
     protected function shortTitle(): Attribute

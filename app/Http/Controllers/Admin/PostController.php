@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Post;
+use App\Repositories\PostRepository;
 use App\Rules\Slug;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ final class PostController
         return view('admin.post.create', ['post' => new Post, 'tags' => []]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, PostRepository $postRepository): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
@@ -33,13 +34,12 @@ final class PostController
             ],
         ]);
 
-        $post = Post::create([
-            'title' => $request->input('title'),
-            'body' => $request->input('body'),
-            'slug' => $request->input('slug'),
-        ]);
-
-        $post->syncTags($request->input('tags', []));
+        $postRepository->create(
+            title: $request->input('title'),
+            body: $request->input('body'),
+            slug: $request->input('slug'),
+            tags: $request->input('tags', []),
+        );
 
         return redirect()->route('admin.dashboard');
     }
@@ -49,7 +49,7 @@ final class PostController
         return view('admin.post.edit', ['post' => $post, 'tags' => $post->tags()->pluck('name')]);
     }
 
-    public function update(Request $request, Post $post): RedirectResponse
+    public function update(Request $request, Post $post, PostRepository $postRepository): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
@@ -61,15 +61,13 @@ final class PostController
             ],
         ]);
 
-        $post->update([
-            'title' => $request->input('title'),
-            'body' => $request->input('body'),
-            'slug' => $request->input('slug'),
-        ]);
-
-        $tags = (array) $request->input('tags', []);
-
-        $post->syncTags($tags);
+        $postRepository->update(
+            post: $post,
+            title: $request->input('title'),
+            body: $request->input('body'),
+            slug: $request->input('slug'),
+            tags: $request->input('tags', [])
+        );
 
         return redirect()->route('admin.dashboard');
     }

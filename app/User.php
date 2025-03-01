@@ -59,7 +59,6 @@ final class User extends Authenticatable implements MustVerifyEmail
         return Attribute::make(get: function () {
             return in_array($this->email, [
                 'patrique.ouimet@gmail.com',
-                'taylorjdunphy@gmail.com',
             ]);
         });
     }

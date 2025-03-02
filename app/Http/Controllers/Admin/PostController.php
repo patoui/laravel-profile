@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Post\Create;
+use App\Actions\Post\Update as PostUpdate;
+use App\Http\Requests\Admin\Post\Create as PostCreate;
+use App\Http\Requests\Admin\Post\Update;
 use App\Post;
-use App\Repositories\PostRepository;
-use App\Rules\Slug;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 use function redirect;
@@ -22,24 +22,9 @@ final class PostController
         return view('admin.post.create', ['post' => new Post, 'tags' => []]);
     }
 
-    public function store(Request $request, PostRepository $postRepository): RedirectResponse
+    public function store(PostCreate $request, Create $action): RedirectResponse
     {
-        $request->validate([
-            'title' => 'required|string',
-            'body' => 'required|string',
-            'slug' => [
-                'required',
-                new Slug,
-                Rule::unique('posts', 'slug'),
-            ],
-        ]);
-
-        $postRepository->create(
-            title: $request->input('title'),
-            body: $request->input('body'),
-            slug: $request->input('slug'),
-            tags: $request->input('tags', []),
-        );
+        $action->execute($request->dto());
 
         return redirect()->route('admin.dashboard');
     }
@@ -49,25 +34,9 @@ final class PostController
         return view('admin.post.edit', ['post' => $post, 'tags' => $post->tags()->pluck('name')]);
     }
 
-    public function update(Request $request, Post $post, PostRepository $postRepository): RedirectResponse
+    public function update(Update $request, PostUpdate $action): RedirectResponse
     {
-        $request->validate([
-            'title' => 'required|string',
-            'body' => 'required|string',
-            'slug' => [
-                'required',
-                new Slug,
-                Rule::unique('posts', 'slug')->ignore($post->id),
-            ],
-        ]);
-
-        $postRepository->update(
-            post: $post,
-            title: $request->input('title'),
-            body: $request->input('body'),
-            slug: $request->input('slug'),
-            tags: $request->input('tags', [])
-        );
+        $action->execute($request->dto());
 
         return redirect()->route('admin.dashboard');
     }

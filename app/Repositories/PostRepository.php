@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Data\Post\StoreData;
+use App\Data\Post\UpdateData;
 use App\Post;
 use App\Repositories\Traits\PublishesRepository;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -14,40 +16,32 @@ final class PostRepository
 {
     use PublishesRepository;
 
-    public function create(
-        string $title,
-        string $body,
-        string $slug,
-        array $tags = [],
-    ) {
+    public function create(StoreData $data): Post
+    {
         $post = new Post;
 
-        $post->title = $title;
-        $post->body = $body;
-        $post->slug = $slug;
+        $post->title = $data->title;
+        $post->body = $data->body;
+        $post->slug = $data->slug;
 
-        DB::transaction(function () use ($post, $tags) {
+        DB::transaction(function () use ($post, $data) {
             $post->save();
-            $post->syncTags($tags);
+            $post->syncTags($data->tags);
         });
 
         return $post;
     }
 
-    public function update(
-        Post $post,
-        string $title,
-        string $body,
-        string $slug,
-        array $tags = [],
-    ) {
-        $post->title = $title;
-        $post->body = $body;
-        $post->slug = $slug;
+    public function update(UpdateData $data): Post
+    {
+        $post = $data->post;
+        $post->title = $data->title;
+        $post->body = $data->body;
+        $post->slug = $data->slug;
 
-        DB::transaction(function () use ($post, $tags) {
+        DB::transaction(function () use ($post, $data) {
             $post->save();
-            $post->syncTags($tags);
+            $post->syncTags($data->tags);
         });
 
         return $post;

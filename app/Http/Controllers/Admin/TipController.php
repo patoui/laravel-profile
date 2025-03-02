@@ -52,7 +52,7 @@ final class TipController
         return view('admin.tip.edit', ['tip' => $tip, 'tags' => $tip->tags()->pluck('name')]);
     }
 
-    public function update(Request $request, Tip $tip): RedirectResponse
+    public function update(Request $request, Tip $tip, TipRepository $tipRepository): RedirectResponse
     {
         $request->validate([
             'title' => 'required|string',
@@ -66,15 +66,13 @@ final class TipController
             'tags.*' => 'nullable|string|alpha_num',
         ]);
 
-        $tip->update([
-            'title' => request('title'),
-            'body' => request('body'),
-            'slug' => request('slug'),
-        ]);
-
-        $tags = (array) $request->input('tags', []);
-
-        $tip->syncTags($tags);
+        $tipRepository->update(
+            tip: $tip,
+            title: $request->input('title'),
+            body: $request->input('body'),
+            slug: $request->input('slug'),
+            tags: (array) $request->input('tags', []),
+        );
 
         return redirect()->route('admin.dashboard');
     }

@@ -20,7 +20,7 @@ final class UpdateData extends Data
 
     public static function fromRequest(Request $request): static
     {
-        return static::from([
+        return self::from([
             'post' => Post::findOrFail($request->route('post')),
             'title' => $request->input('title'),
             'body' => $request->input('body'),

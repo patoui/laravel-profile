@@ -34,7 +34,7 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: APP_ENV=testing vendor/bin/phpunit
-    - name: Run Duster Lint Checker
+    - name: Run Laravel Pint Checker
       run: vendor/bin/pint --test
     - name: PHPStan Static Analysis
       run: vendor/bin/phpstan analyse

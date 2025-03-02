@@ -13,7 +13,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 use function redirect;
-use function request;
 use function view;
 
 final class TipController

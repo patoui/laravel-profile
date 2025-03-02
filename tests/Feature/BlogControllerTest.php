@@ -8,7 +8,7 @@ use App\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class BlogControllerTest extends TestCase
+final class BlogControllerTest extends TestCase
 {
     use RefreshDatabase;
 

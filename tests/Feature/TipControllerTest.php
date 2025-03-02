@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Jobs\ProcessAnalytic;
@@ -10,7 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
-class TipControllerTest extends TestCase
+final class TipControllerTest extends TestCase
 {
     use RefreshDatabase;
 

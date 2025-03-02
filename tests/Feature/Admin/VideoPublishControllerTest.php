@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Admin;
 
 use App\User;
@@ -7,7 +9,7 @@ use App\Video;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class VideoPublishControllerTest extends TestCase
+final class VideoPublishControllerTest extends TestCase
 {
     use RefreshDatabase;
 

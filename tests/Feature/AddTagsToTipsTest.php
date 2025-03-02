@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Tip;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AddTagsToTipsTest extends TestCase
+final class AddTagsToTipsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -22,6 +24,6 @@ class AddTagsToTipsTest extends TestCase
         $tip->syncTags(['php', 'laravel', 'collection', 'eloquent', 'learning']);
 
         // Assert
-        self::assertEquals(5, $tip->fresh()->tags()->count());
+        self::assertSame(5, $tip->fresh()->tags()->count());
     }
 }

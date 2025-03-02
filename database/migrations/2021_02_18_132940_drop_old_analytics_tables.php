@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class DropOldAnalyticsTables extends Migration
+final class DropOldAnalyticsTables extends Migration
 {
     public function up(): void
     {

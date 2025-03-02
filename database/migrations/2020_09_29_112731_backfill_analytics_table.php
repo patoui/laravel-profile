@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Analytic;
 use App\Post;
 use App\Tip;
@@ -8,7 +10,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class BackfillAnalyticsTable extends Migration
+final class BackfillAnalyticsTable extends Migration
 {
     public static function hasRecord(int $model_id, string $created_at, string $model_type): bool
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Jobs\ProcessAnalytic;
@@ -11,7 +13,7 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-class PostControllerTest extends TestCase
+final class PostControllerTest extends TestCase
 {
     use RefreshDatabase;
 

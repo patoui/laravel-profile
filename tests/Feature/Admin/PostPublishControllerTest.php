@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Admin;
 
 use App\Post;
@@ -7,7 +9,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class PostPublishControllerTest extends TestCase
+final class PostPublishControllerTest extends TestCase
 {
     use RefreshDatabase;
 

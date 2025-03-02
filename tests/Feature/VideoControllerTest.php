@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Jobs\ProcessAnalytic;
@@ -8,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Tests\TestCase;
 
-class VideoControllerTest extends TestCase
+final class VideoControllerTest extends TestCase
 {
     use RefreshDatabase;
 

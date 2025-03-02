@@ -8,7 +8,7 @@ use App\Tip;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class TipFactory extends Factory
+final class TipFactory extends Factory
 {
     protected $model = Tip::class;
 

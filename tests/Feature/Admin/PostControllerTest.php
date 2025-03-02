@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Admin;
 
 use App\Post;
@@ -7,7 +9,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class PostControllerTest extends TestCase
+final class PostControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -99,19 +101,19 @@ class PostControllerTest extends TestCase
         $response->assertStatus(302);
 
         // Assert title was updated
-        $this->assertEquals(
+        $this->assertSame(
             'Second Title',
             $post->fresh()->title
         );
 
         // Assert body was updated
-        $this->assertEquals(
+        $this->assertSame(
             'Second Body',
             $post->fresh()->body
         );
 
         // Assert slug was updated
-        $this->assertEquals(
+        $this->assertSame(
             'second-title',
             $post->fresh()->slug
         );

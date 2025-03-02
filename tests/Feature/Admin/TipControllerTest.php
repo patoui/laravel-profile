@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Admin;
 
 use App\Tip;
@@ -7,7 +9,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TipControllerTest extends TestCase
+final class TipControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -50,9 +52,9 @@ class TipControllerTest extends TestCase
         $response->assertRedirect('/admin/dashboard');
         $tip = app(Tip::class)->where('title', 'My New Tip Title')->first();
         self::assertNotNull($tip);
-        self::assertEquals('My New Tip Title', $tip->fresh()->title);
-        self::assertEquals('My New Tip Body', $tip->fresh()->body);
-        self::assertEquals('my-new-tip-body', $tip->fresh()->slug);
+        self::assertSame('My New Tip Title', $tip->fresh()->title);
+        self::assertSame('My New Tip Body', $tip->fresh()->body);
+        self::assertSame('my-new-tip-body', $tip->fresh()->slug);
     }
 
     /**
@@ -98,9 +100,9 @@ class TipControllerTest extends TestCase
         // Assert
         $response->assertStatus(302);
         $response->assertRedirect('/admin/dashboard');
-        self::assertEquals('Second Title', $tip->fresh()->title);
-        self::assertEquals('Second Body', $tip->fresh()->body);
-        self::assertEquals('second-title', $tip->fresh()->slug);
+        self::assertSame('Second Title', $tip->fresh()->title);
+        self::assertSame('Second Body', $tip->fresh()->body);
+        self::assertSame('second-title', $tip->fresh()->slug);
     }
 
     /**

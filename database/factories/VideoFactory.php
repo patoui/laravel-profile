@@ -8,7 +8,7 @@ use App\Video;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class VideoFactory extends Factory
+final class VideoFactory extends Factory
 {
     protected $model = Video::class;
 

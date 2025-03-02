@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Rules\Slug;
 use Exception;
 use Tests\TestCase;
 
-class SlugTest extends TestCase
+final class SlugTest extends TestCase
 {
     /**
      * @test

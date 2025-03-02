@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Admin;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DashboardControllerTest extends TestCase
+final class DashboardControllerTest extends TestCase
 {
     use RefreshDatabase;
 

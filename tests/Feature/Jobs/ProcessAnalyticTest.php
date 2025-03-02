@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Jobs;
 
 use App\Jobs\ProcessAnalytic;
@@ -10,7 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-class ProcessAnalyticTest extends TestCase
+final class ProcessAnalyticTest extends TestCase
 {
     use RefreshDatabase;
 

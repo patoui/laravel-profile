@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Unit;
 
 use App\Post;
@@ -7,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class PostTest extends TestCase
+final class PostTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -48,7 +50,7 @@ class PostTest extends TestCase
             'slug' => 'my-articles-title',
         ]);
 
-        self::assertEquals(
+        self::assertSame(
             '1111111111'
                 . '1111111111'
                 . '1111111111'
@@ -72,7 +74,7 @@ class PostTest extends TestCase
             'published_at' => '2017-02-02 06:06:06',
         ]);
 
-        self::assertEquals(
+        self::assertSame(
             'Thu, Feb 2, 2017 1:06 AM',
             $post->short_published_at
         );
@@ -86,7 +88,7 @@ class PostTest extends TestCase
         Post::factory(2)->create();
         Post::factory()->published()->create();
 
-        self::assertEquals(
+        self::assertSame(
             1,
             app(Post::class)->published()->count()
         );
@@ -106,7 +108,7 @@ class PostTest extends TestCase
 
         $previousPostFound = $post->previousPublished($post);
 
-        self::assertEquals($previousPost->title, $previousPostFound->value('title'));
+        self::assertSame($previousPost->title, $previousPostFound->value('title'));
     }
 
     /**
@@ -123,6 +125,6 @@ class PostTest extends TestCase
 
         $nextPostFound = $post->nextPublished($post);
 
-        self::assertEquals($nextPost->title, $nextPostFound->value('title'));
+        self::assertSame($nextPost->title, $nextPostFound->value('title'));
     }
 }

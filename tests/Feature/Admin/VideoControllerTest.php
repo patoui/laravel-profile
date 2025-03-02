@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Admin;
 
 use App\User;
@@ -7,7 +9,7 @@ use App\Video;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class VideoControllerTest extends TestCase
+final class VideoControllerTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -38,7 +40,7 @@ class VideoControllerTest extends TestCase
         $response = $this->post(route('admin.video.store'), [
             'title' => 'My New Video Title',
             'slug' => 'my-new-video-body',
-            'external_id' => uniqid('foo', true),
+            'external_id' => fake()->word(),
         ]);
 
         // Assert
@@ -46,8 +48,8 @@ class VideoControllerTest extends TestCase
         $response->assertRedirect('/admin/dashboard');
         $video = app(Video::class)->where('title', 'My New Video Title')->first();
         $this->assertNotNull($video);
-        $this->assertEquals('My New Video Title', $video->fresh()->title);
-        $this->assertEquals('my-new-video-body', $video->fresh()->slug);
+        $this->assertSame('My New Video Title', $video->fresh()->title);
+        $this->assertSame('my-new-video-body', $video->fresh()->slug);
     }
 
     /**
@@ -76,21 +78,21 @@ class VideoControllerTest extends TestCase
         $video = Video::factory()->create([
             'title' => 'First Title',
             'slug' => 'first-title',
-            'external_id' => uniqid(true),
+            'external_id' => fake()->word(),
         ]);
 
         // Act
         $response = $this->put(route('admin.video.update', [$video->slug]), [
             'title' => 'Second Title',
             'slug' => 'second-title',
-            'external_id' => uniqid('foo', true),
+            'external_id' => fake()->word(),
         ]);
 
         // Assert
         $response->assertStatus(302);
         $response->assertRedirect('/admin/dashboard');
-        $this->assertEquals('Second Title', $video->fresh()->title);
-        $this->assertEquals('second-title', $video->fresh()->slug);
+        $this->assertSame('Second Title', $video->fresh()->title);
+        $this->assertSame('second-title', $video->fresh()->slug);
     }
 
     /**

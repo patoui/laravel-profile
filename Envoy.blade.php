@@ -1,17 +1,17 @@
 @setup
     require __DIR__.'/vendor/autoload.php';
-	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 
-	try {
-		$dotenv->load();
-		$dotenv->required(['DEPLOY_SERVER', 'DEPLOY_PATH'])->notEmpty();
-	} catch ( Exception $e )  {
-		echo $e->getMessage();
-		exit;
-	}
+    try {
+        $dotenv->load();
+        $dotenv->required(['DEPLOY_SERVER', 'DEPLOY_PATH'])->notEmpty();
+    } catch ( Exception $e )  {
+        echo $e->getMessage();
+        exit;
+    }
 
-	$server = $_ENV['DEPLOY_SERVER'];
-	$path = $_ENV['DEPLOY_PATH'];
+    $server = $_ENV['DEPLOY_SERVER'];
+    $path = $_ENV['DEPLOY_PATH'];
 @endsetup
 
 @servers(['web' => $server])

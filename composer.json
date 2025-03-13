@@ -16,7 +16,7 @@
       "ext-gd": "*",
       "ext-json": "*",
       "calebporzio/gitdown": "dev-master",
-      "laravel/framework": "^11.0",
+      "laravel/framework": "^12.0",
       "laravel/tinker": "^2.0",
       "laravel/ui": "^4.0",
       "predis/predis": "^1.1",
@@ -35,10 +35,9 @@
       "laravel/pint": "^1.21",
       "mockery/mockery": "^1.6",
       "nunomaduro/collision": "^8.1",
-      "phpunit/phpunit": "10.*",
+      "phpunit/phpunit": "^11.0",
       "roave/security-advisories": "dev-latest",
-      "squizlabs/php_codesniffer": "*",
-      "wnx/laravel-stats": "^2.1"
+      "squizlabs/php_codesniffer": "*"
    },
     "config": {
         "optimize-autoloader": true,

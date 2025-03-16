@@ -39,6 +39,7 @@
     echo "Start: updating repository..."
 
     cd {{ $path }}
+    git pull origin master
 
     echo "End: successfully updated the repository"
 @endtask

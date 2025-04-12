@@ -17,7 +17,7 @@
 <h2 class="w-full block mt-3 mb-2 font-bold text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl">About me</h2>
 <ul class="w-full block list-disc ml-5">
     <li>
-        <p class="block mb-2 leading-relaxed">🛢 I'm enjoying working with large datasets as I find the challenges, technologies, and strategies facinating. I'm currently reading <a class="text-blue-600 visited:text-purple-600" href="https://dataintensive.net/">Designing Data Intensive Applications - Martin Kleppmann</a> on this topic and gaining additional knowledge and insights, I highly recommend this book</p>
+        <p class="block mb-2 leading-relaxed">🛢 I enjoy working with large datasets as I find the challenges, technologies, and strategies facinating. I've finished reading <a class="text-blue-600 visited:text-purple-600" href="https://dataintensive.net/">Designing Data Intensive Applications - Martin Kleppmann</a> on this topic and gaining additional knowledge and insights, I highly recommend this book</p>
     </li>
     <li>
         <p class="block mb-2 leading-relaxed">🔭 I currently work on a variety of PHP projects utilizing some great open source projects! <a class="text-blue-600 visited:text-purple-600" href="https://laravel.com/" title="Laravel">Laravel</a>, <a class="text-blue-600 visited:text-purple-600" href="https://www.slimframework.com/" title="Slim">Slim</a>, <a class="text-blue-600 visited:text-purple-600" href="https://docs.guzzlephp.org/en/stable/" title="Guzzle">Guzzle</a></p>

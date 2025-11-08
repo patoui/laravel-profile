@@ -33,7 +33,7 @@
             </div>
             <div>
                 <p class="block text-2xl">Patrique Ouimet</p>
-                <p class="block text-xs italic">Senior Product Engineer</p>
+                <p class="block text-xs italic">Senior Backend Software Engineer</p>
             </div>
         </div>
     </div>
